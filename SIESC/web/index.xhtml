@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        <ui:composition template="./templatePrincipal.xhtml">
+
+            <ui:define name="content">
+
+                <!-- ==== ESTILOS ==== -->
+                <style>
+                    body {
+                        background-color: #f4f6f9;
+                        font-family: 'Segoe UI', sans-serif;
+                    }
+
+                    #center_right_content {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 80vh;
+                    }
+
+                    .card {
+                        background-color: #ffffff;
+                        padding: 3rem 3.5rem;
+                        border-radius: 16px;
+                        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+                        width: 100%;
+                        max-width: 400px;
+                        text-align: center;
+                        transition: all 0.3s ease;
+                    }
+
+                    .card:hover {
+                        transform: translateY(-4px);
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                    }
+
+                    h2 {
+                        color: #003366;
+                        margin-bottom: 1.5rem;
+                        font-weight: 700;
+                        font-size: 1.6rem;
+                        letter-spacing: 0.5px;
+                    }
+
+                    .ui-inputgroup {
+                        margin-bottom: 1rem;
+                        width: 100%;
+                    }
+
+                    .ui-inputgroup-addon {
+                        background: #003366;
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 6px 0 0 6px;
+                        padding: 0.7rem;
+                    }
+
+                    input.ui-inputfield,
+                    .ui-password input {
+                        width: 100%;
+                        padding: 0.8rem;
+                        border: 1px solid #ccc;
+                        border-radius: 0 6px 6px 0;
+                        transition: border-color 0.3s ease;
+                    }
+
+                    input.ui-inputfield:focus,
+                    .ui-password input:focus {
+                        border-color: #0066cc;
+                        outline: none;
+                    }
+
+                    .ui-commandbutton {
+                        background-color: #007bff;
+                        border: none;
+                        color: white;
+                        font-weight: 600;
+                        border-radius: 8px;
+                        width: 100%;
+                        padding: 0.8rem;
+                        transition: background-color 0.3s ease;
+                    }
+
+                    .ui-commandbutton:hover {
+                        background-color: #0056b3;
+                    }
+                    /* Centrar absoluto sobre el layout existente */
+.login-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 13px;
+        }
+
+                </style>
+
+                <!-- ==== CONTENIDO ==== -->
+<div class="login-wrapper">
+    <div class="card">
+        <h:form>
+            <h2>Iniciar Sesión</h2>
+
+            <div class="ui-inputgroup">
+                <div class="ui-inputgroup-addon">
+                    <i class="pi pi-user"></i>
+                </div>
+                <p:inputText id="usr" value="#{loginBean.usuario}" required="true" placeholder="Usuario" />
+            </div>
+
+            <div class="ui-inputgroup">
+                <div class="ui-inputgroup-addon">
+                    <i class="pi pi-lock"></i>
+                </div>
+                <p:password id="pass" value="#{loginBean.contrasena}" required="true" placeholder="Contraseña" />
+            </div>
+
+            <p:commandButton value="Iniciar Sesión" action="#{loginBean.login()}" ajax="false" />
+        </h:form>
+    </div>
+</div>
+
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+
