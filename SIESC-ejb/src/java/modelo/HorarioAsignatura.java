@@ -17,17 +17,17 @@ import javax.persistence.Entity;
 public class HorarioAsignatura implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    private int id;
-    private String lunes;
-    private String martes;
-    private String miercoles;
-    private String jueves;
-    private String viernes;
-    private String sabado;
-    private String asignatura;
-    private String grupo;
-    private String materia;
-    private String docente;
+    private int id=0;
+    private String lunes="";
+    private String martes="";
+    private String miercoles="";
+    private String jueves="";
+    private String viernes="";
+    private String sabado="";
+    private String asignatura="";
+    private String grupo="";
+    private String materia="";
+    private String docente="";
 
     public int getId() {
         return id;

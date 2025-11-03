@@ -23,24 +23,24 @@ import modelo.ReticulaDatos;
  */
 @Stateless
 public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
-    
+
     @EJB
     private MateriasCarrerasFacadeLocal materiasCarrerasFacade1;
-    
+
     @EJB
     private HistoriaAlumnoServicioLocal historiaAlumnoServicio;
-    
+
     @EJB
     private MateriasCarrerasFacadeLocal materiasCarrerasFacade;
-    
+
     private Reticula reticula;
-    
+
     @Override
     public void prueba() {
         System.out.println("Prueba");
     }
-    
-     @Override
+
+    @Override
     public MateriasCarreras buscarPorId(Integer x) {
         return materiasCarrerasFacade1.find(x);
     }
@@ -49,32 +49,51 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
     // "Insert Code > Add Business Method")
     @Override
     public ArrayList<Reticula> buscarMaterias(Estudiante estudiante) {
-        
-        ArrayList<Reticula> listaR = new ArrayList();
+
+        ArrayList<Reticula> listaR = new ArrayList();//Lista final de objetos Reticula que se va a devolver.
+        //Lista de todas las materias disponibles para la retícula del estudiante. Es decir creo saca todas las materias que corresponde con la reticula del estudiante
+        //Caracteristicas de las materias por carrera tomando la reticula 9 es decir como los creditos totales, horas teoricas practicas, etc. 
         List<MateriasCarreras> listaM = materiasCarrerasFacade.buscarMaterias(estudiante.getReticula().getReticula());
+        //estudiante.getReticula().getReticula() -> 9
+        //Tabla estudiante tiene esto -> Word
+
+        //Tabla MateriasCarrera tiene esto -> Word
+        //Como lo dice su nombre es un historial de sus calificaciones de la materia, con el grupo, si esta en doble 
         List<HistoriaAlumno> listaHA = historiaAlumnoServicio.buscarAsignaturas(estudiante.getNoDeControl());
-        Integer renglonAnt = 1;
-        reticula = new Reticula();
-        for (MateriasCarreras materia : listaM) {
+        //Tabla MateriasCarrera tiene esto -> Word
+
+        Integer renglonAnt = 1;//Controla el "renglón" o fila de materias que se van a agrupar en un objeto Reticula.
+        //Esto significa que cada objeto Reticula representa un renglón de materias en la tabla de retícula
+        reticula = new Reticula();//Objeto temporal de tipo Reticula que se va llenando mientras recorremos listaM.
+        for (MateriasCarreras materia : listaM) {//Recorres todas las materias de la carrera (listaM).
             System.out.println(materia.getRenglon() + "/" + materia.getSemestreReticula() + " Materia Semestre" + materia.getMateria().getNombreCompletoMateria() + " clave " + materia.getMateria().getMateria());
-            if (renglonAnt != materia.getRenglon()) {
+            System.out.println("Renglon: " + renglonAnt);
+            System.out.println("---------------------------");
+
+            if (renglonAnt != materia.getRenglon()) {//Se verifica si el renglon cambió respecto al anterior:
+                //Si sí, se guarda la reticula actual en listaR y se crea una nueva para el siguiente renglón.
                 listaR.add(reticula);
-                reticula = new Reticula();                
-                agregarDatos(materia, estudiante.getSemestre());
+                reticula = new Reticula();
+                agregarDatos(materia, estudiante.getSemestre());// 8 
                 renglonAnt = materia.getRenglon();
             } else {
+                //Si no, se sigue llenando la reticula actual.//Objeto Materia ,  8 
                 agregarDatos(materia, estudiante.getSemestre());
-                renglonAnt = materia.getRenglon();                
+                renglonAnt = materia.getRenglon();
             }
-            
+
         }
-        String color;        
+        String color;
         boolean disponible;
+        //Se recorren todas las materias que el estudiante ya cursó (listaHA).
         for (HistoriaAlumno historiaA : listaHA) {
+
             if (historiaA.getCalificacion() >= 70) {
+                //Si la calificación es ≥70 → materia acreditada, no disponible para inscripción (disponible=false).
                 color = "acreditado";
                 disponible = false;
             } else {
+                //Si no está acreditada → se determina color según tipo de evaluación (ordinario, repetición, especial).
                 disponible = true;
                 switch (historiaA.getTipoEvaluacion().getPrioridad()) {
                     case 1:
@@ -86,17 +105,27 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
                     case 3:
                         color = "especial";
                         break;
-                    default:                        
+                    default:
                         color = "nodisponible";
                         break;
                 }
             }
             for (int ren = 0; ren < listaR.size(); ren++) {
                 Reticula aux = listaR.get(ren);
+                //Por cada materia en la historia académica, se busca en cada semestre de cada renglón si coincide la materia.
+
+                //Busca el codigo 1R1 = 1R1 
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre1().getMateria())) {
-                    aux.getSemestre1().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());                    
+                    //Se asigna la calificación con el tipo de evaluación (70 / ordinario).
+                    aux.getSemestre1().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
+                    //Se pinta el color correspondiente (acreditado, repeticion, etc.).
                     aux.getSemestre1().setColor(color);
-                    aux.getSemestre1().setDisponible(disponible);                    
+                    //Se establece si está disponible o no para inscripción.
+                    aux.getSemestre1().setDisponible(disponible);
+
+                    /*Color de celda según situación de la materia.
+                    Texto de calificación + tipo de examen.
+                    Si el botón o acción para inscribirse está habilitada.*/
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre2().getMateria())) {
                     aux.getSemestre2().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
@@ -140,22 +169,32 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
                 }
             }
         }
+        //Devuelve la lista completa de Reticula, cada una con sus 9 semestres (ReticulaDatos) llenos con materia, calificación, color y disponibilidad.
+
+
         return listaR;
     }
+
     @Override
-    public List<MateriasCarreras> buscarMateriasCarreraPerMateria(String idmateria) {
-        return materiasCarrerasFacade.buscarMateriasCarreraPerMateria(idmateria);
+    public MateriasCarreras buscarMateriasCarreraPorMateria(String idmateria) {
+        return materiasCarrerasFacade.buscarMateriaCarreraPorMateria(idmateria);
     }
 
     private void agregarDatos(MateriasCarreras materia, Integer semestre) {
-        ReticulaDatos reticulaDatos = new ReticulaDatos();
-        reticulaDatos.setMateria(materia.getMateria().getMateria());
-        reticulaDatos.setNombreMateria(materia.getMateria().getNombreAbreviadoMateria());
-        reticulaDatos.setClave(materia.getClaveOficialMateria());
+
+        //Aqui asigna acomoda la materia en la reticula de acuerdo al semestre 
+        ReticulaDatos reticulaDatos = new ReticulaDatos();//Se crea un objeto ReticulaDatos que contendrá la información de una materia específica.
+        //Se llenan los campos:
+        reticulaDatos.setMateria(materia.getMateria().getMateria());//el código de la materia.
+        reticulaDatos.setNombreMateria(materia.getMateria().getNombreAbreviadoMateria());//el nombre abreviado de la materia.
+        reticulaDatos.setClave(materia.getClaveOficialMateria());//la clave oficial de la materia en la carrera.
+        //Se compara el semestre de la materia (materia.getSemestreReticula()) con el semestre actual del estudiante (semestre).
         if (materia.getSemestreReticula() <= semestre) {
+            //Se marca como disponible (disponible = true) y el color se pone en "disponible".
             reticulaDatos.setColor("disponible");
             reticulaDatos.setDisponible(true);
         } else {
+            //Se marca como no disponible (disponible = false) y el color se pone en "nodisponible".
             reticulaDatos.setColor("nodisponible");
             reticulaDatos.setDisponible(false);
         }
@@ -189,20 +228,20 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
                 break;
         }
     }
-    
+
     @Override
-    public List<MateriasCarreras> buscarPorCarrera(Integer reticula) {        
+    public List<MateriasCarreras> buscarPorCarrera(Integer reticula) {
         return materiasCarrerasFacade1.buscarMateriasCarrera(reticula);
     }
-    
+
     @Override
     public List<MateriasCarreras> buscarPorCarreraDepto(Integer reticula, String claveArea) {
         return materiasCarrerasFacade1.buscarMateriasDepto(reticula, claveArea);
     }
-    
+
     @Override
     public List<MateriasCarreras> buscarAsinaturaSemestre(Integer reticula, Integer semestre) {
         return materiasCarrerasFacade1.buscarAsignaturaSemestre(reticula, semestre);
     }
-    
+
 }

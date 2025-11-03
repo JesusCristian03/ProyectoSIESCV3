@@ -1047,7 +1047,7 @@ public class HorarioCrearBean implements Serializable {
             this.listaHorariosGenerados = horarioServicio.buscarHorariosPorGrupos(carrera, Integer.parseInt(semestreS), periodoEscolarServicio.buscarPorId(periodoS), valorgrupo);
             //actualizarTabla()
 
-            addMessage(FacesMessage.SEVERITY_INFO, "ÉXITO", "El aula se modificó correctamente.");
+            addMessage(FacesMessage.SEVERITY_INFO, "ÉXITO", "EL AULA SE MODIFICÓ CORRECTAMENTE.");
             activarModoModificar();
             // Actualizar la tabla visualmente
             PrimeFaces.current().ajax().update("horarioG:grupo");
@@ -1214,8 +1214,8 @@ public class HorarioCrearBean implements Serializable {
 
         actualizarTabla();
         cambiarModoColorTabla("F8D5D4");
-        System.out.println("Limpiando cancelar....");
-        addMessage(FacesMessage.SEVERITY_WARN, "CANCELAR", "LIMPIANDO CANCELAR.");
+
+        //addMessage(FacesMessage.SEVERITY_WARN, "CANCELAR", "LIMPIANDO CANCELAR.");
     }
 
     public void confirmarEliminarMateria() {
@@ -1246,6 +1246,8 @@ public class HorarioCrearBean implements Serializable {
         limpiarVariablesDeEstadoEliminar();
         actualizarTabla();
         cambiarModoColorTabla("F8D5D4");
+        listaHorarios = null;//Para evitar que mande mensajes que no.
+
         addMessage(FacesMessage.SEVERITY_WARN, "MATERIA ELIMINADA", "Se eliminaron " + horariosAEliminar.size() + " coincidencias de la materia seleccionada.");
         // Actualiza la tabla en pantalla (si tienes método para ello)
 
@@ -1380,12 +1382,12 @@ public class HorarioCrearBean implements Serializable {
             aula = aulasServicio.buscarPorId(aulas);//Busco el objeto por su id
 
             if (booleanBuscarAula) {//Dependiendo si busco por grupo o por horario
-                listaHorariosGenerados = horarioServicio.buscarHorariosPorAulas(carrera, semestre, periodoescolar,
+                listaHorariosGenerados = horarioServicio.buscarHorariosPorAulas(carrera, periodoescolar,
                         aula);
+
                 addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR AULA",
                         " \nAULA: " + aulas
                         + " " + carrera.getNombreCarrera()
-                        + " \nSEMESTRE: " + semestreS
                         + " \nPERIODO: " + periodoescolar.getIdentificacionCorta()
                 );
 
@@ -1491,7 +1493,7 @@ public class HorarioCrearBean implements Serializable {
             grupo.setMateria(materiasCarreras.getMateria().getMateria());
             grupo.setGrupo(valorgrupo);
             gruposServicio.insertarNuevoGrupo(grupo);
-            addMessage(FacesMessage.SEVERITY_INFO, "LISTO", "SE HA COMPLETADO  DE INSERTAR GRUPO");
+           // addMessage(FacesMessage.SEVERITY_INFO, "LISTO", "SE HA COMPLETADO  DE INSERTAR GRUPO");
         }
 
     }
@@ -1506,13 +1508,13 @@ public class HorarioCrearBean implements Serializable {
             int columna = Integer.parseInt(indices[1]);
 
             System.out.println("DiaSemana:" + (columna + 1) + "Hora Inicial:"
-                    + obtenerStringDeHoraPorFila(fila - 1)
-                    + "Hora Final" + obtenerStringDeHoraPorFila(fila)
+                    + obtenerStringDeHoraPorFila(fila)
+                    + "Hora Final" + obtenerStringDeHoraPorFila(fila + 1)
                     + "AulaBuscada:" + aulaBuscada + (aulaBuscada.getAula()));
 
             horarioempalme = horarioServicio.buscarHorarioPorEmpalme((short) (columna + 1),
-                    obtenerStringDeHoraPorFila(fila - 1),
                     obtenerStringDeHoraPorFila(fila),
+                    obtenerStringDeHoraPorFila(fila+1),
                     aulaBuscada);
 
             if (horarioempalme != null) {
@@ -1532,81 +1534,84 @@ public class HorarioCrearBean implements Serializable {
     }
 
     public void generarHorario() throws ParseException {
-        materiasCarreras = materiasCarrerasServicio.buscarPorId(Integer.parseInt(asignaturaS));
-        modoSeleccionMateria = false;//¨Por si paso de modo eliminar a modo Insertar Materia.
-        aula = aulasServicio.buscarPorId(aulas);
-        aulaBuscada = aulasServicio.buscarPorId(aulas);
-        verificacionDeCampos();//VERIFICA QUE LOS CAMPOS TENGAN ALGO
-        transformarCoordenadas();// pasa de esto 1,1;1,2;1,3;1,4;1,5 a ["1,1"]["1,2"]["1,3"]["1,4"]["1,5"]
+        if (verificacionDeCampos()) {
+            //VERIFICA QUE LOS CAMPOS TENGAN ALGO
+     
+            materiasCarreras = materiasCarrerasServicio.buscarPorId(Integer.parseInt(asignaturaS));
+            modoSeleccionMateria = false;//¨Por si paso de modo eliminar a modo Insertar Materia.
+            aula = aulasServicio.buscarPorId(aulas);
+            aulaBuscada = aulasServicio.buscarPorId(aulas);
+            transformarCoordenadas();// pasa de esto 1,1;1,2;1,3;1,4;1,5 a ["1,1"]["1,2"]["1,3"]["1,4"]["1,5"]
 
-        if (listaHorariosGenerados != null) {//Verifico que no ya este la materia que voy a insertar en la base de datos. 
-            for (Horarios h : listaHorariosGenerados) {
-                if (materiasCarreras.getMateria().getNombreCompletoMateria().equals(h.getMateria().getNombreCompletoMateria())) {
-                    addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "MATERIA YA INSERTADA");
-                    return;
+            if (listaHorariosGenerados != null) {//Verifico que no ya este la materia que voy a insertar en la base de datos. 
+                for (Horarios h : listaHorariosGenerados) {
+                    if (materiasCarreras.getMateria().getNombreCompletoMateria().equals(h.getMateria().getNombreCompletoMateria())) {
+                        addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "MATERIA YA INSERTADA");
+                        return;
+                    }
                 }
             }
-        }
 
-        if (comprobacionEmpalmes()) {//Compruebo si no hay empalmes entre las elegidas
-            return;
-        }
+            if (comprobacionEmpalmes()) {//Compruebo si no hay empalmes entre las elegidas
+                return;
+            }
 
-        if (camposllenos) {//COMPRUEBA QUE TODOS LOS CAMPOS TENGAN ALGO Y QUE HAYAN SIDO SELECCIOANDAS AL MENOS UNA CELDA
-            generarGrupo();//Genera el grupo.         
-            organigrama = organigramaServicio.buscarPorId(materiasCarreras.getMateria().getClaveArea().getClaveArea());
-            if (listaHorarios == null) {//VERIFICA TODOS LOS HORARIOS QUE SE HAN LLENADO
-                listaHorarios = new ArrayList<>();//Vamos a guardar todos los horarios que se van a guardar en la base de datos
-                for (int i = 0; i < listacoordenadas.size(); i++) {
-                    String celda = listacoordenadas.get(i);//Voy a recorrer todos estos ["1,1"]["1,2"]["1,3"]["1,4"]["1,5"]
-                    String[] indices = celda.split(",");//tienen el formato ["1,1"] entonces los separa respectivamente fila: 1 y columna: 1
-                    int fila = Integer.parseInt(indices[0]);
-                    int columna = Integer.parseInt(indices[1]);
+            if (camposllenos) {//COMPRUEBA QUE TODOS LOS CAMPOS TENGAN ALGO Y QUE HAYAN SIDO SELECCIOANDAS AL MENOS UNA CELDA
+                generarGrupo();//Genera el grupo.         
+                organigrama = organigramaServicio.buscarPorId(materiasCarreras.getMateria().getClaveArea().getClaveArea());
+                System.out.println("listaHorarios{" + listaHorarios + "}");
+                if (listaHorarios == null) {//VERIFICA TODOS LOS HORARIOS QUE SE HAN LLENADO
+                    listaHorarios = new ArrayList<>();//Vamos a guardar todos los horarios que se van a guardar en la base de datos
+                    for (int i = 0; i < listacoordenadas.size(); i++) {
+                        String celda = listacoordenadas.get(i);//Voy a recorrer todos estos ["1,1"]["1,2"]["1,3"]["1,4"]["1,5"]
+                        String[] indices = celda.split(",");//tienen el formato ["1,1"] entonces los separa respectivamente fila: 1 y columna: 1
+                        int fila = Integer.parseInt(indices[0]);
+                        int columna = Integer.parseInt(indices[1]);
 
-                    horario = new Horarios();
-                    horario.setPeriodo(periodo);//Insertar periodo
-                    horario.setTipoHorario('V');//Preguntar al maestro
+                        horario = new Horarios();
+                        horario.setPeriodo(periodo);//Insertar periodo
+                        horario.setTipoHorario('V');//Preguntar al maestro
 
-                    horario.setDiaSemana((short) (columna + 1));//Guarda el dia de la semana con numero. 
-                    asignarHoras(fila + 1);//Elige primero el rango que va a convertir, por ejemplo "7:00-8:00" los transforma a date 7 y 8. 
-                    horario.setHoraInicial(horainicioMateria);
-                    horario.setHoraFinal(horainiciofinMateria);
-                    horario.setMateria(materiasCarreras.getMateria());
-                    horario.setGrupo(valorgrupo);
-                    horario.setAula(aula);
-                    horario.setTipoPersonal('D');
-                    horario.setIdGrupo(grupo);
-                    listaHorarios.add(horario);
-                    horarioServicio.insertarHorario(horario);
-                }
-                addMessage(FacesMessage.SEVERITY_INFO, "ÉXITO", "SE HAN AGREGADO TODAS LOS HORARIOS A LA BD");
-                //ACOMODAR EN LA TABLA LA INFORMACION 
-                for (int i = 0; i < listaHorarios.size(); i++) {//Obtener el objeto donde tengo la informacion de las materias.
-                    horario = listaHorarios.get(i);
-                    String celda = listacoordenadas.get(i);//Voy a recorrer todos estos ["1,1"]["1,2"]["1,3"]["1,4"]["1,5"]
-                    String[] indices = celda.split(",");//tienen el formato ["1,1"] entonces los separa respectivamente fila: 1 y columna: 1
-                    int fila = Integer.parseInt(indices[0]);
-                    int columna = Integer.parseInt(indices[1]);
+                        horario.setDiaSemana((short) (columna + 1));//Guarda el dia de la semana con numero. 
+                        asignarHoras(fila + 1);//Elige primero el rango que va a convertir, por ejemplo "7:00-8:00" los transforma a date 7 y 8. 
+                        horario.setHoraInicial(horainicioMateria);
+                        horario.setHoraFinal(horainiciofinMateria);
+                        horario.setMateria(materiasCarreras.getMateria());
+                        horario.setGrupo(valorgrupo);
+                        horario.setAula(aula);
+                        horario.setTipoPersonal('D');
+                        horario.setIdGrupo(grupo);
+                        listaHorarios.add(horario);
+                        horarioServicio.insertarHorario(horario);
+                    }
+                    addMessage(FacesMessage.SEVERITY_INFO, "ÉXITO", "SE HAN AGREGADO TODAS LOS HORARIOS A LA BD");
+                    //ACOMODAR EN LA TABLA LA INFORMACION 
+                    for (int i = 0; i < listaHorarios.size(); i++) {//Obtener el objeto donde tengo la informacion de las materias.
+                        horario = listaHorarios.get(i);
+                        String celda = listacoordenadas.get(i);//Voy a recorrer todos estos ["1,1"]["1,2"]["1,3"]["1,4"]["1,5"]
+                        String[] indices = celda.split(",");//tienen el formato ["1,1"] entonces los separa respectivamente fila: 1 y columna: 1
+                        int fila = Integer.parseInt(indices[0]);
+                        int columna = Integer.parseInt(indices[1]);
 
-                    for (int j = 0; j < listaHorarioCrear.size(); j++) {//Recorrer la tabla primero por las filas
-                        horariocrear = listaHorarioCrear.get(j);
-                        if (j == fila) {
-                            //horariocrear.setColor("#3B0000");//Poner el color que le corresponde a las materias. 
-                            asignarDatoSemana(horariocrear, columna, horario, "#" + organigrama.getColor(), "#3B0000");
-                            break;
+                        for (int j = 0; j < listaHorarioCrear.size(); j++) {//Recorrer la tabla primero por las filas
+                            horariocrear = listaHorarioCrear.get(j);
+                            if (j == fila) {
+                                //horariocrear.setColor("#3B0000");//Poner el color que le corresponde a las materias. 
+                                asignarDatoSemana(horariocrear, columna, horario, "#" + organigrama.getColor(), "#3B0000");
+                                break;
+                            }
+
                         }
 
                     }
 
-                }
-            } else if (materiasCarreras.getMateria().getNombreCompletoMateria() == listaHorarios.get(0).getMateria().getNombreCompletoMateria()) {
-                addMessage(FacesMessage.SEVERITY_ERROR, "ERROR", "MATERIA YA INSERTADA");
-            } else {
-                addMessage(FacesMessage.SEVERITY_INFO, "INFO", "LIMPIANDO LISTA");
-                listaHorarios = null;
-                generarHorario();
-            }
+                    actualizarTabla();//para evitar que se pierdan los datos al momento de eliminar
+                    //Ya al momento de insertar si quiero insertar otra para que no me mande mensaje de error despues de eliminar
+                    listaHorarios = null;
+                    //addMessage(FacesMessage.SEVERITY_INFO, "INFO", "LIMPIANDO LISTA 1" );
+                } 
 
+            }
         }
 
     }
@@ -1629,7 +1634,7 @@ public class HorarioCrearBean implements Serializable {
         System.out.println("Coordenadas guardadas en ArrayList: " + listacoordenadas);
     }
 
-    public void verificacionDeCampos() {//Verifica que los campos todos tengan algo
+    public Boolean verificacionDeCampos() {//Verifica que los campos todos tengan algo
         System.out.println("CarreraS: " + carreraS + " PeriodosS: " + periodoS + " SemestreS: " + semestreS + " AsignaturaS: " + asignaturaS
                 + " Aulas: " + aulas + " Valorgrupo: " + valorgrupo + " Numestudiantes " + numestudiantes);
         System.out.println("Celdas seleccionadas: " + posicionesSeleccionadas);
@@ -1641,30 +1646,42 @@ public class HorarioCrearBean implements Serializable {
             pares = posicionesSeleccionadas.split(";");
         }
 
-        if (carreraS == null) {
+        if (carreraS == null || "".equals(carreraS)) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "CAMPO CARRERA VACIO");
+            return false;
         } else if ("0".equals(semestreS)) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "CAMPO SEMESTRE VACIO");
-        } else if (aulas == null) {
+            return false;
+        } else if (aulas == null || "".equals(aulas)) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "CAMPO AULA VACIO");
+            return false;
         } else if (numestudiantes == 0) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "CAMPO ESTUDIANTES EN 0");
-        } else if (periodoS == null) {
+            return false;
+        } else if (periodoS == null || "".equals(periodoS)) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "CAMPO PERIODO VACIO");
-        } else if (asignaturaS == null) {
+            return false;
+        } else if (asignaturaS == null || "".equals(asignaturaS)) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "CAMPO ASIGNATURA VACIO");
-        } else if (valorgrupo == null) {
+        } else if (valorgrupo == null || "".equals(valorgrupo)) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "CAMPO NOMBRE GRUPO VACIO");
+            return false;
         } else if (pares == null) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "NO TIENES NINGUNA SELECCIONADA");
+            return false;
         } else if (pares.length == 0) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "SELECCIONA TODAS LAS HORAS TOTAL: " + creditos);
+            return false;
         } else if (pares.length != creditos) {
             addMessage(FacesMessage.SEVERITY_WARN, "INFO", "TE FALTAN: " + (creditos - pares.length) + " HORAS");
+            return false;
         } else {
             camposllenos = true;
-            addMessage(FacesMessage.SEVERITY_INFO, "INFO", "CAMPOS COMPLETOS");
+
+           // addMessage(FacesMessage.SEVERITY_INFO, "INFO", "CAMPOS COMPLETOS");
+            return true;
         }
+        return false;
     }
 
     public boolean verificacionDeCamposActualizado() {//Verifica que los campos todos tengan algo
@@ -1698,8 +1715,13 @@ public class HorarioCrearBean implements Serializable {
             booleanCampoAula = false;
             activarodesactivarBotones(false);
             return false;
+        } else if (asignaturaS == null || "".equals(asignaturaS)) {
+            addMessage(FacesMessage.SEVERITY_WARN, "INFO", "CAMPO NOMBRE AULA VACIO");
+            booleanCampoAula = false;
+            activarodesactivarBotones(false);
+            return false;
         }
-        addMessage(FacesMessage.SEVERITY_INFO, "INFO", "CAMPOS COMPLETOS");
+       // addMessage(FacesMessage.SEVERITY_INFO, "INFO", "CAMPOS COMPLETOS");
 
         //Booleans para controlar si tienen aunque sea algo los booleanos
         booleanCampoCarrera = true;
@@ -1919,13 +1941,36 @@ public class HorarioCrearBean implements Serializable {
     }
 
     public void actualizarCreditos() {
-
-        materiasCarreras = materiasCarrerasServicio.buscarPorId(Integer.parseInt(asignaturaS));
-        if (materiasCarreras != null) {
-            creditos = materiasCarreras.getHorasPracticas() + materiasCarreras.getHorasTeoricas();
-            // Enviar el valor actualizado al cliente ANTES del update
-            PrimeFaces.current().ajax().addCallbackParam("creditos", this.creditos);
+        if (verificacionDeCamposActualizado()) { //Esto sirve al inicio cuando apenas estoy llenando los campos verifica que todos esten llenos si no no ocurre nada.
+            System.out.println("Entro a actualizar creditos true valor asignaturaS{" + asignaturaS + "}");
+            //Se evita que se desactive cualquier boton al cambiar un campo por culpa del ajax. Manteniendo el modo grupo y modo aula.
+            if (booleanBotonGrupo) {//Si esta activado el boton
+                activarodesactivarBotones(true);
+                actualizarTabla();
+            } else if (booleanBotonAula) {
+                booleanBotonIntercambiar = true;
+                actualizarTabla();
+            } else {
+                booleanBotonAula = true;
+                booleanBotonGrupo = true;
+                activarodesactivarBotones(false);
+            }
+        } else {
+            System.out.println("Entro a actualizar creditos false");
+            booleanBotonAula = false;
+            booleanBotonGrupo = false;
+            activarodesactivarBotones(false);
         }
+        if (!"".equals(asignaturaS) && asignaturaS != null) {//POr si esta activo inactivo.
+            System.out.println("Entre para asignar creditos");
+            materiasCarreras = materiasCarrerasServicio.buscarPorId(Integer.parseInt(asignaturaS));
+            if (materiasCarreras != null) {
+                creditos = materiasCarreras.getHorasPracticas() + materiasCarreras.getHorasTeoricas();
+                // Enviar el valor actualizado al cliente ANTES del update
+                PrimeFaces.current().ajax().addCallbackParam("creditos", this.creditos);
+            }
+        }
+
     }
 
     public void cambioPeriodo() {//Cauando cambie el periodo
@@ -1998,6 +2043,7 @@ public class HorarioCrearBean implements Serializable {
     public void cambioGrupo() {//Cuando cambie el campo grupo
         System.out.println("Cambio de grupo. ");
 
+        //listaHorarios = null; //Limpiamos la lista 
         if (verificacionDeCamposActualizado()) { //Esto sirve al inicio cuando apenas estoy llenando los campos verifica que todos esten llenos si no no ocurre nada.
             //Se evita que se desactive cualquier boton al cambiar un campo por culpa del ajax. Manteniendo el modo grupo y modo aula.
             if (booleanBotonGrupo) {//Si esta activado el boton

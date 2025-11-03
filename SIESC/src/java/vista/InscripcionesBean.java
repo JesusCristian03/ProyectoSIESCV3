@@ -14,12 +14,23 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import modelo.Estudiante;
+import modelo.Grupos;
+import modelo.HistoriaAlumno;
 import modelo.HorarioAsignatura;
+import modelo.Horarios;
 import modelo.Materia;
+import modelo.MateriasCarreras;
+import modelo.PeriodoEscolar;
 import modelo.Reticula;
+import modelo.ReticulaDatos;
+import modelo.SeleccionMaterias;
+import servicio.GruposServicioLocal;
+import servicio.HistoriaAlumnoServicioLocal;
 import servicio.HorarioAsignaturaServicioLocal;
 import servicio.HorarioServicioLocal;
 import servicio.MateriasCarrerasServicioLocal;
+import servicio.PeriodoEscolarServicioLocal;
+import servicio.SeleccionMateriasServicioLocal;
 
 /**
  *
@@ -30,6 +41,18 @@ import servicio.MateriasCarrerasServicioLocal;
 public class InscripcionesBean implements Serializable {
 
     @EJB
+    private HistoriaAlumnoServicioLocal historiaAlumnoServicio;
+
+    @EJB
+    private SeleccionMateriasServicioLocal seleccionMateriasServicio;
+
+    @EJB
+    private PeriodoEscolarServicioLocal periodoEscolarServicio;
+
+    @EJB
+    private GruposServicioLocal gruposServicio;
+
+    @EJB
     private HorarioAsignaturaServicioLocal horarioAsignaturaServicio;
 
     @EJB
@@ -37,39 +60,143 @@ public class InscripcionesBean implements Serializable {
 
     @EJB
     private MateriasCarrerasServicioLocal materiasCarrerasServicio;
-    
-    private List<HorarioAsignatura> listaHorarioAsignatura;
+
+    private List<HorarioAsignatura> listaHorarioAsignatura = new ArrayList<>();//Para llenar mi tabla de seleccion materias.
+    private List<HorarioAsignatura> listaHorarioASeleccionadas = new ArrayList<>();//Para llenar mi tabla de seleccion materias.
+    private List<Horarios> listaHorariosGenerados;
+    private List<PeriodoEscolar> listaPeriodoEscolar;//para sacar los periodos escolares. 
     private ArrayList<Reticula> listaM = new ArrayList();
-    
+    private List<SeleccionMaterias> listaSM = new ArrayList();
+
+    private List<String> listaGC = new ArrayList();
+
+    private HorarioAsignatura grupoSeleccionado;
 
     private Estudiante estudiante;
-    
-    private String grupo = "false";
-    private String asignatura = "false";
-    
+
+    private MateriasCarreras materiaSeleccionada;
     private String periodo;
     private String materia;
+    private double promedio;
+    private PeriodoEscolar periodoActual;
+    private ReticulaDatos materiaDeTabla;
+
+    public List<String> getListaGC() {
+        return listaGC;
+    }
+
+    public void setListaGC(List<String> listaGC) {
+        this.listaGC = listaGC;
+    }
+
+    public PeriodoEscolar getPeriodoActual() {
+        return periodoActual;
+    }
+
+    public void setPeriodoActual(PeriodoEscolar periodoActual) {
+        this.periodoActual = periodoActual;
+    }
+
+    public double getPromedio() {
+        return promedio;
+    }
+
+    public void setPromedio(double promedio) {
+        this.promedio = promedio;
+    }
+
+    public ReticulaDatos getMateriaDeTabla() {
+        return materiaDeTabla;
+    }
+
+    public List<HorarioAsignatura> getListaHorarioASeleccionadas() {
+        return listaHorarioASeleccionadas;
+    }
+
+    public void setListaHorarioASeleccionadas(List<HorarioAsignatura> listaHorarioASeleccionadas) {
+        this.listaHorarioASeleccionadas = listaHorarioASeleccionadas;
+    }
+
+    public void onSeleccionarGrupo() {
+
+        System.out.println("===============SELECCIONADO==================");
+        System.out.println("Seleccionado: " + grupoSeleccionado);
+        System.out.println("Grupo: " + grupoSeleccionado.getGrupo());
+        System.out.println("IdGrupo: " + grupoSeleccionado.getId());
+        System.out.println("Materia: " + grupoSeleccionado.getMateria());
+        System.out.println("Asignatura: " + grupoSeleccionado.getAsignatura());
+        System.out.println("Docente: " + grupoSeleccionado.getDocente());
+        System.out.println("Lunes: " + grupoSeleccionado.getLunes());
+        System.out.println("Martes: " + grupoSeleccionado.getMartes());
+        System.out.println("Miércoles: " + grupoSeleccionado.getMiercoles());
+        System.out.println("Jueves: " + grupoSeleccionado.getJueves());
+        System.out.println("Viernes: " + grupoSeleccionado.getViernes());
+        System.out.println("Sábado: " + grupoSeleccionado.getSabado());
+
+        System.out.println("================SELECCIONADO=================");
+        materiaDeTabla.setColor("cursando");
+        // materiaDeTabla.setDisponible(false);
+
+        listaHorarioASeleccionadas.add(grupoSeleccionado);
+
+    }
+
+    public HorarioAsignatura getGrupoSeleccionado() {
+        return grupoSeleccionado;
+    }
+
+    public List<SeleccionMaterias> getListaSM() {
+        return listaSM;
+    }
+
+    public void setListaSM(List<SeleccionMaterias> listaSM) {
+        this.listaSM = listaSM;
+    }
+
     /**
      * Creates a new instance of InscripcionesBean
      */
+    public void setGrupoSeleccionado(HorarioAsignatura grupoSeleccionado) {
+        this.grupoSeleccionado = grupoSeleccionado;
+    }
+
+    public void setMateriaDeTabla(ReticulaDatos materiaDeTabla) {
+        this.materiaDeTabla = materiaDeTabla;
+    }
+
     public InscripcionesBean() {
-        try{
+        try {
             FacesContext contexto = FacesContext.getCurrentInstance();
             estudiante = (Estudiante) contexto.getExternalContext().getSessionMap().get("estudiante");
-            if(estudiante!=null){
+
+            if (estudiante != null) {
                 //System.out.println("Buscarrrrrrrr Materias" + estudiante.getReticula().getReticula());
                 //
-                
-                
-            }else{
-                grupo = "true";
-                asignatura = "true";
+
+            } else {
+
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getStackTrace() + "\nError" + e.getCause().toString());
         }
     }
-    
+
+    public List<PeriodoEscolar> getListaPeriodoEscolar() {
+        return listaPeriodoEscolar;
+    }
+
+    public void setListaPeriodoEscolar(List<PeriodoEscolar> listaPeriodoEscolar) {
+        this.listaPeriodoEscolar = listaPeriodoEscolar;
+    }
+
+    public MateriasCarreras getMateriaSeleccionada() {
+        return materiaSeleccionada;
+    }
+
+    public void setMateriaSeleccionada(MateriasCarreras materiaSeleccionada) {
+        this.materiaSeleccionada = materiaSeleccionada;
+    }
+
     public String getPeriodo() {
         return periodo;
     }
@@ -103,27 +230,76 @@ public class InscripcionesBean implements Serializable {
     }
 
     public List<HorarioAsignatura> getListaHorarioAsignatura() {
-        listaHorarioAsignatura = horarioAsignaturaServicio.buscarHorarioAsignatura(periodo, materia);
+        //listaHorarioAsignatura = horarioAsignaturaServicio.buscarHorarioAsignatura(periodo, materia);
+        System.out.println("listaHorarioAsignatura size:" + listaHorarioAsignatura.size());
         return listaHorarioAsignatura;
     }
 
     public void setListaHorarioAsignatura(List<HorarioAsignatura> listaHorarioAsignatura) {
-        
         this.listaHorarioAsignatura = listaHorarioAsignatura;
     }
-    
+
     // Metodos 
-    
-    public void iniciarInscripcion(){
-        
+    public void iniciarInscripcion() {
+        //Esa lista se asigna a tu bean (listaM) y luego se usa en la página JSF para mostrar la retícula de materias.
         listaM = materiasCarrerasServicio.buscarMaterias(estudiante);
+        List<HistoriaAlumno> listaHA = historiaAlumnoServicio.buscarAsignaturas(estudiante.getNoDeControl());
+        double suma = 0;
+        int contador = 0;
+
+        for (int i = 0; i < listaHA.size(); i++) {
+            HistoriaAlumno ha = listaHA.get(i);
+            if (ha.getCalificacion() != null) { // por si alguna materia no tiene calificación aún
+                suma += ha.getCalificacion();
+                contador++;
+            }
+        }
+
+        promedio = (contador > 0) ? (suma / contador) : 0;
+        periodoActual = periodoEscolarServicio.buscarPorId(periodoEscolarServicio.periodoActual());
+        listaGC = gruposServicio.buscarGruposCompletos(estudiante.getReticula(), estudiante.getSemestre(), periodoActual);
         
+        System.out.println("----------------DATOS ENVIADOS PARA GC--------------");
+        System.out.println("Tamaño lista listaGC.size:" + listaGC.size());
+        System.out.println("Retícula: " + estudiante.getReticula());
+        System.out.println("Semestre: " + estudiante.getSemestre());
+        System.out.println("Periodo actual: " + periodoActual);
+        System.out.println("-----------------------------------------------------");
+        System.out.println("Promedio del alumno: " + promedio);
+
     }
-    
-    public void onMateriaClick(String materia) {
+
+    public void verHorarios(String grupo) {
+
+        horarioServicio.buscarHorariosPorGrupos(estudiante.getReticula(), estudiante.getSemestre(), periodoActual, grupo);
+
+    }
+
+    public void onMateriaClick(ReticulaDatos materia) {
         // Aquí recuperas la materia seleccionada desde el component binding
-        listaHorarioAsignatura = horarioAsignaturaServicio.buscarHorarioAsignatura(periodo, materia);
-        this.materia=materia;
-        //System.out.println("Entraaaaaa" + materia);
+        System.out.println("Materia Escogida->" + materia + "disponible?:->" + materia.isDisponible());
+        materiaDeTabla = materia;
+        materiaDeTabla.setDisponible(true);
+
+        System.out.println("Nombre:" + materiaDeTabla.getNombreMateria()
+                + "Id:" + materiaDeTabla.getMateria()
+                + "Creditos" + materiaDeTabla.getCreditos()
+                + "Color:" + materiaDeTabla.getColor()
+                + "Clave:" + materiaDeTabla.getClave()
+                + "Calificacion" + materiaDeTabla.getCalificacion());
+
+        materiaSeleccionada = materiasCarrerasServicio.buscarMateriasCarreraPorMateria(materiaDeTabla.getMateria());
+        listaPeriodoEscolar = periodoEscolarServicio.periodosEscolaresActivos();
+        System.out.println("---------------DATOS---------------------");
+        System.out.println("Encontre:" + materiaSeleccionada);
+        System.out.println("Retícula: " + materiaSeleccionada.getReticula().getReticula());
+        System.out.println("Semestre: " + materiaSeleccionada.getSemestreReticula());
+        System.out.println("Periodo: " + listaPeriodoEscolar.get(0).getPeriodo());
+        System.out.println("Materia: " + materiaSeleccionada.getMateria().getMateria());
+
+        listaHorarioAsignatura = gruposServicio.buscarGruposPorCampoMateriaSeleccionada(materiaSeleccionada.getReticula().getReticula(),
+                materiaSeleccionada.getSemestreReticula(),
+                listaPeriodoEscolar.get(0).getPeriodo(),
+                materiaSeleccionada.getMateria().getMateria());
     }
 }

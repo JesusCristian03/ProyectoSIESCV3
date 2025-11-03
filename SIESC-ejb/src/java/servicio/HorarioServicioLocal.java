@@ -36,7 +36,7 @@ public interface HorarioServicioLocal {
     
     void actualizar(Horarios horarios);
     
-    List<Horarios> buscarHorariosPorAulas(Carrera reticula, int semestre, PeriodoEscolar periodo, Aulas aula);
+    List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula);
     
     Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula);
 }

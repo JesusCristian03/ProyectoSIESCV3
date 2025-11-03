@@ -204,7 +204,7 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
     @Override
     public List<Horarios> buscarHorariosPorGrupos(Carrera reticula, int semestre, PeriodoEscolar periodo, String nombregrupo) {
         List<Horarios> lista = null;
-        System.out.println("BUSCANDO HORARIOS: -> ");
+        System.out.println("BUSCANDO HORARIOS ");
 
         String sql = "SELECT h FROM Horarios h "
                 + "JOIN h.idGrupo g "
@@ -225,11 +225,11 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
 
         return lista;
     }
-
+    
     @Override
-    public List<Horarios> buscarHorariosPorAulas(Carrera reticula, int semestre, PeriodoEscolar periodo, Aulas aula) {
+    public List<Horarios> buscarHorariosPorMateria(Carrera reticula, int semestre, PeriodoEscolar periodo, String materia) {
         List<Horarios> lista = null;
-        System.out.println("BUSCANDO HORARIOS: -> ");
+        System.out.println("BUSCANDO HORARIOS POR MATERIA:");
 
         String sql = "SELECT h FROM Horarios h "
                 + "JOIN h.idGrupo g "
@@ -237,15 +237,35 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
                 + "WHERE g.reticula = :reticula "
                 + "AND mc.semestreReticula = :semestre "
                 + "AND g.periodo = :periodo "
-                + "AND h.aula = :Aula";
+                + "AND g.materia = :Materia";
 
         Query query = em.createQuery(sql);
 
         query.setParameter("reticula", reticula);
         query.setParameter("semestre", semestre);
         query.setParameter("periodo", periodo);
-        query.setParameter("Aula", aula);
+        query.setParameter("Materia", materia);
 
+        lista = (List<Horarios>) query.getResultList();
+
+        return lista;
+    }
+
+    @Override
+    public List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula) {
+        List<Horarios> lista = null;
+        System.out.println("BUSCANDO HORARIOS: -> ");
+
+        String sql = "SELECT h FROM Horarios h "
+                + "JOIN h.idGrupo g "              
+                + "WHERE g.reticula = :reticula "
+                + "AND g.periodo = :periodo "
+                + "AND h.aula = :Aula";
+
+        Query query = em.createQuery(sql);
+        query.setParameter("reticula", reticula);
+        query.setParameter("periodo", periodo);
+        query.setParameter("Aula", aula);
         lista = (List<Horarios>) query.getResultList();
 
         return lista;

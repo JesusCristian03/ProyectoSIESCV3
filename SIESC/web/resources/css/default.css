@@ -2,19 +2,19 @@ body {
     background-color: #ffffff;
     font-size: 12px;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
-    color: #000000;  
+    color: #000000;
     margin: 0;
     height: 100%;
 
 }
 html{
     height: 80vh;
-    
+
 }
 
 h1 {
     font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
-    border-bottom: 1px solid #000000; 
+    border-bottom: 1px solid #000000;
     font-size:  16px;
     font-weight: bold;
     margin: 0px;
@@ -42,7 +42,7 @@ form{
     align-items: center;
 }
 .nuevo-equipo-col{
-   
+
 }
 .card{
     display: flex;
@@ -109,22 +109,22 @@ form{
     }
 }
 .terminar-button {
-        background-color: #FF0000; /* Cambia esto por el color que desees */
-        color: white; /* Cambia el color del texto */
-        border: none; /* Elimina el borde por defecto */
-        padding: 10px 20px; /* Ajusta el padding */
-        text-align: center; /* Centra el texto */
-        text-decoration: none; /* Elimina el subrayado */
-        display: inline-block; /* Permite ajustar el tamaño */
-        font-size: 16px; /* Ajusta el tamaño de la fuente */
-        margin: 4px 2px; /* Margen alrededor del botón */
-        cursor: pointer; /* Cambia el cursor al pasar por encima */
-        border-radius: 5px; /* Opcional: esquinas redondeadas */
+    background-color: #FF0000; /* Cambia esto por el color que desees */
+    color: white; /* Cambia el color del texto */
+    border: none; /* Elimina el borde por defecto */
+    padding: 10px 20px; /* Ajusta el padding */
+    text-align: center; /* Centra el texto */
+    text-decoration: none; /* Elimina el subrayado */
+    display: inline-block; /* Permite ajustar el tamaño */
+    font-size: 16px; /* Ajusta el tamaño de la fuente */
+    margin: 4px 2px; /* Margen alrededor del botón */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    border-radius: 5px; /* Opcional: esquinas redondeadas */
 }
-    
+
 .invisible{
     display:none;
-}   
+}
 .ui-datatable-even {
     background: #FF0000;
 }
@@ -181,3 +181,55 @@ form{
     text-align: center;
     font-size: 11px
 }
+.row-highlight {
+    /*Sirve para resaltar una fila seleccionada (por ejemplo, cuando el usuario da clic)*/
+    background: linear-gradient(90deg, #4a90e2, #007bff) !important;
+    color: #fff !important;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+    transition: all 0.2s ease-in-out;
+}
+
+
+.ui-datatable tbody tr.ui-state-hover {
+    /*Controla cómo se ve una fila cuando pasas el mouse encima (hover).*/
+    background: #BCBCBC !important;
+    color: #0A0A0A !important;
+    transform: scale(1.01);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.ui-datatable tbody tr {
+    /*Da un estilo base a todas las filas, agregando una línea divisoria:*/
+    border-bottom: 1px solid #dcdcdc;
+}
+.ui-dialog {
+    /*Centra los cuadros de diálogo (p:dialog) en el centro de la pantalla:*/
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.grupos-grid .panel-grupo {
+    transition: all 0.3s ease;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.grupos-grid .panel-grupo:hover {
+    background-color: #e6f0ff;
+    border-color: #2196F3;
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+    transform: translateY(-3px);
+}
+
+
+
+
+
+

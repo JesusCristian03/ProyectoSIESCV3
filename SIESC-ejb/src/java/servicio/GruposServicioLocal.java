@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Local;
 import modelo.Carrera;
 import modelo.Grupos;
+import modelo.HorarioAsignatura;
 import modelo.PeriodoEscolar;
 
 /**
@@ -23,4 +24,6 @@ public interface GruposServicioLocal {
     public List<Grupos> buscarGrupoSii(Integer reticula, Integer idmateriacarrera, String periodo, String grupo);
     List<Grupos> buscarGruposPorCampoNombre(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String grupo);
     void eliminar(Grupos grupo);
+    List<HorarioAsignatura> buscarGruposPorCampoMateriaSeleccionada(int reticula, Integer semestre, String periodo, String materia);
+    List<String> buscarGruposCompletos(Carrera reticula, Integer semestre, PeriodoEscolar periodo);
 }

@@ -28,7 +28,7 @@ public interface MateriasCarrerasServicioLocal {
 
     List<MateriasCarreras> buscarAsinaturaSemestre(Integer reticula, Integer semestre);
 
-    List<MateriasCarreras> buscarMateriasCarreraPerMateria(String idmateria);
+    MateriasCarreras buscarMateriasCarreraPorMateria(String idmateria);
 
     public MateriasCarreras buscarPorId(Integer x);
 }

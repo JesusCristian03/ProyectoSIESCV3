@@ -71,7 +71,7 @@
                                                  disabled="#{horarioCrearBean.desactivarCampos}">
 
                                     <p:ajax listener="#{horarioCrearBean.actualizarCreditos}" 
-                                            update="grupo"
+                                            update="grupo panelBotones panelBotonesModoGrupoAulas"
                                             oncomplete="maximoSeleccion = args.creditos; console.log('Nuevo maximoSeleccion:', maximoSeleccion);" />
 
                                     <f:selectItem itemLabel="SELECCIONA ASIGNATURA" itemValue="" noSelectionOption="true" />

@@ -52,27 +52,30 @@ public class HorarioServicio implements HorarioServicioLocal {
     public void insertarHorario(Horarios horarios) {
         horariosFacade.create(horarios);
     }
+
     @Override
     public List<Horarios> buscarHorariosPorGrupos(Carrera reticula, int semestre, PeriodoEscolar periodo, String nombregrupo) {
         return horariosFacade.buscarHorariosPorGrupos(reticula, semestre, periodo, nombregrupo);
     }
-    
+
     @Override
-    public List<Horarios> buscarHorariosPorAulas(Carrera reticula, int semestre, PeriodoEscolar periodo, Aulas aula) {
-        return horariosFacade.buscarHorariosPorAulas(reticula, semestre, periodo, aula);
+    public List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula) {
+        return horariosFacade.buscarHorariosPorAulas(reticula, periodo, aula);
     }
+
     @Override
     public void eliminar(Horarios horarios) {
         horariosFacade.remove(horarios);
     }
+
     @Override
     public void actualizar(Horarios horarios) {
         horariosFacade.edit(horarios);
     }
+
     @Override
     public Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula) {
         return horariosFacade.buscarHorarioPorEmpalme(diaSemana, horaInicial, horaFinal, aula);
     }
-    
-  
+
 }

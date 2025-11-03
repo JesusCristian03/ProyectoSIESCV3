@@ -13,6 +13,20 @@
         <h:outputStylesheet name="/css/cssLayout.css"/>
         <link rel="icon" href="/resources/assets/itc.png" type="image/x-icon"/>
         <title>Sistema Escolar ITC</title>
+        <style>
+            .ui-datatable th {
+                /*Define el encabezado de la tabla:*/
+                background-color: #014E82 !important;
+                color: #fff !important;
+                font-weight: bold;
+                text-align: center;
+                
+            }
+            
+
+        </style>
+
+
     </h:head>
 
     <h:body>
@@ -35,7 +49,7 @@
                                 <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
                             </p:submenu>
                             <p:submenu label="Iscripciones" expanded="false">
-                                <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones" actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-refresh"/>
+                                <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones?faces-redirect=true"  actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-refresh"/>
                                 <p:menuitem value="Grupos Disponibles" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
                                 <p:menuitem value="Horario Inscripcion" action="horarios" icon="pi pi-refresh"/>
                                 <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
@@ -46,7 +60,7 @@
                                 <p:menuitem value="Horarios" action="horarios" icon="pi pi-refresh"/>
                                 <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
                             </p:submenu>
-                            
+
                         </p:menu>
                         <style>
                             .ui-widget {
@@ -58,7 +72,7 @@
             </div>
             <div id="content" class="left_content">
                 <ui:insert name="content">
-                    
+
                 </ui:insert>
             </div>
         </div>

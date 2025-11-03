@@ -78,7 +78,8 @@ public class LoginBean implements Serializable {
                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usr);
                System.out.println("redireccionar" + usr.getIdrol().getRuta());
-               redireccion = "faces/" + usr.getIdrol().getRuta() + "/index.xhtml";
+               redireccion = usr.getIdrol().getRuta() + "/index.xhtml?faces-redirect=true";
+               
                
            }
             
@@ -107,7 +108,7 @@ public class LoginBean implements Serializable {
                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("estudiante", estudiante);   
                
-               redireccion = "faces/estudiante/index.xhtml";               
+               redireccion = "estudiante/index.xhtml?faces-redirect=true";             
            }            
         }catch(Exception e ){
             
