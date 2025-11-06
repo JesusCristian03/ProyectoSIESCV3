@@ -20,9 +20,26 @@
                 color: #fff !important;
                 font-weight: bold;
                 text-align: center;
-                
+
             }
-            
+            .grupos-grid .ui-panel {
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .grupos-grid .ui-panel:hover {
+                transform: scale(1.03);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+            @media (max-width: 900px) {
+                .grupos-grid {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                }
+            }
+            .bloqueado {
+                pointer-events: none;
+                opacity: 0.6;
+            }
+
+
 
         </style>
 

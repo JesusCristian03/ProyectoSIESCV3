@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import modelo.Carrera;
@@ -25,6 +26,7 @@ import modelo.PeriodoEscolar;
  * @author gacev
  */
 @Stateless
+@PermitAll
 public class GruposServicio implements GruposServicioLocal {
 
     @EJB
@@ -100,7 +102,8 @@ public class GruposServicio implements GruposServicioLocal {
     public List<HorarioAsignatura> buscarGruposPorCampoMateriaSeleccionada(int reticula, Integer semestre, String periodo, String materia) {
         PeriodoEscolar p = periodoEscolarFacade.find(periodo);
         Carrera r = carreraFacade.find(reticula);
-        System.out.println("--------------SERVICIO----------------");
+
+        System.out.println("--------------SERVICIO MATERIA----------------");
         System.out.println("Carrera:" + r);
         System.out.println("Semestre:" + semestre);
         System.out.println("PeriodoEscolar:" + p);
@@ -108,12 +111,36 @@ public class GruposServicio implements GruposServicioLocal {
 
         List<Grupos> gruposDisponibles = gruposFacade.buscarGruposPorCampoMateria(r, semestre, p, materia);
         List<Horarios> horariosDisponibles = horariosFacade.buscarHorariosPorMateria(r, semestre, p, materia);
-
         //HorarioAsignatura horario = new HorarioAsignatura();
         System.out.println("Se han encontrado gruposDisponibles.size:" + gruposDisponibles.size());
         System.out.println("Se han encontrado horariosDisponibles:" + horariosDisponibles.size());
+        return acomodarListaHorarios(gruposDisponibles, horariosDisponibles);
 
-        List<HorarioAsignatura> listaHorarioAsignatura = new ArrayList<>();
+    }
+
+    @Override
+    public List<HorarioAsignatura> buscarGruposPorCampoGrupoSeleccionada(int reticula, Integer semestre, String periodo, String grupo) {
+        PeriodoEscolar p = periodoEscolarFacade.find(periodo);
+        Carrera r = carreraFacade.find(reticula);
+
+        System.out.println("--------------SERVICIO GRUPO----------------");
+        System.out.println("Carrera:" + r);
+        System.out.println("Semestre:" + semestre);
+        System.out.println("PeriodoEscolar:" + p);
+        System.out.println("Grupo:" + grupo);
+
+        List<Grupos> gruposDisponibles = gruposFacade.buscarGruposPorCampoGrupo(r, semestre, p, grupo);
+        List<Horarios> horariosDisponibles = horariosFacade.buscarHorariosPorGrupos(r, semestre, p, grupo);
+        //HorarioAsignatura horario = new HorarioAsignatura();
+        System.out.println("Se han encontrado gruposDisponibles.size:" + gruposDisponibles.size());
+        System.out.println("Se han encontrado horariosDisponibles:" + horariosDisponibles.size());
+        return acomodarListaHorarios(gruposDisponibles, horariosDisponibles);
+
+    }
+
+    public List<HorarioAsignatura> acomodarListaHorarios(List<Grupos> gruposDisponibles, List<Horarios> horariosDisponibles) {
+
+        List<HorarioAsignatura> listaHorarioAsignaturas = new ArrayList<>();
 
         for (Grupos grupo : gruposDisponibles) {
             HorarioAsignatura horarioAsignatura = new HorarioAsignatura();
@@ -121,7 +148,8 @@ public class GruposServicio implements GruposServicioLocal {
             horarioAsignatura.setMateria(grupo.getMateria());
             horarioAsignatura.setAsignatura(grupo.getIdMateriaCarrera().getMateria().getNombreCompletoMateria());
             horarioAsignatura.setId(grupo.getIdGrupo());
-            horarioAsignatura.setDocente(grupo.getRfc().getNombreEmpleado());
+
+            // horarioAsignatura.setDocente(grupo.getRfc().getNombreEmpleado());
             // Recorremos los horarios y asignamos según el día
             for (Horarios horario : horariosDisponibles) {
                 if (horario.getIdGrupo().equals(grupo)) { // Coincide grupo
@@ -161,10 +189,10 @@ public class GruposServicio implements GruposServicioLocal {
                 }
             }
 
-            listaHorarioAsignatura.add(horarioAsignatura);
+            listaHorarioAsignaturas.add(horarioAsignatura);
         }
 
-        for (HorarioAsignatura h : listaHorarioAsignatura) {
+        for (HorarioAsignatura h : listaHorarioAsignaturas) {
             System.out.println("=================================");
             System.out.println("Grupo: " + h.getGrupo());
             System.out.println("IdGrupo: " + h.getId());
@@ -181,8 +209,7 @@ public class GruposServicio implements GruposServicioLocal {
             System.out.println("=================================");
         }
 
-        return listaHorarioAsignatura;
-
+        return listaHorarioAsignaturas;
     }
 
 }

@@ -60,4 +60,5 @@ public interface HorariosFacadeLoca {
     
     Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula);
 
+
 }

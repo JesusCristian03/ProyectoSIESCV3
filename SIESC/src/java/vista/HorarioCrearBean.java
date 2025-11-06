@@ -905,9 +905,7 @@ public class HorarioCrearBean implements Serializable {
                 .getExternalContext().getRequestParameterMap();
         nombreMateriaSeleccionada = params.get("nombre");
         aulaMateriaSeleccionada = params.get("aula");
-        System.out.println("Materia seleccionada: " + nombreMateriaSeleccionada);
-        System.out.println("Aula: " + aulaMateriaSeleccionada);
-        addMessage(FacesMessage.SEVERITY_INFO, "MATERIA", nombreMateriaSeleccionada + " AULA:" + aulaMateriaSeleccionada);
+        //addMessage(FacesMessage.SEVERITY_INFO, "MATERIA", nombreMateriaSeleccionada + " AULA " + aulaMateriaSeleccionada);
 
         modoEliminarSeleccionado();//Pinta de color rojo mas oscuro con letra blanca cuales he seleccionado
 
@@ -1248,7 +1246,7 @@ public class HorarioCrearBean implements Serializable {
         cambiarModoColorTabla("F8D5D4");
         listaHorarios = null;//Para evitar que mande mensajes que no.
 
-        addMessage(FacesMessage.SEVERITY_WARN, "MATERIA ELIMINADA", "Se eliminaron " + horariosAEliminar.size() + " coincidencias de la materia seleccionada.");
+        addMessage(FacesMessage.SEVERITY_WARN, "MATERIA ELIMINADA", "SE ELIMINARON " + horariosAEliminar.size() + " COINCIDENCIAS DE LA MATERIA SLECCIONADA.");
         // Actualiza la tabla en pantalla (si tienes método para ello)
 
     }
@@ -1298,7 +1296,6 @@ public class HorarioCrearBean implements Serializable {
         //Agregar una de modoSeleccionMateria;
         //Comparar con el tamaño encontrado 
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA", nombreMateriaSeleccionada);
-        System.out.println("SE HA SELECCIONADO MATERIA");
     }
 
     public void mostrarNotificacionCeldaMateria() {

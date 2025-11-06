@@ -251,6 +251,7 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
         return lista;
     }
 
+
     @Override
     public List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula) {
         List<Horarios> lista = null;

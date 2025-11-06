@@ -15,19 +15,29 @@ import javax.persistence.Entity;
 @Entity
 
 public class HorarioAsignatura implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
-    private int id=0;
-    private String lunes="";
-    private String martes="";
-    private String miercoles="";
-    private String jueves="";
-    private String viernes="";
-    private String sabado="";
-    private String asignatura="";
-    private String grupo="";
-    private String materia="";
-    private String docente="";
+    private int id = 0;
+    private String lunes = "";
+    private String martes = "";
+    private String miercoles = "";
+    private String jueves = "";
+    private String viernes = "";
+    private String sabado = "";
+    private String asignatura = "";
+    private String grupo = "";
+    private String materia = "";
+    private String docente = "";
+    private Boolean global = false;
+
+    public Boolean getGlobal() {
+        return global;
+    }
+
+    public void setGlobal(Boolean global) {
+        this.global = global;
+    }
 
     public int getId() {
         return id;
@@ -116,7 +126,5 @@ public class HorarioAsignatura implements Serializable {
     public void setDocente(String docente) {
         this.docente = docente;
     }
-    
-    
-    
+
 }

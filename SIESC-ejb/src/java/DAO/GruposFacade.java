@@ -59,16 +59,17 @@ public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacade
         lista = (List<Grupos>) (queryPersonal.getResultList());
         return lista;
     }
+
     @Override
     public List<Grupos> buscarGruposPorCampoNombre(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String nombregrupo) {
         List<Grupos> lista = null;
         System.out.println("BUSCANDO GRUPO: -> ");
-        String sqlPermisos = "SELECT g FROM Grupos g " +
-              "JOIN g.idMateriaCarrera mc " +
-              "WHERE g.reticula = :reticula " +
-              "AND mc.semestreReticula = :semestre " +
-              "AND g.periodo = :periodo " +
-              "AND g.grupo = :nombreGrupo";
+        String sqlPermisos = "SELECT g FROM Grupos g "
+                + "JOIN g.idMateriaCarrera mc "
+                + "WHERE g.reticula = :reticula "
+                + "AND mc.semestreReticula = :semestre "
+                + "AND g.periodo = :periodo "
+                + "AND g.grupo = :nombreGrupo";
 
         //System.out.println("Consulta " + sqlPermisos);
         Query queryPersonal = em.createQuery(sqlPermisos);
@@ -82,17 +83,17 @@ public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacade
 
         return lista;
     }
-    
+
     @Override
     public List<Grupos> buscarGruposPorCampoMateria(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String materia) {
         List<Grupos> lista = null;
         System.out.println("BUSCANDO GRUPO: -> ");
-        String sqlPermisos = "SELECT g FROM Grupos g " +
-              "JOIN g.idMateriaCarrera mc " +
-              "WHERE g.reticula = :reticula " +
-              "AND mc.semestreReticula = :semestre " +
-              "AND g.periodo = :periodo " +
-              "AND g.materia = :Materia";
+        String sqlPermisos = "SELECT g FROM Grupos g "
+                + "JOIN g.idMateriaCarrera mc "
+                + "WHERE g.reticula = :reticula "
+                + "AND mc.semestreReticula = :semestre "
+                + "AND g.periodo = :periodo "
+                + "AND g.materia = :Materia";
 
         //System.out.println("Consulta " + sqlPermisos);
         Query queryPersonal = em.createQuery(sqlPermisos);
@@ -106,16 +107,41 @@ public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacade
 
         return lista;
     }
+
+    @Override
+    public List<Grupos> buscarGruposPorCampoGrupo(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String grupo) {
+        List<Grupos> lista = null;
+        System.out.println("BUSCANDO GRUPO: -> ");
+        String sqlPermisos = "SELECT g FROM Grupos g "
+                + "JOIN g.idMateriaCarrera mc "
+                + "WHERE g.reticula = :reticula "
+                + "AND mc.semestreReticula = :semestre "
+                + "AND g.periodo = :periodo "
+                + "AND g.grupo = :Grupo";
+
+        //System.out.println("Consulta " + sqlPermisos);
+        Query queryPersonal = em.createQuery(sqlPermisos);
+
+        queryPersonal.setParameter("reticula", reticula);
+        queryPersonal.setParameter("semestre", semestre);
+        queryPersonal.setParameter("periodo", periodo);
+        queryPersonal.setParameter("Grupo", grupo);
+
+        lista = (List<Grupos>) (queryPersonal.getResultList());
+
+        return lista;
+    }
     
+
     @Override
     public List<Grupos> buscarGruposCompletos(Carrera reticula, Integer semestre, PeriodoEscolar periodo) {
         List<Grupos> lista = null;
         System.out.println("BUSCANDO GRUPO: -> ");
-        String sqlPermisos = "SELECT g FROM Grupos g " +
-              "JOIN g.idMateriaCarrera mc " +
-              "WHERE g.reticula = :reticula " +
-              "AND mc.semestreReticula = :semestre " +
-              "AND g.periodo = :periodo ";
+        String sqlPermisos = "SELECT g FROM Grupos g "
+                + "JOIN g.idMateriaCarrera mc "
+                + "WHERE g.reticula = :reticula "
+                + "AND mc.semestreReticula = :semestre "
+                + "AND g.periodo = :periodo ";
 
         //System.out.println("Consulta " + sqlPermisos);
         Query queryPersonal = em.createQuery(sqlPermisos);
@@ -124,11 +150,9 @@ public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacade
         queryPersonal.setParameter("semestre", semestre);
         queryPersonal.setParameter("periodo", periodo);
 
-
         lista = (List<Grupos>) (queryPersonal.getResultList());
 
         return lista;
     }
-    
-    
+
 }

@@ -26,4 +26,6 @@ public interface GruposServicioLocal {
     void eliminar(Grupos grupo);
     List<HorarioAsignatura> buscarGruposPorCampoMateriaSeleccionada(int reticula, Integer semestre, String periodo, String materia);
     List<String> buscarGruposCompletos(Carrera reticula, Integer semestre, PeriodoEscolar periodo);
+    
+    List<HorarioAsignatura> buscarGruposPorCampoGrupoSeleccionada(int reticula, Integer semestre, String periodo, String grupo);
 }

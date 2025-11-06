@@ -30,7 +30,9 @@
                     </h:form>
 
                     <h:form id="seleccion">
-                        <p:tabView id="tabVista">
+                        <p:tabView id="tabVista" cache="false">
+
+                            <p:ajax event="tabChange" listener="#{inscripcionesBean.onTabChange}" update="@this :seleccion:tabVista:panelGrupos" />
                             <f:facet name="actions">
                                 Global actions
                             </f:facet>
@@ -40,7 +42,7 @@
                                 </f:facet>
 
                                 <h1><h:outputText value="List"/></h1>
-                                <p:dataTable id="tabla" value="#{inscripcionesBean.listaM}" var="asignatura" rowStyleClass="registroPrueba" showGridlines="true">                                        
+                                <p:dataTable id="tablaReticula" value="#{inscripcionesBean.listaM}" var="asignatura" rowStyleClass="registroPrueba" showGridlines="true">                                        
 
                                     <p:column styleClass="#{asignatura.semestre1.color}">
                                         <f:facet name="header">
@@ -48,14 +50,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre1.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre1.materia}" style="font-size:12px; color: #{asignatura.semestre1.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre1.nombreMateria}" 
                                             rendered="#{asignatura.semestre1.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre1)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -63,7 +65,7 @@
 
                                         <h:outputText value="#{asignatura.semestre1.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre1.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre1.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre1.calificacion}" style="font-size:12px;" />
@@ -76,14 +78,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre2.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre2.materia}" style="font-size:12px; color: #{asignatura.semestre2.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre2.nombreMateria}" 
                                             rendered="#{asignatura.semestre2.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre2)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -91,7 +93,7 @@
 
                                         <h:outputText value="#{asignatura.semestre2.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre2.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre2.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre2.calificacion}" style="font-size:12px;" />
@@ -103,14 +105,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre3.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre3.materia}" style="font-size:12px; color: #{asignatura.semestre3.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre3.nombreMateria}" 
                                             rendered="#{asignatura.semestre3.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre3)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -118,7 +120,7 @@
 
                                         <h:outputText value="#{asignatura.semestre3.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre3.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre3.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre3.calificacion}" style="font-size:12px;" />
@@ -130,14 +132,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre4.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre4.materia}" style="font-size:12px; color: #{asignatura.semestre4.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre4.nombreMateria}" 
                                             rendered="#{asignatura.semestre4.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre4)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -145,7 +147,7 @@
 
                                         <h:outputText value="#{asignatura.semestre4.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre4.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre4.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre4.calificacion}" style="font-size:12px;" />
@@ -157,14 +159,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre5.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre5.materia}" style="font-size:12px; color: #{asignatura.semestre5.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre5.nombreMateria}" 
                                             rendered="#{asignatura.semestre5.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre5)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -172,7 +174,7 @@
 
                                         <h:outputText value="#{asignatura.semestre5.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre5.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre5.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre5.calificacion}" style="font-size:12px;" />
@@ -184,14 +186,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre6.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre6.materia}" style="font-size:12px; color: #{asignatura.semestre6.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre6.nombreMateria}" 
                                             rendered="#{asignatura.semestre6.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre6)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -199,7 +201,7 @@
 
                                         <h:outputText value="#{asignatura.semestre6.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre6.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre6.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre6.calificacion}" style="font-size:12px;" />
@@ -213,14 +215,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre7.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre7.materia}" style="font-size:12px; color: #{asignatura.semestre7.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre7.nombreMateria}" 
                                             rendered="#{asignatura.semestre7.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre7)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -228,7 +230,7 @@
 
                                         <h:outputText value="#{asignatura.semestre7.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre7.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre7.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre7.calificacion}" style="font-size:12px;" />
@@ -240,14 +242,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre8.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre8.materia}" style="font-size:12px; color: #{asignatura.semestre8.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre8.nombreMateria}" 
                                             rendered="#{asignatura.semestre8.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre8)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -255,7 +257,7 @@
 
                                         <h:outputText value="#{asignatura.semestre8.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre8.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre8.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre8.calificacion}" style="font-size:12px;" />
@@ -267,14 +269,14 @@
                                         </f:facet>
 
                                         <div style="text-align:center;">
-                                            <h:outputText value="#{asignatura.semestre9.materia}" style="font-size:12px; color:#090811;" />
+                                            <h:outputText value="#{asignatura.semestre9.materia}" style="font-size:12px; color: #{asignatura.semestre9.color=='cursando' ? '#FFFFFF' : '#090811'};" />
                                         </div>
 
                                         <p:commandLink  
                                             value="#{asignatura.semestre9.nombreMateria}" 
                                             rendered="#{asignatura.semestre9.disponible eq 'true'}"
                                             actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre9)}"
-                                            update=":seleccion:tabVista:resultadosTabla"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente"
                                             oncomplete="PF('selecionMateria').show()"
                                             style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
                                             onmouseover="this.style.color = '#FFFFFF';"
@@ -282,7 +284,7 @@
 
                                         <h:outputText value="#{asignatura.semestre9.nombreMateria}" 
                                                       rendered="#{not asignatura.semestre9.disponible eq 'true'}"
-                                                      style="font-size:12px; color:#090811;" />
+                                                      style="font-size:12px; color: #{asignatura.semestre9.color=='cursando' ? '#FFFFFF' : '#090811'};" />
 
                                         <div style="color:#090811; text-align:center;">
                                             <h:outputText value="#{asignatura.semestre9.calificacion}" style="font-size:12px;" />
@@ -301,7 +303,7 @@
 
                                     <h3 style="text-align:center;">Lista de Grupos</h3>
 
-                                    <p:dataTable id="resultadosTabla"
+                                    <p:dataTable id="tablaHorarioSeleccionandoEmergente"
                                                  value="#{inscripcionesBean.listaHorarioAsignatura}"
                                                  var="item"
                                                  selection="#{inscripcionesBean.grupoSeleccionado}" 
@@ -314,25 +316,34 @@
 
                                         <p:ajax event="rowSelect" 
                                                 listener="#{inscripcionesBean.onSeleccionarGrupo}" 
-                                                update="resultadosTabla :seleccion:tabVista:tabla :seleccion:tabVista:tablaHorario"
+                                                update="tablaHorarioSeleccionandoEmergente :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado"
                                                 oncomplete="PF('selecionMateria').hide();" />
 
-                                        <p:column headerText="Grupo" style="width:4%; text-align:center;"><h:outputText value="#{item.grupo}" /></p:column>                        
-                                        <p:column headerText="Materia" style="width:8%; text-align:center;"><h:outputText value="#{item.materia}" /></p:column> 
-                                        <p:column headerText="Asignatura" style="width:18%; text-align:center;"><h:outputText value="#{item.asignatura}" /></p:column> 
-                                        <p:column headerText="Docente" style="width:11%; text-align:center;"><h:outputText value="#{item.docente}" /></p:column> 
-                                        <p:column headerText="Lunes" style="width:10%; text-align:center;"><h:outputText value="#{item.lunes}" /></p:column>
-                                        <p:column headerText="Martes" style="width:10%; text-align:center;"><h:outputText value="#{item.martes}" /></p:column> 
-                                        <p:column headerText="Miércoles" style="width:10%; text-align:center;"><h:outputText value="#{item.miercoles}" /></p:column> 
-                                        <p:column headerText="Jueves" style="width:10%; text-align:center;"><h:outputText value="#{item.jueves}" /></p:column>
-                                        <p:column headerText="Viernes" style="width:10%; text-align:center;"><h:outputText value="#{item.viernes}" /></p:column>
-                                        <p:column headerText="Sábado" style="width:9%; text-align:center;"><h:outputText value="#{item.sabado}" /></p:column>
+                                        <p:column headerText="Grupo" style="width:4%;"><h:outputText value="#{item.grupo}" /></p:column>   
+                                        <!-- ✅ Nueva columna para el campo Global -->
+                                        <p:column headerText="Global" style="width:6%;">
+                                            <p:selectBooleanCheckbox value="#{item.global}">
+                                                <p:ajax event="change" update="tablaHorarioSeleccionandoEmergente" />
+                                            </p:selectBooleanCheckbox>
+                                        </p:column>
+                                        <p:column headerText="Materia" style="width:8%;"><h:outputText value="#{item.materia}" /></p:column> 
+                                        <p:column headerText="Asignatura" style="width:18%;"><h:outputText value="#{item.asignatura}" /></p:column> 
+                                        <p:column headerText="Docente" style="width:11%;"><h:outputText value="#{item.docente}" /></p:column> 
+                                        <p:column headerText="Lunes" style="width:10%;"><h:outputText value="#{item.lunes}" /></p:column>
+                                        <p:column headerText="Martes" style="width:10%;"><h:outputText value="#{item.martes}" /></p:column> 
+                                        <p:column headerText="Miércoles" style="width:10%;"><h:outputText value="#{item.miercoles}" /></p:column> 
+                                        <p:column headerText="Jueves" style="width:10%;"><h:outputText value="#{item.jueves}" /></p:column>
+                                        <p:column headerText="Viernes" style="width:10%;"><h:outputText value="#{item.viernes}" /></p:column>
+                                        <p:column headerText="Sábado" style="width:9%;"><h:outputText value="#{item.sabado}" /></p:column>
+
+
 
                                     </p:dataTable>
                                 </p:dialog>
 
+
                                 <p:panel header="HORARIOS SELECCIONADOS" style="margin-top:20px;">
-                                    <p:dataTable id="tablaHorario"
+                                    <p:dataTable id="tablaHorarioSeleccionado"
                                                  value="#{inscripcionesBean.listaHorarioASeleccionadas}" 
                                                  var="item"
                                                  style="font-size:12px; text-align:center; width:100%;"
@@ -388,6 +399,8 @@
 
                             </p:tab>
                             <p:tab>
+
+
                                 <f:facet name="actions">
                                     Por Asignatura
                                 </f:facet>
@@ -395,27 +408,91 @@
                                     <span>Grupo</span> <p:badge value="3" severity="danger" class="ml-1"></p:badge>
                                 </f:facet>
 
+                                <p:dialog id="dlg1" 
+                                          header="Selecciona Grupo" 
+                                          showEffect="fade" 
+                                          modal="true" 
+                                          widgetVar="selecionMateriaGrupo" 
+                                          responsive="true" 
+                                          width="75%"
+                                          position="center center">
 
-                                <p:dataGrid value="#{inscripcionesBean.listaGC}" var="grupo" columns="3" styleClass="grupos-grid">
+                                    <h3 style="text-align:center;">Lista de Grupos</h3>
 
-                                    <p:panel styleClass="panel-grupo" header="#{grupo}">
-                                        <h:panelGrid columns="2" cellpadding="4">
-                                            <h:outputText value="Grupo:" />
-                                            <h:outputText value="#{grupo}" />
+                                    <p:dataTable id="resultadosTabla1"
+                                                 value="#{inscripcionesBean.listaHorarioAsignatura}"
+                                                 var="item"
+                                                 style="font-size:12px; text-align:center;"
+                                                 scrollable="true"
+                                                 scrollHeight="500">
 
+                                        <p:column headerText="Grupo" style="width:4%; text-align:center;">
+                                            <h:outputText value="#{item.grupo}" />
+                                        </p:column>                        
+                                        <p:column headerText="Materia" style="width:8%; text-align:center;">
+                                            <h:outputText value="#{item.materia}" />
+                                        </p:column> 
+                                        <p:column headerText="Asignatura" style="width:18%; text-align:center;">
+                                            <h:outputText value="#{item.asignatura}" />
+                                        </p:column> 
+                                        <p:column headerText="Docente" style="width:11%; text-align:center;">
+                                            <h:outputText value="#{item.docente}" />
+                                        </p:column> 
+                                        <p:column headerText="Lunes" style="width:10%; text-align:center;">
+                                            <h:outputText value="#{item.lunes}" />
+                                        </p:column>
+                                        <p:column headerText="Martes" style="width:10%; text-align:center;">
+                                            <h:outputText value="#{item.martes}" />
+                                        </p:column> 
+                                        <p:column headerText="Miércoles" style="width:10%; text-align:center;">
+                                            <h:outputText value="#{item.miercoles}" />
+                                        </p:column> 
+                                        <p:column headerText="Jueves" style="width:10%; text-align:center;">
+                                            <h:outputText value="#{item.jueves}" />
+                                        </p:column>
+                                        <p:column headerText="Viernes" style="width:10%; text-align:center;">
+                                            <h:outputText value="#{item.viernes}" />
+                                        </p:column>
+                                        <p:column headerText="Sábado" style="width:9%; text-align:center;">
+                                            <h:outputText value="#{item.sabado}" />
+                                        </p:column>
+                                    </p:dataTable>
 
-                                        </h:panelGrid>
+                                    <!-- Botón de selección -->
+                                    <div style="text-align:center; margin-top:20px;">
+                                        <p:commandButton value="Seleccionar Grupo"
+                                                         icon="pi pi-check"
+                                                         styleClass="p-button-rounded p-button-success"
+                                                         actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
+                                                         oncomplete="PF('selecionMateriaGrupo').hide();"
+                                                         update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
+                                    </div>
 
-                                        <div style="text-align: center; margin-top: 10px;">
-                                            <p:commandButton value="Ver horario"
-                                                             icon="pi pi-calendar"
-                                                             oncomplete="PF('dialogHorariosGrupo').show()"
-                                                             actionListener="#{inscripcionesBean.verHorarios(grupo)}"
-                                                             update=":seleccion:tabVista:resultadosTabla" />
-                                        </div>
-                                    </p:panel>
+                                </p:dialog>
 
-                                </p:dataGrid>
+                                <p:outputPanel id="panelGrupos" styleClass="#{inscripcionesBean.grupoBloqueado ? 'bloqueado' : ''}">
+                                    <p:dataGrid value="#{inscripcionesBean.listaGC}" var="grupo"
+                                                columns="3"
+                                                styleClass="grupos-grid"
+                                                layout="grid">
+                                        <p:panel styleClass="panel-grupo" style="text-align:center; padding:15px;">
+                                            <h:panelGrid columns="1" style="width:100%; text-align:center;" cellpadding="5">
+
+                                                <i class="pi pi-users" style="font-size:3em; color:#2196F3;"></i>
+                                                <h:outputText value="#{grupo}" style="font-weight:bold; font-size:1.2em; color:#333;" />
+
+                                                <p:commandButton value="Ver horario"
+                                                                 icon="pi pi-calendar"
+                                                                 styleClass="p-button-rounded p-button-info"
+                                                                 style="margin-top:10px;"
+                                                                 oncomplete="PF('selecionMateriaGrupo').show()"
+                                                                 actionListener="#{inscripcionesBean.verHorarios(grupo)}"
+                                                                 update=":seleccion:tabVista:resultadosTabla1"
+                                                                 disabled="#{inscripcionesBean.grupoBloqueado}" />
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:dataGrid>
+                                </p:outputPanel>
                             </p:tab>
                             <p:tab title="Header III">
                                 <p class="m-0">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores

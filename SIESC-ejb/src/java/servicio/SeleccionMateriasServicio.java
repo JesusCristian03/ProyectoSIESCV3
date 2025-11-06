@@ -65,6 +65,11 @@ public class SeleccionMateriasServicio implements SeleccionMateriasServicioLocal
         sm.setStatusSeleccion('S');
         sm.setFechaHoraSeleccion(fechaHoraSeleccion);
         sm.setIdGrupo(g);
+        if (grupoSeleccionado.getGlobal()) {
+            sm.setGlobal('S');
+        } else {
+            sm.setGlobal('N');
+        }
 
         seleccionMateriasFacade.create(sm);
 

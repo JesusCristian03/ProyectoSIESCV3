@@ -72,7 +72,7 @@ public class ReticulaDatos implements Serializable{
         this.color = color;
     }
 
-    public boolean isDisponible() {
+    public boolean getDisponible() {
         return disponible;
     }
 
