@@ -188,6 +188,7 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
         reticulaDatos.setMateria(materia.getMateria().getMateria());//el código de la materia.
         reticulaDatos.setNombreMateria(materia.getMateria().getNombreAbreviadoMateria());//el nombre abreviado de la materia.
         reticulaDatos.setClave(materia.getClaveOficialMateria());//la clave oficial de la materia en la carrera.
+        reticulaDatos.setCreditos(""+materia.getCreditosMateria());
         //Se compara el semestre de la materia (materia.getSemestreReticula()) con el semestre actual del estudiante (semestre).
         if (materia.getSemestreReticula() <= semestre) {
             //Se marca como disponible (disponible = true) y el color se pone en "disponible".

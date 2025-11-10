@@ -696,7 +696,7 @@
                             console.log("Celdas seleccionadas:", celdas); //  mira qué celdas encuentra
 
                             celdas.forEach(function (celda, index) {
-                            const fila = celda.dataset.row;
+                            const fila = parseInt(celda.dataset.row) + 1;
                             const columna = celda.dataset.col;
                             console.log(`Celda ${index}: fila=${fila}, columna=${columna}`); // revisa los atributos
 

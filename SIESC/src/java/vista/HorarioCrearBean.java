@@ -22,6 +22,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 import modelo.Aulas;
 import modelo.Carrera;
 import modelo.Grupos;
@@ -1165,6 +1166,7 @@ public class HorarioCrearBean implements Serializable {
         aulaBuscada = aulasServicio.buscarPorId(aulaMateriaSeleccionada);
 
         if (comprobacionEmpalmes()) {
+            System.out.println("Se encontro un empalme");
             return;
         }
 
@@ -1490,7 +1492,7 @@ public class HorarioCrearBean implements Serializable {
             grupo.setMateria(materiasCarreras.getMateria().getMateria());
             grupo.setGrupo(valorgrupo);
             gruposServicio.insertarNuevoGrupo(grupo);
-           // addMessage(FacesMessage.SEVERITY_INFO, "LISTO", "SE HA COMPLETADO  DE INSERTAR GRUPO");
+            // addMessage(FacesMessage.SEVERITY_INFO, "LISTO", "SE HA COMPLETADO  DE INSERTAR GRUPO");
         }
 
     }
@@ -1505,13 +1507,13 @@ public class HorarioCrearBean implements Serializable {
             int columna = Integer.parseInt(indices[1]);
 
             System.out.println("DiaSemana:" + (columna + 1) + "Hora Inicial:"
-                    + obtenerStringDeHoraPorFila(fila)
-                    + "Hora Final" + obtenerStringDeHoraPorFila(fila + 1)
+                    + obtenerStringDeHoraPorFila(fila - 1)
+                    + "Hora Final" + obtenerStringDeHoraPorFila(fila)
                     + "AulaBuscada:" + aulaBuscada + (aulaBuscada.getAula()));
 
             horarioempalme = horarioServicio.buscarHorarioPorEmpalme((short) (columna + 1),
+                    obtenerStringDeHoraPorFila(fila - 1),
                     obtenerStringDeHoraPorFila(fila),
-                    obtenerStringDeHoraPorFila(fila+1),
                     aulaBuscada);
 
             if (horarioempalme != null) {
@@ -1533,7 +1535,7 @@ public class HorarioCrearBean implements Serializable {
     public void generarHorario() throws ParseException {
         if (verificacionDeCampos()) {
             //VERIFICA QUE LOS CAMPOS TENGAN ALGO
-     
+
             materiasCarreras = materiasCarrerasServicio.buscarPorId(Integer.parseInt(asignaturaS));
             modoSeleccionMateria = false;//¨Por si paso de modo eliminar a modo Insertar Materia.
             aula = aulasServicio.buscarPorId(aulas);
@@ -1551,6 +1553,17 @@ public class HorarioCrearBean implements Serializable {
 
             if (comprobacionEmpalmes()) {//Compruebo si no hay empalmes entre las elegidas
                 return;
+            }
+
+            for (int i = 0; i < listacoordenadas.size(); i++) {//Devuelo a la posicion original en fila
+                String celda = listacoordenadas.get(i);
+                String[] indices = celda.split(",");
+                int fila = Integer.parseInt(indices[0]) - 1;
+                int columna = Integer.parseInt(indices[1]);
+                // Crea el nuevo valor
+                String nuevoValor = fila + "," + columna;
+                // Reemplaza en la misma posición
+                listacoordenadas.set(i, nuevoValor);
             }
 
             if (camposllenos) {//COMPRUEBA QUE TODOS LOS CAMPOS TENGAN ALGO Y QUE HAYAN SIDO SELECCIOANDAS AL MENOS UNA CELDA
@@ -1606,7 +1619,7 @@ public class HorarioCrearBean implements Serializable {
                     //Ya al momento de insertar si quiero insertar otra para que no me mande mensaje de error despues de eliminar
                     listaHorarios = null;
                     //addMessage(FacesMessage.SEVERITY_INFO, "INFO", "LIMPIANDO LISTA 1" );
-                } 
+                }
 
             }
         }
@@ -1675,7 +1688,7 @@ public class HorarioCrearBean implements Serializable {
         } else {
             camposllenos = true;
 
-           // addMessage(FacesMessage.SEVERITY_INFO, "INFO", "CAMPOS COMPLETOS");
+            // addMessage(FacesMessage.SEVERITY_INFO, "INFO", "CAMPOS COMPLETOS");
             return true;
         }
         return false;
@@ -1718,7 +1731,7 @@ public class HorarioCrearBean implements Serializable {
             activarodesactivarBotones(false);
             return false;
         }
-       // addMessage(FacesMessage.SEVERITY_INFO, "INFO", "CAMPOS COMPLETOS");
+        // addMessage(FacesMessage.SEVERITY_INFO, "INFO", "CAMPOS COMPLETOS");
 
         //Booleans para controlar si tienen aunque sea algo los booleanos
         booleanCampoCarrera = true;
