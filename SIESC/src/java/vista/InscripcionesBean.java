@@ -885,6 +885,13 @@ public class InscripcionesBean implements Serializable {
         if (!grupoBloqueado) {
             addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR GRUPO", "SELECCIONA UN GRUPO");
         }
+        if (estudiante.getCreditosAprobados()==estudiante.getCreditosCursados()) {
+            grupoBloqueado=false;//Si ambos creditos aprobados o cursados son iguales si puedo seleccionar grupo. 
+            
+        }else {
+            grupoBloqueado=true;
+         addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS NO ALCANZADOS", "NO HAZ ALCANZADO LOS CREDITOS SUFICIENTE");
+        }
 
         // grupoBloqueado = true;//Para bloquear los grupos si ya he seleccionado
     }
