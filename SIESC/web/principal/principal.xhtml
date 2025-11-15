@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Portal Institucional</title>
+
+    <!-- Estilos del tema Ultima -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+
+    <!-- Íconos de PrimeFaces -->
+    <h:outputStylesheet library="primefaces" name="primeicons/primeicons.css"/>
+
+    <style>
+        body {
+            background-color: #f4f8ff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Encabezado institucional */
+        .encabezado {
+            background-color: #0a3d62;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .encabezado img {
+            height: 60px;
+        }
+
+        .encabezado h2 {
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .inicio-header {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #0a3d62;
+        }
+
+        .inicio-header h1 {
+            font-weight: 700;
+            font-size: 2.4rem;
+        }
+
+        .inicio-header p {
+            font-size: 1.2rem;
+            color: #3d5a80;
+        }
+
+        .botones-inicio {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .botones-inicio .ui-button {
+            width: 240px;
+            margin: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .footer {
+            background-color: #0a3d62;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer a {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: #4da8ff;
+        }
+
+        .ui-carousel .ui-carousel-item img {
+            width: 90%;
+            border-radius: 12px;
+            margin: auto;
+            display: block;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <!-- ENCABEZADO -->
+    <div class="encabezado">
+        <div style="display:flex; align-items:center; gap:15px;">
+            <h:graphicImage library="imagenes/sistema" name="logo2.png" alt="Logo Institucional"/>
+            <h2>Instituto Tecnológico de Cuautla</h2>
+        </div>
+        <div>
+            <a href="#" style="color:white; margin-right:20px;">Inicio</a>
+            <a href="#" style="color:white;">Contacto</a>
+        </div>
+    </div>
+
+    <!-- CUERPO PRINCIPAL -->
+    <div class="inicio-header">
+        <h1>Portal Institucional</h1>
+        <p>Bienvenido al sistema de gestión institucional. Selecciona tu tipo de usuario para continuar.</p>
+    </div>
+
+    <!-- CARRUSEL -->
+    <div class="p-d-flex p-jc-center">
+        <p:carousel value="#{inicioBean.imagenes}" var="img" numVisible="1" circular="true" autoplayInterval="3000">
+            <p:graphicImage library="imagenes/sistema" name="#{img}" style="width:90%; border-radius:15px;"/>
+        </p:carousel>
+    </div>
+
+    <!-- BOTONES DE INICIO -->
+    <div class="botones-inicio">
+        <p:button value="Iniciar como Estudiante" styleClass="ui-button-raised ui-button-primary"
+                  outcome="/escolar/index.xhtml" icon="pi pi-user"/>
+
+        <p:button value="Iniciar como Aspirante" styleClass="ui-button-raised ui-button-info"
+                  outcome="/escolar/index.xhtml" icon="pi pi-id-card"/>
+
+        <p:button value="Iniciar como Personal Administrativo" styleClass="ui-button-raised ui-button-secondary"
+                  outcome="/divisionEP/index.xhtml" icon="pi pi-briefcase"/>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <h:outputText value="© 2025 Instituto Tecnológico de Cuautla. Todos los derechos reservados." />
+        <br/><br/>
+        <a href="https://www.youtube.com/@tecnm-cuautla" target="_blank"><i class="pi pi-youtube"></i></a>
+        <a href="https://web.facebook.com/search/top?q=tecnologico%20de%20cuautla" target="_blank"><i class="pi pi-facebook"></i></a>
+    </div>
+
+</h:body>
+</html>
+
