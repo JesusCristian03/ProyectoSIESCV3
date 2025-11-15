@@ -9,11 +9,95 @@
   
 <h:head> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-    <h:outputStylesheet name="css/default.css"/> 
-    <h:outputStylesheet name="css/cssLayout.css"/> 
-    <h:outputStylesheet name="css/ultima.css"/> 
+
+        <!-- Ultima Theme y Layout -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+
+    
     <title>Division de estudios profesionales</title>
 
+</h:head> 
+    
+<h:body> 
+    <!-- ENCABEZADO -->
+<!-- ENCABEZADO -->
+<div id="top" class="top"> 
+    <!-- SECCIÓN IZQUIERDA -->
+    <div class="left-section">
+        <i class="pi pi-bars menu-toggle" onclick="toggleMenu()"></i>
+        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
+    </div>
+
+    <!-- SECCIÓN CENTRAL -->
+    <div class="center-section">
+        <h2>DIVISIÓN DE ESTUDIOS PROFESIONALES</h2>
+    </div>
+
+    <!-- SECCIÓN DERECHA -->
+    <div class="right-section">
+        <h:form styleClass="logout-form">
+            <p:commandButton 
+                value="Cerrar sesión" 
+                icon="pi pi-sign-out"
+                styleClass="ui-button-danger ui-button-rounded ui-button-outlined"
+                action="#{controlSesion.cerrarSesion}"
+                ajax="false" />
+        </h:form>
+    </div>
+</div>
+ 
+
+    <!-- MENÚ LATERAL -->
+    <div id="left"> 
+        <ui:insert name="left">
+            <h:form>
+                <p:menu toggleable="true">
+                    <p:submenu label="Mantenimiento" expanded="false"> 
+                        <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="gruposNE" icon="pi pi-plus-circle"/> 
+                        <p:menuitem value="Asistencia" action="index" icon="pi pi-calendar-check"/> 
+                        <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-file-edit"/> 
+                        <p:menuitem value="Horarios" action="horarios" icon="pi pi-clock"/> 
+                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
+                    </p:submenu> 
+
+                    <p:submenu label="Inscripciones" expanded="false"> 
+                        <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones" actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-calendar-plus"/> 
+                        <p:menuitem value="Grupos Disponibles" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-users"/> 
+                        <p:menuitem value="Horario Inscripcion" action="horarios" icon="pi pi-clock"/> 
+                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
+                    </p:submenu> 
+
+                    <p:submenu label="Eval. Docente" expanded="false"> 
+                        <p:menuitem value="Asistencia" action="asistenciaDocente" icon="pi pi-calendar-check"/> 
+                        <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-file-edit"/> 
+                        <p:menuitem value="Horarios" action="horarios" icon="pi pi-clock"/> 
+                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
+                    </p:submenu>
+                </p:menu> 
+            </h:form>
+        </ui:insert> 
+    </div> 
+
+    <!-- CONTENIDO -->
+    <div id="content" class="left_content"> 
+        <ui:insert name="content">
+                 
+        </ui:insert> 
+          <h3>Bienvenido al panel principal</h3>
+            <p>Selecciona una opción del menú para continuar.</p> 
+
+    </div> 
+
+    <footer>
+        © 2025 Tecnológico Nacional de México Campus Cuautla | División de Estudios Profesionales
+    </footer>
+</h:body> 
+    
+    
     <style>
         body {
             background: linear-gradient(to right, #f4f6f9, #eef1f6);
@@ -191,80 +275,4 @@ footer {
             menu.classList.toggle('active');
         }
     </script>
-</h:head> 
-    
-<h:body> 
-    <!-- ENCABEZADO -->
-<!-- ENCABEZADO -->
-<div id="top" class="top"> 
-    <!-- SECCIÓN IZQUIERDA -->
-    <div class="left-section">
-        <i class="pi pi-bars menu-toggle" onclick="toggleMenu()"></i>
-        <img src="../resources/assets/TECNM-blanco.png" alt="TECNM"/> 
-    </div>
-
-    <!-- SECCIÓN CENTRAL -->
-    <div class="center-section">
-        <h2>DIVISIÓN DE ESTUDIOS PROFESIONALES</h2>
-    </div>
-
-    <!-- SECCIÓN DERECHA -->
-    <div class="right-section">
-        <h:form styleClass="logout-form">
-            <p:commandButton 
-                value="Cerrar sesión" 
-                icon="pi pi-sign-out"
-                styleClass="ui-button-danger ui-button-rounded ui-button-outlined"
-                action="#{controlSesion.cerrarSesion}"
-                ajax="false" />
-        </h:form>
-    </div>
-</div>
- 
-
-    <!-- MENÚ LATERAL -->
-    <div id="left"> 
-        <ui:insert name="left">
-            <h:form>
-                <p:menu toggleable="true">
-                    <p:submenu label="Mantenimiento" expanded="false"> 
-                        <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="gruposNE?faces-redirect=true" icon="pi pi-plus-circle"/> 
-                        <p:menuitem value="Asistencia" action="index" icon="pi pi-calendar-check"/> 
-                        <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-file-edit"/> 
-                        <p:menuitem value="Horarios" action="horarios" icon="pi pi-clock"/> 
-                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
-                    </p:submenu> 
-
-                    <p:submenu label="Inscripciones" expanded="false"> 
-                        <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones" actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-calendar-plus"/> 
-                        <p:menuitem value="Grupos Disponibles" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-users"/> 
-                        <p:menuitem value="Horario Inscripcion" action="horarios" icon="pi pi-clock"/> 
-                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
-                    </p:submenu> 
-
-                    <p:submenu label="Eval. Docente" expanded="false"> 
-                        <p:menuitem value="Asistencia" action="asistenciaDocente" icon="pi pi-calendar-check"/> 
-                        <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-file-edit"/> 
-                        <p:menuitem value="Horarios" action="horarios" icon="pi pi-clock"/> 
-                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
-                    </p:submenu>
-                </p:menu> 
-            </h:form>
-        </ui:insert> 
-    </div> 
-
-    <!-- CONTENIDO -->
-    <div id="content" class="left_content"> 
-        <ui:insert name="content">
-                 
-        </ui:insert> 
-          <h3>Bienvenido al panel principal</h3>
-            <p>Selecciona una opción del menú para continuar.</p> 
-
-    </div> 
-
-    <footer>
-        © 2025 Tecnológico Nacional de México Campus Cuautla | División de Estudios Profesionales
-    </footer>
-</h:body> 
 </html>
