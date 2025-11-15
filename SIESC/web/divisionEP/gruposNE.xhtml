@@ -20,35 +20,21 @@
                         <p:panel header="CREAR GRUPO: " style="margin-bottom:10px;">
                             <h:panelGrid columns="4" cellpadding="5">
                                 <p:outputLabel for="carrera" value="Carrera: "/>
-                                <p:selectOneMenu id="carrera" value="#{horarioCrearBean.carreraS}" 
-                                                 style="width:100%" 
-                                                 filter="true" 
-                                                 filterMatchMode="contains" 
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">
+                                <p:selectOneMenu id="carrera" value="#{horarioCrearBean.carreraS}" style="width:100%" filter="true" filterMatchMode="contains">
                                     <p:ajax listener="#{horarioCrearBean.cambioCarrera}" update="asignatura semestre grupo panelBotones panelBotonesModoGrupoAulas"/>
                                     <f:selectItem itemLabel="SELECCIONA CARRERA" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaPermisos}" var="listaPermiso" itemLabel="#{listaPermiso.reticula.nombreCarrera}" itemValue="#{listaPermiso.reticula.reticula}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="periodo" value="Periodo: "/>
-                                <p:selectOneMenu id="periodo" 
-                                                 value="#{horarioCrearBean.periodoS}" 
-                                                 style="width:100%" 
-                                                 filter="true" 
-                                                 filterMatchMode="contains"
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">                                    
+                                <p:selectOneMenu id="periodo" value="#{horarioCrearBean.periodoS}" style="width:100%" filter="true" filterMatchMode="contains">                                    
                                     <p:ajax listener="#{horarioCrearBean.cambioPeriodo}" update="grupo panelBotones panelBotonesModoGrupoAulas"/>
                                     <f:selectItem itemLabel="SELECCIONA UN PERIODO" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaPeriodoEscolar}" var="listaPeriodo" itemLabel="#{listaPeriodo.identificacionCorta}" itemValue="#{listaPeriodo.periodo}"/>
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="semestre" value="Semestre: "/>
-                                <p:selectOneMenu id="semestre" 
-                                                 value="#{horarioCrearBean.semestreS}" 
-                                                 style="width:100%" 
-                                                 filter="true" 
-                                                 filterMatchMode="contains"
-                                                  disabled="#{horarioCrearBean.desactivarCampos}">                                    
+                                <p:selectOneMenu id="semestre" value="#{horarioCrearBean.semestreS}" style="width:100%" filter="true" filterMatchMode="contains">                                    
                                     <p:ajax listener="#{horarioCrearBean.cambioSemestre}" update="asignatura grupo panelBotones panelBotonesModoGrupoAulas" />
                                     <f:selectItem itemLabel="SELECCIONA UN SEMESTRE" itemValue="0" noSelectionOption="true"/>
                                     <f:selectItem itemLabel="SEMESTRE 1" itemValue="1"/>
@@ -67,11 +53,10 @@
                                                  value="#{horarioCrearBean.asignaturaS}" 
                                                  style="width:100%" 
                                                  filter="true" 
-                                                 filterMatchMode="contains"
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">
+                                                 filterMatchMode="contains">
 
                                     <p:ajax listener="#{horarioCrearBean.actualizarCreditos}" 
-                                            update="grupo panelBotones panelBotonesModoGrupoAulas"
+                                            update="grupo"
                                             oncomplete="maximoSeleccion = args.creditos; console.log('Nuevo maximoSeleccion:', maximoSeleccion);" />
 
                                     <f:selectItem itemLabel="SELECCIONA ASIGNATURA" itemValue="" noSelectionOption="true" />
@@ -82,12 +67,8 @@
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="aulas" value="Aula: "/>
-                                <p:selectOneMenu id="aulas" 
-                                                 value="#{horarioCrearBean.aulas}" 
-                                                 style="width:100%" 
-                                                 filter="true" 
-                                                 filterMatchMode="contains" 
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">
+
+                                <p:selectOneMenu id="aulas" value="#{horarioCrearBean.aulas}" style="width:100%" filter="true" filterMatchMode="contains" >
                                     <p:ajax listener="#{horarioCrearBean.cambioAula}" update="grupo panelBotones panelBotonesModoGrupoAulas" />
                                     <f:selectItem itemLabel="SELECCIONA AULA" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaAulas}" var="listaAulas" itemLabel="#{listaAulas.aula}" itemValue="#{listaAulas.aula}"/>
@@ -100,8 +81,7 @@
                                              title="Namegroup"
                                              required="true"
                                              requiredMessage="CAMPO NOMBRE GRUPO ES OBLIGATORIO."
-                                             style="width:400px"
-                                             disabled="#{horarioCrearBean.desactivarCampos}">
+                                             style="width:400px">
 
                                     <!-- Este bloque hace que al escribir o cambiar, se llame al método -->
                                     <p:ajax event="input" listener="#{horarioCrearBean.cambioGrupo}" update="grupo panelBotones panelBotonesModoGrupoAulas" process="@this"/>
@@ -117,8 +97,7 @@
                                                requiredMessage="El campo es obligatorio"
                                                minValue="0"
                                                maxValue="100"      
-                                               inputStyle="width:400px"
-                                               disabled="#{horarioCrearBean.desactivarCampos}">
+                                               inputStyle="width:400px">
                                     <p:ajax />
                                 </p:inputNumber>
 
@@ -130,9 +109,7 @@
                                                          style="flex:1; background-color:#6100B2; color:white; width:100%; border: 2px solid #6100B2;"  
                                                          actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
                                                          update="grupo growl panelBotonesModoGrupoAulas panelBotones"
-                                                         oncomplete="desactivandoModoTodo();"
-                                                         disabled="#{!horarioCrearBean.booleanBotonAula 
-                                                                     or  horarioCrearBean.desactivarCampos}"
+                                                         disabled="#{!horarioCrearBean.booleanBotonAula}"
                                                          />
                                     </h:panelGroup>
 
@@ -143,9 +120,7 @@
                                                          style="flex:1; background-color:#0231B3; color:white; width:100%; border: 2px solid #0231B3;"
                                                          actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
                                                          update="grupo growl panelBotonesModoGrupoAulas panelBotones"
-                                                         oncomplete="desactivandoModoTodo();"
-                                                         disabled="#{!horarioCrearBean.booleanBotonGrupo
-                                                                     or  horarioCrearBean.desactivarCampos}"
+                                                         disabled="#{!horarioCrearBean.booleanBotonGrupo}"
                                                          />
                                     </h:panelGroup>
                                 </h:panelGroup>
@@ -233,12 +208,9 @@
                                 title="Selecciona la materia a eliminar"
                                 actionListener="#{horarioCrearBean.activarEliminar}"
                                 oncomplete="activarModoEliminarJS();"
-                                update="panelBotones growl grupo confirmEliminarDialog 
-                                carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
+                                update="panelBotones growl grupo confirmEliminarDialog"
                                 process="@this"
-                                disabled="#{!horarioCrearBean.booleanBotonEliminar 
-                                            or horarioCrearBean.activarModificar 
-                                            or horarioCrearBean.modoIntercambio}"
+                                disabled="#{!horarioCrearBean.booleanBotonEliminar}"
                                 >
                             </p:commandButton>
 
@@ -250,25 +222,19 @@
                                 title="Selecciona una materia para modificar su aula"
                                 actionListener="#{horarioCrearBean.activarModoModificar}"  
                                 oncomplete="activarModoModificarJS();"  
-                                update="panelBotones growl grupo confirmModificarDialog 
-                                carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
+                                update="panelBotones growl grupo confirmModificarDialog"
                                 process="@this"
-                                disabled="#{!horarioCrearBean.booleanBotonModificar 
-                                            or horarioCrearBean.eliminando 
-                                            or horarioCrearBean.modoIntercambio }"
+                                disabled="#{!horarioCrearBean.booleanBotonModificar}"
                                 />
 
                             <p:commandButton value="Intercambiar Horas"
                                              icon="pi pi-refresh"
                                              actionListener="#{horarioCrearBean.activarModoIntercambio}"
                                              process="@this"
-                                             update="panelBotones grupo
-                                             carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
+                                             update="panelBotones grupo"
                                              style="background-color:green; color:white; border: 2px green;"
                                              oncomplete="activarModoIntercambiar();"  
-                                             disabled="#{!horarioCrearBean.booleanBotonIntercambiar 
-                                                         or horarioCrearBean.eliminando 
-                                                         or horarioCrearBean.activarModificar}"
+                                             disabled="#{!horarioCrearBean.booleanBotonIntercambiar}"
                                              />
 
                         </h:panelGrid>
@@ -464,20 +430,13 @@
                             actualizarCursorCeldas();
                             console.log("Modo intercambio activo:", modoIntercambiar);
                             }
-                            
-                            function desactivandoModoTodo() {
-                            modoIntercambiar = false;
-                            modoEliminar = false;
-                            modoModificar = false;
-                            actualizarCursorCeldas();                          
-                            }
 
                             // ================== ACTUALIZAR CURSOR ==================
                             function actualizarCursorCeldas() {
                             document.querySelectorAll('#horarioG\\:grupo tr').forEach(fila => {
                             const celdas = fila.querySelectorAll('td');
                             celdas.forEach((td, index) => {
-                            if (index > 0 &amp;&amp; td.textContent.trim()) {
+                           if (index > 0 &amp; td.textContent.trim()) {
                             td.style.cursor = (modoEliminar || modoModificar || modoIntercambiar) ? 'pointer' : 'default';
                             } else {
                             td.style.cursor = (modoIntercambiar) ? 'pointer' : 'default';
@@ -504,7 +463,7 @@
                             // ===============================
 
                             // --- MODO ELIMINAR ---
-                            if (modoEliminar &amp;&amp; contenido !== "") {
+                            if (modoEliminar &amp; contenido !== "") {
                             asignarMateriaSeleccionadaRC([
                             { name: 'nombre', value: nombre },
                             { name: 'aula', value: aula }
@@ -519,7 +478,7 @@
                             // ===============================
 
                             // --- MODO MODIFICAR ---
-                            if (modoModificar &amp;&amp; contenido !== "") {
+                            if (modoModificar &amp; contenido !== "") {
                             asignarMateriaSeleccionadaM([
                             { name: 'nombre', value: nombre },
                             { name: 'aula', value: aula },
@@ -540,7 +499,7 @@
                             // panelGroup dentro del td
                             const panel = td.querySelector('div,h3,span,p') || td;
                             // Si aún hay celda seleccionada desde antes, y lo que se selecciono es una celda con texto, vuelvo a seleccionar
-                            if (celdaSeleccionadaIntercambio &amp;&amp; panel.textContent.trim() !== ""){
+                            if (celdaSeleccionadaIntercambio  &amp; panel.textContent.trim() !== ""){
                             mostrarNotificacionCeldaMateria();
                             celdaSeleccionadaIntercambio = null;
                             console.log("HABIA MATERIA SELECCIONADA ANTES PERO AHORA SELECCIONO OTRA");
@@ -597,16 +556,16 @@
                             document.addEventListener('mouseover', function(e) {
                             const td = e.target.closest('td');
                             if (!td || !td.closest('#horarioG\\:grupo')) return;
-                            if (modoIntercambiar &amp;&amp; td.textContent.trim()) {
+                            if (modoIntercambiar  &amp; td.textContent.trim()) {
                             td.classList.add('celda-hover-intercambio');
                             console.log("EFECTO HOVER: INTERCAMBIO");
-                            } else if (modoModificar &amp;&amp; td.textContent.trim()) {
+                            } else if (modoModificar  &amp; td.textContent.trim()) {
                             console.log("EFECTO HOVER: MODIFICAR");
                             td.classList.add('celda-hover-modificar');
-                            } else if (modoEliminar &amp;&amp; td.textContent.trim()) {
+                            } else if (modoEliminar  &amp; td.textContent.trim()) {
                             console.log("EFECTO HOVER: ELIMINAR");
                             td.classList.add('celda-hover-eliminar');
-                            } else if (modoAgregar &amp;&amp; td.textContent.trim() === "") {
+                            } else if (modoAgregar  &amp; td.textContent.trim() === "") {
                             console.log("EFECTO HOVER: AGREGAR");
                             td.classList.add('celda-hover-agregar');
                             }
@@ -637,15 +596,15 @@
                             //  *Habilita el botón de guardar cuando se llega al límite.
                             document.addEventListener('click', function (e) {
                             // Si está en modo eliminar, no permitir selección de celdas vacías
-                            if (typeof modoEliminar !== 'undefined' &amp;&amp; modoEliminar) {
+                            if (typeof modoEliminar !== 'undefined'  &amp; modoEliminar) {
                             return;
                             }
 
-                            if (typeof modoModificar !== 'undefined' &amp;&amp; modoModificar) {
+                            if (typeof modoModificar !== 'undefined'  &amp;modoModificar) {
                             return;
                             }
 
-                            if (typeof modoIntercambiar !== 'undefined' &amp;&amp; modoIntercambiar) {
+                            if (typeof modoIntercambiar !== 'undefined'  &amp; modoIntercambiar) {
                             return;
                             }
 
@@ -696,7 +655,7 @@
                             console.log("Celdas seleccionadas:", celdas); //  mira qué celdas encuentra
 
                             celdas.forEach(function (celda, index) {
-                            const fila = parseInt(celda.dataset.row) + 1;
+                            const fila = celda.dataset.row;
                             const columna = celda.dataset.col;
                             console.log(`Celda ${index}: fila=${fila}, columna=${columna}`); // revisa los atributos
 
@@ -824,7 +783,7 @@
                                              icon="pi pi-check"
                                              styleClass="ui-button-danger"
                                              actionListener="#{horarioCrearBean.confirmarEliminarMateria}"
-                                             oncomplete="PF('confirmEliminarDialogWidget').hide();"
+                                             oncomplete="PF('confirmEliminarDialogWidget').hide(); modoEliminar = false;"
                                              process="@this nombreMateriaEliminar aulaMateriaEliminar"
                                              update="grupo growl" />
 
@@ -888,3 +847,4 @@
 
     </body>
 </html>
+
