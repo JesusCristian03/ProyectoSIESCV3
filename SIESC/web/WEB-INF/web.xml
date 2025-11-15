@@ -53,6 +53,6 @@
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/principal/principal.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
