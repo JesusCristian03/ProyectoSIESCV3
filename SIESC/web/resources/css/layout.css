@@ -1,0 +1,271 @@
+body {
+    margin: 4px !important;
+}
+
+body > .ui-layout-north {
+    background: none;
+    border: none;
+    overflow: hidden;
+}
+
+body a {
+    color: var(--primary-color, rgb(0, 0, 238));
+}
+
+body > form > .ui-layout-south {
+    background: none;
+    border: none;
+    color: #000000;
+    overflow: hidden;
+    vertical-align: middle;
+    font-size: 11px !important;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+body .ajax-loader {
+    font-size: 3rem;
+    color: var(--primary-color, orangered);
+}
+
+#componentList,
+#useCaseList {
+    border-width: 0;
+    background: none;
+    white-space: nowrap;
+}
+
+#componentList .ui-menuitem-link,
+#useCaseList .ui-menuitem-link {
+    padding: 0.15em;
+    float: left;
+}
+
+#componentList.ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-text {
+    width: 60px;
+    float: left;
+}
+
+#componentList .ui-separator {
+    margin: 5px 0;
+    width: 120%;
+}
+
+#useCaseList .ui-menuitem {
+    width: auto !important;
+}
+
+#useCaseList .ui-menuitem-text {
+    padding-left: 3px;
+}
+
+#useCaseList .ui-menuitem-link {
+    width: 200%;
+}
+
+body .ui-datatable.docuTable .ui-datatable-data > tr > td {
+    word-break: normal;
+    padding: 0.3rem;
+}
+
+.docuCaption {
+    vertical-align: middle;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 1px;
+}
+
+.docuEventCaption {
+    vertical-align: middle;
+    text-align: center;
+    height: 20px;
+    margin-top: 8px;
+    margin-bottom: 1px;
+}
+
+#docuTabView {
+    padding: 0;
+    border: none;
+}
+
+#docuTabView .ui-tabs-panel {
+    padding: 1em 0;
+}
+
+div.homePanel {
+    display: block;
+}
+
+div.centerContent {
+    padding: 15px;
+    font-size: 13px;
+}
+
+div.centerExample {
+    padding: 0 15px 0 15px;
+}
+
+div.source {
+    margin: 15px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#sourceTabView .ui-tabs-panel {
+    padding: 0 1em;
+}
+
+.smallNav {
+    text-align: right;
+    float: right;
+    margin-right: 10px;
+    margin-top: -10px;
+    *margin-top: -41px; /* shows in IE7 and below */
+}
+
+.smallNav td {
+    font-size: 11px;
+}
+
+.smallNav .smallNavImg {
+    color: #D61F27 !important;
+    font-weight: bold;
+    border: none;
+    font-size: 10px;
+    padding-right: 4px;
+    padding-top: 2px;
+}
+
+.smallNav .smallNavText {
+    color: #4F4F4F !important;
+    font-size: 11px;
+    vertical-align: middle;
+    padding-right: 4px;
+    padding-top: 4px;
+}
+
+.smallNav .smallNavText a {
+    color: #4F4F4F !important;
+    text-decoration: none;
+    border-bottom: dotted 1px #4F4F4F !important;
+}
+
+.smallNav .smallNavText a:hover {
+    color: blue !important;
+    border-bottom: dotted 1px blue !important;
+}
+
+.developersCol1 {
+    padding: 2px 10px 2px 5px;
+    text-align: right;
+}
+
+.developersCol2 {
+    padding: 2px;
+    text-align: left;
+}
+
+html body .ui-panelgrid .ui-panelgrid-cell,
+html body .ui-panel.ui-layout-south .ui-panel-content {
+    padding: .25rem;
+}
+
+body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-icon.ui-icon-none {
+    width: 9px;
+    height: 16px;
+    margin-right: 3px;
+    float: left;
+    background-image: none !important;
+}
+
+body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-icon.ui-icon-new-comp {
+    margin-right: 3px;
+    font-size: 0.75em;
+    float: left;
+    color: green;
+}
+
+body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-icon.ui-icon-new-comp:before {
+    font-family: 'primeicons', sans-serif;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e911";
+}
+
+body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-icon.ui-icon-updated-comp {
+    margin-right: 3px;
+    font-size: 0.75em;
+    float: left;
+    color: #aaa;
+}
+
+body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-icon.ui-icon-updated-comp:before {
+    font-family: 'primeicons', sans-serif;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e911";
+}
+
+body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-icon.ui-icon-deprecated-comp {
+    margin-right: 3px;
+    font-size: 0.75em;
+    float: left;
+    color: #D61F27;
+}
+
+body .ui-menu .ui-menu-list .ui-menuitem .ui-menuitem-link .ui-menuitem-icon.ui-icon-deprecated-comp:before {
+    font-family: 'primeicons', sans-serif;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e911";
+}
+
+#headerForm .logo {
+    position: relative;
+    float: left;
+    top: -12px;
+    height: 55px;
+}
+
+#logo-link {
+    background-image: url("#{resource['images/icon-prime.svg']}");
+    display: block;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    width: 50px;
+    background-size: 50px 55px;
+}
+
+#logo-text {
+    background-image: url("#{resource['images/logo-text.svg']}");
+    display: block;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    width: 200px;
+    background-size: 200px 55px;
+    left: -20px;
+}
