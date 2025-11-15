@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
@@ -6,16 +9,17 @@
 
 <h:head>
     <title>Portal Institucional</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <!-- Estilos del tema Ultima -->
     <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
     <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+    
 
-    <!-- Íconos de PrimeFaces -->
-    <h:outputStylesheet library="primefaces" name="primeicons/primeicons.css"/>
+
+
 
     <style>
         body {
@@ -59,18 +63,50 @@
             font-size: 1.2rem;
             color: #3d5a80;
         }
+        
+        
 
-        .botones-inicio {
-            text-align: center;
-            margin-top: 2rem;
-        }
+.botones-inicio {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;       /* separación entre botones */
+    margin-top: 2rem;
+}
 
-        .botones-inicio .ui-button {
-            width: 240px;
-            margin: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
+.botones-inicio .ui-button {
+    width: 350px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 14px 0 !important;
+    border-radius: 10px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px;  /* icono - texto */
+}
+
+.botones-inicio .ui-button .ui-button-text {
+    opacity: 1 !important;
+    color: #fff !important;
+}
+
+.botones-inicio .ui-button .ui-button-icon {
+    font-size: 1.4rem !important;
+}
+
+.botones-inicio .ui-button {
+    transition: 0.25s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.botones-inicio .ui-button:hover {
+    transform: translateY(-4px); /* Subir ligeramente */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.20); /* Sombra más grande */
+}
+
+        
 
         .footer {
             background-color: #0a3d62;
@@ -97,6 +133,10 @@
             margin: auto;
             display: block;
         }
+        
+        .pi::before {
+    font-family: 'primeicons' !important;
+}
     </style>
 </h:head>
 
@@ -129,14 +169,14 @@
 
     <!-- BOTONES DE INICIO -->
     <div class="botones-inicio">
-        <p:button value="Iniciar como Estudiante" styleClass="ui-button-raised ui-button-primary"
-                  outcome="/escolar/index.xhtml" icon="pi pi-user"/>
+        <p:button value="Iniciar como Estudiante" styleClass="pi pi-user-plus"
+                  outcome="/loginEstudiante.xhtml" />
 
         <p:button value="Iniciar como Aspirante" styleClass="ui-button-raised ui-button-info"
                   outcome="/escolar/index.xhtml" icon="pi pi-id-card"/>
 
         <p:button value="Iniciar como Personal Administrativo" styleClass="ui-button-raised ui-button-secondary"
-                  outcome="/divisionEP/index.xhtml" icon="pi pi-briefcase"/>
+                  outcome="/index.xhtml" icon="pi pi-briefcase"/>
     </div>
 
     <!-- FOOTER -->
