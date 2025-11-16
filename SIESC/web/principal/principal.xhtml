@@ -158,12 +158,28 @@
         <p>Bienvenido al sistema de gestión institucional. Selecciona tu tipo de usuario para continuar.</p>
     </div>
 
-    <!-- CARRUSEL -->
-    <div class="p-d-flex p-jc-center">
-        <p:carousel value="#{inicioBean.imagenes}" var="img" numVisible="1" circular="true" autoplayInterval="3000">
-            <p:graphicImage library="imagenes/sistema" name="#{img}" style="width:90%; border-radius:15px;"/>
-        </p:carousel>
-    </div>
+<!-- CARRUSEL PRO -->
+<div class="carousel-pro">
+<p:carousel value="#{inicioBean.imagenes}" var="img"
+            numVisible="1" numScroll="1"
+            circular="true" autoplayInterval="4000"
+            widgetVar="carouselPro"
+            styleClass="carousel-pro-container">
+
+    <p:graphicImage library="assets"
+                    name="#{img}"
+                    styleClass="carousel-pro-image"/>
+</p:carousel>
+
+    <!-- Puntos de navegación -->
+    <div id="carousel-dots" class="carousel-dots"></div>
+</div>
+
+
+
+
+
+
 
     <!-- BOTONES DE INICIO -->
     <div class="botones-inicio">
@@ -185,6 +201,114 @@
         <a href="https://web.facebook.com/search/top?q=tecnologico%20de%20cuautla" target="_blank"><i class="pi pi-facebook"></i></a>
     </div>
 
+    
+    
+    
+    
+    
+<style>
+/* Ocultar flechas internas de PrimeFaces */
+.ui-carousel-prev,
+.ui-carousel-next {
+    display: none !important;
+}
+
+/* ===== CARRUSEL PRO ===== */
+.carousel-pro {
+    position: relative;
+    width: 20%; /*tamaño del carrusel*/
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.carousel-pro-container .carousel-pro-image {
+    width: 20%;
+    border-radius: 20px;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.carousel-pro-container .ui-carousel-item.ui-carousel-item-active img {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+/* ===== Flechas ===== */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.45);
+    border: none;
+    color: white;
+    padding: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    transition: 0.3s;
+}
+
+
+
+/* ===== Puntos ===== */
+.carousel-dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.carousel-dots .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #d0d4da;
+    margin: 5px;
+    border-radius: 50%;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.carousel-dots .dot.active {
+    background: #0a3d62;
+    transform: scale(1.2);
+}
+
+
+</style>
+
+<script type="text/javascript">
+    //<![CDATA[
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(initCarouselDots, 600);
+    });
+
+    function initCarouselDots() {
+        const pf = PF('carouselPro');
+        if (!pf) return;
+
+        const total = pf.cfg.value.length;
+        const dotsContainer = document.getElementById("carousel-dots");
+
+        dotsContainer.innerHTML = "";
+
+        for (let i = 0; i < total; i++) {
+            let dot = document.createElement("span");
+            dot.classList.add("dot");
+            dot.addEventListener("click", () => pf.setPage(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        pf.cfg.onPageChange = updateDots;
+        updateDots(pf.getPage());
+    }
+
+    function updateDots(page) {
+        const dots = document.querySelectorAll(".carousel-dots .dot");
+        dots.forEach((d, i) => d.classList.toggle("active", i === page));
+    }
+    //]]>
+</script>
 </h:body>
 </html>
 
