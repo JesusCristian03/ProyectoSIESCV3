@@ -52,7 +52,7 @@
         }
 
         .inicio-header h1 {
-            font-weight: 700;
+            font-weight: 500;
             font-size: 2.4rem;
         }
 
@@ -61,47 +61,30 @@
             color: #3d5a80;
         }
         
-        
+.botones-inicio { 
+    text-align: center; 
+    display: flex; justify-content: 
+        center; gap: 20px; 
+                 
+                 /* separación entre botones */ 
+                 margin-top: 2rem; } 
+.botones-inicio .ui-button { 
+    width: 300px; 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    padding: 14px 0 !important; 
+            border-radius: 10px !important; 
+            display: flex !important; align-items: center !important; 
+            justify-content: center !important; 
+            gap: 10px; /* icono - texto */ } 
 
-.botones-inicio {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    gap: 20px;       /* separación entre botones */
-    margin-top: 2rem;
-}
-
-.botones-inicio .ui-button {
-    width: 350px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 14px 0 !important;
-    border-radius: 10px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px;  /* icono - texto */
-}
-
-.botones-inicio .ui-button .ui-button-text {
-    opacity: 1 !important;
-    color: #fff !important;
-}
-
-.botones-inicio .ui-button .ui-button-icon {
-    font-size: 1.4rem !important;
-}
-
-.botones-inicio .ui-button {
-    transition: 0.25s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-}
-
-.botones-inicio .ui-button:hover {
-    transform: translateY(-4px); /* Subir ligeramente */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.20); /* Sombra más grande */
-}
+.botones-inicio .ui-button .ui-button-text { opacity: 1 !important; color: #fff !important; } 
+.botones-inicio .ui-button .ui-button-icon { font-size: 1.4rem !important; } 
+.botones-inicio .ui-button { transition: 0.25s ease; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); } 
+.botones-inicio .ui-button:hover { 
+    transform: translateY(-4px); /* Subir ligeramente */ 
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.20);/* Sombra más grande */ } 
+ 
 
         
 
@@ -124,12 +107,7 @@
             color: #4da8ff;
         }
 
-        .ui-carousel .ui-carousel-item img {
-            width: 90%;
-            border-radius: 12px;
-            margin: auto;
-            display: block;
-        }
+
         
         .pi::before {
     font-family: 'primeicons' !important;
@@ -183,20 +161,22 @@
 
     <!-- BOTONES DE INICIO -->
     <div class="botones-inicio">
-        <p:button value="Iniciar como Estudiante" styleClass="pi pi-user-plus"
+        
+        
+        <p:button value="Aspirante" styleClass="ui-button-raised ui-button-info"
+                  outcome="/escolar/index.xhtml" icon="pi pi-id-card"/>
+        
+        <p:button value="Estudiante" styleClass="pi pi-user-plus"
                   outcome="/loginEstudiante.xhtml" />
 
-        <p:button value="Iniciar como Aspirante" styleClass="ui-button-raised ui-button-info"
-                  outcome="/escolar/index.xhtml" icon="pi pi-id-card"/>
-
-        <p:button value="Iniciar como Personal Administrativo" styleClass="ui-button-raised ui-button-secondary"
+        <p:button value=" Personal Administrativo" styleClass="ui-button-raised ui-button-secondary"
                   outcome="/index.xhtml" icon="pi pi-briefcase"/>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
         <h:outputText value="© 2025 Instituto Tecnológico de Cuautla. Todos los derechos reservados." />
-        <br/><br/>
+      
         <a href="https://www.youtube.com/@tecnm-cuautla" target="_blank"><i class="pi pi-youtube"></i></a>
         <a href="https://web.facebook.com/search/top?q=tecnologico%20de%20cuautla" target="_blank"><i class="pi pi-facebook"></i></a>
     </div>
@@ -207,7 +187,14 @@
     
     
 <style>
-/* Ocultar flechas internas de PrimeFaces */
+        .ui-carousel .ui-carousel-item img {
+            width: 60%;
+            border-radius: 12px;
+            margin: auto;
+            display: block;
+        }
+    
+    /* Ocultar flechas internas de PrimeFaces */
 .ui-carousel-prev,
 .ui-carousel-next {
     display: none !important;
