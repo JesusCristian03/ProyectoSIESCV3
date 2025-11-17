@@ -119,53 +119,92 @@ footer {
 <!-- MENÚ LATERAL -->
 <aside class="sidebar">
     <h:form>
-        <p:panelMenu style="width:100%;" styleClass="custom-menu">
+ <p:panelMenu style="width:100%;" styleClass="custom-menu">
 
-            <!-- ASPIRANTES -->
-            <p:submenu label="Aspirantes" icon="">
-                <p:menuitem value="Alta de aspirantes" outcome="/escolar/altaEstudiantes.xhtml"
-                            styleClass="pi pi-user-plus" />
-                <p:menuitem value="Lista de aspirantes" outcome="/escolar/listaAspirantes.xhtml"
-                            styleClass="pi pi-list" />
-            </p:submenu>
+    <!-- 1 ALUMNO -->
+    <p:submenu label="Alumnos" icon="pi pi-users">
+        <p:menuitem value="Alta de Alumnos" outcome="/escolar/altaEstudiantes.xhtml"
+                    icon="pi pi-user-plus" />
+        <p:menuitem value="Modificaciones de datos del Alumno" outcome="/escolar/listaAspirantes.xhtml"
+                    icon="pi pi-user-edit" />
+        <p:menuitem value="Eliminación de alumnos" outcome="/escolar/listaAspirantes.xhtml"
+                    icon="pi pi-user-minus" />
+        <p:menuitem value="Adeudos" outcome="/escolar/listaAspirantes.xhtml"
+                    icon="pi pi-exclamation-circle" />
+        <p:menuitem value="Registro de titulados" outcome="/escolar/listaAspirantes.xhtml"
+                    icon="pi pi-file-edit" />
+        <p:menuitem value="Generar número de control" outcome="/escolar/listaAspirantes.xhtml"
+                    icon="pi pi-hashtag" />
+        <p:menuitem value="Recuperar Semestres" outcome="/escolar/listaAspirantes.xhtml"
+                    icon="pi pi-history" />
+        <p:menuitem value="Redactar mensaje" outcome="/escolar/listaAspirantes.xhtml"
+                    icon="pi pi-envelope" />
+        <p:menuitem value="NIPs de alumnos" outcome="/escolar/listaAspirantes.xhtml"
+                    icon="pi pi-key" />
+    </p:submenu>
 
-            <!-- ESTUDIANTES -->
-            <p:submenu label="Estudiantes" icon="">
-                <p:menuitem value="Consultar alumnos" styleClass="pi pi-search" />
-                <p:menuitem value="Modificar datos" styleClass="pi pi-pencil" />
-            </p:submenu>
+    <!-- 2 HISTORIAL -->
+    <p:submenu label="Historial académico" icon="pi pi-book">
+        <p:menuitem value="Consultar historial" icon="pi pi-search" />
+        <p:menuitem value="Imprimir historial" icon="pi pi-print" />
+    </p:submenu>
 
-            <!-- REINSCRIPCIONES -->
-            <p:submenu label="Reinscripciones" icon="">
-                <p:menuitem value="Abrir periodo" styleClass="pi pi-calendar-plus" />
-                <p:menuitem value="Historial de reinscripción" styleClass="pi pi-history" />
-            </p:submenu>
+    <!-- 3 CALIFICACIONES Y ACTAS -->
+    <p:submenu label="Calificaciones y Actas" icon="pi pi-file">
+        <p:menuitem value="Captura de calificaciones" icon="pi pi-pencil" />
+        <p:menuitem value="Generar actas" icon="pi pi-file-pdf" />
+    </p:submenu>
 
-            <!-- REPORTES -->
-            <p:submenu label="Reportes" icon="">
-                <p:menuitem value="Generar reportes" styleClass="pi pi-file-pdf" />
-                <p:menuitem value="Estadísticas generales" styleClass="pi pi-chart-line" />
-            </p:submenu>
+    <!-- 4 INSCRIPCIONES -->
+    <p:submenu label="Inscripciones" icon="pi pi-check-square">
+        <p:menuitem value="Inscripciones" icon="pi pi-user-check" />
+        <p:menuitem value="Reinscripciones" icon="pi pi-refresh" />
+    </p:submenu>
 
-            <!-- CONFIGURACIÓN -->
-            <p:submenu label="Configuración" icon="">
-                <p:menuitem value="Usuarios" styleClass="pi pi-user-plus" />
-                <p:menuitem value="Roles y permisos" styleClass="pi pi-shield" />
-            </p:submenu>
+    <!-- 5 CARRERAS -->
+    <p:submenu label="Carreras" icon="pi pi-briefcase">
+        <p:menuitem value="Gestión de carreras" icon="pi pi-cog" />
+        <p:menuitem value="Asignar planes" icon="pi pi-sitemap" />
+    </p:submenu>
 
-            <!-- AYUDA -->
-            <p:submenu label="Ayuda" icon="">
-                <p:menuitem value="Guía del sistema" styleClass="pi pi-book" />
-                <p:menuitem value="Contacto soporte" styleClass="pi pi-envelope" />
-            </p:submenu>
+    <!-- 5 ESPECIALIDADES -->
+    <p:submenu label="Especialidades" icon="pi pi-star">
+        <p:menuitem value="Gestión de especialidades" icon="pi pi-cog" />
+        <p:menuitem value="Asignar materias a especialidad" icon="pi pi-list" />
+    </p:submenu>
 
-            <!-- CERRAR SESIÓN -->
-            <p:submenu label="Sesión" icon="">
-                <p:menuitem value="Cerrar sesión" styleClass="pi pi-lock"
-                            action="#{controlSesion.cerrarSesion}" ajax="false" />
-            </p:submenu>
+    <!-- 6 PLAN CURRICULAR -->
+    <p:submenu label="Plan curricular" icon="pi pi-folder-open">
+        <p:menuitem value="Ver plan curricular" icon="pi pi-eye" />
+        <p:menuitem value="Editar plan curricular" icon="pi pi-pencil" />
+    </p:submenu>
 
-        </p:panelMenu>
+    <!-- 7 EXÁMENES ESPECIALES -->
+    <p:submenu label="Exámenes especiales" icon="pi pi-star-fill">
+        <p:menuitem value="Solicitud de exámenes" icon="pi pi-file-edit" />
+        <p:menuitem value="Resultado de exámenes" icon="pi pi-chart-bar" />
+    </p:submenu>
+
+    <!-- 8 PERIODOS ESCOLARES -->
+    <p:submenu label="Periodos Escolares" icon="pi pi-calendar">
+        <p:menuitem value="Gestión de periodos" icon="pi pi-cog" />
+        <p:menuitem value="Calendario escolar" icon="pi pi-calendar-plus" />
+    </p:submenu>
+
+    <!-- ASPIRANTES -->
+    <p:submenu label="Aspirantes" icon="pi pi-user">
+        <p:menuitem value="Lista de aspirantes" icon="pi pi-list" />
+        <p:menuitem value="Resultados de aspirantes" icon="pi pi-chart-line" />
+    </p:submenu>
+
+    <!-- 5 CIERRE DE SEMESTRE -->
+    <p:submenu label="Cierre de semestre" icon="pi pi-lock">
+        <p:menuitem value="Cierre administrativo" icon="pi pi-folder" />
+        <p:menuitem value="Reportes de cierre" icon="pi pi-chart-pie" />
+    </p:submenu>
+
+</p:panelMenu>
+
     </h:form>
 </aside>
 
