@@ -10,117 +10,135 @@
     <title>Departamento de Escolares - SIESC</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <!-- Ultima Theme y Layout -->
+    <!-- Ultima Theme -->
     <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
     <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 
-
     <style>
-        body { font-family: "Segoe UI", sans-serif; background-color: #f4f6f9; margin:0; padding:0; }
-        .main-container { display:flex; flex-direction:column; min-height:100vh; }
-        .content-wrapper { display:flex; flex:1; overflow:hidden; }
+        body {
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
-        header {
+        /* Estructura principal */
+        .layout-wrapper {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== TOPBAR ===== */
+        .layout-topbar {
             background-color: #003366;
-            color:white;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:0 20px;
-            height:65px;
-            box-shadow:0 3px 6px rgba(0,0,0,0.16);
-            position:sticky; top:0; z-index:1000;
+            color: white;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+            z-index: 1000;
         }
 
-        header img { height:45px; }
-        header h2 { margin:0; font-size:1.25rem; font-weight:600; text-align:center; flex:1; }
-
-        .logout-btn .ui-button {
-            background-color: transparent; border: 2px solid #fff;
-            color:#fff; border-radius:25px; font-weight:500;
-            transition:all 0.3s ease;
+        .layout-topbar .title {
+            flex: 1;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
         }
-        .logout-btn .ui-button:hover { background-color:#fff; color:#003366; transform:scale(1.05); }
 
-        aside.sidebar {
-            width:260px;
-            background-color:#fff;
-            border-right:1px solid #ddd;
-            box-shadow:2px 0 6px rgba(0,0,0,0.05);
-            padding:15px;
-            overflow-y:auto;
-            transition: all 0.3s ease;
+        .menu-toggle-btn {
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            margin-right: 15px;
         }
-        aside.sidebar.collapsed { width:0; padding:0; overflow:hidden; }
 
-        main.content { flex:1; padding:2rem; background-color:#f4f6f9; overflow-y:auto; }
-        main.content h3 { font-size:1.5rem; font-weight:600; color:#003366; margin-bottom:1rem; }
-        main.content p { font-size:1rem; color:#333; }
+        /* ===== SIDEBAR ===== */
+        .layout-sidebar {
+            width: 260px;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            padding: 15px;
+        }
 
-        .menu-toggle-btn { font-size:1.5rem; color:white; cursor:pointer; margin-right:15px; display:flex; align-items:center; justify-content:center; }
-        /* Íconos personalizados en el panelMenu */
-.ui-menuitem-link::before {
-    font-family: 'primeicons';
-    font-size: 1rem;
-    display: inline-block;
-    margin-right: 10px;
-    vertical-align: middle;
-}
+        .layout-sidebar.collapsed {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
-/* Usar la clase del icono (pi pi-...) para mostrarlo */
-.pi::before {
+        /* ===== MAIN ===== */
+        .layout-main-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .layout-main {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background-color: #f4f6f9;
+        }
+
+        
+        .pi::before {
     font-family: 'primeicons' !important;
 }
-footer {
-    background-color: #003366;
-    color: white;
-    text-align: center;
-    padding: 8px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    font-size: 13px;
-    line-height: 20px;
-}
 
+        /* ===== FOOTER ===== */
+        .layout-footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
     </style>
 
     <script>
         function toggleSidebar() {
-            const sidebar = document.querySelector('aside.sidebar');
-            sidebar.classList.toggle('collapsed');
+            document.querySelector('.layout-sidebar').classList.toggle('collapsed');
         }
     </script>
 </h:head>
 
-<h:body>
-<div class="main-container">
 
-    <!-- HEADER -->
-    <header>
+<h:body>
+
+<div class="layout-wrapper">
+
+    <!-- ================= TOPBAR ================= -->
+    <div class="layout-topbar">
         <div class="menu-toggle-btn" onclick="toggleSidebar()">
             <i class="pi pi-bars"></i>
         </div>
+
         <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
-        <h2>DEPARTAMENTO DE ESCOLARES</h2>
+
+        <div class="title">DEPARTAMENTO DE ESCOLARES</div>
+
         <h:form styleClass="logout-btn">
             <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
-                             action="#{controlSesion.cerrarSesion}" ajax="false"/>
+                             action="#{controlSesion.cerrarSesion}" ajax="false" />
         </h:form>
-    </header>
+    </div>
 
-    <!-- CONTENEDOR -->
-    <div class="content-wrapper">
+    <div class="layout-main-container">
 
-<!-- MENÚ LATERAL -->
-<aside class="sidebar">
-    <h:form>
- <p:panelMenu style="width:100%;" styleClass="custom-menu">
-
+        <!-- ================= SIDEBAR ================= -->
+        <div class="layout-sidebar">
+            <h:form>
+                <!-- AQUÍ DEJO TU PANELMENU SIN CAMBIAR NADA -->
+                <p:panelMenu style="width:100%;" styleClass="custom-menu">
     <!-- 1 ALUMNO -->
     <p:submenu label="Alumnos" icon="pi pi-users">
         <p:menuitem value="Alta de Alumnos" outcome="/escolar/altaEstudiantes.xhtml"
@@ -203,30 +221,29 @@ footer {
         <p:menuitem value="Reportes de cierre" icon="pi pi-chart-pie" />
     </p:submenu>
 
-</p:panelMenu>
+                </p:panelMenu>
+            </h:form>
+        </div>
 
-    </h:form>
-</aside>
-
-
-
-
-        <!-- CONTENIDO PRINCIPAL -->
-        <main class="content">
+        <!-- ================= CONTENIDO PRINCIPAL ================= -->
+        <div class="layout-main">
             <ui:insert name="content">
                 <h3>Bienvenido al Departamento de Escolares</h3>
                 <p>Selecciona una opción del menú lateral para comenzar.</p>
             </ui:insert>
-        </main>
+        </div>
     </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="layout-footer">
+        © 2025 Tecnológico Nacional de México Campus Cuautla | Departamento Escolares
+    </div>
+
 </div>
-    <flooter>
-       © 2025 Tecnológico Nacional de México Campus Cuautla | Escolares
-    </flooter>
+
 </h:body>
-
-
 </html>
+
 
 
 
