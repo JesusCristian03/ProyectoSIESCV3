@@ -31,6 +31,9 @@
                 </h3>
 
                 <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                    <p:outputLabel value="No. Control" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.noControl}" styleClass="ui-inputfield"/>
+                    
                     <p:outputLabel value="Apellido Paterno" />
                     <p:inputText value="#{altaEstudiantesBean.estudiante.apellidoPaterno}" styleClass="ui-inputfield"/>
 
@@ -40,8 +43,6 @@
                     <p:outputLabel value="Nombre" />
                     <p:inputText value="#{altaEstudiantesBean.estudiante.nombre}" styleClass="ui-inputfield"/>
 
-                    <p:outputLabel value="No. Control" />
-                    <p:inputText value="#{altaEstudiantesBean.estudiante.noControl}" styleClass="ui-inputfield"/>
 
                     <p:outputLabel value="Fecha de Nacimiento" />
                     <p:datePicker value="#{altaEstudiantesBean.estudiante.fechaNacimiento}" showIcon="true" styleClass="ui-inputfield"/>
