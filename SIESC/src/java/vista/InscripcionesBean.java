@@ -366,7 +366,7 @@ public class InscripcionesBean implements Serializable {
                 .toLocalDateTime();
 
         LocalDateTime ahora = LocalDateTime.now();
-        LocalDateTime finVentana = fechaSeleccion.plusMinutes(30);
+        LocalDateTime finVentana = fechaSeleccion.plusMinutes(50);
 
         // --- Impresiones en consola ---
         System.out.println("Fecha/Hora asignada al alumno: " + fechaSeleccion);

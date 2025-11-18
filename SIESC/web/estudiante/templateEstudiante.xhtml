@@ -6,124 +6,108 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:head>
-        <f:event type="preRenderView" listener="#{controlSesion.verificarEstudiante}"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="/css/default.css"/>
-        <h:outputStylesheet name="/css/cssLayout.css"/>
-        <link rel="icon" href="/resources/assets/itc.png" type="image/x-icon"/>
-        <title>Sistema Escolar ITC</title>
-        <style>
-            .ui-datatable th {
-                /*Define el encabezado de la tabla:*/
-                background-color: #014E82 !important;
-                color: #fff !important;
-                font-weight: bold;
-                text-align: center;
+<h:head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Sistema Escolar ITC - Estudiantes</title>
 
-            }
-            .grupos-grid .ui-panel {
-                transition: transform 0.2s, box-shadow 0.2s;
-            }
-            .grupos-grid .ui-panel:hover {
-                transform: scale(1.03);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            }
-            @media (max-width: 900px) {
-                .grupos-grid {
-                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                }
-            }
-            .bloqueado {
-                pointer-events: none;
-                opacity: 0.6;
-            }
-            /* columnas */
-            .label {
-                font-weight: 600;
-                padding: 6px 8px;
-            }
-            .value {
-                padding: 6px 8px;
-            }
+    <!-- Ultima Theme -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+<h:outputStylesheet library="css" name="estudiantes.css"/>
 
-            /* estilo tipo card */
-            .custom-card .ui-panel-titlebar {
-                background: transparent;
-                border: none;
-                padding-bottom: 8px;
-            }
-            .custom-card {
-                box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-                border-radius: 6px;
-                padding: 12px;
-            }
+ 
+      
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.layout-sidebar').classList.toggle('collapsed');
+        }
+    </script>
+</h:head>
 
-            .clickable-panel {
-                transition: transform 0.15s ease, box-shadow 0.15s ease;
-            }
+<h:body>
+    
+    <f:event type="preRenderView" listener="#{controlSesion.verificarEstudiante}"/>
 
-            .clickable-panel:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            }
+<div class="layout-wrapper">
 
-
-        </style>
-
-
-    </h:head>
-
-    <h:body>
-
-
-        <div id="top" class="top">
-            <ui:insert name="top">
-                <img src="../resources/assets/TECNM-blanco.png" width="100" height="45" alt="TECNM"/>
-            </ui:insert>
+    <!-- ================= TOPBAR ================= -->
+    <div class="layout-topbar">
+        <div class="menu-toggle-btn" onclick="toggleSidebar()">
+            <i class="pi pi-bars"></i>
         </div>
-        <div>
-            <div id="left">
-                <ui:insert name="left">
-                    <h:form>
-                        <p:menu toggleable="true" style="font-size:15px;">
 
-                            <p:submenu label="Información Escolar" expanded="false">
-                                <p:menuitem value="Asistencia" action="index" icon="pi pi-refresh"/>
-                                <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
-                                <p:menuitem value="Horarios" action="horarios" icon="pi pi-refresh"/>
-                                <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
-                            </p:submenu>
-                            <p:submenu label="Iscripciones" expanded="false">
-                                <p:menuitem value="Ene-Jun/Ago-Dic" update="growlMensajes" actionListener="#{inscripcionesBean.verificarAcceso}" icon="pi pi-refresh" ajax="true"/>
-                                <p:menuitem value="Grupos Disponibles" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
-                                <p:menuitem value="Horario Inscripcion" action="horarios" icon="pi pi-refresh"/>
-                                <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
-                            </p:submenu>
-                            <p:submenu label="Eval. Docente" expanded="false">
-                                <p:menuitem value="Asistencia" action="asistenciaDocente" icon="pi pi-refresh"/>
-                                <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
-                                <p:menuitem value="Horarios" action="horarios" icon="pi pi-refresh"/>
-                                <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
-                            </p:submenu>
+        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
 
-                        </p:menu>
-                        <style>
-                            .ui-widget {
-                                font-size: 10px;
-                            }
-                        </style>  
-                        <!-- AHORA el growl está DENTRO del form -->
-                        <p:growl id="growlMensajes" showDetail="true" sticky="false" life="4000"/>
-                    </h:form>
-                </ui:insert>
-            </div>
-            <div id="content" class="left_content">
-                <ui:insert name="content">                    
+        <div class="title">SISTEMA ESCOLAR – ESTUDIANTES</div>
 
-                </ui:insert>
-            </div>
+        <h:form>
+            <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
+                             action="#{controlSesion.cerrarSesion}" ajax="false" />
+        </h:form>
+    </div>
+
+
+    <div class="layout-main-container">
+
+        <!-- ================= SIDEBAR ================= -->
+        <div class="layout-sidebar">
+
+            <h:form>
+                <!-- MENÚ ORIGINAL, COMPLETAMENTE RESPETADO -->
+                <p:menu toggleable="true" style="font-size:15px;">
+
+                    <p:submenu label="Información Escolar" expanded="false">
+                        <p:menuitem value="Asistencia" action="index" icon="pi pi-refresh"/>
+                        <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
+                        <p:menuitem value="Horarios" action="horarios" icon="pi pi-refresh"/>
+                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
+                    </p:submenu>
+
+                    <p:submenu label="Iscripciones" expanded="false">
+                        <p:menuitem value="Ene-Jun/Ago-Dic" update="growlMensajes" actionListener="#{inscripcionesBean.verificarAcceso}" icon="pi pi-refresh" ajax="true"/>
+                        <p:menuitem value="Grupos Disponibles" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
+                        <p:menuitem value="Horario Inscripcion" action="horarios" icon="pi pi-refresh"/>
+                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
+                    </p:submenu>
+
+                    <p:submenu label="Eval. Docente" expanded="false">
+                        <p:menuitem value="Asistencia" action="asistenciaDocente" icon="pi pi-refresh"/>
+                        <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
+                        <p:menuitem value="Horarios" action="horarios" icon="pi pi-refresh"/>
+                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
+                    </p:submenu>
+
+                </p:menu>
+
+                <style>.ui-widget { font-size: 10px; }</style>
+
+                <p:growl id="growlMensajes" showDetail="true" sticky="false" life="4000"/>
+            </h:form>
+
         </div>
-    </h:body>
 
+        <!-- ================= CONTENIDO ================= -->
+        <div class="layout-main">
+            <ui:insert name="content"/>
+        </div>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="layout-footer">
+        © 2025 Tecnológico Nacional de México Campus Cuautla | Estudiantes
+    </div>
+
+</div>
+    
+</h:body>
 </html>
+
+
+
+
+

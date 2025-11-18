@@ -1,0 +1,114 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Estructura principal */
+.layout-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== TOPBAR ===== */
+.layout-topbar {
+    background-color: #003366;
+    color: white;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    z-index: 1000;
+}
+
+.layout-topbar .title {
+    flex: 1;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.menu-toggle-btn {
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+/* ===== SIDEBAR ===== */
+.layout-sidebar {
+    width: 260px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.layout-sidebar.collapsed {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* ===== MAIN ===== */
+.layout-main-container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* 🔧 CORRECCIÓN -- REDUCE EL ESPACIO ENTRE HEADER Y CONTENIDO */
+.layout-main {
+    flex: 1;
+    padding: 1rem 2rem !important; /* ↓ antes era 2rem; ahora 1rem arriba */
+    overflow-y: auto;
+    background-color: #f4f6f9;
+}
+
+/* HACE QUE EL PANEL (CONTENEDOR) NO SE VEA TRANSPARENTE */
+.ui-panel,
+.ui-panel-content,
+.ui-widget-content {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+}
+
+/* HACE QUE EL PANEL TENGA ANCHO COMPLETO */
+.ui-panel {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* HACE QUE LA TABLA NO SEA TRANSPARENTE */
+.ui-datatable table {
+    background: #fff !important;
+}
+
+/* AJUSTE DEL TÍTULO DEL PANEL */
+.ui-panel-titlebar {
+    background: #3f51b5 !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.pi::before {
+    font-family: 'primeicons' !important;
+}
+
+/* ===== FOOTER ===== */
+.layout-footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+

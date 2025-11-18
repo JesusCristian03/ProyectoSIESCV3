@@ -9,32 +9,64 @@
 
 
     <body>
+        
 
         <ui:composition template="./templateEstudiante.xhtml">
 
+    
+    
 
+    
             <ui:define name="content">
 
                 <f:view>
 
 
-                    <h:form>
-                        <p:panel styleClass="custom-card" style="max-width:100%; margin:0;">
-                            <f:facet name="header">
-                                <h:outputText value="Información del Estudiante" style="font-weight:700; font-size:1.1rem;" />
-                            </f:facet>
+<h:form>
+   <p:panel styleClass="custom-card" style="width:100%; margin: 0 auto; display:block;">
 
-                            <p:panelGrid columns="2" style="width:100%;" columnClasses="label,value">
-                                <p:outputLabel value="NoDeControl: #{inscripcionesBean.estudiante.noDeControl}"  />
-                                <p:outputLabel value="Estudiante: #{inscripcionesBean.estudiante.apellidoPaterno} #{inscripcionesBean.estudiante.apellidoMaterno} #{inscripcionesBean.estudiante.nombreAlumno}" />
-                                <p:outputLabel value="Carrera: #{inscripcionesBean.estudiante.reticula.nombreCarrera}"  />
-                                <p:outputLabel value="Semestre: #{inscripcionesBean.estudiante.semestre}"  />
-                                <p:outputLabel value="PeriodoEscolar: #{inscripcionesBean.periodoActual.identificacionLarga}"  />
-                                <p:outputLabel value="Calificacion: #{inscripcionesBean.promedio}"  />
-                                <p:outputLabel value="Especialidad: #{inscripcionesBean.estudiante.especialidad}"  />
-                            </p:panelGrid>
-                        </p:panel>
-                    </h:form>
+
+           <f:facet name="header">
+            <h:outputText value="Información del Estudiante" 
+                          styleClass="custom-title" />
+        </f:facet>
+
+
+
+        <p:panelGrid columns="2"
+                     style="width:95%; margin:0 auto;"
+                     columnClasses="label,value"
+                     styleClass="custom-grid">
+
+            <p:outputLabel value="No. de Control:" />
+            <p:outputLabel value="#{inscripcionesBean.estudiante.noDeControl}" />
+
+            <p:outputLabel value="Estudiante:" />
+            <p:outputLabel value="#{inscripcionesBean.estudiante.apellidoPaterno}
+                                   #{inscripcionesBean.estudiante.apellidoMaterno}
+                                   #{inscripcionesBean.estudiante.nombreAlumno}" />
+
+            <p:outputLabel value="Carrera:" />
+            <p:outputLabel value="#{inscripcionesBean.estudiante.reticula.nombreCarrera}" />
+
+            <p:outputLabel value="Semestre:" />
+            <p:outputLabel value="#{inscripcionesBean.estudiante.semestre}" />
+
+            <p:outputLabel value="Periodo Escolar:" />
+            <p:outputLabel value="#{inscripcionesBean.periodoActual.identificacionLarga}" />
+
+            <p:outputLabel value="Calificación:" />
+            <p:outputLabel value="#{inscripcionesBean.promedio}" />
+
+            <p:outputLabel value="Especialidad:" />
+            <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" />
+
+        </p:panelGrid>
+
+    </p:panel>
+</h:form>
+
+
 
                     <h:form id="seleccion">
                         <p:tabView id="tabVista" cache="false">
@@ -48,7 +80,11 @@
 
                                 </f:facet>
 
-                                <h1><h:outputText value="List"/></h1>
+               
+                                
+                                
+                                
+                                
                                 <p:dataTable id="tablaReticula" value="#{inscripcionesBean.listaM}" var="asignatura" rowStyleClass="registroPrueba" showGridlines="true">                                        
 
                                     <p:column styleClass="#{asignatura.semestre1.color}">
@@ -535,7 +571,7 @@
                                                     <h:outputText value="#{grupo}"
                                                                   style="font-weight:bold; font-size:1.2em; color:#333;" />
                                                 </h:panelGrid>
-
+                                             
                                             </p:panel>
 
                                         </p:commandLink>
@@ -547,13 +583,13 @@
 
                         </p:tabView>
 
-
+                     
                     </h:form>
                 </f:view>
 
             </ui:define>
 
         </ui:composition>
-
+ 
     </body>
 </html>
