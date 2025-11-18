@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    
+<ui:composition template="templateEscolares.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="formAlta" styleClass="card card-shadow">
+
+            <h2 class="form-title">
+                <i class="pi pi-user-plus"></i> Alta de Estudiante
+            </h2>
+
+            <p:panel header="Registro de Nuevo Alumno" styleClass="card custom-panel">
+
+              
+
+                <!-- ================= DATOS GENERALES ================= -->
+                <h3 class="section-title">
+                    <i class="pi pi-id-card"></i> Datos Generales
+                </h3>
+
+                <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                    <p:outputLabel value="No. Control" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.noControl}" styleClass="ui-inputfield"/>
+                    
+                    <p:outputLabel value="Apellido Paterno" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.apellidoPaterno}" styleClass="ui-inputfield"/>
+
+                    <p:outputLabel value="Apellido Materno" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.apellidoMaterno}" styleClass="ui-inputfield"/>
+
+                    <p:outputLabel value="Nombre" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.nombre}" styleClass="ui-inputfield"/>
+
+
+                    <p:outputLabel value="Fecha de Nacimiento" />
+                    <p:datePicker value="#{altaEstudiantesBean.estudiante.fechaNacimiento}" showIcon="true" styleClass="ui-inputfield"/>
+
+                    <p:outputLabel value="Sexo" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.sexo}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Estado Civil" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.estadoCivil}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Soltero(a)" itemValue="Soltero"/>
+                        <f:selectItem itemLabel="Casado(a)" itemValue="Casado"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="CURP" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.curp}" styleClass="ui-inputfield"/>
+
+                    <p:outputLabel value="Correo Electrónico" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.email}" styleClass="ui-inputfield"/>
+                </p:panelGrid>
+
+                <!-- ================= DOMICILIO ================= -->
+                <h3 class="section-title">
+                    <i class="pi pi-home"></i> Domicilio
+                </h3>
+
+                <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                    <p:outputLabel value="Calle y Número" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.domicilio}" styleClass="ui-inputfield"/>
+                    <p:outputLabel value="Colonia" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.colonia}" styleClass="ui-inputfield"/>
+                    <p:outputLabel value="Código Postal" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.cp}" styleClass="ui-inputfield"/>
+                    <p:outputLabel value="Ciudad" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.ciudad}" styleClass="ui-inputfield"/>
+                    <p:outputLabel value="Entidad Federativa" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.estado}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Morelos" itemValue="Morelos"/>
+                        <f:selectItem itemLabel="CDMX" itemValue="CDMX"/>
+                        <f:selectItem itemLabel="Puebla" itemValue="Puebla"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Teléfono" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.telefono}" styleClass="ui-inputfield"/>
+                </p:panelGrid>
+
+                <!-- ================= DATOS ESCOLARES ================= -->
+                <h3 class="section-title">
+                    <i class="pi pi-book"></i> Datos Escolares
+                </h3>
+
+                <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                    <p:outputLabel value="Carrera y Retícula" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.carrera}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Seleccione carrera" itemValue=""/>
+                        <f:selectItems value="#{altaEstudiantesBean.listaCarreras}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Especialidad" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.especialidad}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Sin especialidad" itemValue=""/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Periodo Ingreso IT" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.periodo}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Ene-Jun" itemValue="Ene-Jun"/>
+                        <f:selectItem itemLabel="Ago-Dic" itemValue="Ago-Dic"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Año" />
+                    <p:inputNumber value="#{altaEstudiantesBean.estudiante.anioIngreso}" minValue="2000" maxValue="2100" styleClass="ui-inputfield"/>
+
+                    <p:outputLabel value="Tipo de Ingreso" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.tipoIngreso}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Examen Selección" itemValue="Examen"/>
+                        <f:selectItem itemLabel="Reingreso" itemValue="Reingreso"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Nivel Escolar" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.nivel}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Licenciatura" itemValue="Licenciatura"/>
+                        <f:selectItem itemLabel="TSU" itemValue="TSU"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Estatus del Alumno" />
+                    <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.estatus}" styleClass="ui-inputfield">
+                        <f:selectItem itemLabel="Activo" itemValue="Activo"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+
+                <!-- ================= DATOS FAMILIARES ================= -->
+                <h3 class="section-title">
+                    <i class="pi pi-users"></i> Datos Familiares
+                </h3>
+
+                <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                    <p:outputLabel value="Nombre del Padre" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.padreNombre}" styleClass="ui-inputfield"/>
+                    <p:outputLabel value="Teléfono" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.padreTelefono}" styleClass="ui-inputfield"/>
+                    <p:outputLabel value="Nombre de la Madre" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.madreNombre}" styleClass="ui-inputfield"/>
+                    <p:outputLabel value="Teléfono" />
+                    <p:inputText value="#{altaEstudiantesBean.estudiante.madreTelefono}" styleClass="ui-inputfield"/>
+                </p:panelGrid>
+
+                <!-- ================= BOTONES ================= -->
+                <div class="buttons-container">
+                    <p:commandButton value="Dar de Alta"
+                                     action="#{altaEstudiantesBean.guardar}"
+                                     update="@form"
+                                     icon="pi pi-check"
+                                     styleClass="ui-button-success"/>
+                    <p:button value="Regresar"
+                              outcome="listaAspirantes"
+                              icon="pi pi-arrow-left"
+                              styleClass="ui-button-secondary"/>
+                </div>
+            </p:panel>
+        </h:form>
+
+        <!-- ================= ESTILOS ADICIONALES ================= -->
+        <style>
+            .form-title {
+                text-align: center;
+                font-size: 28px;
+                font-weight: bold;
+                color: #1976D2;
+                margin-bottom: 20px;
+            }
+
+            .card.custom-panel {
+                background: #f9fbfc !important;
+                border: 1px solid #cbd5e1;
+                border-radius: 12px !important;
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            }
+
+            .section-title {
+                margin-top: 30px;
+                margin-bottom: 15px;
+                font-size: 20px;
+                font-weight: bold;
+                text-align: center;
+                color: #1976D2;
+                border-bottom: 2px solid #BBDEFB;
+                padding-bottom: 5px;
+            }
+
+            .ui-inputfield {
+                border-radius: 8px !important;
+                box-shadow: none !important;
+            }
+
+            .buttons-container {
+                margin-top: 35px;
+                display: flex;
+                justify-content: center;
+                gap: 25px;
+            }
+        </style>
+    </ui:define>
+</ui:composition>
+
+
+</html>
+
+
+
+

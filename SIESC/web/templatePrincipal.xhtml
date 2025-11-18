@@ -6,12 +6,57 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="css/default.css"/>
-        <h:outputStylesheet name="css/cssLayout.css"/>
+
+        
+          <!-- Ultima Theme y Layout -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+  
+        
         <link rel="icon" href="#{resource['assets/itc.png']}" type="image/x-icon"/>
         <title>Sistema Escolar ITC</title>
+
+    </h:head>
+
+    <h:body>
+
+
         
-        <style>
+    <!-- ENCABEZADO -->
+        <div id="top" class="top"> 
+        <div class="left-section">
+          
+            <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />  
+        </div>
+       
+        </div> 
+        <div>
+            <!-- <div id="left">
+                <ui:insert name="left">
+                    
+                </ui:insert>
+            </div>
+            
+            -->
+            <div id="content" class="left_content">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+        
+        
+           <!-- PIE DE PAGINA -->
+            <footer>
+            © 2025 Tecnológico Nacional de México Campus Cuautla 
+            </footer>
+    
+    
+    
+    
+    
+            <style>
    /* ======== ENCABEZADO ======== */
     #top {
         background-color: #003366;
@@ -28,7 +73,7 @@
         height: 45px;
     }
          
-            
+           /* ========  PIE DE PAGINA ======== */  
                     footer {
             background-color: #003366;
             color: white;
@@ -41,41 +86,6 @@
         }
             
         </style>
-    </h:head>
-
-    <h:body>
-
-
-    <!-- ENCABEZADO -->
-    <div id="top" class="top"> 
-        <div class="left-section">
-          
-            <img src="../resources/assets/TECNM-blanco.png" alt="TECNM"/> 
-            
-        </div>
-       
-    </div> 
-        
-        
-        
-        <div>
-            <!-- <div id="left">
-                <ui:insert name="left">
-                    
-                </ui:insert>
-            </div>
-            
-            -->
-            <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
-        </div>
-        
-        
-        
-            <footer>
-        © 2025 Tecnológico Nacional de México Campus Cuautla | División de Estudios Profesionales
-    </footer>
     </h:body>
 
 </html>

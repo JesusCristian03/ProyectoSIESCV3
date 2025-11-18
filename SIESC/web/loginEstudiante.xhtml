@@ -6,36 +6,232 @@
       xmlns:p="http://primefaces.org/ui">
 
     <body>
+      
+<ui:composition template="./templatePrincipal.xhtml">
+<ui:define name="content">
 
-        <ui:composition template="./templatePrincipal.xhtml">
+<style>
+    body {
+        background-color: #eef2f7;
+        font-family: 'Segoe UI', sans-serif;
+    }
 
-            <ui:define name="content">
-                <div class="card" id="center_right_content">        
-                    <h:form >
-                        <h2>
-                            Iniciar Sesión
-                        </h2>
-                        <h:panelGrid columns="2" cellpadding="6"  >
-                            <div class="ui-inputgroup">
-                                <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>                                
-                                <p:inputText id="usr" value="#{loginBean.usuario}" required='true' placeholder="Usuario"/>
-                            </div>
-                        </h:panelGrid>
-                        <h:panelGrid columns="2" cellpadding="6">
-                            <div class="ui-inputgroup">
-                                <div class="ui-inputgroup-addon"><i class="pi pi-lock"></i></div>
-                                <p:password id="pass" value="#{loginBean.contrasena}" required='true' placeholder="Contraseña"/>
-                            </div>
-                        </h:panelGrid>
-                        <h:panelGrid columns="1" cellpadding="6">
-                            <p:commandButton value="Iniciar Sesion" action="#{loginBean.loginEstudiante}" ajax="false"  />
-                        </h:panelGrid>
+    /* ----------- CARD PRINCIPAL ----------- */
+    .login-wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: stretch;
+        width: 90%;
+        max-width: 800px;
+        background: #ffffff;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+      
+    }
 
-                    </h:form>
+    /* Lado de la imagen */
+    .login-image {
+        flex: 1;
+        background: #003366;
+    }
+
+    .login-image img {
+        width: 100%;
+        height: 80%;
+        object-fit: cover;
+    }
+
+    /* Lado del formulario */
+    .login-card {
+        flex: 1;
+     
+        padding: 1rem 2rem !important;
+        text-align: center;
+    }
+
+    /* Logo */
+    .login-logo {
+        width: 80px;
+        margin-bottom: 0rem;
+    }
+
+    /* Título */
+    h2 {
+        color: #003366;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    /* Subtítulo institucional */
+    .subtitulo-login {
+        margin-top: 0rem;
+        margin-bottom: 1rem;
+        color: #555;
+        font-size: 1rem;
+        letter-spacing: 0.3px;
+    }
+
+    /* -------- INPUTS -------- */
+    .ui-inputgroup-addon {
+        background: #003366;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px 0 0 8px;
+        padding: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    input.ui-inputfield,
+    .ui-password input {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid #c5c5c5;
+        border-radius: 0 8px 8px 0;
+        background: #f5f8ff;
+        transition: 0.3s ease;
+    }
+
+    /* Espaciado entre inputs */
+    .ui-inputgroup {
+        margin-bottom: .5rem !important;
+    }
+
+    /* Input focus */
+    input.ui-inputfield:focus,
+    .ui-password input:focus {
+        border-color: #007bff;
+        background: #ffffff;
+        box-shadow: 0 0 8px rgba(0,123,255,0.3);
+        outline: none;
+    }
+
+    /* ----------- BOTÓN ----------- */
+    .ui-commandbutton {
+        background: #ffb428;
+        border: none;
+        color: #ffffff;
+        font-weight: 600;
+        width: 100%;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 0.5rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: 0.28s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(255, 180, 40, 0.4);
+    }
+
+    .ui-commandbutton:hover {
+        background: #e0a31f;
+        box-shadow: 0 6px 15px rgba(255, 180, 40, 0.55);
+        transform: translateY(-2px);
+    }
+
+    /* Corrige alineación del texto interno del botón */
+    .ui-button .ui-button-text {
+        padding: 0 !important;
+        line-height: 1.2 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Mensaje motivacional */
+    .mensaje-motivacional {
+        margin-top: 1.5rem;
+        color: #777;
+        font-size: 0.9rem;
+        font-style: italic;
+    }
+
+    /* Pie interno */
+    .pie-login {
+        margin-top: 2rem;
+          color: #888;
+        font-size: 0.75rem;
+    }
+
+    /* -------- RESPONSIVE -------- */
+    @media (max-width: 768px) {
+        .login-wrapper {
+            flex-direction: column;
+            width: 95%;
+            max-width: 450px;
+        }
+
+        .login-image img {
+            height: 180px;
+            object-fit: cover;
+        }
+    }
+</style>
+
+<div class="login-wrapper">
+
+    <div class="login-image">
+        <p:graphicImage library="assets" name="estudiante.jpg" />
+    </div>
+
+    <div class="login-card">
+        <h:form>
+
+            <!-- Logo -->
+            <p:graphicImage library="assets" name="usuario5.png" styleClass="login-logo" />
+
+            <!-- Título -->
+            <h2>Iniciar Sesión</h2>
+
+            <!-- Subtítulo -->
+            <p class="subtitulo-login">Sistema Integral de Servicios Escolares</p>
+
+            <!-- Usuario -->
+            <div class="ui-inputgroup">
+                <div class="ui-inputgroup-addon">
+                    <i class="pi pi-user"></i>
                 </div>
-            </ui:define>
+                <p:inputText id="usr" value="#{loginBean.usuario}" required="true" placeholder="Usuario" />
+            </div>
 
-        </ui:composition>
+            <!-- Contraseña -->
+            <div class="ui-inputgroup">
+                <div class="ui-inputgroup-addon">
+                    <i class="pi pi-lock"></i>
+                </div>
+                <p:password id="pass" value="#{loginBean.contrasena}" required="true" placeholder="Contraseña" />
+            </div>
 
+            <!-- Botón -->
+            <p:commandButton value="Iniciar Sesión" action="#{loginBean.loginEstudiante()}" ajax="false" />
+
+            <!-- Mensaje motivacional -->
+            <p class="mensaje-motivacional">
+                Lo que aprendas hoy construye el mañana que sueñas.
+            </p>
+
+            <!-- Pie interno -->
+            <p class="pie-login">
+              ¿Problemas para acceder?  Contacta a soporte escolar.
+            </p>
+
+        </h:form>
+    </div>
+</div>
+
+</ui:define>
+</ui:composition>
+
+    
     </body>
 </html>
+

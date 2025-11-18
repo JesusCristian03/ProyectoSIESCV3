@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Departamento de Escolares - SIESC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <!-- Ultima Theme y Layout -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+
+
+    <style>
+        body { font-family: "Segoe UI", sans-serif; background-color: #f4f6f9; margin:0; padding:0; }
+        .main-container { display:flex; flex-direction:column; min-height:100vh; }
+        .content-wrapper { display:flex; flex:1; overflow:hidden; }
+
+        header {
+            background-color: #003366;
+            color:white;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:0 20px;
+            height:65px;
+            box-shadow:0 3px 6px rgba(0,0,0,0.16);
+            position:sticky; top:0; z-index:1000;
+        }
+
+        header img { height:45px; }
+        header h2 { margin:0; font-size:1.25rem; font-weight:600; text-align:center; flex:1; }
+
+        .logout-btn .ui-button {
+            background-color: transparent; border: 2px solid #fff;
+            color:#fff; border-radius:25px; font-weight:500;
+            transition:all 0.3s ease;
+        }
+        .logout-btn .ui-button:hover { background-color:#fff; color:#003366; transform:scale(1.05); }
+
+        aside.sidebar {
+            width:260px;
+            background-color:#fff;
+            border-right:1px solid #ddd;
+            box-shadow:2px 0 6px rgba(0,0,0,0.05);
+            padding:15px;
+            overflow-y:auto;
+            transition: all 0.3s ease;
+        }
+        aside.sidebar.collapsed { width:0; padding:0; overflow:hidden; }
+
+        main.content { flex:1; padding:2rem; background-color:#f4f6f9; overflow-y:auto; }
+        main.content h3 { font-size:1.5rem; font-weight:600; color:#003366; margin-bottom:1rem; }
+        main.content p { font-size:1rem; color:#333; }
+
+        .menu-toggle-btn { font-size:1.5rem; color:white; cursor:pointer; margin-right:15px; display:flex; align-items:center; justify-content:center; }
+        /* Íconos personalizados en el panelMenu */
+.ui-menuitem-link::before {
+    font-family: 'primeicons';
+    font-size: 1rem;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Usar la clase del icono (pi pi-...) para mostrarlo */
+.pi::before {
+    font-family: 'primeicons' !important;
+}
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+    </style>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('aside.sidebar');
+            sidebar.classList.toggle('collapsed');
+        }
+    </script>
+</h:head>
+
+<h:body>
+<div class="main-container">
+
+    <!-- HEADER -->
+    <header>
+        <div class="menu-toggle-btn" onclick="toggleSidebar()">
+            <i class="pi pi-bars"></i>
+        </div>
+        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
+        <h2>DEPARTAMENTO DE ESCOLARES</h2>
+        <h:form styleClass="logout-btn">
+            <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
+                             action="#{controlSesion.cerrarSesion}" ajax="false"/>
+        </h:form>
+    </header>
+
+    <!-- CONTENEDOR -->
+    <div class="content-wrapper">
+
+<!-- MENÚ LATERAL -->
+<aside class="sidebar">
+    <h:form>
+        <p:panelMenu style="width:100%;" styleClass="custom-menu">
+
+            <!-- ASPIRANTES -->
+            <p:submenu label="Aspirantes" icon="">
+                <p:menuitem value="Alta de aspirantes" outcome="/escolar/altaEstudiantes.xhtml"
+                            styleClass="pi pi-user-plus" />
+                <p:menuitem value="Lista de aspirantes" outcome="/escolar/listaAspirantes.xhtml"
+                            styleClass="pi pi-list" />
+            </p:submenu>
+
+            <!-- ESTUDIANTES -->
+            <p:submenu label="Estudiantes" icon="">
+                <p:menuitem value="Consultar alumnos" styleClass="pi pi-search" />
+                <p:menuitem value="Modificar datos" styleClass="pi pi-pencil" />
+            </p:submenu>
+
+            <!-- REINSCRIPCIONES -->
+            <p:submenu label="Reinscripciones" icon="">
+                <p:menuitem value="Abrir periodo" styleClass="pi pi-calendar-plus" />
+                <p:menuitem value="Historial de reinscripción" styleClass="pi pi-history" />
+            </p:submenu>
+
+            <!-- REPORTES -->
+            <p:submenu label="Reportes" icon="">
+                <p:menuitem value="Generar reportes" styleClass="pi pi-file-pdf" />
+                <p:menuitem value="Estadísticas generales" styleClass="pi pi-chart-line" />
+            </p:submenu>
+
+            <!-- CONFIGURACIÓN -->
+            <p:submenu label="Configuración" icon="">
+                <p:menuitem value="Usuarios" styleClass="pi pi-user-plus" />
+                <p:menuitem value="Roles y permisos" styleClass="pi pi-shield" />
+            </p:submenu>
+
+            <!-- AYUDA -->
+            <p:submenu label="Ayuda" icon="">
+                <p:menuitem value="Guía del sistema" styleClass="pi pi-book" />
+                <p:menuitem value="Contacto soporte" styleClass="pi pi-envelope" />
+            </p:submenu>
+
+            <!-- CERRAR SESIÓN -->
+            <p:submenu label="Sesión" icon="">
+                <p:menuitem value="Cerrar sesión" styleClass="pi pi-lock"
+                            action="#{controlSesion.cerrarSesion}" ajax="false" />
+            </p:submenu>
+
+        </p:panelMenu>
+    </h:form>
+</aside>
+
+
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="content">
+            <ui:insert name="content">
+                <h3>Bienvenido al Departamento de Escolares</h3>
+                <p>Selecciona una opción del menú lateral para comenzar.</p>
+            </ui:insert>
+        </main>
+    </div>
+</div>
+    <flooter>
+       © 2025 Tecnológico Nacional de México Campus Cuautla | Escolares
+    </flooter>
+</h:body>
+
+
+</html>
+
+
+

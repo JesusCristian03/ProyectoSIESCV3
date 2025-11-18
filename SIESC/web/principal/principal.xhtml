@@ -1,0 +1,301 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Portal Institucional</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+    
+
+    <style>
+        body {
+            background-color: #f4f8ff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Encabezado institucional */
+        .encabezado {
+            background-color: #0a3d62;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .encabezado img {
+            height: 60px;
+        }
+
+        .encabezado h2 {
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .inicio-header {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #0a3d62;
+        }
+
+        .inicio-header h1 {
+            font-weight: 500;
+            font-size: 2.4rem;
+        }
+
+        .inicio-header p {
+            font-size: 1.2rem;
+            color: #3d5a80;
+        }
+        
+.botones-inicio { 
+    text-align: center; 
+    display: flex; justify-content: 
+        center; gap: 20px; 
+                 
+                 /* separación entre botones */ 
+                 margin-top: 2rem; } 
+.botones-inicio .ui-button { 
+    width: 300px; 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    padding: 14px 0 !important; 
+            border-radius: 10px !important; 
+            display: flex !important; align-items: center !important; 
+            justify-content: center !important; 
+            gap: 10px; /* icono - texto */ } 
+
+.botones-inicio .ui-button .ui-button-text { opacity: 1 !important; color: #fff !important; } 
+.botones-inicio .ui-button .ui-button-icon { font-size: 1.4rem !important; } 
+.botones-inicio .ui-button { transition: 0.25s ease; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); } 
+.botones-inicio .ui-button:hover { 
+    transform: translateY(-4px); /* Subir ligeramente */ 
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.20);/* Sombra más grande */ } 
+ 
+
+        
+
+        .footer {
+            background-color: #0a3d62;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer a {
+            color: #ffffff;
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+
+        .footer a:hover {
+            color: #4da8ff;
+        }
+
+
+        
+        .pi::before {
+    font-family: 'primeicons' !important;
+}
+    </style>
+</h:head>
+
+<h:body>
+
+    <!-- ENCABEZADO -->
+    <div class="encabezado">
+        <div style="display:flex; align-items:center; gap:15px;">
+           <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" alt="Logo Institucional" />
+            <h2>SISTEMA INTEGRAL DE INFORMACIÒN</h2>
+            <h2>Instituto Tecnológico de Cuautla</h2>
+        </div>
+        <div>
+            <a href="#" style="color:white; margin-right:20px;">Informacion</a>
+            <a href="#" style="color:white;">Contacto</a>
+        </div>
+    </div>
+
+    <!-- CUERPO PRINCIPAL -->
+    <div class="inicio-header">
+        <h1>BINVENID@S</h1>
+        <p>Bienvenido al sistema de gestión institucional. Selecciona tu tipo de usuario para continuar.</p>
+    </div>
+
+<!-- CARRUSEL PRO -->
+<div class="carousel-pro">
+<p:carousel value="#{inicioBean.imagenes}" var="img"
+            numVisible="1" numScroll="1"
+            circular="true" autoplayInterval="4000"
+            widgetVar="carouselPro"
+            styleClass="carousel-pro-container">
+
+    <p:graphicImage library="assets"
+                    name="#{img}"
+                    styleClass="carousel-pro-image"/>
+</p:carousel>
+
+    <!-- Puntos de navegación -->
+    <div id="carousel-dots" class="carousel-dots"></div>
+</div>
+
+
+
+
+
+
+
+    <!-- BOTONES DE INICIO -->
+    <div class="botones-inicio">
+        
+        
+        <p:button value="Aspirante" styleClass="ui-button-raised ui-button-info"
+                  outcome="/escolar/index.xhtml" icon="pi pi-id-card"/>
+        
+        <p:button value="Estudiante" styleClass="pi pi-user-plus"
+                  outcome="/loginEstudiante.xhtml" />
+
+        <p:button value=" Personal Administrativo" styleClass="ui-button-raised ui-button-secondary"
+                  outcome="/index.xhtml" icon="pi pi-briefcase"/>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <h:outputText value="© 2025 Instituto Tecnológico de Cuautla. Todos los derechos reservados." />
+      
+        <a href="https://www.youtube.com/@tecnm-cuautla" target="_blank"><i class="pi pi-youtube"></i></a>
+        <a href="https://web.facebook.com/search/top?q=tecnologico%20de%20cuautla" target="_blank"><i class="pi pi-facebook"></i></a>
+    </div>
+
+    
+    
+    
+    
+    
+<style>
+        .ui-carousel .ui-carousel-item img {
+            width: 60%;
+            border-radius: 12px;
+            margin: auto;
+            display: block;
+        }
+    
+    /* Ocultar flechas internas de PrimeFaces */
+.ui-carousel-prev,
+.ui-carousel-next {
+    display: none !important;
+}
+
+/* ===== CARRUSEL PRO ===== */
+.carousel-pro {
+    position: relative;
+    width: 20%; /*tamaño del carrusel*/
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.carousel-pro-container .carousel-pro-image {
+    width: 20%;
+    border-radius: 20px;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.carousel-pro-container .ui-carousel-item.ui-carousel-item-active img {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+/* ===== Flechas ===== */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.45);
+    border: none;
+    color: white;
+    padding: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    backdrop-filter: blur(4px);
+    transition: 0.3s;
+}
+
+
+
+/* ===== Puntos ===== */
+.carousel-dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.carousel-dots .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #d0d4da;
+    margin: 5px;
+    border-radius: 50%;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.carousel-dots .dot.active {
+    background: #0a3d62;
+    transform: scale(1.2);
+}
+
+
+</style>
+
+<script type="text/javascript">
+    //<![CDATA[
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(initCarouselDots, 600);
+    });
+
+    function initCarouselDots() {
+        const pf = PF('carouselPro');
+        if (!pf) return;
+
+        const total = pf.cfg.value.length;
+        const dotsContainer = document.getElementById("carousel-dots");
+
+        dotsContainer.innerHTML = "";
+
+        for (let i = 0; i < total; i++) {
+            let dot = document.createElement("span");
+            dot.classList.add("dot");
+            dot.addEventListener("click", () => pf.setPage(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        pf.cfg.onPageChange = updateDots;
+        updateDots(pf.getPage());
+    }
+
+    function updateDots(page) {
+        const dots = document.querySelectorAll(".carousel-dots .dot");
+        dots.forEach((d, i) => d.classList.toggle("active", i === page));
+    }
+    //]]>
+</script>
+</h:body>
+</html>
+

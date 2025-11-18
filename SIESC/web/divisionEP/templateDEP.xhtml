@@ -9,8 +9,15 @@
   
 <h:head> 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-    <h:outputStylesheet name="css/default.css"/> 
-    <h:outputStylesheet name="css/cssLayout.css"/> 
+
+        <!-- Ultima Theme y Layout -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+
+    
     <title>Division de estudios profesionales</title>
 
     <style>
@@ -199,7 +206,7 @@ footer {
     <!-- SECCIÓN IZQUIERDA -->
     <div class="left-section">
         <i class="pi pi-bars menu-toggle" onclick="toggleMenu()"></i>
-        <img src="../resources/assets/TECNM-blanco.png" alt="TECNM"/> 
+        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
     </div>
 
     <!-- SECCIÓN CENTRAL -->
@@ -227,7 +234,7 @@ footer {
             <h:form>
                 <p:menu toggleable="true">
                     <p:submenu label="Mantenimiento" expanded="false"> 
-                        <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="gruposNE?faces-redirect=true" icon="pi pi-plus-circle"/> 
+                        <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="gruposNE" icon="pi pi-plus-circle"/> 
                         <p:menuitem value="Asistencia" action="index" icon="pi pi-calendar-check"/> 
                         <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-file-edit"/> 
                         <p:menuitem value="Horarios" action="horarios" icon="pi pi-clock"/> 
