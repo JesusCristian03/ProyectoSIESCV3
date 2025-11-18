@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/valer/Documents/RESIDENCIA/ProyectoSIESCV3/SIESC/web/loginEstudiante.xhtml</file>
-            <file>file:/C:/Users/valer/Documents/RESIDENCIA/ProyectoSIESCV3/SIESC/web/index.xhtml</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/web/divisionEP/gruposNE.xhtml</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/src/java/vista/HorarioCrearBean.java</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/web/estudiante/inscripciones.xhtml</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/src/java/vista/GruposCompletos.java</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/src/java/vista/LoginBean.java</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/src/java/vista/InscripcionesBean.java</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/src/java/vista/AccesoBean.java</file>
         </group>
     </open-files>
 </project-private>
