@@ -16,17 +16,24 @@
             <ui:define name="content">
 
                 <f:view>
+
+
                     <h:form>
-                        <h1><h:outputText value="Estudiante"/></h1>
-                        <p:panelGrid columns="2" class="panel" style="">
-                            <p:outputLabel value="NoDeControl: #{inscripcionesBean.estudiante.noDeControl}"  />
-                            <p:outputLabel value="Estudiante: #{inscripcionesBean.estudiante.apellidoPaterno} #{inscripcionesBean.estudiante.apellidoMaterno} #{inscripcionesBean.estudiante.nombreAlumno}" />
-                            <p:outputLabel value="Carrera: #{inscripcionesBean.estudiante.reticula.nombreCarrera}"  />
-                            <p:outputLabel value="Semestre: #{inscripcionesBean.estudiante.semestre}"  />
-                            <p:outputLabel value="PeriodoEscolar: #{inscripcionesBean.periodoActual.identificacionLarga}"  />
-                            <p:outputLabel value="Calificacion: #{inscripcionesBean.promedio}"  />
-                            <p:outputLabel value="Especialidad: #{inscripcionesBean.estudiante.especialidad}"  />
-                        </p:panelGrid>
+                        <p:panel styleClass="custom-card" style="max-width:100%; margin:0;">
+                            <f:facet name="header">
+                                <h:outputText value="Información del Estudiante" style="font-weight:700; font-size:1.1rem;" />
+                            </f:facet>
+
+                            <p:panelGrid columns="2" style="width:100%;" columnClasses="label,value">
+                                <p:outputLabel value="NoDeControl: #{inscripcionesBean.estudiante.noDeControl}"  />
+                                <p:outputLabel value="Estudiante: #{inscripcionesBean.estudiante.apellidoPaterno} #{inscripcionesBean.estudiante.apellidoMaterno} #{inscripcionesBean.estudiante.nombreAlumno}" />
+                                <p:outputLabel value="Carrera: #{inscripcionesBean.estudiante.reticula.nombreCarrera}"  />
+                                <p:outputLabel value="Semestre: #{inscripcionesBean.estudiante.semestre}"  />
+                                <p:outputLabel value="PeriodoEscolar: #{inscripcionesBean.periodoActual.identificacionLarga}"  />
+                                <p:outputLabel value="Calificacion: #{inscripcionesBean.promedio}"  />
+                                <p:outputLabel value="Especialidad: #{inscripcionesBean.estudiante.especialidad}"  />
+                            </p:panelGrid>
+                        </p:panel>
                     </h:form>
 
                     <h:form id="seleccion">
@@ -34,11 +41,11 @@
 
                             <p:ajax event="tabChange" listener="#{inscripcionesBean.onTabChange}" update="@this :seleccion:tabVista:panelGrupos" />
                             <f:facet name="actions">
-                                Global actions
+
                             </f:facet>
                             <p:tab title="Asignatura" >
                                 <f:facet name="actions">
-                                    Asignatura
+
                                 </f:facet>
 
                                 <h1><h:outputText value="List"/></h1>
@@ -432,15 +439,13 @@
                             <p:tab>
 
 
-                                <f:facet name="actions">
-                                    Por Asignatura
-                                </f:facet>
+
                                 <f:facet name="title">
                                     <span>Grupo</span> <p:badge value="3" severity="danger" class="ml-1"></p:badge>
                                 </f:facet>
 
                                 <p:dialog id="dlg1" 
-                                          header="Selecciona Grupo" 
+
                                           showEffect="fade" 
                                           modal="true" 
                                           widgetVar="selecionMateriaGrupo" 
@@ -489,11 +494,17 @@
                                         </p:column>
                                     </p:dataTable>
 
-                                    <!-- Botón de selección -->
-                                    <div style="text-align:center; margin-top:20px;">
+                                    <!-- Botón abajo a la derecha -->
+                                    <div style="display:flex; justify-content:flex-end; margin-top:20px;">
+
                                         <p:commandButton value="Seleccionar Grupo"
                                                          icon="pi pi-check"
-                                                         styleClass="p-button-rounded p-button-success"
+                                                         style="background:#03396c;
+                                                         border-color:#03396c;
+                                                         width:220px;
+                                                         height:42px;
+                                                         font-size:14px;
+                                                         font-weight:bold;"
                                                          actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
                                                          oncomplete="PF('selecionMateriaGrupo').hide();"
                                                          update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
@@ -506,33 +517,33 @@
                                                 columns="3"
                                                 styleClass="grupos-grid"
                                                 layout="grid">
-                                        <p:panel styleClass="panel-grupo" style="text-align:center; padding:15px;">
-                                            <h:panelGrid columns="1" style="width:100%; text-align:center;" cellpadding="5">
 
-                                                <i class="pi pi-users" style="font-size:3em; color:#2196F3;"></i>
-                                                <h:outputText value="#{grupo}" style="font-weight:bold; font-size:1.2em; color:#333;" />
+                                        <!-- HACER CLICKEABLE TODO EL PANEL -->
+                                        <p:commandLink style="text-decoration:none; color:inherit;"
+                                                       oncomplete="PF('selecionMateriaGrupo').show()"
+                                                       actionListener="#{inscripcionesBean.verHorarios(grupo)}"
+                                                       update=":seleccion:tabVista:resultadosTabla1"
+                                                       disabled="#{inscripcionesBean.grupoBloqueado}">
 
-                                                <p:commandButton value="Ver horario"
-                                                                 icon="pi pi-calendar"
-                                                                 styleClass="p-button-rounded p-button-info"
-                                                                 style="margin-top:10px;"
-                                                                 oncomplete="PF('selecionMateriaGrupo').show()"
-                                                                 actionListener="#{inscripcionesBean.verHorarios(grupo)}"
-                                                                 update=":seleccion:tabVista:resultadosTabla1"
-                                                                 disabled="#{inscripcionesBean.grupoBloqueado}" />
+                                            <p:panel styleClass="panel-grupo clickable-panel"
+                                                     style="text-align:center; padding:15px; cursor:pointer;">
 
+                                                <h:panelGrid columns="1" style="width:100%; text-align:center;" cellpadding="5">
 
-                                            </h:panelGrid>
-                                        </p:panel>
+                                                    <i class="pi pi-users" style="font-size:3em; color:#2196F3;"></i>
+
+                                                    <h:outputText value="#{grupo}"
+                                                                  style="font-weight:bold; font-size:1.2em; color:#333;" />
+                                                </h:panelGrid>
+
+                                            </p:panel>
+
+                                        </p:commandLink>
+
                                     </p:dataGrid>
                                 </p:outputPanel>
                             </p:tab>
-                            <p:tab title="Header III">
-                                <p class="m-0">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores
-                                    et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                                    Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-                                </p>
-                            </p:tab>
+
 
                         </p:tabView>
 

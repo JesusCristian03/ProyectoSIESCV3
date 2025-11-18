@@ -4,11 +4,15 @@
  */
 package vista;
 
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -88,6 +92,7 @@ public class InscripcionesBean implements Serializable {
     private String materia;
     private double promedio;
     private Boolean grupoBloqueado = false;
+    private Boolean modoGrupo = false;
     private String grupo = "";
     private int creditosSeleccionados = 0;
 
@@ -99,6 +104,14 @@ public class InscripcionesBean implements Serializable {
 
     public AvisosReinscripcion getVr() {
         return vr;
+    }
+
+    public Boolean getModoGrupo() {
+        return modoGrupo;
+    }
+
+    public void setModoGrupo(Boolean modoGrupo) {
+        this.modoGrupo = modoGrupo;
     }
 
     public void setVr(AvisosReinscripcion vr) {
@@ -332,6 +345,69 @@ public class InscripcionesBean implements Serializable {
         List<HistoriaAlumno> listaHA = historiaAlumnoServicio.buscarAsignaturas(estudiante.getNoDeControl());
         promedio = estudiante.getPromedioAritmeticoAcumulado();
         listaGC = gruposServicio.buscarGruposCompletos(estudiante.getReticula(), estudiante.getSemestre(), periodoActual);
+        addMessage(FacesMessage.SEVERITY_INFO, "Reinscripción", "Tu proceso de reinscripción ha empezado");
+    }
+
+    public void verificarAcceso() {
+        FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getFlash()
+                .setKeepMessages(true);
+        System.out.println("=== VERIFICACIÓN DE INSCRIPCIÓN ===");
+
+        // Obtiene periodo de prueba
+        PeriodoEscolar prueba = periodoEscolarServicio.buscarPorId("20251");
+        vr = avisosReinscripcionServicio.buscarAvisoReinscripcion(estudiante, prueba);
+
+        Date fechaSeleccionDate = vr.getFechaHoraSeleccion();
+
+        LocalDateTime fechaSeleccion = fechaSeleccionDate.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+
+        LocalDateTime ahora = LocalDateTime.now();
+        LocalDateTime finVentana = fechaSeleccion.plusMinutes(30);
+
+        // --- Impresiones en consola ---
+        System.out.println("Fecha/Hora asignada al alumno: " + fechaSeleccion);
+        System.out.println("Hora actual del sistema:        " + ahora);
+        System.out.println("Fin de ventana (30 min):        " + finVentana);
+        System.out.println("-----------------------------------------");
+
+        // --- Validaciones ---
+        if (ahora.isBefore(fechaSeleccion)) {
+            System.out.println("[INFO] Aún no es tu hora, acceso bloqueado.");
+
+            /*FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Aún no puedes inscribirte",
+                    "Tu horario empieza a las: " + fechaSeleccion);
+            FacesContext.getCurrentInstance().addMessage(null, msg);*/
+            addMessage(FacesMessage.SEVERITY_WARN, "Aún no puedes inscribirte", "Tu horario empieza a las: " + fechaSeleccion);
+            return;
+        }
+
+        if (ahora.isAfter(finVentana)) {
+            System.out.println("[INFO] Se acabaron tus 30 minutos, acceso bloqueado.");
+
+            /* FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Tiempo expirado",
+                    "Tu ventana de inscripción terminó");
+            FacesContext.getCurrentInstance().addMessage(null, msg);*/
+            addMessage(FacesMessage.SEVERITY_ERROR, "Tiempo expirado", "Tu ventana de inscripción terminó");
+            return;
+        }
+
+        // ✔ Acceso permitido
+        System.out.println("[OK] Estás dentro del tiempo permitido, redirigiendo...");
+        System.out.println("-----------------------------------------");
+
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("inscripciones.xhtml");
+            iniciarInscripcion();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void validaciones() {
@@ -341,7 +417,7 @@ public class InscripcionesBean implements Serializable {
         if (Mrojas != 0) {
             grupoBloqueado = true;
             addMessage(FacesMessage.SEVERITY_ERROR, "CARRERA REPROBADA", "NO PUEDES SELECCIONAR NINGUNA MATERIA");
-            //return;
+            return;
         }
         if (Mnaranjas != 0) {
             grupoBloqueado = true;
@@ -614,69 +690,76 @@ public class InscripcionesBean implements Serializable {
     }
 
     public void onTabChange() { //Solo se activa Sleccion con grupos cuando todas las materias a escoger estan en azul en el semestre del alumno.
-        System.out.println("estudiante.getCreditosAprobados()" + estudiante.getCreditosAprobados());
-        System.out.println("estudiante.getCreditosCursados()" + estudiante.getCreditosCursados());
-        if (Objects.equals(estudiante.getCreditosAprobados(), estudiante.getCreditosCursados())) {
-            grupoBloqueado = false;//Si ambos creditos aprobados o cursados son iguales si puedo seleccionar grupo. 
-            addMessage(FacesMessage.SEVERITY_INFO, "CREDITOS ALCANZADOS", "HAZ ALCANZADO LOS CREDITOS PUEDES SELECCIONAR GRUPO");
-            int n = 0;
-            int semestre = estudiante.getSemestre();
-            for (Reticula r : listaM) {
-                try {
-                    // Obtener dinámicamente el semestre usando reflexión
-                    ReticulaDatos rd = (ReticulaDatos) r.getClass()
-                            .getMethod("getSemestre" + semestre)
-                            .invoke(r);
+        //System.out.println("estudiante.getCreditosAprobados()" + estudiante.getCreditosAprobados());
+        //System.out.println("estudiante.getCreditosCursados()" + estudiante.getCreditosCursados());
 
-                    if (rd != null && rd.getDisponible()) {
-                        n++;
+        modoGrupo = !modoGrupo;
+        if (modoGrupo) {//Para evitar que se ejecute todo sino que solamente cuando entre a modoGrupo.
+            if (Objects.equals(estudiante.getCreditosAprobados(), estudiante.getCreditosCursados())) {
+                grupoBloqueado = false;//Si ambos creditos aprobados o cursados son iguales si puedo seleccionar grupo. 
+                //addMessage(FacesMessage.SEVERITY_INFO, "CREDITOS ALCANZADOS", "HAZ ALCANZADO LOS CREDITOS PUEDES SELECCIONAR GRUPO");
+                int n = 0;
+                int semestre = estudiante.getSemestre();
+                for (Reticula r : listaM) {
+                    try {
+                        // Obtener dinámicamente el semestre usando reflexión
+                        ReticulaDatos rd = (ReticulaDatos) r.getClass()
+                                .getMethod("getSemestre" + semestre)
+                                .invoke(r);
+
+                        if (rd != null && rd.getDisponible()) {
+                            n++;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Error al obtener semestre " + semestre + ": " + e.getMessage());
                     }
-                } catch (Exception e) {
-                    System.out.println("Error al obtener semestre " + semestre + ": " + e.getMessage());
                 }
-            }
 
-            // Determinar cuántas materias son necesarias para desbloquear el grupo
-            int materiasRequeridas;
-            switch (semestre) {
-                case 1:
-                case 2:
-                case 5:
-                    materiasRequeridas = 6;
-                    break;
-                case 3:
-                case 4:
-                case 6:
-                case 7:
-                case 8:
-                    materiasRequeridas = 7;
-                    break;
-                case 9:
-                    grupoBloqueado = true;
-                    addMessage(FacesMessage.SEVERITY_INFO, "RESIDENCIAS", "SELECCIONA DESDE RETICULA");
-                    return;
-                default:
-                    grupoBloqueado = true;
-                    addMessage(FacesMessage.SEVERITY_INFO, "GRUPOS NO DISPONIBLES", "SELECCIONA DESDE RETICULA");
-                    return;
-            }
+                // Determinar cuántas materias son necesarias para desbloquear el grupo
+                int materiasRequeridas;
+                switch (semestre) {
+                    case 1:
+                    case 2:
+                    case 5:
+                        materiasRequeridas = 6;
+                        break;
+                    case 3:
+                    case 4:
+                    case 6:
+                    case 7:
+                    case 8:
+                        materiasRequeridas = 7;
+                        break;
+                    case 9:
+                        grupoBloqueado = true;
+                        addMessage(FacesMessage.SEVERITY_INFO, "RESIDENCIAS", "SELECCIONA DESDE RETICULA");
+                        return;
+                    default:
+                        grupoBloqueado = true;
+                        addMessage(FacesMessage.SEVERITY_INFO, "GRUPOS NO DISPONIBLES", "SELECCIONA DESDE RETICULA");
+                        return;
+                }
 
-            // Finalmente, asignar bloqueado o no
-            grupoBloqueado = n != materiasRequeridas;
+                // Finalmente, asignar bloqueado o no
+                grupoBloqueado = n != materiasRequeridas;
+                if (!grupoBloqueado && modoGrupo) {
+                    addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR GRUPO", "SELECCIONA UN GRUPO");
+                } else {
+                    addMessage(FacesMessage.SEVERITY_WARN, "HORARIO POR GRUPO", "NO PUEDES SELECCIONAR NINGUN GRUPO");
 
-            if (!grupoBloqueado) {
-                addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR GRUPO", "SELECCIONA UN GRUPO");
+                }
+
+                return;
             } else {
-                addMessage(FacesMessage.SEVERITY_WARN, "HORARIO POR GRUPO", "NO PUEDES SELECCIONAR NINGUN GRUPO");
+                grupoBloqueado = true;
+                System.out.println("ENTROOOOOOOOOOOOOOOO ONTABACHANGE 2");
+                if (modoGrupo) {
+                    addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS NO ALCANZADOS", "NO HAZ ALCANZADO LOS CREDITOS SUFICIENTE");
+                }
 
+                return;
             }
 
-            return;
-        } else {
-            grupoBloqueado = true;
-            System.out.println("ENTROOOOOOOOOOOOOOOO ONTABACHANGE 2");
-            addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS NO ALCANZADOS", "NO HAZ ALCANZADO LOS CREDITOS SUFICIENTE");
-            return;
         }
 
         // grupoBloqueado = true;//Para bloquear los grupos si ya he seleccionado

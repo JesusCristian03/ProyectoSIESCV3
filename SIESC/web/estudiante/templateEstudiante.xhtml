@@ -38,7 +38,35 @@
                 pointer-events: none;
                 opacity: 0.6;
             }
+            /* columnas */
+            .label {
+                font-weight: 600;
+                padding: 6px 8px;
+            }
+            .value {
+                padding: 6px 8px;
+            }
 
+            /* estilo tipo card */
+            .custom-card .ui-panel-titlebar {
+                background: transparent;
+                border: none;
+                padding-bottom: 8px;
+            }
+            .custom-card {
+                box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+                border-radius: 6px;
+                padding: 12px;
+            }
+
+            .clickable-panel {
+                transition: transform 0.15s ease, box-shadow 0.15s ease;
+            }
+
+            .clickable-panel:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
 
 
         </style>
@@ -59,6 +87,7 @@
                 <ui:insert name="left">
                     <h:form>
                         <p:menu toggleable="true" style="font-size:15px;">
+
                             <p:submenu label="Información Escolar" expanded="false">
                                 <p:menuitem value="Asistencia" action="index" icon="pi pi-refresh"/>
                                 <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
@@ -66,7 +95,7 @@
                                 <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
                             </p:submenu>
                             <p:submenu label="Iscripciones" expanded="false">
-                                <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones?faces-redirect=true"  actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-refresh"/>
+                                <p:menuitem value="Ene-Jun/Ago-Dic" update="growlMensajes" actionListener="#{inscripcionesBean.verificarAcceso}" icon="pi pi-refresh" ajax="true"/>
                                 <p:menuitem value="Grupos Disponibles" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
                                 <p:menuitem value="Horario Inscripcion" action="horarios" icon="pi pi-refresh"/>
                                 <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
@@ -83,12 +112,14 @@
                             .ui-widget {
                                 font-size: 10px;
                             }
-                        </style>    
+                        </style>  
+                        <!-- AHORA el growl está DENTRO del form -->
+                        <p:growl id="growlMensajes" showDetail="true" sticky="false" life="4000"/>
                     </h:form>
                 </ui:insert>
             </div>
             <div id="content" class="left_content">
-                <ui:insert name="content">
+                <ui:insert name="content">                    
 
                 </ui:insert>
             </div>

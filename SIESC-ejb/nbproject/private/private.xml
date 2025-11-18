@@ -12,11 +12,6 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC-ejb/src/java/DAO/PeriodoEscolarFacadeLocal.java</file>
-            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC-ejb/src/java/modelo/ReticulaDatos.java</file>
-            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC-ejb/src/java/servicio/GruposServicio.java</file>
-            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC-ejb/src/java/servicio/GruposServicioLocal.java</file>
-            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC-ejb/src/java/modelo/HorarioAsignatura.java</file>
             <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC-ejb/src/java/servicio/MateriasCarrerasServicio.java</file>
         </group>
     </open-files>
