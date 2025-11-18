@@ -1,30 +1,205 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="css/default.css"/>
-        <h:outputStylesheet name="css/cssLayout.css"/>
-        <title>Facelets Template</title>
-    </h:head>
+<h:head>
+    <title>Departamento Academico</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <h:body>
+    <!-- Ultima Theme -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Estructura principal */
+        .layout-wrapper {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== TOPBAR ===== */
+        .layout-topbar {
+            background-color: #003366;
+            color: white;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+            z-index: 1000;
+        }
+
+        .layout-topbar .title {
+            flex: 1;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .menu-toggle-btn {
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .layout-sidebar {
+            width: 260px;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .layout-sidebar.collapsed {
+            width: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* ===== MAIN ===== */
+        .layout-main-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .layout-main {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background-color: #f4f6f9;
+        }
+
+        
+        .pi::before {
+    font-family: 'primeicons' !important;
+}
+
+        /* ===== FOOTER ===== */
+        .layout-footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+    </style>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.layout-sidebar').classList.toggle('collapsed');
+        }
+    </script>
+</h:head>
 
 
-        <div id="top" class="top">
-            <ui:insert name="top">Top</ui:insert>
+<h:body>
+
+<div class="layout-wrapper">
+
+    <!-- ================= TOPBAR ================= -->
+    <div class="layout-topbar">
+        <div class="menu-toggle-btn" onclick="toggleSidebar()">
+            <i class="pi pi-bars"></i>
         </div>
-        <div>
-            <div id="left">
-                <ui:insert name="left">Left</ui:insert>
-            </div>
-            <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
-        </div>
-    </h:body>
 
+        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
+
+        <div class="title">DEPARTAMENTO DE ACADEMICO</div>
+
+        <h:form styleClass="logout-btn">
+            <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
+                             action="#{controlSesion.cerrarSesion}" ajax="false" />
+        </h:form>
+    </div>
+
+    <div class="layout-main-container">
+
+        <!-- ================= SIDEBAR ================= -->
+        <div class="layout-sidebar">
+            <h:form>
+              
+                <p:panelMenu style="width:100%;" styleClass="custom-menu">
+    <!-- 1 DOCENTE -->
+    <p:submenu label="Docentes" icon="pi pi-users">
+        <p:menuitem value="Base" outcome=""
+                    icon="pi pi-user-plus" />
+        <p:menuitem value="Horarios" outcome=""
+                    icon="" />
+        
+    </p:submenu>
+
+    <!-- 2 GRUPOS -->
+    <p:submenu label="Grupos de horarios" icon="">
+       
+    </p:submenu>
+
+    <!-- 3 HORARIOS -->
+    <p:submenu label="" icon="">
+        
+    </p:submenu>
+
+    <!-- 4 RESIDENCIAS -->
+    <p:submenu label="" icon="">
+        
+    </p:submenu>
+
+    <!-- 5 CONCENTRADO -->
+    <p:submenu label="" icon="">
+        
+    </p:submenu>
+
+    <!-- 6 PROGRAMA -->
+    <p:submenu label=" " icon="">
+       
+    </p:submenu>
+
+    <!-- 7 AVANCE -->
+    <p:submenu label="Plan curricular" icon="">
+       
+    </p:submenu>
+
+  
+
+                </p:panelMenu>
+            </h:form>
+        </div>
+
+        <!-- ================= CONTENIDO PRINCIPAL ================= -->
+        <div class="layout-main">
+            <ui:insert name="content">
+                <h3>Bienvenido al Departamento de Academico</h3>
+                <p>Selecciona una opción del menú lateral para comenzar.</p>
+            </ui:insert>
+        </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="layout-footer">
+        © 2025 Tecnológico Nacional de México Campus Cuautla | Departamento Escolares
+    </div>
+
+</div>
+
+</h:body>
 </html>
