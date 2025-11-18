@@ -157,32 +157,38 @@ public class GruposServicio implements GruposServicioLocal {
                     switch (horario.getDiaSemana()) {
                         case 2:
                             horarioAsignatura.setLunes(
-                                    formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
+                                    (horarioAsignatura.getLunes() != null ? horarioAsignatura.getLunes() + "   " : "")
+                                    + formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
                             );
                             break;
                         case 3:
                             horarioAsignatura.setMartes(
-                                    formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
+                                    (horarioAsignatura.getMartes() != null ? horarioAsignatura.getMartes() + "   " : "")
+                                    + formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
                             );
                             break;
                         case 4:
                             horarioAsignatura.setMiercoles(
-                                    formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
+                                    (horarioAsignatura.getMiercoles() != null ? horarioAsignatura.getMiercoles() + "   " : "")
+                                    + formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
                             );
                             break;
                         case 5:
                             horarioAsignatura.setJueves(
-                                    formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
+                                    (horarioAsignatura.getJueves() != null ? horarioAsignatura.getJueves() + "   " : "")
+                                    + formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
                             );
                             break;
                         case 6:
                             horarioAsignatura.setViernes(
-                                    formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
+                                    (horarioAsignatura.getViernes() != null ? horarioAsignatura.getViernes() + "   " : "")
+                                    + formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
                             );
                             break;
                         case 7:
                             horarioAsignatura.setSabado(
-                                    formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
+                                    (horarioAsignatura.getSabado() != null ? horarioAsignatura.getSabado() + "   " : "")
+                                    + formatoHora.format(horario.getHoraInicial()) + " - " + formatoHora.format(horario.getHoraFinal())
                             );
                             break;
                     }

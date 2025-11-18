@@ -7,8 +7,14 @@ package vista;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -315,7 +321,7 @@ public class InscripcionesBean implements Serializable {
     public void iniciarInscripcion() {
         //Esa lista se asigna a tu bean (listaM) y luego se usa en la página JSF para mostrar la retícula de materias.
         listaM = materiasCarrerasServicio.buscarMaterias(estudiante);
-        periodoActual = periodoEscolarServicio.buscarPorId(periodoEscolarServicio.periodoActual()); 
+        periodoActual = periodoEscolarServicio.buscarPorId(periodoEscolarServicio.periodoActual());
         ///-----------------------------------------------------------
         PeriodoEscolar prueba = periodoEscolarServicio.buscarPorId("20251");//Componer porque no hay como tal 
         //............................................................
@@ -326,25 +332,6 @@ public class InscripcionesBean implements Serializable {
         List<HistoriaAlumno> listaHA = historiaAlumnoServicio.buscarAsignaturas(estudiante.getNoDeControl());
         promedio = estudiante.getPromedioAritmeticoAcumulado();
         listaGC = gruposServicio.buscarGruposCompletos(estudiante.getReticula(), estudiante.getSemestre(), periodoActual);
-        /*int contador = 0;
-        double suma = 0;
-        for (int i = 0; i < listaHA.size(); i++) {
-            HistoriaAlumno ha = listaHA.get(i);
-            if (ha.getCalificacion() != null) { // por si alguna materia no tiene calificación aún
-                suma += ha.getCalificacion();
-                contador++;
-            }
-        }
-        
-        System.out.println("----------------DATOS ENVIADOS PARA GC--------------");
-        System.out.println("Tamaño lista listaGC.size:" + listaGC.size());
-        System.out.println("Retícula: " + estudiante.getReticula());
-        System.out.println("Semestre: " + estudiante.getSemestre());
-        System.out.println("Periodo actual: " + periodoActual);
-        System.out.println("-----------------------------------------------------");
-        System.out.println("Promedio del alumno: " + promedio);
-         */
-
     }
 
     public void validaciones() {
@@ -354,7 +341,7 @@ public class InscripcionesBean implements Serializable {
         if (Mrojas != 0) {
             grupoBloqueado = true;
             addMessage(FacesMessage.SEVERITY_ERROR, "CARRERA REPROBADA", "NO PUEDES SELECCIONAR NINGUNA MATERIA");
-            return;
+            //return;
         }
         if (Mnaranjas != 0) {
             grupoBloqueado = true;
@@ -501,6 +488,7 @@ public class InscripcionesBean implements Serializable {
 
     public void verHorarios(String grupo) {
         this.grupo = grupo;
+
         listaHorarioAsignatura = gruposServicio.buscarGruposPorCampoGrupoSeleccionada(estudiante.getReticula().getReticula(),
                 estudiante.getSemestre(),
                 periodoActual.getPeriodo(),
@@ -548,118 +536,6 @@ public class InscripcionesBean implements Serializable {
         addMessage(FacesMessage.SEVERITY_INFO, "GRUPO SELECCIONADO", "HAZ SELECCIONADO:" + grupo);
     }
 
-    /*public void cambiarEstadoMateriasSeleccionadasPorGrupo() {
-        for (int i = 0; i < listaM.size(); i++) {//Para cambiar el estado y color despues de seleccionar el grupo al cual voy a iniciar.
-            Reticula r = listaM.get(i);
-            ReticulaDatos rd;
-            switch (estudiante.getSemestre()) {
-                case 1:
-                    rd = r.getSemestre1();
-                    if (rd.getDisponible()) {//Por si hay una materia que ya fue cursada. 
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-
-                    }
-
-                    break;
-                case 2:
-                    rd = r.getSemestre2();
-                    if (rd.getDisponible()) {
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-                    }
-                    break;
-                case 3:
-                    rd = r.getSemestre3();
-                    if (rd.getDisponible()) {
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-                    }
-                    break;
-                case 4:
-                    rd = r.getSemestre4();
-                    if (rd.getDisponible()) {
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-                    }
-                    break;
-                case 5:
-                    rd = r.getSemestre5();
-                    if (rd.getDisponible()) {
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-                    }
-                    break;
-                case 6:
-                    rd = r.getSemestre6();
-                    if (rd.getDisponible()) {
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-                    }
-                    break;
-                case 7:
-                    rd = r.getSemestre7();
-                    if (rd.getDisponible()) {
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-                    }
-                    break;
-                case 8:
-                    rd = r.getSemestre8();
-                    if (rd.getDisponible()) {
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-                    }
-                    break;
-                case 9:
-                    rd = r.getSemestre9();
-                    if (rd.getDisponible()) {
-                        rd.setDisponible(false);
-                        rd.setColor("cursando");
-                    } else {
-                        rd.setDisponible(true);
-                        rd.setColor("disponible");
-                    }
-                    break;
-                default:
-                    // En caso de que el semestre no esté entre 1 y 9
-                    break;
-            }
-        }
-
-    }*/
     public void restaurarHorarioReticula() {
 
         for (int i = 0; i < listaHorarioASeleccionadas.size(); i++) {//Recorro para encontrar todas las materias 
@@ -738,159 +614,69 @@ public class InscripcionesBean implements Serializable {
     }
 
     public void onTabChange() { //Solo se activa Sleccion con grupos cuando todas las materias a escoger estan en azul en el semestre del alumno.
-        int n = 0;
-        for (int i = 0; i < listaM.size(); i++) {//Para cambiar el estado y color despues de seleccionar el grupo al cual voy a iniciar.
-            Reticula r = listaM.get(i);
-            ReticulaDatos rd = new ReticulaDatos();
+        System.out.println("estudiante.getCreditosAprobados()" + estudiante.getCreditosAprobados());
+        System.out.println("estudiante.getCreditosCursados()" + estudiante.getCreditosCursados());
+        if (Objects.equals(estudiante.getCreditosAprobados(), estudiante.getCreditosCursados())) {
+            grupoBloqueado = false;//Si ambos creditos aprobados o cursados son iguales si puedo seleccionar grupo. 
+            addMessage(FacesMessage.SEVERITY_INFO, "CREDITOS ALCANZADOS", "HAZ ALCANZADO LOS CREDITOS PUEDES SELECCIONAR GRUPO");
+            int n = 0;
+            int semestre = estudiante.getSemestre();
+            for (Reticula r : listaM) {
+                try {
+                    // Obtener dinámicamente el semestre usando reflexión
+                    ReticulaDatos rd = (ReticulaDatos) r.getClass()
+                            .getMethod("getSemestre" + semestre)
+                            .invoke(r);
 
-            switch (estudiante.getSemestre()) {//contabilizamos cuantas materias existen seleccionadas porque solamente puedes seleccionar por grupo cuando todas las materias de un semestre esten en azul, 
-                case 1:
-                    rd = r.getSemestre1();
-                    if (rd.getDisponible()) {
+                    if (rd != null && rd.getDisponible()) {
                         n++;
                     }
-
-                    break;
-                case 2:
-                    rd = r.getSemestre2();
-                    if (rd.getDisponible()) {
-                        n++;
-                    }
-
-                    break;
-                case 3:
-                    rd = r.getSemestre3();
-                    if (rd.getDisponible()) {
-                        n++;
-                    }
-
-                    break;
-                case 4:
-                    rd = r.getSemestre4();
-                    if (rd.getDisponible()) {
-                        n++;
-                    }
-                    break;
-                case 5:
-                    rd = r.getSemestre5();
-                    if (rd.getDisponible()) {
-                        n++;
-                    }
-                    break;
-                case 6:
-                    rd = r.getSemestre6();
-                    if (rd.getDisponible()) {
-                        n++;
-                    }
-                    break;
-                case 7:
-                    rd = r.getSemestre7();
-                    if (rd.getDisponible()) {
-                        n++;
-                    }
-                    break;
-                case 8:
-                    rd = r.getSemestre8();
-                    if (rd.getDisponible()) {
-                        n++;
-                    }
-
-                    break;
-                case 9:
-                    rd = r.getSemestre9();
-                    if (rd.getDisponible()) {
-                        n++;
-                    }
-                    break;
-                default:
-                    // En caso de que el semestre no esté entre 1 y 9
-                    break;
+                } catch (Exception e) {
+                    System.out.println("Error al obtener semestre " + semestre + ": " + e.getMessage());
+                }
             }
 
-        }
+            // Determinar cuántas materias son necesarias para desbloquear el grupo
+            int materiasRequeridas;
+            switch (semestre) {
+                case 1:
+                case 2:
+                case 5:
+                    materiasRequeridas = 6;
+                    break;
+                case 3:
+                case 4:
+                case 6:
+                case 7:
+                case 8:
+                    materiasRequeridas = 7;
+                    break;
+                case 9:
+                    grupoBloqueado = true;
+                    addMessage(FacesMessage.SEVERITY_INFO, "RESIDENCIAS", "SELECCIONA DESDE RETICULA");
+                    return;
+                default:
+                    grupoBloqueado = true;
+                    addMessage(FacesMessage.SEVERITY_INFO, "GRUPOS NO DISPONIBLES", "SELECCIONA DESDE RETICULA");
+                    return;
+            }
 
-        switch (estudiante.getSemestre()) {//Verificando si es necesario desactivar la seleccion por grupo o no despues de contabilizar.
-            case 1:
-                if (n == 6) {
-                    grupoBloqueado = false;
-                } else {
-                    grupoBloqueado = true;
-                }
-                break;
-            case 2:
+            // Finalmente, asignar bloqueado o no
+            grupoBloqueado = n != materiasRequeridas;
 
-                if (n == 6) {
-                    grupoBloqueado = false;
-                } else {
-                    grupoBloqueado = true;
-                }
+            if (!grupoBloqueado) {
+                addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR GRUPO", "SELECCIONA UN GRUPO");
+            } else {
+                addMessage(FacesMessage.SEVERITY_WARN, "HORARIO POR GRUPO", "NO PUEDES SELECCIONAR NINGUN GRUPO");
 
-                break;
-            case 3:
-                if (n == 7) {
-                    grupoBloqueado = false;
-                } else {
-                    grupoBloqueado = true;
-                }
-                break;
-            case 4:
-                if (n == 7) {
-                    grupoBloqueado = false;
-                } else {
-                    grupoBloqueado = true;
-                }
+            }
 
-                break;
-            case 5:
-                if (n == 6) {
-                    grupoBloqueado = false;
-                } else {
-                    grupoBloqueado = true;
-                }
-
-                break;
-            case 6:
-                if (n == 7) {
-                    grupoBloqueado = false;
-                } else {
-                    grupoBloqueado = true;
-                }
-
-                break;
-            case 7:
-                if (n == 7) {
-                    grupoBloqueado = false;
-                } else {
-                    grupoBloqueado = true;
-                }
-                break;
-            case 8:
-                if (n == 7) {
-                    grupoBloqueado = false;
-                } else {
-                    grupoBloqueado = true;
-                }
-                break;
-            case 9:
-                grupoBloqueado = true;
-                addMessage(FacesMessage.SEVERITY_INFO, "RESIDENCIAS", "SELECCIONA DESDE RETICULA");
-                break;
-            default:
-                grupoBloqueado = true;
-                addMessage(FacesMessage.SEVERITY_INFO, "GRUPOS NO DISPONIBLES", "SELECCIONA DESDE RETICULA");
-                // En caso de que el semestre no esté entre 1 y 9
-                break;
-        }
-
-        if (!grupoBloqueado) {
-            addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR GRUPO", "SELECCIONA UN GRUPO");
-        }
-        if (estudiante.getCreditosAprobados()==estudiante.getCreditosCursados()) {
-            grupoBloqueado=false;//Si ambos creditos aprobados o cursados son iguales si puedo seleccionar grupo. 
-            
-        }else {
-            grupoBloqueado=true;
-         addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS NO ALCANZADOS", "NO HAZ ALCANZADO LOS CREDITOS SUFICIENTE");
+            return;
+        } else {
+            grupoBloqueado = true;
+            System.out.println("ENTROOOOOOOOOOOOOOOO ONTABACHANGE 2");
+            addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS NO ALCANZADOS", "NO HAZ ALCANZADO LOS CREDITOS SUFICIENTE");
+            return;
         }
 
         // grupoBloqueado = true;//Para bloquear los grupos si ya he seleccionado
@@ -917,17 +703,102 @@ public class InscripcionesBean implements Serializable {
         System.out.println("Sábado: " + grupoSeleccionado.getSabado());
         System.out.println("Global: " + grupoSeleccionado.getGlobal());
         System.out.println("================SELECCIONADO=================");
-          creditosSeleccionados += Integer.parseInt(materiaDeTabla.getCreditos());
+        creditosSeleccionados += Integer.parseInt(materiaDeTabla.getCreditos());
         System.out.println("creditosSeleccionados->" + creditosSeleccionados + "creditosAutorizados->" + vr.getCreditosAutorizados());
-       
+
         if (creditosSeleccionados <= vr.getCreditosAutorizados()) {
-            materiaDeTabla.setColor("cursando");
-            materiaDeTabla.setDisponible(false);
-            addMessage(FacesMessage.SEVERITY_INFO, "HORARIO SELECCIONADO GRUPO " + grupoSeleccionado.getGrupo(), grupoSeleccionado.getAsignatura());
-            listaHorarioASeleccionadas.add(grupoSeleccionado);
-           
+            boolean empalme = false;
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+
+            for (HorarioAsignatura hc : listaHorarioASeleccionadas) {
+                // Recorremos cada día
+                Map<String, String> dias = new HashMap<>();
+                dias.put("lunes", hc.getLunes());
+                dias.put("martes", hc.getMartes());
+                dias.put("miercoles", hc.getMiercoles());
+                dias.put("jueves", hc.getJueves());
+                dias.put("viernes", hc.getViernes());
+                dias.put("sabado", hc.getSabado());
+
+                for (Map.Entry<String, String> entry : dias.entrySet()) {
+                    String dia = entry.getKey();
+                    String horariosExistentes = entry.getValue();
+                    String horariosNuevo = null;
+
+                    switch (dia) {
+                        case "lunes":
+                            horariosNuevo = grupoSeleccionado.getLunes();
+                            break;
+                        case "martes":
+                            horariosNuevo = grupoSeleccionado.getMartes();
+                            break;
+                        case "miercoles":
+                            horariosNuevo = grupoSeleccionado.getMiercoles();
+                            break;
+                        case "jueves":
+                            horariosNuevo = grupoSeleccionado.getJueves();
+                            break;
+                        case "viernes":
+                            horariosNuevo = grupoSeleccionado.getViernes();
+                            break;
+                        case "sabado":
+                            horariosNuevo = grupoSeleccionado.getSabado();
+                            break;
+                    }
+
+                    if (horariosExistentes != null && horariosNuevo != null) {
+                        // Separar rangos por el separador usado
+                        String[] rangosExistentes = horariosExistentes.split("   ");
+                        String[] rangosNuevo = horariosNuevo.split("   ");
+
+                        for (String rangoE : rangosExistentes) {
+                            for (String rangoN : rangosNuevo) {
+                                // Parsear horas
+                                String[] hE = rangoE.split(" - ");
+                                String[] hN = rangoN.split(" - ");
+
+                                try {
+                                    Date inicioE = formatoHora.parse(hE[0].trim());
+                                    Date finE = formatoHora.parse(hE[1].trim());
+                                    Date inicioN = formatoHora.parse(hN[0].trim());
+                                    Date finN = formatoHora.parse(hN[1].trim());
+
+                                    // Verificar si se empalman
+                                    if (!(finN.before(inicioE) || inicioN.after(finE))) {
+                                        empalme = true;
+                                        addMessage(FacesMessage.SEVERITY_WARN, "EMPALME DETECTADO",
+                                                "La materia " + grupoSeleccionado.getAsignatura()
+                                                + " tiene horario que se empalma en " + dia);
+                                        break;
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (empalme) {
+                                break;
+                            }
+                        }
+                    }
+                    if (empalme) {
+                        break;
+                    }
+                }
+                if (empalme) {
+                    break;
+                }
+            }
+
+            if (!empalme) {
+                materiaDeTabla.setColor("cursando");
+                materiaDeTabla.setDisponible(false);
+                addMessage(FacesMessage.SEVERITY_INFO, "HORARIO SELECCIONADO GRUPO " + grupoSeleccionado.getGrupo(),
+                        grupoSeleccionado.getAsignatura());
+                listaHorarioASeleccionadas.add(grupoSeleccionado);
+            }
         } else {
-            addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS AUTORIZADOS ALCANZADOS", "NO PUEDES SELECCIONAR MAS MATERIAS");
+            addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS AUTORIZADOS ALCANZADOS",
+                    "NO PUEDES SELECCIONAR MAS MATERIAS");
         }
 
     }
