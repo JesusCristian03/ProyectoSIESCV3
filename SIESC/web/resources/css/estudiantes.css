@@ -3,6 +3,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+      background-color: #003366;
 }
 
 /* Estructura principal */
@@ -35,7 +36,7 @@ body {
     font-size: 1.5rem;
     color: white;
     cursor: pointer;
-    margin-right: 15px;
+    margin-right: 5px;
 }
 
 /* ===== SIDEBAR ===== */
@@ -60,15 +61,15 @@ body {
     overflow: hidden;
 }
 
-/* 🔧 CORRECCIÓN -- REDUCE EL ESPACIO ENTRE HEADER Y CONTENIDO */
+/* Contenedor principal más cerca del header */
 .layout-main {
     flex: 1;
-    padding: 1rem 2rem !important; /* ↓ antes era 2rem; ahora 1rem arriba */
+    padding: 1rem 2rem !important; /* Más pegado al header */
     overflow-y: auto;
     background-color: #f4f6f9;
 }
 
-/* HACE QUE EL PANEL (CONTENEDOR) NO SE VEA TRANSPARENTE */
+/* ===== PANEL (CONTENEDOR) ===== */
 .ui-panel,
 .ui-panel-content,
 .ui-widget-content {
@@ -76,18 +77,13 @@ body {
     border-radius: 12px !important;
 }
 
-/* HACE QUE EL PANEL TENGA ANCHO COMPLETO */
+/* Panel ancho completo */
 .ui-panel {
     width: 100% !important;
     box-sizing: border-box !important;
 }
 
-/* HACE QUE LA TABLA NO SEA TRANSPARENTE */
-.ui-datatable table {
-    background: #fff !important;
-}
-
-/* AJUSTE DEL TÍTULO DEL PANEL */
+/* Título del panel */
 .ui-panel-titlebar {
     background: #3f51b5 !important;
     color: white !important;
@@ -96,6 +92,7 @@ body {
     border-radius: 12px 12px 0 0 !important;
 }
 
+/* PrimeIcons */
 .pi::before {
     font-family: 'primeicons' !important;
 }
@@ -111,4 +108,113 @@ body {
     flex-shrink: 0;
 }
 
+/* ============================================================
+   REPARAR TABLA PRIMEFACES SIN AFECTAR COLORES DEL BEAN
+   ============================================================ */
 
+/* Fondo independiente */
+.contenedor-principal .ui-datatable,
+.contenedor-principal .ui-datatable .ui-datatable-tablewrapper,
+.contenedor-principal .ui-datatable table {
+    background: white !important;
+    box-shadow: none !important;
+    border-radius: 6px;
+}
+
+/* Header estilo PrimeFaces */
+.ui-datatable thead th {
+    background: #f1f1f1 !important;
+    color: #333 !important;
+    border-color: #ddd !important;
+    font-weight: 600 !important;
+}
+
+/* Filas conservan color del BEAN */
+.ui-datatable tbody td {
+    background: transparent !important;
+}
+
+/* Hover limpio */
+.ui-datatable tbody tr:hover td {
+    background: rgba(0,0,0,0.04) !important;
+}
+
+/* Bordes */
+.ui-datatable table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+
+
+
+
+
+
+
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.layout-main {
+    padding: 0px;
+    text-align: center;
+    animation: fadein 0.8s ease;
+}
+
+/* Bienvenida inicialmente visible */
+.welcome-box {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 5px;
+    background: #ffffff;
+    border-radius: 5px;
+ 
+    transition: opacity .5s ease, transform .5s ease;
+}
+
+.welcome-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #3f51b5; /* azul bonito */
+    margin-bottom: 10px;
+}
+
+.welcome-subtitle {
+    font-size: 16px;
+    color: #5a5a5a;
+    margin-bottom: 20px;
+}
+
+
+.welcome-image {
+    height: 350px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
+}
+
+/* Textos debajo de la imagen */
+.welcome-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #3f51b5;
+    margin: 5px 0;
+}
+
+.welcome-label-small {
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+}
+
+ /* Animación */
+@keyframes fadein {
+    from { opacity:0; transform: translateY(15px); }
+    to { opacity:1; transform: translateY(0); }
+}
+
+/* ===== DESAPARECER CUANDO SE CARGUE UN CONTENIDO ===== */
+.hide-welcome {
+    opacity: 0;
+    transform: scale(.95);
+    pointer-events: none;
+}

@@ -19,7 +19,7 @@
     <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 <h:outputStylesheet library="css" name="estudiantes.css"/>
 
- 
+
       
     <script>
         function toggleSidebar() {
@@ -57,31 +57,124 @@
         <div class="layout-sidebar">
 
             <h:form>
-                <!-- MENÚ ORIGINAL, COMPLETAMENTE RESPETADO -->
-                <p:menu toggleable="true" style="font-size:15px;">
+<p:panelMenu style="width:100%;" styleClass="custom-menu">   
 
-                    <p:submenu label="Información Escolar" expanded="false">
-                        <p:menuitem value="Asistencia" action="index" icon="pi pi-refresh"/>
-                        <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
-                        <p:menuitem value="Horarios" action="horarios" icon="pi pi-refresh"/>
-                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
-                    </p:submenu>
+    <!-- =================== INFORMACIÓN ESCOLAR =================== -->
+    <p:submenu label="Información Escolar" expanded="false">
+        <p:menuitem value="Asistencia" action="index" 
+                    icon="pi pi-calendar"/>
+        <p:menuitem value="Justificación" 
+                    actionListener="#{horarioBean.buscarFaltas}" 
+                    action="justificaDocente" 
+                    icon="pi pi-file-edit"/>
+        <p:menuitem value="Horarios" action="horarios" 
+                    icon="pi pi-clock"/>
+        
+    </p:submenu>
 
-                    <p:submenu label="Iscripciones" expanded="false">
-                        <p:menuitem value="Ene-Jun/Ago-Dic" update="growlMensajes" actionListener="#{inscripcionesBean.verificarAcceso}" icon="pi pi-refresh" ajax="true"/>
-                        <p:menuitem value="Grupos Disponibles" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
-                        <p:menuitem value="Horario Inscripcion" action="horarios" icon="pi pi-refresh"/>
-                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
-                    </p:submenu>
+    <!-- =================== INSCRIPCIONES =================== -->
+    <p:submenu label="Iscripciones" expanded="false">
+        <p:menuitem value="Ene-Jun/Ago-Dic" 
+                    update="growlMensajes" 
+                    actionListener="#{inscripcionesBean.verificarAcceso}" 
+                    icon="pi pi-book" 
+                    ajax="true"/>
 
-                    <p:submenu label="Eval. Docente" expanded="false">
-                        <p:menuitem value="Asistencia" action="asistenciaDocente" icon="pi pi-refresh"/>
-                        <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-times"/>
-                        <p:menuitem value="Horarios" action="horarios" icon="pi pi-refresh"/>
-                        <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-list"/>
-                    </p:submenu>
+        <p:menuitem value="Grupos Disponibles" 
+                    actionListener="#{horarioBean.buscarFaltas}" 
+                    action="justificaDocente" 
+                    icon="pi pi-users"/>
 
-                </p:menu>
+        <p:menuitem value="Horario Inscripcion" 
+                    action="horarios" 
+                    icon="pi pi-calendar-plus"/>
+
+     
+    </p:submenu>
+
+    <!-- =================== EVALUACIÓN DOCENTE =================== -->
+    <p:submenu label="Eval. Docente" expanded="false">
+        <p:menuitem value="Asistencia" 
+                    action="asistenciaDocente" 
+                    icon="pi pi-calendar"/>
+
+        <p:menuitem value="Justificación" 
+                    actionListener="#{horarioBean.buscarFaltas}" 
+                    action="justificaDocente" 
+                    icon="pi pi-file-edit"/>
+
+        <p:menuitem value="Horarios" 
+                    action="horarios" 
+                    icon="pi pi-clock"/>
+
+
+    </p:submenu>
+
+</p:panelMenu>
+<p:panelMenu style="width:100%;" styleClass="custom-menu">   
+
+    <!-- =================== INFORMACIÓN ESCOLAR =================== -->
+    <p:submenu label="Información Escolar" expanded="false">
+        <p:menuitem value="Asistencia" action="index" 
+                    icon="pi pi-calendar"/>
+        <p:menuitem value="Justificación" 
+                    actionListener="#{horarioBean.buscarFaltas}" 
+                    action="justificaDocente" 
+                    icon="pi pi-file-edit"/>
+        <p:menuitem value="Horarios" action="horarios" 
+                    icon="pi pi-clock"/>
+        <p:menuitem value="Cerrar sesión" 
+                    action="#{controlSesion.cerrarSesion}" 
+                    ajax="false" 
+                    icon="pi pi-sign-out"/>
+    </p:submenu>
+
+    <!-- =================== INSCRIPCIONES =================== -->
+    <p:submenu label="Iscripciones" expanded="false">
+        <p:menuitem value="Ene-Jun/Ago-Dic" 
+                    update="growlMensajes" 
+                    actionListener="#{inscripcionesBean.verificarAcceso}" 
+                    icon="pi pi-book" 
+                    ajax="true"/>
+
+        <p:menuitem value="Grupos Disponibles" 
+                    actionListener="#{horarioBean.buscarFaltas}" 
+                    action="justificaDocente" 
+                    icon="pi pi-users"/>
+
+        <p:menuitem value="Horario Inscripcion" 
+                    action="horarios" 
+                    icon="pi pi-calendar-plus"/>
+
+        <p:menuitem value="Cerrar sesión" 
+                    action="#{controlSesion.cerrarSesion}" 
+                    ajax="false" 
+                    icon="pi pi-sign-out"/>
+    </p:submenu>
+
+    <!-- =================== EVALUACIÓN DOCENTE =================== -->
+    <p:submenu label="Eval. Docente" expanded="false">
+        <p:menuitem value="Asistencia" 
+                    action="asistenciaDocente" 
+                    icon="pi pi-calendar"/>
+
+        <p:menuitem value="Justificación" 
+                    actionListener="#{horarioBean.buscarFaltas}" 
+                    action="justificaDocente" 
+                    icon="pi pi-file-edit"/>
+
+        <p:menuitem value="Horarios" 
+                    action="horarios" 
+                    icon="pi pi-clock"/>
+
+        <p:menuitem value="Cerrar sesión" 
+                    action="#{controlSesion.cerrarSesion}" 
+                    ajax="false" 
+                    icon="pi pi-sign-out"/>
+    </p:submenu>
+
+</p:panelMenu>
+
 
                 <style>.ui-widget { font-size: 10px; }</style>
 
@@ -91,9 +184,29 @@
         </div>
 
         <!-- ================= CONTENIDO ================= -->
-        <div class="layout-main">
-            <ui:insert name="content"/>
-        </div>
+<div class="layout-main">
+
+    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
+    <ui:insert name="content" />
+
+    <!-- CAJA DE BIENVENIDA -->
+    <h:panelGroup id="welcomeBox" 
+                  layout="block"
+                  styleClass="#{empty requestScope['javax.faces.view.ViewScopeKey'] ? 'welcome-box' : 'hide-welcome'}">
+
+        <h3 class="welcome-title">Bienvenido al Departamento de Académico</h3>
+        <p class="welcome-subtitle">Selecciona una opción del menú lateral para comenzar.</p>
+
+        <h:graphicImage library="assets" name="aguiluchos.jpg" 
+                        styleClass="welcome-image"/>
+
+        <p class="welcome-label">AGUILUCHOS</p>
+        <p class="welcome-label-small">ITC</p>
+
+    </h:panelGroup>
+
+</div>
+
 
     </div>
 
