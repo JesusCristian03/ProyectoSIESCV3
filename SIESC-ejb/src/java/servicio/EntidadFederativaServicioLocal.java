@@ -4,20 +4,17 @@
  */
 package servicio;
 
+import java.util.List;
 import javax.ejb.Local;
-import modelo.Estudiante;
+import modelo.EntidadFederativa;
 
 /**
  *
- * @author gacev
+ * @author cris_
  */
 @Local
-public interface EstudianteServicioLocal {
-
-    Estudiante buscarPorID(String no_de_control);
-
-    Estudiante loginEstudiante(Estudiante estudiante);
-    
-    void insertarEstudiante(Estudiante estudiante);
+public interface EntidadFederativaServicioLocal {
+    List<EntidadFederativa> traerListaEF();
+    EntidadFederativa buscarEntidadFederativa(Integer x);
     
 }
