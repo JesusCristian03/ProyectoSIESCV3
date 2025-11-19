@@ -8,6 +8,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import modelo.AlumnosGenerales;
 import modelo.Carrera;
 import modelo.Estudiante;
 
@@ -21,6 +22,15 @@ public class altaEstudiantesBean implements Serializable {
     Estudiante estudiante=new Estudiante();
     
     List<Carrera> listaCarreras;
+    
+    AlumnosGenerales alumnoGeneral;
+    
+    
+    private Integer anioIngreso;
+    
+    private String tipoIngreso;
+
+    
     /**
      * Creates a new instance of altaEstudiantesBean
      */
@@ -41,6 +51,30 @@ public class altaEstudiantesBean implements Serializable {
 
     public void setListaCarreras(List<Carrera> listaCarreras) {
         this.listaCarreras = listaCarreras;
+    }
+
+    public AlumnosGenerales getAlumnoGeneral() {
+        return alumnoGeneral;
+    }
+
+    public void setAlumnoGeneral(AlumnosGenerales alumnoGeneral) {
+        this.alumnoGeneral = alumnoGeneral;
+    }
+
+    public Integer getAnioIngreso() {
+        return anioIngreso;
+    }
+
+    public void setAnioIngreso(Integer anioIngreso) {
+        this.anioIngreso = anioIngreso;
+    }
+
+    public String getTipoIngreso() {
+        return tipoIngreso;
+    }
+
+    public void setTipoIngreso(String tipoIngreso) {
+        this.tipoIngreso = tipoIngreso;
     }
     
     

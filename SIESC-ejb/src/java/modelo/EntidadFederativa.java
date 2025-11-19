@@ -5,14 +5,17 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,6 +30,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "EntidadFederativa.findByNombreEntidad", query = "SELECT e FROM EntidadFederativa e WHERE e.nombreEntidad = :nombreEntidad"),
     @NamedQuery(name = "EntidadFederativa.findByClaveEntidad", query = "SELECT e FROM EntidadFederativa e WHERE e.claveEntidad = :claveEntidad")})
 public class EntidadFederativa implements Serializable {
+
+    @OneToMany(mappedBy = "domicilioEntidadFedMadre")
+    private List<AlumnosGenerales> alumnosGeneralesList;
+    @OneToMany(mappedBy = "domicilioEntidadFedPadre")
+    private List<AlumnosGenerales> alumnosGeneralesList1;
+    @OneToMany(mappedBy = "entidadFederativa")
+    private List<AlumnosGenerales> alumnosGeneralesList2;
+    @OneToMany(mappedBy = "entidadFederativaPrepa")
+    private List<AlumnosGenerales> alumnosGeneralesList3;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -92,6 +104,42 @@ public class EntidadFederativa implements Serializable {
     @Override
     public String toString() {
         return "modelo.EntidadFederativa[ identidad=" + identidad + " ]";
+    }
+
+    @XmlTransient
+    public List<AlumnosGenerales> getAlumnosGeneralesList() {
+        return alumnosGeneralesList;
+    }
+
+    public void setAlumnosGeneralesList(List<AlumnosGenerales> alumnosGeneralesList) {
+        this.alumnosGeneralesList = alumnosGeneralesList;
+    }
+
+    @XmlTransient
+    public List<AlumnosGenerales> getAlumnosGeneralesList1() {
+        return alumnosGeneralesList1;
+    }
+
+    public void setAlumnosGeneralesList1(List<AlumnosGenerales> alumnosGeneralesList1) {
+        this.alumnosGeneralesList1 = alumnosGeneralesList1;
+    }
+
+    @XmlTransient
+    public List<AlumnosGenerales> getAlumnosGeneralesList2() {
+        return alumnosGeneralesList2;
+    }
+
+    public void setAlumnosGeneralesList2(List<AlumnosGenerales> alumnosGeneralesList2) {
+        this.alumnosGeneralesList2 = alumnosGeneralesList2;
+    }
+
+    @XmlTransient
+    public List<AlumnosGenerales> getAlumnosGeneralesList3() {
+        return alumnosGeneralesList3;
+    }
+
+    public void setAlumnosGeneralesList3(List<AlumnosGenerales> alumnosGeneralesList3) {
+        this.alumnosGeneralesList3 = alumnosGeneralesList3;
     }
     
 }

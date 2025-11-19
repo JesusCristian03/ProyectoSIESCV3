@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -63,6 +64,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Estudiante.findByFechaActualizacion", query = "SELECT e FROM Estudiante e WHERE e.fechaActualizacion = :fechaActualizacion"),
     @NamedQuery(name = "Estudiante.findByPromedioFinalAlcanzado", query = "SELECT e FROM Estudiante e WHERE e.promedioFinalAlcanzado = :promedioFinalAlcanzado")})
 public class Estudiante implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "noDeControl")
+    private List<AlumnosGenerales> alumnosGeneralesList;
 
     @OneToMany(mappedBy = "noDeControl")
     private List<SeleccionMateriasLog> seleccionMateriasLogList;
@@ -486,6 +490,15 @@ public class Estudiante implements Serializable {
 
     public void setHistoriaAlumnoList(List<HistoriaAlumno> historiaAlumnoList) {
         this.historiaAlumnoList = historiaAlumnoList;
+    }
+
+    @XmlTransient
+    public List<AlumnosGenerales> getAlumnosGeneralesList() {
+        return alumnosGeneralesList;
+    }
+
+    public void setAlumnosGeneralesList(List<AlumnosGenerales> alumnosGeneralesList) {
+        this.alumnosGeneralesList = alumnosGeneralesList;
     }
     
 }
