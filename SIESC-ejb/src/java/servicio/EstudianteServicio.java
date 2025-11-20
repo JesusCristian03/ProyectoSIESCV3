@@ -32,5 +32,10 @@ public class EstudianteServicio implements EstudianteServicioLocal {
         return estudianteFacade.loginEstudiante(estudiante);
     }
     
+    @Override
+    public void insertarEstudiante(Estudiante estudiante){
+    estudianteFacade.create(estudiante);
+    
+    }
     
 }

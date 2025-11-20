@@ -95,12 +95,50 @@ public class InscripcionesBean implements Serializable {
     private Boolean modoGrupo = false;
     private String grupo = "";
     private int creditosSeleccionados = 0;
+    private String mensaje;
+    private String colorMensaje; // clase CSS
 
     private int Mrojas = 0, Mamarillas = 0, Mnaranjas = 0, Mazules = 0;
     List<int[]> listaRojas = new ArrayList<>();
     List<int[]> listaNaranjas = new ArrayList<>();
     List<int[]> listaAmarillas = new ArrayList<>();
     List<int[]> listaAzules = new ArrayList<>();
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getColorMensaje() {
+        return colorMensaje;
+    }
+
+    public void setColorMensaje(String colorMensaje) {
+        this.colorMensaje = colorMensaje;
+    }
+
+    public void mostrarMensajeExito() {
+        mensaje = "Estudiante inscrito correctamente";
+        colorMensaje = "mensaje-exito";
+    }
+
+    public void mostrarMensajeError() {
+        mensaje = "Ocurrió un error al guardar";
+        colorMensaje = "mensaje-error";
+    }
+
+    public void mostrarMensajeInfo() {
+        mensaje = "Seleccione una opción";
+        colorMensaje = "mensaje-info";
+    }
+
+    public void mostrarPanel(String mensaje, String color) {
+        this.mensaje = mensaje;
+        this.colorMensaje = color;
+    }
 
     public AvisosReinscripcion getVr() {
         return vr;
@@ -345,7 +383,30 @@ public class InscripcionesBean implements Serializable {
         List<HistoriaAlumno> listaHA = historiaAlumnoServicio.buscarAsignaturas(estudiante.getNoDeControl());
         promedio = estudiante.getPromedioAritmeticoAcumulado();
         listaGC = gruposServicio.buscarGruposCompletos(estudiante.getReticula(), estudiante.getSemestre(), periodoActual);
-        addMessage(FacesMessage.SEVERITY_INFO, "Reinscripción", "Tu proceso de reinscripción ha empezado");
+
+        //addMessage(FacesMessage.SEVERITY_INFO, "Reinscripción", "Tu proceso de reinscripción ha empezado");
+        mostrarPanel("Tu proceso de reinscripción ha empezado", "mensaje-info");
+
+        FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getFlash()
+                .put("mensaje", mensaje);
+
+        FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getFlash()
+                .put("colorMensaje", colorMensaje);
+    }
+
+    public void recuperarPanelFlash() {
+        Map<String, Object> flash = FacesContext.getCurrentInstance()
+                .getExternalContext().getFlash();
+
+        mensaje = (String) flash.get("mensaje");
+        colorMensaje = (String) flash.get("colorMensaje");
+        
+        System.out.println("Mensaje "+mensaje);
+        System.out.println("colorMensaje "+colorMensaje);
     }
 
     public void verificarAcceso() {
@@ -377,22 +438,12 @@ public class InscripcionesBean implements Serializable {
         // --- Validaciones ---
         if (ahora.isBefore(fechaSeleccion)) {
             System.out.println("[INFO] Aún no es tu hora, acceso bloqueado.");
-
-            /*FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Aún no puedes inscribirte",
-                    "Tu horario empieza a las: " + fechaSeleccion);
-            FacesContext.getCurrentInstance().addMessage(null, msg);*/
             addMessage(FacesMessage.SEVERITY_WARN, "Aún no puedes inscribirte", "Tu horario empieza a las: " + fechaSeleccion);
             return;
         }
 
         if (ahora.isAfter(finVentana)) {
             System.out.println("[INFO] Se acabaron tus 30 minutos, acceso bloqueado.");
-
-            /* FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "Tiempo expirado",
-                    "Tu ventana de inscripción terminó");
-            FacesContext.getCurrentInstance().addMessage(null, msg);*/
             addMessage(FacesMessage.SEVERITY_ERROR, "Tiempo expirado", "Tu ventana de inscripción terminó");
             return;
         }
@@ -402,10 +453,17 @@ public class InscripcionesBean implements Serializable {
         System.out.println("-----------------------------------------");
 
         try {
+            iniciarInscripcion();
+
+            FacesContext.getCurrentInstance()
+                    .getExternalContext()
+                    .getFlash()
+                    .setKeepMessages(true);
+
             FacesContext.getCurrentInstance().getExternalContext()
                     .redirect("inscripciones.xhtml");
-            iniciarInscripcion();
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

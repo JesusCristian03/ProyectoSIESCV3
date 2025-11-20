@@ -5,19 +5,13 @@
 package servicio;
 
 import javax.ejb.Local;
-import modelo.Estudiante;
+import modelo.AlumnosGenerales;
 
 /**
  *
- * @author gacev
+ * @author cris_
  */
 @Local
-public interface EstudianteServicioLocal {
-
-    Estudiante buscarPorID(String no_de_control);
-
-    Estudiante loginEstudiante(Estudiante estudiante);
-    
-    void insertarEstudiante(Estudiante estudiante);
-    
+public interface AlumnosGeneralesServicioLocal {
+    void insertarAlumnoGeneral(AlumnosGenerales alumnosGenerales);
 }

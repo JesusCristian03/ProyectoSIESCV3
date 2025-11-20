@@ -43,8 +43,8 @@
                         <p:outputLabel value="Nombre" />
                         <p:inputText value="#{altaEstudiantesBean.estudiante.nombreAlumno}" styleClass="ui-inputfield"/>
 
-                         <p:outputLabel value="Lugar de Nacimiento" />
-                        <p:datePicker value="#{altaEstudiantesBean.estudiante.lugarNacimiento}" showIcon="true" styleClass="ui-inputfield"/>
+                        <p:outputLabel value="Lugar de Nacimiento" />
+                        <p:datePicker value="#{altaEstudiantesBean.lugarNacimiento}" showIcon="true" styleClass="ui-inputfield"/>
 
 
                         <p:outputLabel value="Fecha de Nacimiento" />
@@ -76,47 +76,20 @@
 
                     <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
                         <p:outputLabel value="Calle y Número" />
-                        <p:inputText value="#{altaEstudiantesBean.estudiante.domicilioEscuela}" styleClass="ui-inputfield"/>
+                        <p:inputText value="#{altaEstudiantesBean.domicilioCalle}" styleClass="ui-inputfield"/>
                         <p:outputLabel value="Colonia" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColonia}" styleClass="ui-inputfield"/>
+                        <p:inputText value="#{altaEstudiantesBean.domicilioColonia}" styleClass="ui-inputfield"/>
                         <p:outputLabel value="Código Postal" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.codigoPostal}" styleClass="ui-inputfield"/>
                         <p:outputLabel value="Ciudad" />
                         <p:inputText value="#{altaEstudiantesBean.estudiante.ciudadProcedencia}" styleClass="ui-inputfield"/>
                         <p:outputLabel value="Entidad Federativa" />
-                        <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.entidadProcedencia}" styleClass="ui-inputfield">
-                            <f:selectItem itemLabel="Aguascalientes" itemValue="Aguascalientes"/>
-                            <f:selectItem itemLabel="Baja California" itemValue="Baja California"/>
-                            <f:selectItem itemLabel="Baja California Sur" itemValue="Baja California Sur"/>
-                            <f:selectItem itemLabel="Campeche" itemValue="Campeche"/>
-                            <f:selectItem itemLabel="Coahuila" itemValue="Coahuila"/>
-                            <f:selectItem itemLabel="Colima" itemValue="Colima"/>
-                            <f:selectItem itemLabel="Chiapas" itemValue="Chiapas"/>
-                            <f:selectItem itemLabel="Chihuahua" itemValue="Chihuahua"/>
-                            <f:selectItem itemLabel="Ciudad de México" itemValue="Ciudad de México"/>
-                            <f:selectItem itemLabel="Durango" itemValue="Durango"/>
-                            <f:selectItem itemLabel="Guanajuato" itemValue="Guanajuato"/>
-                            <f:selectItem itemLabel="Guerrero" itemValue="Guerrero"/>
-                            <f:selectItem itemLabel="Hidalgo" itemValue="Hidalgo"/>
-                            <f:selectItem itemLabel="Jalisco" itemValue="Jalisco"/>
-                            <f:selectItem itemLabel="México" itemValue="México"/>
-                            <f:selectItem itemLabel="Michoacán" itemValue="Michoacán"/>
-                            <f:selectItem itemLabel="Morelos" itemValue="Morelos"/>
-                            <f:selectItem itemLabel="Nayarit" itemValue="Nayarit"/>
-                            <f:selectItem itemLabel="Nuevo León" itemValue="Nuevo León"/>
-                            <f:selectItem itemLabel="Oaxaca" itemValue="Oaxaca"/>
-                            <f:selectItem itemLabel="Puebla" itemValue="Puebla"/>
-                            <f:selectItem itemLabel="Querétaro" itemValue="Querétaro"/>
-                            <f:selectItem itemLabel="Quintana Roo" itemValue="Quintana Roo"/>
-                            <f:selectItem itemLabel="San Luis Potosí" itemValue="San Luis Potosí"/>
-                            <f:selectItem itemLabel="Sinaloa" itemValue="Sinaloa"/>
-                            <f:selectItem itemLabel="Sonora" itemValue="Sonora"/>
-                            <f:selectItem itemLabel="Tabasco" itemValue="Tabasco"/>
-                            <f:selectItem itemLabel="Tamaulipas" itemValue="Tamaulipas"/>
-                            <f:selectItem itemLabel="Tlaxcala" itemValue="Tlaxcala"/>
-                            <f:selectItem itemLabel="Veracruz" itemValue="Veracruz"/>
-                            <f:selectItem itemLabel="Yucatán" itemValue="Yucatán"/>
-                            <f:selectItem itemLabel="Zacatecas" itemValue="Zacatecas"/>
+                        <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioEstudiante}" styleClass="ui-inputfield">
+                            <f:selectItems
+                                value="#{altaEstudiantesBean.listaEntidadFederativa}"
+                                var="ent"
+                                itemValue="#{ent.identidad.intValue}"
+                                itemLabel="#{ent.nombreEntidad}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Teléfono" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.telefono}" styleClass="ui-inputfield"/>
@@ -129,9 +102,12 @@
 
                     <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
                         <p:outputLabel value="Carrera y Retícula" />
-                        <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.carrera}" styleClass="ui-inputfield">
-                            <f:selectItem itemLabel="Seleccione carrera" itemValue=""/>
-                            <f:selectItems value="#{altaEstudiantesBean.listaCarreras}"/>
+                        <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.reticula}" styleClass="ui-inputfield">
+                            <f:selectItem itemLabel="Seleccione carrera" itemValue="" />
+                            <f:selectItems value="#{altaEstudiantesBean.listaCarreras}"
+                                           var="car"
+                                           itemLabel="#{car.nombreCarrera}"
+                                           itemValue="#{car}"/>
                         </p:selectOneMenu>
 
                         <p:outputLabel value="Especialidad" />
@@ -143,28 +119,28 @@
                         <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.periodoIngresoIt}" styleClass="ui-inputfield">
                             <f:selectItem itemLabel="Ene-Jun" itemValue="Ene-Jun"/>
                             <f:selectItem itemLabel="Ago-Dic" itemValue="Ago-Dic"/>
-                            
-                             <p:outputLabel value="Año" />
-                        <p:inputNumber value="#{altaEstudiantesBean.anioIngreso}" minValue="2000" maxValue="2100" styleClass="ui-inputfield"/>
+
+                            <p:outputLabel value="Año" />
+                            <p:inputNumber value="#{altaEstudiantesBean.anioIngreso}" minValue="2000" maxValue="2100" styleClass="ui-inputfield"/>
 
                         </p:selectOneMenu>
 
-                       
+
                         <p:outputLabel value="Tipo de Ingreso al Plantel" />
                         <p:selectOneMenu value="#{altaEstudiantesBean.tipoIngreso}" styleClass="ui-inputfield">
                             <f:selectItem itemLabel="Examen Selección" itemValue="Examen"/>
                             <f:selectItem itemLabel="Reingreso" itemValue="Reingreso"/>
                         </p:selectOneMenu>
 
-                        
-                                                
+
+
                         <p:outputLabel value="Plan de estudio" />
-                        <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.tipoIngreso}" styleClass="ui-inputfield">
+                        <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.planDeEstudios}" styleClass="ui-inputfield">
                             <f:selectItem itemLabel="3- Competencias" itemValue="Examen"/>
                             <f:selectItem itemLabel="4- Competencias" itemValue="Reingreso"/>
                         </p:selectOneMenu>
 
-                        
+
                         <p:outputLabel value="Nivel Escolar" />
                         <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.nivelEscolar}" styleClass="ui-inputfield">
                             <f:selectItem itemLabel="Licenciatura" itemValue="Licenciatura"/>
@@ -185,87 +161,39 @@
                     <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
                         <p:outputLabel value="Nombre del Padre" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombrePadre}" styleClass="ui-inputfield"/>
-                         <p:outputLabel value="Domicilio(calle y numero)" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioPadre}" styleClass="ui-inputfield"/>
-                         <p:outputLabel value="colonia" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.coloniaPadre}" styleClass="ui-inputfield"/>
-                        <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.entidadProcedenciaPadre}" styleClass="ui-inputfield">
-                            <f:selectItem itemLabel="Aguascalientes" itemValue="Aguascalientes"/>
-                            <f:selectItem itemLabel="Baja California" itemValue="Baja California"/>
-                            <f:selectItem itemLabel="Baja California Sur" itemValue="Baja California Sur"/>
-                            <f:selectItem itemLabel="Campeche" itemValue="Campeche"/>
-                            <f:selectItem itemLabel="Coahuila" itemValue="Coahuila"/>
-                            <f:selectItem itemLabel="Colima" itemValue="Colima"/>
-                            <f:selectItem itemLabel="Chiapas" itemValue="Chiapas"/>
-                            <f:selectItem itemLabel="Chihuahua" itemValue="Chihuahua"/>
-                            <f:selectItem itemLabel="Ciudad de México" itemValue="Ciudad de México"/>
-                            <f:selectItem itemLabel="Durango" itemValue="Durango"/>
-                            <f:selectItem itemLabel="Guanajuato" itemValue="Guanajuato"/>
-                            <f:selectItem itemLabel="Guerrero" itemValue="Guerrero"/>
-                            <f:selectItem itemLabel="Hidalgo" itemValue="Hidalgo"/>
-                            <f:selectItem itemLabel="Jalisco" itemValue="Jalisco"/>
-                            <f:selectItem itemLabel="México" itemValue="México"/>
-                            <f:selectItem itemLabel="Michoacán" itemValue="Michoacán"/>
-                            <f:selectItem itemLabel="Morelos" itemValue="Morelos"/>
-                            <f:selectItem itemLabel="Nayarit" itemValue="Nayarit"/>
-                            <f:selectItem itemLabel="Nuevo León" itemValue="Nuevo León"/>
-                            <f:selectItem itemLabel="Oaxaca" itemValue="Oaxaca"/>
-                            <f:selectItem itemLabel="Puebla" itemValue="Puebla"/>
-                            <f:selectItem itemLabel="Querétaro" itemValue="Querétaro"/>
-                            <f:selectItem itemLabel="Quintana Roo" itemValue="Quintana Roo"/>
-                            <f:selectItem itemLabel="San Luis Potosí" itemValue="San Luis Potosí"/>
-                            <f:selectItem itemLabel="Sinaloa" itemValue="Sinaloa"/>
-                            <f:selectItem itemLabel="Sonora" itemValue="Sonora"/>
-                            <f:selectItem itemLabel="Tabasco" itemValue="Tabasco"/>
-                            <f:selectItem itemLabel="Tamaulipas" itemValue="Tamaulipas"/>
-                            <f:selectItem itemLabel="Tlaxcala" itemValue="Tlaxcala"/>
-                            <f:selectItem itemLabel="Veracruz" itemValue="Veracruz"/>
-                            <f:selectItem itemLabel="Yucatán" itemValue="Yucatán"/>
-                            <f:selectItem itemLabel="Zacatecas" itemValue="Zacatecas"/>
+                        <p:outputLabel value="Domicilio(calle y numero)" />
+                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCallePadre}" styleClass="ui-inputfield"/>
+                        <p:outputLabel value="colonia" />
+                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColoniaPadre}" styleClass="ui-inputfield"/>
+                        <p:outputLabel value="Ciudad o Estado" />
+
+                        <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioPadre}" styleClass="ui-inputfield">
+                            <f:selectItems
+                                value="#{altaEstudiantesBean.listaEntidadFederativa}"
+                                var="ent"
+                                itemValue="#{ent.identidad}"
+                                itemLabel="#{ent.nombreEntidad}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Teléfono" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoPadre}" styleClass="ui-inputfield"/>
-                              </p:panelGrid>
-                                        <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
-                       <p:outputLabel value="Nombre de la Madre" />
+                    </p:panelGrid>
+                    <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                        <p:outputLabel value="Nombre de la Madre" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombreMadre}" styleClass="ui-inputfield"/>
-                         <p:outputLabel value="Domicilio(calle y numero)" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioMadre}" styleClass="ui-inputfield"/>
-                         <p:outputLabel value="colonia" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.coloniaMadre}" styleClass="ui-inputfield"/>
-                        <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.entidadProcedenciaMadre}" styleClass="ui-inputfield">
-                            <f:selectItem itemLabel="Aguascalientes" itemValue="Aguascalientes"/>
-                            <f:selectItem itemLabel="Baja California" itemValue="Baja California"/>
-                            <f:selectItem itemLabel="Baja California Sur" itemValue="Baja California Sur"/>
-                            <f:selectItem itemLabel="Campeche" itemValue="Campeche"/>
-                            <f:selectItem itemLabel="Coahuila" itemValue="Coahuila"/>
-                            <f:selectItem itemLabel="Colima" itemValue="Colima"/>
-                            <f:selectItem itemLabel="Chiapas" itemValue="Chiapas"/>
-                            <f:selectItem itemLabel="Chihuahua" itemValue="Chihuahua"/>
-                            <f:selectItem itemLabel="Ciudad de México" itemValue="Ciudad de México"/>
-                            <f:selectItem itemLabel="Durango" itemValue="Durango"/>
-                            <f:selectItem itemLabel="Guanajuato" itemValue="Guanajuato"/>
-                            <f:selectItem itemLabel="Guerrero" itemValue="Guerrero"/>
-                            <f:selectItem itemLabel="Hidalgo" itemValue="Hidalgo"/>
-                            <f:selectItem itemLabel="Jalisco" itemValue="Jalisco"/>
-                            <f:selectItem itemLabel="México" itemValue="México"/>
-                            <f:selectItem itemLabel="Michoacán" itemValue="Michoacán"/>
-                            <f:selectItem itemLabel="Morelos" itemValue="Morelos"/>
-                            <f:selectItem itemLabel="Nayarit" itemValue="Nayarit"/>
-                            <f:selectItem itemLabel="Nuevo León" itemValue="Nuevo León"/>
-                            <f:selectItem itemLabel="Oaxaca" itemValue="Oaxaca"/>
-                            <f:selectItem itemLabel="Puebla" itemValue="Puebla"/>
-                            <f:selectItem itemLabel="Querétaro" itemValue="Querétaro"/>
-                            <f:selectItem itemLabel="Quintana Roo" itemValue="Quintana Roo"/>
-                            <f:selectItem itemLabel="San Luis Potosí" itemValue="San Luis Potosí"/>
-                            <f:selectItem itemLabel="Sinaloa" itemValue="Sinaloa"/>
-                            <f:selectItem itemLabel="Sonora" itemValue="Sonora"/>
-                            <f:selectItem itemLabel="Tabasco" itemValue="Tabasco"/>
-                            <f:selectItem itemLabel="Tamaulipas" itemValue="Tamaulipas"/>
-                            <f:selectItem itemLabel="Tlaxcala" itemValue="Tlaxcala"/>
-                            <f:selectItem itemLabel="Veracruz" itemValue="Veracruz"/>
-                            <f:selectItem itemLabel="Yucatán" itemValue="Yucatán"/>
-                            <f:selectItem itemLabel="Zacatecas" itemValue="Zacatecas"/>
+                        <p:outputLabel value="Domicilio(calle y numero)" />
+                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCalleMadre}" styleClass="ui-inputfield"/>
+                        <p:outputLabel value="Colonia" />
+                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColoniaMadre}" styleClass="ui-inputfield"/>
+                        <p:outputLabel value="Ciudad o Estado" />
+                        <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioMadre}"
+                                         styleClass="ui-inputfield">
+
+                            <f:selectItems
+                                value="#{altaEstudiantesBean.listaEntidadFederativa}"
+                                var="ent"
+                                itemValue="#{ent.identidad}"
+                                itemLabel="#{ent.nombreEntidad}" />
+
                         </p:selectOneMenu>
                         <p:outputLabel value="Teléfono" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoMadre}" styleClass="ui-inputfield"/>
@@ -276,6 +204,7 @@
                         <p:commandButton value="Dar de Alta"
                                          action="#{altaEstudiantesBean.guardar}"
                                          update="@form"
+                                         process="@this"
                                          icon="pi pi-check"
                                          styleClass="ui-button-success"/>
                         <p:button value="Regresar"
