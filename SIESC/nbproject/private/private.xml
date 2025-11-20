@@ -5,9 +5,10 @@
         <group>
             <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/web/loginEstudiante.xhtml</file>
             <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/src/java/vista/altaEstudiantesBean.java</file>
-            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/src/java/vista/HorarioCrearBean.java</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/web/escolar/index.xhtml</file>
             <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/web/escolar/altaEstudiantes.xhtml</file>
             <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/web/estudiante/index.xhtml</file>
+            <file>file:/C:/Users/cris_/OneDrive/Documentos/NetBeansProjects/SIESC/SIESC/web/escolar/templateEscolares.xhtml</file>
         </group>
     </open-files>
 </project-private>

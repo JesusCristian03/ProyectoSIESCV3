@@ -88,7 +88,7 @@
                             <f:selectItems
                                 value="#{altaEstudiantesBean.listaEntidadFederativa}"
                                 var="ent"
-                                itemValue="#{ent.identidad}"
+                                itemValue="#{ent.identidad.intValue}"
                                 itemLabel="#{ent.nombreEntidad}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Teléfono" />
@@ -204,6 +204,7 @@
                         <p:commandButton value="Dar de Alta"
                                          action="#{altaEstudiantesBean.guardar}"
                                          update="@form"
+                                         process="@this"
                                          icon="pi pi-check"
                                          styleClass="ui-button-success"/>
                         <p:button value="Regresar"

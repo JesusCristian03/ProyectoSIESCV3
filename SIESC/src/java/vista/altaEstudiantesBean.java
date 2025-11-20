@@ -240,6 +240,7 @@ public class altaEstudiantesBean implements Serializable {
         alumnoGeneral.setNombre(estudiante.getNombreAlumno());
 
         //Asignamos la entidad Federativa. 
+        System.out.println("numeroMunicipioEstudiante:"+numeroMunicipioEstudiante);
         entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioEstudiante);
 
         String domicilioCompleto = domicilioCalle + ","
@@ -274,5 +275,6 @@ public class altaEstudiantesBean implements Serializable {
         estudianteServicio.insertarEstudiante(estudiante);
         alumnoGeneral.setNoDeControl(estudiante);
         alumnosGeneralesServicio.insertarAlumnoGeneral(alumnoGeneral);
+        System.out.println("INSERTO ALUMNO GENERAL Y ESTUDIANTE");
     }
 }
