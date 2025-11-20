@@ -104,6 +104,27 @@
         }
     </style>
 
+    
+    
+           <style>
+            .label-form {
+                font-weight: 600;
+                color: #3f51b5;
+                margin-bottom: 4px;
+                display: block;
+            }
+            .label-strong {
+                font-weight: 700;
+                color: #333;
+                margin-bottom: 4px;
+                display: block;
+            }
+            .sub-panel .ui-panel-title {
+                font-size: 1rem !important;
+                color: #fff !important;
+            }
+        </style>
+        
     <script>
         function toggleSidebar() {
             document.querySelector('.layout-sidebar').classList.toggle('collapsed');
@@ -146,7 +167,7 @@
         
             <p:submenu label="DOCENTES" icon="pi pi-users">
                        <p:submenu label="BASE" icon="pi pi-users">
-                                  <p:menuitem value="Asignacion a grupo" outcome=""
+                                  <p:menuitem value="Asignacion a grupo" outcome="/academico/AsignacionGrupos.xhtml"
                                     icon="pi pi-user-plus" />
         
                                   <p:menuitem value="Asignacion temporal " outcome=""
@@ -160,7 +181,7 @@
 
             <p:submenu label="Grupos de Horarios" icon=" ">
                        <p:submenu label=" " icon=" ">
-                                  <p:menuitem value=" " outcome=""
+                                  <p:menuitem value="hola " outcome="/academico/AsignacionGrupos.xhtml"
                                     icon=" " />
                        </p:submenu>
             </p:submenu>
@@ -210,7 +231,8 @@
 
  
     <p:submenu label="EVALUACION" icon="">
-       
+        <p:menuitem value="hola " outcome="/academico/AsignacionGrupos.xhtml"
+                                    icon=" " />
     </p:submenu>
 
   
