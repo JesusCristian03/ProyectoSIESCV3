@@ -6,218 +6,306 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:head>
-    
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Sistema Escolar ITC - Estudiantes</title>
+    <h:head>
 
-    <!-- Ultima Theme -->
-    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
-<h:outputStylesheet library="css" name="estudiantes.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sistema Escolar ITC - Estudiantes</title>
+
+        <!-- Ultima Theme -->
+        <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+        <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+        <h:outputStylesheet library="css" name="estudiantes.css"/>
+        <style>
+            .mensaje-exito {
+                background-color: #d4edda !important;
+                color: #155724 !important;
+                border-left: 5px solid #28a745 !important;
+                padding: 10px !important;
+                border-radius: 6px !important;
+            }
+
+            .mensaje-error {
+
+                background-color: #f8d7da !important;
+                color: #721c24 !important;
+                border-left: 5px solid #dc3545 !important;
+                padding: 10px !important;
+                border-radius: 6px !important;
+            }
+
+            .mensaje-info {
+                background-color: #cce5ff !important;
+                color: #004085 !important;
+                border-left: 5px solid #007bff !important;
+                padding: 10px !important;
+                border-radius: 6px !important;
+            }
+
+            .disponible {
+                background-color: #0080C0 !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 11px !important;
+                color: #ffffff !important; /* para asegurar contraste */
+            }
+
+            .acreditado {
+                background-color: #A0D79F !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 11px !important;
+            }
+
+            .cursando {
+                background-color: #603060 !important;
+                color: white !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 11px !important;
+            }
+
+            .ordinario {
+                background-color: #FFFF66 !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 11px !important;
+            }
+
+            .repeticion {
+                background-color: #FF9900 !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 11px !important;
+            }
+
+            .especial {
+                background-color: #FF0000 !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 11px !important;
+                color: white !important;
+            }
+
+            .nodisponible {
+                background-color: #CCCCCC !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 11px !important;
+            }
+
+            .blanco {
+                background-color: #FFFFFF !important;
+                padding: 5px !important;
+                text-align: center !important;
+                font-size: 11px !important;
+
+        </style> 
 
 
-      
-    <script>
-        function toggleSidebar() {
-            document.querySelector('.layout-sidebar').classList.toggle('collapsed');
-        }
-    </script>
-</h:head>
 
-<h:body>
-    
-    <f:event type="preRenderView" listener="#{controlSesion.verificarEstudiante}"/>
+        <script>
+            function toggleSidebar() {
+                document.querySelector('.layout-sidebar').classList.toggle('collapsed');
+            }
+        </script>
 
-<div class="layout-wrapper">
+    </h:head>
 
-    <!-- ================= TOPBAR ================= -->
-    <div class="layout-topbar">
-        <div class="menu-toggle-btn" onclick="toggleSidebar()">
-            <i class="pi pi-bars"></i>
+    <h:body>
+
+        <f:event type="preRenderView" listener="#{controlSesion.verificarEstudiante}"/>
+
+        <div class="layout-wrapper">
+
+            <!-- ================= TOPBAR ================= -->
+            <div class="layout-topbar">
+                <div class="menu-toggle-btn" onclick="toggleSidebar()">
+                    <i class="pi pi-bars"></i>
+                </div>
+
+                <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
+
+                <div class="title">SISTEMA ESCOLAR – ESTUDIANTES</div>
+
+                <h:form>
+                    <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
+                                     action="#{controlSesion.cerrarSesion}" ajax="false" />
+                </h:form>
+            </div>
+
+
+            <div class="layout-main-container">
+
+                <!-- ================= SIDEBAR ================= -->
+                <div class="layout-sidebar">
+
+                    <h:form>
+                        <p:panelMenu style="width:100%;" styleClass="custom-menu">   
+
+                            <!-- =================== INFORMACIÓN ESCOLAR =================== -->
+                            <p:submenu label="Información Escolar" expanded="false">
+                                <p:menuitem value="Asistencia" action="index" 
+                                            icon="pi pi-calendar"/>
+                                <p:menuitem value="Justificación" 
+                                            actionListener="#{horarioBean.buscarFaltas}" 
+                                            action="justificaDocente" 
+                                            icon="pi pi-file-edit"/>
+                                <p:menuitem value="Horarios" action="horarios" 
+                                            icon="pi pi-clock"/>
+
+                            </p:submenu>
+
+                            <!-- =================== INSCRIPCIONES =================== -->
+                            <p:submenu label="Iscripciones" expanded="false">
+                                <p:menuitem value="Ene-Jun/Ago-Dic" 
+                                            update="growlMensajes" 
+                                            actionListener="#{inscripcionesBean.verificarAcceso}" 
+                                            icon="pi pi-book" 
+                                            ajax="true"/>
+
+                                <p:menuitem value="Grupos Disponibles" 
+                                            actionListener="#{horarioBean.buscarFaltas}" 
+                                            action="justificaDocente" 
+                                            icon="pi pi-users"/>
+
+                                <p:menuitem value="Horario Inscripcion" 
+                                            action="horarios" 
+                                            icon="pi pi-calendar-plus"/>
+
+
+                            </p:submenu>
+
+                            <!-- =================== EVALUACIÓN DOCENTE =================== -->
+                            <p:submenu label="Eval. Docente" expanded="false">
+                                <p:menuitem value="Asistencia" 
+                                            action="asistenciaDocente" 
+                                            icon="pi pi-calendar"/>
+
+                                <p:menuitem value="Justificación" 
+                                            actionListener="#{horarioBean.buscarFaltas}" 
+                                            action="justificaDocente" 
+                                            icon="pi pi-file-edit"/>
+
+                                <p:menuitem value="Horarios" 
+                                            action="horarios" 
+                                            icon="pi pi-clock"/>
+
+
+                            </p:submenu>
+
+                        </p:panelMenu>
+                        <p:panelMenu style="width:100%;" styleClass="custom-menu">   
+
+                            <!-- =================== INFORMACIÓN ESCOLAR =================== -->
+                            <p:submenu label="Información Escolar" expanded="false">
+                                <p:menuitem value="Asistencia" action="index" 
+                                            icon="pi pi-calendar"/>
+                                <p:menuitem value="Justificación" 
+                                            actionListener="#{horarioBean.buscarFaltas}" 
+                                            action="justificaDocente" 
+                                            icon="pi pi-file-edit"/>
+                                <p:menuitem value="Horarios" action="horarios" 
+                                            icon="pi pi-clock"/>
+                                <p:menuitem value="Cerrar sesión" 
+                                            action="#{controlSesion.cerrarSesion}" 
+                                            ajax="false" 
+                                            icon="pi pi-sign-out"/>
+                            </p:submenu>
+
+                            <!-- =================== INSCRIPCIONES =================== -->
+                            <p:submenu label="Iscripciones" expanded="false">
+                                <p:menuitem value="Ene-Jun/Ago-Dic" 
+                                            update="growlMensajes" 
+                                            actionListener="#{inscripcionesBean.verificarAcceso}" 
+                                            icon="pi pi-book" 
+                                            ajax="true"/>
+
+                                <p:menuitem value="Grupos Disponibles" 
+                                            actionListener="#{horarioBean.buscarFaltas}" 
+                                            action="justificaDocente" 
+                                            icon="pi pi-users"/>
+
+                                <p:menuitem value="Horario Inscripcion" 
+                                            action="horarios" 
+                                            icon="pi pi-calendar-plus"/>
+
+                                <p:menuitem value="Cerrar sesión" 
+                                            action="#{controlSesion.cerrarSesion}" 
+                                            ajax="false" 
+                                            icon="pi pi-sign-out"/>
+                            </p:submenu>
+
+                            <!-- =================== EVALUACIÓN DOCENTE =================== -->
+                            <p:submenu label="Eval. Docente" expanded="false">
+                                <p:menuitem value="Asistencia" 
+                                            action="asistenciaDocente" 
+                                            icon="pi pi-calendar"/>
+
+                                <p:menuitem value="Justificación" 
+                                            actionListener="#{horarioBean.buscarFaltas}" 
+                                            action="justificaDocente" 
+                                            icon="pi pi-file-edit"/>
+
+                                <p:menuitem value="Horarios" 
+                                            action="horarios" 
+                                            icon="pi pi-clock"/>
+
+                                <p:menuitem value="Cerrar sesión" 
+                                            action="#{controlSesion.cerrarSesion}" 
+                                            ajax="false" 
+                                            icon="pi pi-sign-out"/>
+                            </p:submenu>
+
+                        </p:panelMenu>
+
+
+                        <style>.ui-widget {
+                                font-size: 10px;
+                            }</style>
+
+                        <p:growl id="growlMensajes" showDetail="true" sticky="false" life="4000"/>
+                    </h:form>
+
+                </div>
+
+                <!-- ================= CONTENIDO ================= -->
+                <div class="layout-main">
+
+                    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
+                    <ui:insert name="content" />
+
+                    <!-- CAJA DE BIENVENIDA -->
+                    <h:panelGroup id="welcomeBox" 
+                                  layout="block"
+                                  styleClass="#{empty requestScope['javax.faces.view.ViewScopeKey'] ? 'welcome-box' : 'hide-welcome'}">
+
+                        <h3 class="welcome-title">Bienvenido al Departamento de Académico</h3>
+                        <p class="welcome-subtitle">Selecciona una opción del menú lateral para comenzar.</p>
+
+                        <h:graphicImage library="assets" name="aguiluchos.jpg" 
+                                        styleClass="welcome-image"/>
+
+                        <p class="welcome-label">AGUILUCHOS</p>
+                        <p class="welcome-label-small">ITC</p>
+
+                    </h:panelGroup>
+
+                </div>
+
+
+            </div>
+
+            <!-- ================= FOOTER ================= -->
+            <div class="layout-footer">
+                © 2025 Tecnológico Nacional de México Campus Cuautla | Estudiantes
+            </div>
+
         </div>
 
-        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
-
-        <div class="title">SISTEMA ESCOLAR – ESTUDIANTES</div>
-
-        <h:form>
-            <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
-                             action="#{controlSesion.cerrarSesion}" ajax="false" />
-        </h:form>
-    </div>
-
-
-    <div class="layout-main-container">
-
-        <!-- ================= SIDEBAR ================= -->
-        <div class="layout-sidebar">
-
-            <h:form>
-<p:panelMenu style="width:100%;" styleClass="custom-menu">   
-
-    <!-- =================== INFORMACIÓN ESCOLAR =================== -->
-    <p:submenu label="Información Escolar" expanded="false">
-        <p:menuitem value="Asistencia" action="index" 
-                    icon="pi pi-calendar"/>
-        <p:menuitem value="Justificación" 
-                    actionListener="#{horarioBean.buscarFaltas}" 
-                    action="justificaDocente" 
-                    icon="pi pi-file-edit"/>
-        <p:menuitem value="Horarios" action="horarios" 
-                    icon="pi pi-clock"/>
-        
-    </p:submenu>
-
-    <!-- =================== INSCRIPCIONES =================== -->
-    <p:submenu label="Iscripciones" expanded="false">
-        <p:menuitem value="Ene-Jun/Ago-Dic" 
-                    update="growlMensajes" 
-                    actionListener="#{inscripcionesBean.verificarAcceso}" 
-                    icon="pi pi-book" 
-                    ajax="true"/>
-
-        <p:menuitem value="Grupos Disponibles" 
-                    actionListener="#{horarioBean.buscarFaltas}" 
-                    action="justificaDocente" 
-                    icon="pi pi-users"/>
-
-        <p:menuitem value="Horario Inscripcion" 
-                    action="horarios" 
-                    icon="pi pi-calendar-plus"/>
-
-     
-    </p:submenu>
-
-    <!-- =================== EVALUACIÓN DOCENTE =================== -->
-    <p:submenu label="Eval. Docente" expanded="false">
-        <p:menuitem value="Asistencia" 
-                    action="asistenciaDocente" 
-                    icon="pi pi-calendar"/>
-
-        <p:menuitem value="Justificación" 
-                    actionListener="#{horarioBean.buscarFaltas}" 
-                    action="justificaDocente" 
-                    icon="pi pi-file-edit"/>
-
-        <p:menuitem value="Horarios" 
-                    action="horarios" 
-                    icon="pi pi-clock"/>
-
-
-    </p:submenu>
-
-</p:panelMenu>
-<p:panelMenu style="width:100%;" styleClass="custom-menu">   
-
-    <!-- =================== INFORMACIÓN ESCOLAR =================== -->
-    <p:submenu label="Información Escolar" expanded="false">
-        <p:menuitem value="Asistencia" action="index" 
-                    icon="pi pi-calendar"/>
-        <p:menuitem value="Justificación" 
-                    actionListener="#{horarioBean.buscarFaltas}" 
-                    action="justificaDocente" 
-                    icon="pi pi-file-edit"/>
-        <p:menuitem value="Horarios" action="horarios" 
-                    icon="pi pi-clock"/>
-        <p:menuitem value="Cerrar sesión" 
-                    action="#{controlSesion.cerrarSesion}" 
-                    ajax="false" 
-                    icon="pi pi-sign-out"/>
-    </p:submenu>
-
-    <!-- =================== INSCRIPCIONES =================== -->
-    <p:submenu label="Iscripciones" expanded="false">
-        <p:menuitem value="Ene-Jun/Ago-Dic" 
-                    update="growlMensajes" 
-                    actionListener="#{inscripcionesBean.verificarAcceso}" 
-                    icon="pi pi-book" 
-                    ajax="true"/>
-
-        <p:menuitem value="Grupos Disponibles" 
-                    actionListener="#{horarioBean.buscarFaltas}" 
-                    action="justificaDocente" 
-                    icon="pi pi-users"/>
-
-        <p:menuitem value="Horario Inscripcion" 
-                    action="horarios" 
-                    icon="pi pi-calendar-plus"/>
-
-        <p:menuitem value="Cerrar sesión" 
-                    action="#{controlSesion.cerrarSesion}" 
-                    ajax="false" 
-                    icon="pi pi-sign-out"/>
-    </p:submenu>
-
-    <!-- =================== EVALUACIÓN DOCENTE =================== -->
-    <p:submenu label="Eval. Docente" expanded="false">
-        <p:menuitem value="Asistencia" 
-                    action="asistenciaDocente" 
-                    icon="pi pi-calendar"/>
-
-        <p:menuitem value="Justificación" 
-                    actionListener="#{horarioBean.buscarFaltas}" 
-                    action="justificaDocente" 
-                    icon="pi pi-file-edit"/>
-
-        <p:menuitem value="Horarios" 
-                    action="horarios" 
-                    icon="pi pi-clock"/>
-
-        <p:menuitem value="Cerrar sesión" 
-                    action="#{controlSesion.cerrarSesion}" 
-                    ajax="false" 
-                    icon="pi pi-sign-out"/>
-    </p:submenu>
-
-</p:panelMenu>
-
-
-                <style>.ui-widget { font-size: 10px; }</style>
-
-                <p:growl id="growlMensajes" showDetail="true" sticky="false" life="4000"/>
-            </h:form>
-
-        </div>
-
-        <!-- ================= CONTENIDO ================= -->
-<div class="layout-main">
-
-    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
-    <ui:insert name="content" />
-
-    <!-- CAJA DE BIENVENIDA -->
-    <h:panelGroup id="welcomeBox" 
-                  layout="block"
-                  styleClass="#{empty requestScope['javax.faces.view.ViewScopeKey'] ? 'welcome-box' : 'hide-welcome'}">
-
-        <h3 class="welcome-title">Bienvenido al Departamento de Académico</h3>
-        <p class="welcome-subtitle">Selecciona una opción del menú lateral para comenzar.</p>
-
-        <h:graphicImage library="assets" name="aguiluchos.jpg" 
-                        styleClass="welcome-image"/>
-
-        <p class="welcome-label">AGUILUCHOS</p>
-        <p class="welcome-label-small">ITC</p>
-
-    </h:panelGroup>
-
-</div>
-
-
-    </div>
-
-    <!-- ================= FOOTER ================= -->
-    <div class="layout-footer">
-        © 2025 Tecnológico Nacional de México Campus Cuautla | Estudiantes
-    </div>
-
-</div>
-    
-</h:body>
+    </h:body>
 </html>
 
 

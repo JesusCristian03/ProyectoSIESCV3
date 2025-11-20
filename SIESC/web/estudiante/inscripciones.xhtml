@@ -9,62 +9,73 @@
 
 
     <body>
-        
+
 
         <ui:composition template="./templateEstudiante.xhtml">
 
-    
-    
 
-    
+
+
+
             <ui:define name="content">
 
                 <f:view>
 
 
-<h:form>
-   <p:panel styleClass="custom-card" style="width:100%; margin: 0 auto; display:block;">
+                    <h:form>
+                        <p:panel styleClass="custom-card" style="width:100%; margin: 0 auto; display:block;">
 
 
-           <f:facet name="header">
-            <h:outputText value="Información del Estudiante" 
-                          styleClass="custom-title" />
-        </f:facet>
+                            <f:facet name="header">
+                                <h:outputText value="Información del Estudiante" 
+                                              styleClass="custom-title" />
+                            </f:facet>
 
 
 
-        <p:panelGrid columns="2"
-                     style="width:95%; margin:0 auto;"
-                     columnClasses="label,value"
-                     styleClass="custom-grid">
+                            <p:panelGrid columns="2"
+                                         style="width:95%; margin:0 auto;"
+                                         columnClasses="label,value"
+                                         styleClass="custom-grid">
 
-            <p:outputLabel value="No. de Control:" />
-            <p:outputLabel value="#{inscripcionesBean.estudiante.noDeControl}" />
+                                <p:outputLabel value="No. de Control:" />
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.noDeControl}" />
 
-            <p:outputLabel value="Estudiante:" />
-            <p:outputLabel value="#{inscripcionesBean.estudiante.apellidoPaterno}
-                                   #{inscripcionesBean.estudiante.apellidoMaterno}
-                                   #{inscripcionesBean.estudiante.nombreAlumno}" />
+                                <p:outputLabel value="Estudiante:" />
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.apellidoPaterno}
+                                               #{inscripcionesBean.estudiante.apellidoMaterno}
+                                               #{inscripcionesBean.estudiante.nombreAlumno}" />
 
-            <p:outputLabel value="Carrera:" />
-            <p:outputLabel value="#{inscripcionesBean.estudiante.reticula.nombreCarrera}" />
+                                <p:outputLabel value="Carrera:" />
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.reticula.nombreCarrera}" />
 
-            <p:outputLabel value="Semestre:" />
-            <p:outputLabel value="#{inscripcionesBean.estudiante.semestre}" />
+                                <p:outputLabel value="Semestre:" />
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.semestre}" />
 
-            <p:outputLabel value="Periodo Escolar:" />
-            <p:outputLabel value="#{inscripcionesBean.periodoActual.identificacionLarga}" />
+                                <p:outputLabel value="Periodo Escolar:" />
+                                <p:outputLabel value="#{inscripcionesBean.periodoActual.identificacionLarga}" />
 
-            <p:outputLabel value="Calificación:" />
-            <p:outputLabel value="#{inscripcionesBean.promedio}" />
+                                <p:outputLabel value="Calificación:" />
+                                <p:outputLabel value="#{inscripcionesBean.promedio}" />
+                                <f:metadata>
+                                    <f:viewAction action="#{inscripcionesBean.recuperarPanelFlash}" />
+                                </f:metadata>
 
-            <p:outputLabel value="Especialidad:" />
-            <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" />
+                                <p:outputLabel value="Especialidad:" />
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" />
 
-        </p:panelGrid>
+                                <p:panel id="mensajePanel"
+                                         style="width:95%; margin: 10px auto;"
+                                         styleClass="#{inscripcionesBean.colorMensaje}">
+                                    <h:outputText value="#{inscripcionesBean.mensaje}" style="font-weight: bold;"/>
+                                </p:panel>
+                                
 
-    </p:panel>
-</h:form>
+
+                            </p:panelGrid>
+
+                        </p:panel>
+                    </h:form>
 
 
 
@@ -80,11 +91,11 @@
 
                                 </f:facet>
 
-               
-                                
-                                
-                                
-                                
+
+
+
+
+
                                 <p:dataTable id="tablaReticula" value="#{inscripcionesBean.listaM}" var="asignatura" rowStyleClass="registroPrueba" showGridlines="true">                                        
 
                                     <p:column styleClass="#{asignatura.semestre1.color}">
@@ -571,7 +582,7 @@
                                                     <h:outputText value="#{grupo}"
                                                                   style="font-weight:bold; font-size:1.2em; color:#333;" />
                                                 </h:panelGrid>
-                                             
+
                                             </p:panel>
 
                                         </p:commandLink>
@@ -583,13 +594,13 @@
 
                         </p:tabView>
 
-                     
+
                     </h:form>
                 </f:view>
 
             </ui:define>
 
         </ui:composition>
- 
+
     </body>
 </html>
