@@ -28,12 +28,12 @@ public class LoginBean implements Serializable {
 
     @EJB
     private UsuarioServicioLocal usuarioServicio;
-    
+
     private Usuario user;
     private Estudiante estudianteLogin;
     private String usuario = "";
     private String contrasena = "";
-    
+
     public LoginBean() {
         user = new Usuario();
         estudianteLogin = new Estudiante();
@@ -60,59 +60,56 @@ public class LoginBean implements Serializable {
      *
      * @return
      */
-    public String login(){
+    public String login() {
         Usuario usr = null;
-        
+
         String redireccion = null;
-        
+
         user.setUsuario(usuario);
         String codificado = DigestUtils.sha256Hex(contrasena);
         user.setContrasena(codificado);
         //System.out.println("Codificando contraseña");
-        
-        try{    
-           usr =  usuarioServicio.iniciaSesion(user);
-           
-           //System.out.println("Obteniendo el usuario");
-           if(usr!=null){
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usr);
-               System.out.println("redireccionar" + usr.getIdrol().getRuta());
-               redireccion = usr.getIdrol().getRuta() + "/index.xhtml?faces-redirect=true";
-               
-               
-           }
-            
-        }catch(Exception e ){
-            
+
+        try {
+            usr = usuarioServicio.iniciaSesion(user);
+
+            //System.out.println("Obteniendo el usuario");
+            if (usr != null) {
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usr);
+                // System.out.println("redireccionar" + usr.getIdrol().getRuta());
+                redireccion = usr.getIdrol().getRuta() + "/index.xhtml?faces-redirect=true";
+                System.out.println("Redireccionando a :->" + redireccion);
+
+            }
+
+        } catch (Exception e) {
+
         }
-        
-        
-        
-        
+
         return redireccion;
     }
-    
-    public String loginEstudiante(){
+
+    public String loginEstudiante() {
         Estudiante estudiante = null;
-        
+
         String redireccion = null;
         //System.out.println("Entra a login"); 
-        estudianteLogin.setNoDeControl(usuario);        
+        estudianteLogin.setNoDeControl(usuario);
         estudianteLogin.setNip(Integer.parseInt(contrasena));
         //System.out.println("Entra a login");    
-        try{    
-           estudiante =  estudianteServicio.loginEstudiante(estudianteLogin);
-           if(estudiante!=null){
-               //System.out.println("Encontro ususario");
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
-               FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("estudiante", estudiante);   
-               
-               redireccion = "estudiante/index.xhtml?faces-redirect=true";             
-           }            
-        }catch(Exception e ){
-            
+        try {
+            estudiante = estudianteServicio.loginEstudiante(estudianteLogin);
+            if (estudiante != null) {
+                //System.out.println("Encontro ususario");
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("estudiante", estudiante);
+
+                redireccion = "estudiante/index.xhtml?faces-redirect=true";
+            }
+        } catch (Exception e) {
+
         }
         return redireccion;
-    }    
+    }
 }
