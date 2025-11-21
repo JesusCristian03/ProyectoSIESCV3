@@ -67,6 +67,21 @@
 
                         <p:outputLabel value="Correo Electrónico" />
                         <p:inputText value="#{altaEstudiantesBean.estudiante.correoElectronico}" styleClass="ui-inputfield"/>
+                    
+                        <h:outputLabel for="tipoSangre" value="Tipo de sangre:" />
+                        <p:selectOneMenu id="tipoSangre" value="#{estudianteBean.tipoSangre}" panelStyle="width:150px">
+                        <f:selectItem itemLabel="Seleccione" itemValue=""/>
+                        <f:selectItem itemLabel="A+" itemValue="A+"/>
+                        <f:selectItem itemLabel="A-" itemValue="A-"/>
+                        <f:selectItem itemLabel="B+" itemValue="B+"/>
+                        <f:selectItem itemLabel="B-" itemValue="B-"/>
+                        <f:selectItem itemLabel="AB+" itemValue="AB+"/>
+                        <f:selectItem itemLabel="AB-" itemValue="AB-"/>
+                        <f:selectItem itemLabel="O+" itemValue="O+"/>
+                        <f:selectItem itemLabel="O-" itemValue="O-"/>
+                        </p:selectOneMenu>
+                    
+               
                     </p:panelGrid>
 
                     <!-- ================= DOMICILIO ================= -->
@@ -93,7 +108,17 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="Teléfono" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.telefono}" styleClass="ui-inputfield"/>
+                    
+                                     <h:outputLabel for="municipio" value="Municipio:" />
+                                      <p:inputText id="municipio" value="#{estudianteBean.municipio}" />
+
+                                       <h:outputLabel for="telefonoEmergencia" value="Teléfono emergencia:" />
+                                          <p:inputMask id="telefonoEmergencia" value="#{estudianteBean.telefonoEmergencia}" />  
+      
+                    
                     </p:panelGrid>
+                    
+                    
 
                     <!-- ================= DATOS ESCOLARES ================= -->
                     <h3 class="section-title">
@@ -151,6 +176,43 @@
                         <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.estatusAlumno}" styleClass="ui-inputfield">
                             <f:selectItem itemLabel="Activo" itemValue="Activo"/>
                         </p:selectOneMenu>
+                    
+                     <h:outputLabel for="tipoServicioMedico" value="Tipo de servicio médico:" />
+                     <p:selectOneMenu id="tipoServicioMedico" value="#{estudianteBean.tipoServicioMedico}">
+                     <f:selectItem itemLabel="Seleccione" itemValue="" />
+                     <f:selectItem itemLabel="IMSS" itemValue="IMSS" />
+                     <f:selectItem itemLabel="ISSSTE" itemValue="ISSSTE" />
+                     <f:selectItem itemLabel="Seguro Popular/INSABI" itemValue="INSABI" />
+                     <f:selectItem itemLabel="Privado" itemValue="Privado" />
+                     </p:selectOneMenu>
+
+
+                    <h:outputLabel for="claveServicioMedico" value="Clave servicio médico:" />
+                    <p:inputText id="claveServicioMedico" value="#{estudianteBean.claveServicioMedico}" />
+
+
+                      <h:outputLabel for="escuelaProcedencia" value="Escuela de procedencia:" />
+                      <p:inputText id="escuelaProcedencia" value="#{estudianteBean.escuelaProcedencia}" />
+
+
+                    <h:outputLabel for="domicilioEscuela" value="Domicilio de la escuela:" />
+                    <p:inputText id="domicilioEscuela" value="#{estudianteBean.domicilioEscuela}" />
+
+
+
+                      <h:outputLabel for="foto" value="Foto:" />
+                      <p:fileUpload id="foto" mode="advanced" fileLimit="1" auto="true" update="fotoPreview msgs" allowTypes="(image).*/>
+
+
+                <h:outputLabel for="foto" value="Firma" />
+                 <p:panelGrid columns="1">
+                  <p:signature id="firma" value="#{estudianteBean.firma}" width="50" height="20" />
+                   <p:commandButton value="Borrar firma" type="button" onclick="PF('firma').clear();" />
+                   </p:panelGrid>   
+                    
+                    
+                    
+                    
                     </p:panelGrid>
 
                     <!-- ================= DATOS FAMILIARES ================= -->
@@ -176,7 +238,16 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="Teléfono" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoPadre}" styleClass="ui-inputfield"/>
+                    
+                        <h:outputLabel for="ocupacionPadre" value="Ocupación del padre:" />
+                          <p:inputText id="ocupacionPadre" value="#{estudianteBean.ocupacionPadre}" />
+
+
+                          <h:outputLabel for="domicilioCiudadPadre" value="Domicilio / Ciudad (padre):" />
+                         <p:inputText id="domicilioCiudadPadre" value="#{estudianteBean.domicilioCiudadPadre}" />
                     </p:panelGrid>
+                    
+                    
                     <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
                         <p:outputLabel value="Nombre de la Madre" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombreMadre}" styleClass="ui-inputfield"/>
@@ -197,6 +268,14 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="Teléfono" />
                         <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoMadre}" styleClass="ui-inputfield"/>
+                    
+                        <h:outputLabel for="ocupacionMadre" value="Ocupación de la madre:" />
+<p:inputText id="ocupacionMadre" value="#{estudianteBean.ocupacionMadre}" />
+
+
+<h:outputLabel for="domicilioCiudadMadre" value="Domicilio / Ciudad (madre):" />
+<p:inputText id="domicilioCiudadMadre" value="#{estudianteBean.domicilioCiudadMadre}" />
+                    
                     </p:panelGrid>
 
                     <!-- ================= BOTONES ================= -->

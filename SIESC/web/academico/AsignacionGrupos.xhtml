@@ -1,24 +1,196 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <body>
+<ui:composition template="./templateAcademico.xhtml">
 
-        <ui:composition template="./templateAcademico.xhtml">
-            
-            
-            
-            
-            
-            
-            
 
-            <ui:define name="content">
-                
-            </ui:define>
+    <ui:define name="content">
 
-        </ui:composition>
+        <h:form id="formAsignacion">
 
-    </body>
+            <!-- ===========================
+                 PRIMERA VISTA 
+            ============================ -->
+            <p:panel header="Asignación y Actualización de Docentes a Grupos"
+                     styleClass="card shadow-2 border-round-xl"
+                     rendered="#{asignarDocentesMB.paso eq 1}"
+                     style="max-width:850px; margin:0 auto;">
+
+                <!-- Datos para asignación -->
+                <p:panel header="Datos para la asignación de docentes" styleClass="sub-panel mt-3">
+
+                    <p:outputLabel value="Departamento:" styleClass="label-form"/>
+                    <p:selectOneMenu value="#{asignarDocentesMB.departamento}" styleClass="w-full">
+                        <f:selectItem itemLabel="-- Seleccione un departamento --" itemValue="" />
+                        <f:selectItems value="#{asignarDocentesMB.listaDepartamentos}" />
+                    </p:selectOneMenu>
+
+                </p:panel>
+
+                <!-- Grupo(s) -->
+                <p:panel header="Datos del grupo(s) al que asignará docente" styleClass="sub-panel mt-4">
+
+                    <p:outputLabel value="Carrera:" styleClass="label-form"/>
+                    <p:selectOneMenu value="#{asignarDocentesMB.carrera}" styleClass="w-full">
+                        <f:selectItem itemLabel="-- Seleccione carrera / retícula --" itemValue="" />
+                        <f:selectItems value="#{asignarDocentesMB.listaCarreras}" />
+                    </p:selectOneMenu>
+
+                </p:panel>
+
+                <div class="flex justify-content-center gap-3 mt-4">
+                    <p:commandButton value="Aceptar"
+                                     icon="pi pi-check"
+                                     styleClass="p-button-sm p-button-primary"
+                                     action="#{asignarDocentesMB.irPaso2}"
+                                     update="@form"/>
+                    <p:commandButton value="Cancelar"
+                                     icon="pi pi-times"
+                                     styleClass="p-button-sm p-button-secondary"/>
+                </div>
+
+            </p:panel>
+
+            <!-- ===========================
+                 SEGUNDA VISTA 
+            ============================ -->
+            <p:panel header="Asignación / Actualización de Docentes a Grupos"
+                     styleClass="card shadow-2 border-round-xl"
+                     rendered="#{asignarDocentesMB.paso eq 2}"
+                     style="max-width:1000px; margin:0 auto;">
+
+                <h3 class="text-center mb-4">Datos para la asignación de docentes</h3>
+
+                <!-- GRID DE DATOS -->
+                <div class="grid">
+
+                    <div class="col-6">
+                        <p:outputLabel value="Departamento:" styleClass="label-strong"/>
+                        <p:inputText value="#{asignarDocentesMB.departamento}" readonly="true" styleClass="w-full"/>
+                    </div>
+
+                    <div class="col-6">
+                        <p:outputLabel value="Carrera:" styleClass="label-strong"/>
+                        <p:inputText value="#{asignarDocentesMB.carrera}" readonly="true" styleClass="w-full"/>
+                    </div>
+
+                    <div class="col-6">
+                        <p:outputLabel value="Periodo:" styleClass="label-strong"/>
+                        <p:inputText value="AGO-DIC/2025" readonly="true" styleClass="w-full"/>
+                    </div>
+
+                    <div class="col-6">
+                        <p:outputLabel value="Semestre:" styleClass="label-strong"/>
+                        <p:inputText value="Todos" readonly="true" styleClass="w-full"/>
+                    </div>
+
+                </div>
+
+                <hr class="my-3"/>
+
+                <h4 class="text-center mb-3">Introduzca los siguientes datos:</h4>
+
+                <div class="grid">
+
+                    <div class="col-6">
+                        <p:outputLabel value="Grupo:" styleClass="label-form"/>
+                        <p:selectOneMenu value="#{asignarDocentesMB.grupo}" styleClass="w-full">
+                            <f:selectItem itemLabel="-- Seleccione el grupo --" itemValue="" />
+                            <f:selectItems value="#{asignarDocentesMB.listaGrupos}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <div class="col-6">
+                        <p:outputLabel value="Docente:" styleClass="label-form"/>
+                        <p:selectOneMenu value="#{asignarDocentesMB.docente}" styleClass="w-full">
+                            <f:selectItem itemLabel="-- Seleccione un profesor --" itemValue="" />
+                            <f:selectItems value="#{asignarDocentesMB.listaDocentes}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                </div>
+
+                <div class="flex justify-content-center gap-3 mt-4">
+                    <p:commandButton value="Registrar Docente"
+                                     icon="pi pi-save"
+                                     styleClass="p-button-success p-button-sm"
+                                     action="#{asignarDocentesMB.registrarDocente}"
+                                     update="@form"/>
+
+                    <p:commandButton value="Salir"
+                                     icon="pi pi-sign-out"
+                                     styleClass="p-button-secondary p-button-sm"
+                                     action="#{asignarDocentesMB.regresarPaso1}"
+                                     update="@form"/>
+                </div>
+
+                <h3 class="text-center text-orange-600 mt-5">
+                    Grupos existentes hasta el momento
+                </h3>
+
+                <!-- TABLA DE GRUPOS -->
+                <p:dataTable value="#{asignarDocentesMB.listaGruposAsignados}" var="g"
+                             stripedRows="true" paginator="true" rows="8"
+                             styleClass="mt-4">
+
+                    <p:column headerText="Materia">
+                        #{g.materia}
+                    </p:column>
+
+                    <p:column headerText="Gpo">
+                        #{g.grupo}
+                    </p:column>
+
+                    <p:column headerText="Excl Car">
+                        #{g.exclusion}
+                    </p:column>
+
+                    <p:column headerText="Docente">
+                        #{g.docente}
+                    </p:column>
+
+                    <p:column headerText="Lun">
+                        #{g.lunes}
+                    </p:column>
+
+                    <p:column headerText="Mar">
+                        #{g.martes}
+                    </p:column>
+
+                    <p:column headerText="Mie">
+                        #{g.miercoles}
+                    </p:column>
+
+                    <p:column headerText="Jue">
+                        #{g.jueves}
+                    </p:column>
+
+                    <p:column headerText="Vie">
+                        #{g.viernes}
+                    </p:column>
+
+                    <p:column headerText="Cap">
+                        #{g.capacidad}
+                    </p:column>
+
+                    <p:column headerText="Inscr.">
+                        #{g.inscritos}
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+
+        </h:form>
+
+        <!--  -->
+ 
+
+    </ui:define>
+</ui:composition>
+
 </html>
