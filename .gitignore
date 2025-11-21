@@ -1,11 +1,36 @@
-/SIESC/dist/
-/dist/
-/SIESC-ejb/build/
-/SIESC/build/
-/SIESC-ejb/dist/
+# ===========================
+# BUILD & DIST FOLDERS
+# ===========================
 /build/
+/dist/
+/SIESC/build/
+/SIESC/dist/
+/SIESC-ejb/build/
+/SIESC-ejb/dist/
+
+# ===========================
+# NETBEANS PRIVATE CONFIG
+# (estos sí deben ignorarse)
+# ===========================
 nbproject/private/
 **/nbproject/private/
+**/nbproject/private/**
+
+# PRIVATE PROPERTIES (cambian por PC)
 **/nbproject/private/private.properties
 **/nbproject/private/private.xml
-**/nbproject/project.properties
+
+# ===========================
+# NO IGNORAR ESTOS:
+# (importantes para NetBeans)
+# ===========================
+!nbproject/project.properties
+!**/nbproject/project.properties
+!nbproject/project.xml
+!**/nbproject/project.xml
+
+# ===========================
+# SISTEMA OPERATIVO
+# ===========================
+Thumbs.db
+.DS_Store
