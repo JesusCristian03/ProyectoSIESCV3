@@ -22,6 +22,70 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         
 <h:form id="formAsigGrupo">
     
+         <div class="card" style="padding:20px; margin:auto; max-width:900px;">
+<h2 style="text-align:center; color:#0d47a1;">ASIGNACIÓN Y ACTUALIZACIÓN<br/>DE DOCENTES A GRUPOS</h2>
+
+
+<!-- PANEL PRINCIPAL -->
+<p:panel header="DATOS PARA LA ASIGNACIÓN DE DOCENTES" styleClass="panel-azul">
+<p:panelGrid columns="2" layout="grid" styleClass="ui-fluid">
+    
+    
+<p:outputLabel value="Departamento:" />
+<p:selectOneMenu >
+    <f:selectItem itemLabel="Seleccione un departamento"  />
+<f:selectItems />
+</p:selectOneMenu>
+
+
+
+</p:panelGrid>
+</p:panel>
+
+
+<br/>
+
+
+<!-- SEGUNDO PANEL -->
+<p:panel header="Introduzca los siguientes datos:" styleClass="panel-azul">
+<p:panelGrid columns="2" layout="grid" styleClass="ui-fluid">
+    
+<p:outputLabel value="Carrera:" />
+<p:selectOneMenu >
+    <f:selectItem itemLabel="Selecciones una carrera" itemValue="" />
+<f:selectItems />
+</p:selectOneMenu>
+
+
+<p:outputLabel value="Periodo:" />
+<p:selectOneMenu >
+    <f:selectItem itemLabel="Seleccione el Periodo" itemValue="" />
+<f:selectItems  />
+</p:selectOneMenu>
+
+
+<p:outputLabel value="Semestre:" />
+<p:selectOneMenu >
+<f:selectItem itemLabel="Todos" itemValue="" />
+<f:selectItems />
+</p:selectOneMenu>
+
+</p:panelGrid>
+</p:panel>
+
+
+<br/>
+<div style="text-align:center;">
+<p:commandButton value="ACEPTAR"
+                 icon="pi pi-check"
+                 styleClass="p-button-success"
+                 action="/academico/AsignacionActualizacion?faces-redirect=true" process="@none"  />
+<p:commandButton value="CANCELAR" icon="pi pi-times" styleClass="p-button-secondary" />
+</div>
+
+
+</div>
+    
 <div class="card" style="padding:20px; margin:auto; max-width:900px;">
 <h2 style="text-align:center; color:#0d47a1;">ASIGNACIÓN Y ACTUALIZACIÓN<br/>DE DOCENTES A GRUPOS</h2>
 
