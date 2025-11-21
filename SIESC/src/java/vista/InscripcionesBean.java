@@ -377,16 +377,15 @@ public class InscripcionesBean implements Serializable {
         PeriodoEscolar prueba = periodoEscolarServicio.buscarPorId("20251");//Componer porque no hay como tal 
         //............................................................
         vr = avisosReinscripcionServicio.buscarAvisoReinscripcion(estudiante, prueba);//Para conseguir el limite de creditos
+        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
         guardandoPosicionesDeCadaTipoDeColor();//Contar cuantas materias hay de cada color.
         validaciones();
-        FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+
         List<HistoriaAlumno> listaHA = historiaAlumnoServicio.buscarAsignaturas(estudiante.getNoDeControl());
         promedio = estudiante.getPromedioAritmeticoAcumulado();
         listaGC = gruposServicio.buscarGruposCompletos(estudiante.getReticula(), estudiante.getSemestre(), periodoActual);
 
-        //addMessage(FacesMessage.SEVERITY_INFO, "Reinscripción", "Tu proceso de reinscripción ha empezado");
-        mostrarPanel("Tu proceso de reinscripción ha empezado", "mensaje-info");
-
+        //Validaciones de mensajes 
         FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .getFlash()
@@ -404,9 +403,9 @@ public class InscripcionesBean implements Serializable {
 
         mensaje = (String) flash.get("mensaje");
         colorMensaje = (String) flash.get("colorMensaje");
-        
-        System.out.println("Mensaje "+mensaje);
-        System.out.println("colorMensaje "+colorMensaje);
+
+        System.out.println("Mensaje " + mensaje);
+        System.out.println("colorMensaje " + colorMensaje);
     }
 
     public void verificarAcceso() {
@@ -474,12 +473,14 @@ public class InscripcionesBean implements Serializable {
         int s = 0;
         if (Mrojas != 0) {
             grupoBloqueado = true;
-            addMessage(FacesMessage.SEVERITY_ERROR, "CARRERA REPROBADA", "NO PUEDES SELECCIONAR NINGUNA MATERIA");
+            //addMessage(FacesMessage.SEVERITY_ERROR, "CARRERA REPROBADA", "NO PUEDES SELECCIONAR NINGUNA MATERIA");
+            mostrarPanel("No puedes seleccionar  [ Materia(s) reprobada(s) ]", "mensaje-error");
             return;
         }
         if (Mnaranjas != 0) {
             grupoBloqueado = true;
-            addMessage(FacesMessage.SEVERITY_WARN, "PRIORIDAD  MATERIA(S) EN REPETICION", "SELECCIONA LAS MATERIAS EN REPETICION MAX. 2");
+            //addMessage(FacesMessage.SEVERITY_WARN, "PRIORIDAD  MATERIA(S) EN REPETICION", "SELECCIONA LAS MATERIAS EN REPETICION MAX. 2");
+
             for (int i = 0; i < listaNaranjas.size(); i++) {
                 Reticula r = listaM.get(listaNaranjas.get(i)[0]);
                 try {
@@ -499,13 +500,19 @@ public class InscripcionesBean implements Serializable {
             }
 
             if (listaNaranjas.size() >= 2) {
+                mostrarPanel("Selecciona materias prioritarias [ Materias en repetición Max. 2]" + " Tienes:" + listaNaranjas.size(), "mensaje-naranja");
                 return;
             }
+            //    mostrarPanel("Selecciona materias prioritarias [ Materias en repetición Min. 1]" + " Tienes:" + listaNaranjas.size(), "mensaje-naranja");
 
         }
         if (Mamarillas != 0) {
             grupoBloqueado = true;
-            addMessage(FacesMessage.SEVERITY_WARN, "PRIORIDAD MATERIA(S) EN ORDINARIO", "SELECCIONA TODAS LAS MATERIAS EN ORDINARIO ");
+            //addMessage(FacesMessage.SEVERITY_WARN, "PRIORIDAD MATERIA(S) EN ORDINARIO", "SELECCIONA TODAS LAS MATERIAS EN ORDINARIO ");
+            if (listaNaranjas.size() == 1) {
+                mostrarPanel("Selecciona materias prioritarias [Materias en repetición Min. 1]->[ Materias en ordinario" + listaAmarillas.size() + "]", "mensaje-amarillas");
+            }
+            mostrarPanel("Selecciona materias prioritarias [ Materias en ordinario " + listaAmarillas.size() + "]", "mensaje-amarillas");
             for (int i = 0; i < listaAmarillas.size(); i++) {
                 Reticula r = listaM.get(listaAmarillas.get(i)[0]);
                 try {
@@ -524,7 +531,9 @@ public class InscripcionesBean implements Serializable {
             }
         }
         if (Mazules != 0) {
-            addMessage(FacesMessage.SEVERITY_INFO, "MATERIAS DISPONIBLES ", "SELECCIONA TUS MATERIAS");
+            //  addMessage(FacesMessage.SEVERITY_INFO, "MATERIAS DISPONIBLES ", "SELECCIONA TUS MATERIAS");
+            mostrarPanel("Selecciona materias disponibles [ Materias " + listaAzules.size() + "]", "mensaje-info");
+            
             // Caso 1: el semestre del alumno es PAR y s es IMPAR
 
             for (int i = 0; i < listaAzules.size(); i++) {
