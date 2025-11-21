@@ -4,3 +4,8 @@
 /SIESC/build/
 /SIESC-ejb/dist/
 /build/
+nbproject/private/
+**/nbproject/private/
+**/nbproject/private/private.properties
+**/nbproject/private/private.xml
+**/nbproject/project.properties
