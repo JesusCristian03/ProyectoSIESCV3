@@ -5,6 +5,7 @@
 package servicio;
 
 import DAO.OrganigramaFacadeLocal;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import modelo.Organigrama;
@@ -26,5 +27,10 @@ public class OrganigramaServicio implements OrganigramaServicioLocal {
     @Override
     public Organigrama buscarPorId(String x) {
         return organigramaFacade.find(x);
+    }
+    @Override
+    public List<Organigrama> traerListaOrganigrama(){
+    return organigramaFacade.findAll();
+    
     }
 }

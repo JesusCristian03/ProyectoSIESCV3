@@ -6,107 +6,107 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:head>
-    <title>Departamento Academico</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <h:head>
+        <title>Departamento Academico</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-    <!-- Ultima Theme -->
-    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+        <!-- Ultima Theme -->
+        <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+        <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 
-    <style>
-        body {
-            font-family: "Segoe UI", sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
+        <style>
+            body {
+                font-family: "Segoe UI", sans-serif;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
 
-        /* Estructura principal */
-        .layout-wrapper {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+            /* Estructura principal */
+            .layout-wrapper {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
 
-        /* ===== TOPBAR ===== */
-        .layout-topbar {
-            background-color: #003366;
-            color: white;
-            height: 65px;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-            z-index: 1000;
-        }
+            /* ===== TOPBAR ===== */
+            .layout-topbar {
+                background-color: #003366;
+                color: white;
+                height: 65px;
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+                box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+                z-index: 1000;
+            }
 
-        .layout-topbar .title {
-            flex: 1;
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
+            .layout-topbar .title {
+                flex: 1;
+                text-align: center;
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
 
-        .menu-toggle-btn {
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            margin-right: 15px;
-        }
+            .menu-toggle-btn {
+                font-size: 1.5rem;
+                color: white;
+                cursor: pointer;
+                margin-right: 15px;
+            }
 
-        /* ===== SIDEBAR ===== */
-        .layout-sidebar {
-            width: 260px;
-            background-color: #fff;
-            border-right: 1px solid #ddd;
-            overflow-y: auto;
-            padding: 15px;
-        }
+            /* ===== SIDEBAR ===== */
+            .layout-sidebar {
+                width: 260px;
+                background-color: #fff;
+                border-right: 1px solid #ddd;
+                overflow-y: auto;
+                padding: 15px;
+            }
 
-        .layout-sidebar.collapsed {
-            width: 0;
-            padding: 0;
-            overflow: hidden;
-        }
+            .layout-sidebar.collapsed {
+                width: 0;
+                padding: 0;
+                overflow: hidden;
+            }
 
-        /* ===== MAIN ===== */
-        .layout-main-container {
-            flex: 1;
-            display: flex;
-            overflow: hidden;
-        }
+            /* ===== MAIN ===== */
+            .layout-main-container {
+                flex: 1;
+                display: flex;
+                overflow: hidden;
+            }
 
-        .layout-main {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-            background-color: #f4f6f9;
-        }
+            .layout-main {
+                flex: 1;
+                padding: 2rem;
+                overflow-y: auto;
+                background-color: #f4f6f9;
+            }
 
-        
-        .pi::before {
-    font-family: 'primeicons' !important;
-}
 
-        /* ===== FOOTER ===== */
-        .layout-footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            height: 40px;
-            line-height: 40px;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-    </style>
+            .pi::before {
+                font-family: 'primeicons' !important;
+            }
 
-    
-    
-           <style>
+            /* ===== FOOTER ===== */
+            .layout-footer {
+                background-color: #003366;
+                color: white;
+                text-align: center;
+                height: 40px;
+                line-height: 40px;
+                font-size: 13px;
+                flex-shrink: 0;
+            }
+        </style>
+
+
+
+        <style>
             .label-form {
                 font-weight: 600;
                 color: #3f51b5;
@@ -124,155 +124,156 @@
                 color: #fff !important;
             }
         </style>
-        
-    <script>
-        function toggleSidebar() {
-            document.querySelector('.layout-sidebar').classList.toggle('collapsed');
-        }
-    </script>
-</h:head>
+
+        <script>
+            function toggleSidebar() {
+                document.querySelector('.layout-sidebar').classList.toggle('collapsed');
+            }
+        </script>
+    </h:head>
 
 
-<h:body>
+    <h:body>
 
-<div class="layout-wrapper">
+        <div class="layout-wrapper">
 
-    <!-- ================= TOPBAR ================= -->
-    <div class="layout-topbar">
-        <div class="menu-toggle-btn" onclick="toggleSidebar()">
-            <i class="pi pi-bars"></i>
+            <!-- ================= TOPBAR ================= -->
+            <div class="layout-topbar">
+                <div class="menu-toggle-btn" onclick="toggleSidebar()">
+                    <i class="pi pi-bars"></i>
+                </div>
+
+                <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
+
+                <div class="title">DEPARTAMENTO DE ACADEMICO</div>
+
+                <h:form styleClass="logout-btn">
+                    <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
+                                     action="#{controlSesion.cerrarSesion}" ajax="false" />
+                </h:form>
+            </div>
+
+            <div class="layout-main-container">
+
+                <!-- ================= SIDEBAR ================= -->
+                <div class="layout-sidebar">
+                    <h:form>
+
+                        <p:panelMenu style="width:100%;" styleClass="custom-menu">
+
+
+                            <!-- 1 DOCENTE -->
+                            <p:submenu label="MATENIMIENTO" icon="pi pi-users">
+
+                                <p:submenu label="DOCENTES" icon="pi pi-users">
+                                    <p:submenu label="BASE" icon="pi pi-users">
+                                        <p:menuitem value="Asignacion a grupo"
+                                                    icon="pi pi-user-plus"
+                                                    action="#{asignacionMGBean.abrirAsignacion}" />
+
+                                        <p:menuitem value="Asignacion temporal " outcome=""
+                                                    icon="" />
+                                        <p:menuitem value="Asignacion temporal " outcome=""
+                                                    icon="" />
+                                    </p:submenu>
+
+                                </p:submenu>
+
+
+                                <p:submenu label="Grupos de Horarios" icon=" ">
+                                    <p:submenu label=" " icon=" ">
+                                        <p:menuitem value="hola " outcome="/academico/AsignacionGrupos.xhtml"
+                                                    icon=" " />
+                                    </p:submenu>
+                                </p:submenu>
+
+
+                                <p:submenu label="Horarios examenes especiales/globales " icon=" ">
+                                    <p:submenu label=" " icon=" ">
+                                        <p:menuitem value=" " outcome=""
+                                                    icon=" " />
+                                    </p:submenu>
+                                </p:submenu>
+
+
+                                <p:submenu label="Residencias " icon=" ">
+                                    <p:submenu label=" " icon=" ">
+                                        <p:menuitem value=" " outcome=""
+                                                    icon=" " />
+                                    </p:submenu>
+                                </p:submenu>
+
+
+                                <p:submenu label="Concentrado de Autoevaluacion " icon=" ">
+                                    <p:submenu label=" " icon=" ">
+                                        <p:menuitem value=" " outcome=""
+                                                    icon=" " />
+                                    </p:submenu>
+                                </p:submenu>
+
+
+                                <p:submenu label="Programa oficial " icon=" ">
+                                    <p:submenu label=" " icon=" ">
+                                        <p:menuitem value=" " outcome=""
+                                                    icon=" " />
+                                    </p:submenu>
+                                </p:submenu>
+
+
+                                <p:submenu label="Avance Reticular " icon=" ">
+                                    <p:submenu label=" " icon=" ">
+                                        <p:menuitem value=" " outcome=""
+                                                    icon=" " />
+                                    </p:submenu>
+                                </p:submenu>
+
+
+                            </p:submenu>
+
+
+                            <p:submenu label="EVALUACION" icon="">
+                                <p:menuitem value="hola " outcome="/academico/AsignacionGrupos.xhtml"
+                                            icon=" " />
+                            </p:submenu>
+
+
+                            <p:submenu label="CONSULTAS" icon="">
+
+                            </p:submenu>
+
+
+                            <p:submenu label="DPPI" icon="">
+
+                            </p:submenu>
+
+
+                            <p:submenu label="UTILERIAS" icon="">
+
+                            </p:submenu>
+
+
+
+
+                        </p:panelMenu>
+                    </h:form>
+                </div>
+
+                <!-- ================= CONTENIDO PRINCIPAL ================= -->
+                <div class="layout-main">
+                    <ui:insert name="content">
+                        <h3>Bienvenido al Departamento de Academico</h3>
+                        <p>Selecciona una opción del menú lateral para comenzar.</p>
+                        <h:graphicImage library="assets" name="aguiluchos.jpg" style="height:200px;" />
+                    </ui:insert>
+                </div>
+            </div>
+
+            <!-- ================= FOOTER ================= -->
+            <div class="layout-footer">
+                © 2025 Tecnológico Nacional de México Campus Cuautla | Departamento Academico
+            </div>
+
         </div>
 
-        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
-
-        <div class="title">DEPARTAMENTO DE ACADEMICO</div>
-
-        <h:form styleClass="logout-btn">
-            <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
-                             action="#{controlSesion.cerrarSesion}" ajax="false" />
-        </h:form>
-    </div>
-
-    <div class="layout-main-container">
-
-        <!-- ================= SIDEBAR ================= -->
-        <div class="layout-sidebar">
-            <h:form>
-              
-                <p:panelMenu style="width:100%;" styleClass="custom-menu">
-                    
-                    
-    <!-- 1 DOCENTE -->
-    <p:submenu label="MATENIMIENTO" icon="pi pi-users">
-        
-            <p:submenu label="DOCENTES" icon="pi pi-users">
-                       <p:submenu label="BASE" icon="pi pi-users">
-                                  <p:menuitem value="Asignacion a grupo" outcome="/academico/AsignacionGrupos.xhtml"
-                                    icon="pi pi-user-plus" />
-        
-                                  <p:menuitem value="Asignacion temporal " outcome=""
-                                   icon="" />
-                                  <p:menuitem value="Asignacion temporal " outcome=""
-                                    icon="" />
-                       </p:submenu>
-
-            </p:submenu>
-                
-
-            <p:submenu label="Grupos de Horarios" icon=" ">
-                       <p:submenu label=" " icon=" ">
-                                  <p:menuitem value="hola " outcome="/academico/AsignacionGrupos.xhtml"
-                                    icon=" " />
-                       </p:submenu>
-            </p:submenu>
-        
-        
-            <p:submenu label="Horarios examenes especiales/globales " icon=" ">
-                       <p:submenu label=" " icon=" ">
-                                  <p:menuitem value=" " outcome=""
-                                    icon=" " />
-                       </p:submenu>
-            </p:submenu>
-        
-        
-            <p:submenu label="Residencias " icon=" ">
-                       <p:submenu label=" " icon=" ">
-                                  <p:menuitem value=" " outcome=""
-                                    icon=" " />
-                       </p:submenu>
-            </p:submenu>
-        
-        
-            <p:submenu label="Concentrado de Autoevaluacion " icon=" ">
-                       <p:submenu label=" " icon=" ">
-                                  <p:menuitem value=" " outcome=""
-                                    icon=" " />
-                       </p:submenu>
-            </p:submenu>
-        
-       
-            <p:submenu label="Programa oficial " icon=" ">
-                       <p:submenu label=" " icon=" ">
-                                  <p:menuitem value=" " outcome=""
-                                    icon=" " />
-                       </p:submenu>
-            </p:submenu>
-        
-        
-            <p:submenu label="Avance Reticular " icon=" ">
-                       <p:submenu label=" " icon=" ">
-                                  <p:menuitem value=" " outcome=""
-                                    icon=" " />
-                       </p:submenu>
-            </p:submenu>
-
-        
-    </p:submenu>
-
- 
-    <p:submenu label="EVALUACION" icon="">
-        <p:menuitem value="hola " outcome="/academico/AsignacionGrupos.xhtml"
-                                    icon=" " />
-    </p:submenu>
-
-  
-    <p:submenu label="CONSULTAS" icon="">
-        
-    </p:submenu>
-
- 
-    <p:submenu label="DPPI" icon="">
-        
-    </p:submenu>
-
-    
-    <p:submenu label="UTILERIAS" icon="">
-        
-    </p:submenu>
-
-
-  
-
-                </p:panelMenu>
-            </h:form>
-        </div>
-
-        <!-- ================= CONTENIDO PRINCIPAL ================= -->
-        <div class="layout-main">
-            <ui:insert name="content">
-                <h3>Bienvenido al Departamento de Academico</h3>
-                <p>Selecciona una opción del menú lateral para comenzar.</p>
-                 <h:graphicImage library="assets" name="aguiluchos.jpg" style="height:200px;" />
-            </ui:insert>
-        </div>
-    </div>
-
-    <!-- ================= FOOTER ================= -->
-    <div class="layout-footer">
-        © 2025 Tecnológico Nacional de México Campus Cuautla | Departamento Academico
-    </div>
-
-</div>
-
-</h:body>
+    </h:body>
 </html>

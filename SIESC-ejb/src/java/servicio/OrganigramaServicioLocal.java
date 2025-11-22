@@ -4,6 +4,7 @@
  */
 package servicio;
 
+import java.util.List;
 import javax.ejb.Local;
 import modelo.Organigrama;
 
@@ -14,4 +15,5 @@ import modelo.Organigrama;
 @Local
 public interface OrganigramaServicioLocal {
     Organigrama buscarPorId(String x);
+    List<Organigrama> traerListaOrganigrama();
 }

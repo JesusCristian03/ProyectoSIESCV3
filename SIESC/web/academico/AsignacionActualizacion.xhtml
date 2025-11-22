@@ -10,164 +10,106 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<ui:composition template="./templateAcademico.xhtml">
-
-
-    
-    <ui:define name="content">
-        
-        
-        
-        
-        
-<h:form id="formAsigGrupo">
-    
-         <div class="card" style="padding:20px; margin:auto; max-width:900px;">
-<h2 style="text-align:center; color:#0d47a1;">ASIGNACIÓN Y ACTUALIZACIÓN<br/>DE DOCENTES A GRUPOS</h2>
-
-
-<!-- PANEL PRINCIPAL -->
-<p:panel header="DATOS PARA LA ASIGNACIÓN DE DOCENTES" styleClass="panel-azul">
-<p:panelGrid columns="2" layout="grid" styleClass="ui-fluid">
-    
-    
-<p:outputLabel value="Departamento:" />
-<p:selectOneMenu >
-    <f:selectItem itemLabel="Seleccione un departamento"  />
-<f:selectItems />
-</p:selectOneMenu>
+    <ui:composition template="./templateAcademico.xhtml">
 
 
 
-</p:panelGrid>
-</p:panel>
+        <ui:define name="content">
 
 
-<br/>
 
 
-<!-- SEGUNDO PANEL -->
-<p:panel header="Introduzca los siguientes datos:" styleClass="panel-azul">
-<p:panelGrid columns="2" layout="grid" styleClass="ui-fluid">
-    
-<p:outputLabel value="Carrera:" />
-<p:selectOneMenu >
-    <f:selectItem itemLabel="Selecciones una carrera" itemValue="" />
-<f:selectItems />
-</p:selectOneMenu>
+
+            <h:form id="formAsigGrupo">
+
+                <div class="card" style="padding:20px; margin:auto; max-width:100%;">
+                    <h2 style="text-align:center; color:#0d47a1;">ASIGNACIÓN Y ACTUALIZACIÓN<br/>DE DOCENTES A GRUPOS</h2>
 
 
-<p:outputLabel value="Periodo:" />
-<p:selectOneMenu >
-    <f:selectItem itemLabel="Seleccione el Periodo" itemValue="" />
-<f:selectItems  />
-</p:selectOneMenu>
+                    <!-- PANEL PRINCIPAL -->
+                    <p:panel header="DATOS PARA LA ASIGNACIÓN DE DOCENTES" styleClass="panel-azul">
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-fluid">
 
 
-<p:outputLabel value="Semestre:" />
-<p:selectOneMenu >
-<f:selectItem itemLabel="Todos" itemValue="" />
-<f:selectItems />
-</p:selectOneMenu>
+                            <p:outputLabel value="Departamento:" />
+                            <p:selectOneMenu value="#{asignacionMGBean.departamentoSeleccionado}">
+                                <f:selectItem itemLabel="Seleccione un departamento" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{asignacionMGBean.listaDepartamentos}" var="dep"
+                                               itemLabel="#{dep.descripcionArea}" itemValue="#{dep}" />
+                            </p:selectOneMenu>
 
-</p:panelGrid>
-</p:panel>
-
-
-<br/>
-<div style="text-align:center;">
-<p:commandButton value="ACEPTAR"
-                 icon="pi pi-check"
-                 styleClass="p-button-success"
-                 action="/academico/AsignacionActualizacion?faces-redirect=true" process="@none"  />
-<p:commandButton value="CANCELAR" icon="pi pi-times" styleClass="p-button-secondary" />
-</div>
+                            <p:outputLabel value="Carrera:" />
+                            <p:selectOneMenu >
+                                <f:selectItem itemLabel="Selecciones una carrera" itemValue="" />
+                                <f:selectItems />
+                            </p:selectOneMenu>
 
 
-</div>
-    
-<div class="card" style="padding:20px; margin:auto; max-width:900px;">
-<h2 style="text-align:center; color:#0d47a1;">ASIGNACIÓN Y ACTUALIZACIÓN<br/>DE DOCENTES A GRUPOS</h2>
+                            <p:outputLabel value="Periodo:" />
+                            <p:selectOneMenu >
+                                <f:selectItem itemLabel="Seleccione el Periodo" itemValue="" />
+                                <f:selectItems  />
+                            </p:selectOneMenu>
 
 
-<!-- PANEL PRINCIPAL -->
-<p:panel header="DATOS PARA LA ASIGNACIÓN DE DOCENTES" styleClass="panel-azul">
-<p:panelGrid columns="2" layout="grid" styleClass="ui-fluid">
-    
-    
-<p:outputLabel value="Departamento:" />
-<p:inputText value="#{asigGrupoBean.departamento.nombre}" readonly="true" />
+                            <p:outputLabel value="Semestre:" />
+                            <p:selectOneMenu >
+                                <f:selectItem itemLabel="Todos" itemValue="" />
+                                <f:selectItems />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Grupo:" />
+                            <p:selectOneMenu value="#{asigGrupoBean.grupo}">
+                                <f:selectItem itemLabel="Seleccione el grupo" itemValue="" />
+                                <f:selectItems value="#{asigGrupoBean.listaGrupos}" var="g" itemLabel="#{g.clave}" itemValue="#{g}" />
+                            </p:selectOneMenu>
 
 
-<p:outputLabel value="Carrera:" />
-<p:inputText value="#{asigGrupoBean.carrera.nombre}" readonly="true" />
+                            <p:outputLabel value="Docente:" />
+                            <p:selectOneMenu value="#{asigGrupoBean.docente}">
+                                <f:selectItem itemLabel="Seleccione un profesor" itemValue="" />
+                                <f:selectItems value="#{asigGrupoBean.listaDocentes}" var="pr" itemLabel="#{pr.nombreCompleto}" itemValue="#{pr}" />
+                            </p:selectOneMenu>
+
+                        </p:panelGrid>
+                    </p:panel>
 
 
-<p:outputLabel value="Periodo:" />
-<p:inputText value="#{asigGrupoBean.periodo.descripcion}" readonly="true" />
 
 
-<p:outputLabel value="Semestre:" />
-<p:inputText value="#{asigGrupoBean.semestre}" readonly="true" />
 
-</p:panelGrid>
-</p:panel>
+                </div>
 
-
-<br/>
-
-
-<!-- SEGUNDO PANEL -->
-<p:panel header="Introduzca los siguientes datos:" styleClass="panel-azul">
-<p:panelGrid columns="2" layout="grid" styleClass="ui-fluid">
-    
-<p:outputLabel value="Grupo:" />
-<p:selectOneMenu value="#{asigGrupoBean.grupo}">
-    <f:selectItem itemLabel="Seleccione el grupo" itemValue="" />
-<f:selectItems value="#{asigGrupoBean.listaGrupos}" var="g" itemLabel="#{g.clave}" itemValue="#{g}" />
-</p:selectOneMenu>
+                <div class="card" style="padding:20px; margin:auto; max-width:100%;">
+                    <div style="text-align:center;">
+                        <p:commandButton value="Registrar Docente" icon="pi pi-check" styleClass="p-button-success"
+                                         action="#{asigGrupoBean.registrar}" update="formAsigGrupo" />
+                        <p:commandButton value="Salir" icon="pi pi-times" styleClass="p-button-secondary" />
+                    </div>
 
 
-<p:outputLabel value="Docente:" />
-<p:selectOneMenu value="#{asigGrupoBean.docente}">
-     <f:selectItem itemLabel="Seleccione un profesor" itemValue="" />
-<f:selectItems value="#{asigGrupoBean.listaDocentes}" var="pr" itemLabel="#{pr.nombreCompleto}" itemValue="#{pr}" />
-</p:selectOneMenu>
-</p:panelGrid>
-</p:panel>
+                    <h3 style="text-align:center; color:#b71c1c; margin-top:25px;">Grupos existentes hasta el momento</h3>
 
 
-<br/>
-<div style="text-align:center;">
-<p:commandButton value="Registrar Docente" icon="pi pi-check" styleClass="p-button-success"
-action="#{asigGrupoBean.registrar}" update="formAsigGrupo" />
-<p:commandButton value="Salir" icon="pi pi-times" styleClass="p-button-secondary" />
-</div>
+                    <!-- TABLA -->
+                    <p:dataTable value="#{asigGrupoBean.listaHorarios}" var="h" style="margin-top:20px;">
+                        <p:column headerText="Materia">#{h.materia}</p:column>
+                        <p:column headerText="Gpo">#{h.grupo}</p:column>
+                        <p:column headerText="Excl">#{h.exclusivo}</p:column>
+                        <p:column headerText="Docente">#{h.docente}</p:column>
+                        <p:column headerText="Lun">#{h.lunes}</p:column>
+                        <p:column headerText="Mar">#{h.martes}</p:column>
+                        <p:column headerText="Mie">#{h.miercoles}</p:column>
+                        <p:column headerText="Jue">#{h.jueves}</p:column>
+                        <p:column headerText="Vie">#{h.viernes}</p:column>
+                        <p:column headerText="Sab">#{h.sabado}</p:column>
+                        <p:column headerText="Dom">#{h.domingo}</p:column>
+                        <p:column headerText="CAP">#{h.cap}</p:column>
+                        <p:column headerText="INSCR.">#{h.inscr}</p:column>
+                    </p:dataTable>
 
 
-<h3 style="text-align:center; color:#b71c1c; margin-top:25px;">Grupos existentes hasta el momento</h3>
-
-
-<!-- TABLA -->
-<p:dataTable value="#{asigGrupoBean.listaHorarios}" var="h" style="margin-top:20px;">
-<p:column headerText="Materia">#{h.materia}</p:column>
-<p:column headerText="Gpo">#{h.grupo}</p:column>
-<p:column headerText="Excl">#{h.exclusivo}</p:column>
-<p:column headerText="Docente">#{h.docente}</p:column>
-<p:column headerText="Lun">#{h.lunes}</p:column>
-<p:column headerText="Mar">#{h.martes}</p:column>
-<p:column headerText="Mie">#{h.miercoles}</p:column>
-<p:column headerText="Jue">#{h.jueves}</p:column>
-<p:column headerText="Vie">#{h.viernes}</p:column>
-<p:column headerText="Sab">#{h.sabado}</p:column>
-<p:column headerText="Dom">#{h.domingo}</p:column>
-<p:column headerText="CAP">#{h.cap}</p:column>
-<p:column headerText="INSCR.">#{h.inscr}</p:column>
-</p:dataTable>
-
-
-</div>
-</h:form>
+                </div>
+            </h:form>
 
 
 
@@ -175,14 +117,14 @@ action="#{asigGrupoBean.registrar}" update="formAsigGrupo" />
 
 
 
-        
-            </ui:define>
-    
-    
-    
-    
-    
-</ui:composition>
+
+        </ui:define>
+
+
+
+
+
+    </ui:composition>
 
 </html>
 
