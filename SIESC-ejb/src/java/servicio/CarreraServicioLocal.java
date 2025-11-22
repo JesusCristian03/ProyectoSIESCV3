@@ -25,6 +25,9 @@ public interface CarreraServicioLocal {
     void eliminar(Carrera carrera);
 
     Carrera buscarPorId(Integer reticula);
+    
     List<Carrera> obtenerCarreraPor2(String nombrecarrera, Date fechaFinalizacion);
+    
+    List<Carrera> traerListaCarrera();
     
 }

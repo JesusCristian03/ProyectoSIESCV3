@@ -20,10 +20,9 @@ public class CarreraServicio implements CarreraServicioLocal {
 
     @EJB
     private CarreraFacadeLocal carreraFacade;
-    
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    
     @Override
     public List<Carrera> buscarTodos() {
         return carreraFacade.findAll();
@@ -48,11 +47,15 @@ public class CarreraServicio implements CarreraServicioLocal {
     public Carrera buscarPorId(Integer reticula) {
         return carreraFacade.find(reticula);
     }
-    
+
     @Override
     public List<Carrera> obtenerCarreraPor2(String nombrecarrera, Date fechaFinalizacion) {
         return carreraFacade.buscarCarreraPerTwo(nombrecarrera, fechaFinalizacion);
     }
-    
-    
+
+    @Override
+    public List<Carrera> traerListaCarrera() {
+        return carreraFacade.findAll();
+    }
+
 }

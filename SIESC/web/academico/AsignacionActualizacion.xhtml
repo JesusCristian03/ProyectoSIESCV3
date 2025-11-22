@@ -40,8 +40,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
                             <p:outputLabel value="Carrera:" />
                             <p:selectOneMenu >
-                                <f:selectItem itemLabel="Selecciones una carrera" itemValue="" />
-                                <f:selectItems />
+                                <f:selectItem itemLabel="Selecciones una carrera" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{asignacionMGBean.listaPermisos}" var="listaPermiso" itemLabel="#{listaPermiso.reticula.nombreCarrera}" itemValue="#{listaPermiso.reticula.reticula}"/>
                             </p:selectOneMenu>
 
 

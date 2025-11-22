@@ -167,9 +167,8 @@
 
                                 <p:submenu label="DOCENTES" icon="pi pi-users">
                                     <p:submenu label="BASE" icon="pi pi-users">
-                                        <p:menuitem value="Asignacion a grupo"
-                                                    icon="pi pi-user-plus"
-                                                    action="#{asignacionMGBean.abrirAsignacion}" />
+                                        <p:menuitem value="Asignacion a grupo" action="/academico/AsignacionActualizacion.xhtml"
+                                                    icon="pi pi-user-plus" actionListener="#{asignacionMGBean.inicializar}"/>
 
                                         <p:menuitem value="Asignacion temporal " outcome=""
                                                     icon="" />

@@ -10,9 +10,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import modelo.Carrera;
 import modelo.Organigrama;
+import modelo.Permisos;
+import modelo.Usuario;
+import servicio.CarreraServicioLocal;
 import servicio.OrganigramaServicioLocal;
+import servicio.PermisoServicioLocal;
 
 /**
  *
@@ -23,11 +29,23 @@ import servicio.OrganigramaServicioLocal;
 public class asignacionMGBean implements Serializable {
 
     @EJB
+    private PermisoServicioLocal permisoServicio;
+
+    @EJB
+    private CarreraServicioLocal carreraServicio;
+
+    @EJB
     private OrganigramaServicioLocal organigramaServicio;
 
     private Organigrama departamentoSeleccionado;
 
     List<Organigrama> listaDepartamentos;
+
+    List<Carrera> listaCarreras;
+
+    List<Permisos> listaPermisos;
+
+    private Usuario usuario;
 
     /**
      * Creates a new instance of asignacionMGBean
@@ -36,19 +54,41 @@ public class asignacionMGBean implements Serializable {
     }
 
     public void inicializar(ActionEvent event) {
+        // 4. Obtiene el contexto actual de JSF (para trabajar con sesión, request, etc.)
+        FacesContext contexto = FacesContext.getCurrentInstance();
+        // 5. Recupera el objeto "usuario" guardado en la sesión
+        usuario = (Usuario) contexto.getExternalContext().getSessionMap().get("usuario");
+        listaDepartamentos = organigramaServicio.traerListaOrganigrama();
+        departamentoSeleccionado = new Organigrama();
+        listaCarreras = carreraServicio.traerListaCarrera();
+        listaPermisos = permisoServicio.buscarCarreras(usuario.getUsuario());
+
+        System.out.println("Lista departamento" + listaDepartamentos.size());
 
     }
 
-    public String abrirAsignacion() {
-        // Lógica que antes estaba en inicializar()
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-        listaDepartamentos = organigramaServicio.traerListaOrganigrama();
-        departamentoSeleccionado = new Organigrama();
-        listaDepartamentos = new ArrayList();
-        System.out.println("Lista departamento" + listaDepartamentos.size());
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-        // Navega a la página
-        return "/academico/AsignacionActualizacion.xhtml?faces-redirect=true";
+    public List<Permisos> getListaPermisos() {
+        return listaPermisos;
+    }
+
+    public void setListaPermisos(List<Permisos> listaPermisos) {
+        this.listaPermisos = listaPermisos;
+    }
+
+    public List<Carrera> getListaCarreras() {
+        return listaCarreras;
+    }
+
+    public void setListaCarreras(List<Carrera> listaCarreras) {
+        this.listaCarreras = listaCarreras;
     }
 
     public Organigrama getDepartamentoSeleccionado() {
