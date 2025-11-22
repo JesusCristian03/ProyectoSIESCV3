@@ -32,43 +32,79 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
                             <p:outputLabel value="Departamento:" />
-                            <p:selectOneMenu value="#{asignacionMGBean.departamentoSeleccionado}">
+                            <p:selectOneMenu value="#{asignacionMGBean.departamentoSeleccionado}"
+                                             filter="true" 
+                                             filterMatchMode="contains" >
+                                <p:ajax listener="#{asignacionMGBean.prueba}"/>
                                 <f:selectItem itemLabel="Seleccione un departamento" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems value="#{asignacionMGBean.listaDepartamentos}" var="dep"
-                                               itemLabel="#{dep.descripcionArea}" itemValue="#{dep}" />
+                                               itemLabel="#{dep.descripcionArea}" itemValue="#{dep.claveArea}" />
                             </p:selectOneMenu>
 
                             <p:outputLabel value="Carrera:" />
-                            <p:selectOneMenu >
+                            <p:selectOneMenu value="#{asignacionMGBean.carreraSeleccionada}"
+                                             filter="true" 
+                                             filterMatchMode="contains" >
+                                <p:ajax listener="#{asignacionMGBean.prueba}" update=""/>
                                 <f:selectItem itemLabel="Selecciones una carrera" itemValue="" noSelectionOption="true"/>
-                                <f:selectItems value="#{asignacionMGBean.listaPermisos}" var="listaPermiso" itemLabel="#{listaPermiso.reticula.nombreCarrera}" itemValue="#{listaPermiso.reticula.reticula}"/>
+                                <f:selectItems 
+                                    value="#{asignacionMGBean.listaPermisos}" 
+                                    var="listaPermiso"
+                                    itemLabel="#{listaPermiso.reticula.nombreCarrera} (#{listaPermiso.reticula.claveOficial})"
+                                    itemValue="#{listaPermiso.reticula.reticula}" />
                             </p:selectOneMenu>
 
 
                             <p:outputLabel value="Periodo:" />
-                            <p:selectOneMenu >
+
+                            <p:selectOneMenu id="periodo" 
+                                             value="#{asignacionMGBean.periodoSeleccionado}"
+                                             filter="true" 
+                                             filterMatchMode="contains" >
+                                <p:ajax listener="#{asignacionMGBean.prueba}" update="" />
                                 <f:selectItem itemLabel="Seleccione el Periodo" itemValue="" />
-                                <f:selectItems  />
+                                <f:selectItems 
+                                    value="#{asignacionMGBean.listaPeriodos}" 
+                                    var="p" 
+                                    itemLabel="#{p.identificacionCorta}" 
+                                    itemValue="#{p.periodo}" />
                             </p:selectOneMenu>
 
 
                             <p:outputLabel value="Semestre:" />
-                            <p:selectOneMenu >
+                            <p:selectOneMenu id="semestre" 
+                                             value="#{asignacionMGBean.semestreSeleccionado}"
+                                             filter="true" 
+                                             filterMatchMode="contains" >
+                                <p:ajax listener="#{asignacionMGBean.prueba}" update="" />
                                 <f:selectItem itemLabel="Todos" itemValue="" />
-                                <f:selectItems />
+                                <f:selectItems value="#{asignacionMGBean.semestres}" var="s"
+                                               itemLabel="#{s}" itemValue="#{s}" />
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Docente:" />
+                            <p:selectOneMenu value="#{asignacionMGBean.docenteRFC}"
+                                             filter="true" 
+                                             filterMatchMode="contains" >
+                                <p:ajax listener="#{asignacionMGBean.prueba}" update="" />
+                                <f:selectItem itemLabel="Seleccione un profesor" itemValue="" />
+                                <f:selectItems value="#{asignacionMGBean.listaDocentes}" 
+                                               var="pr" 
+                                               itemLabel="#{pr.nombreEmpleado} #{pr.apellidoPaterno} #{pr.apellidoMaterno}" 
+                                               itemValue="#{pr.rfc}" />
                             </p:selectOneMenu>
                             <p:outputLabel value="Grupo:" />
-                            <p:selectOneMenu value="#{asigGrupoBean.grupo}">
+
+                            <p:selectOneMenu value="#{asigGrupoBean.grupo}"
+                                             filter="true" 
+                                             filterMatchMode="contains" >
+                                <p:ajax listener="#{asignacionMGBean.prueba}" update="" />
                                 <f:selectItem itemLabel="Seleccione el grupo" itemValue="" />
                                 <f:selectItems value="#{asigGrupoBean.listaGrupos}" var="g" itemLabel="#{g.clave}" itemValue="#{g}" />
                             </p:selectOneMenu>
 
 
-                            <p:outputLabel value="Docente:" />
-                            <p:selectOneMenu value="#{asigGrupoBean.docente}">
-                                <f:selectItem itemLabel="Seleccione un profesor" itemValue="" />
-                                <f:selectItems value="#{asigGrupoBean.listaDocentes}" var="pr" itemLabel="#{pr.nombreCompleto}" itemValue="#{pr}" />
-                            </p:selectOneMenu>
+
 
                         </p:panelGrid>
                     </p:panel>
