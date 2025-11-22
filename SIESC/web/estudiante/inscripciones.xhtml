@@ -63,11 +63,12 @@
 
                                 <p:outputLabel value="Especialidad:" />
                                 <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" />
-
+                                
+                                <p:outputLabel value="Estatus:" />
                                 <p:panel id="mensajePanel"
                                          style="width:95%; margin: 10px auto;"
                                          styleClass="#{inscripcionesBean.colorMensaje}">
-                                    <h:outputText value="#{inscripcionesBean.mensaje}" style="font-weight: bold;"/>
+                                    <h:outputText value="#{inscripcionesBean.mensaje}" />
                                 </p:panel>
                                 
 

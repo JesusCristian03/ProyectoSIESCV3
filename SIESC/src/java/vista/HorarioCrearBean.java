@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -606,6 +607,12 @@ public class HorarioCrearBean implements Serializable {
         // 6. Usa el servicio permisoServicio para buscar carreras relacionadas al usuario
         listaPermisos = permisoServicio.buscarCarreras(usuario.getUsuario());
         listaPeriodoEscolar = periodoEscolarServicio.periodosEscolaresActivos();
+        // opcional: listaPeriodoEscolar ya inicializada
+        if (!listaPeriodoEscolar.isEmpty()) {
+            periodoS = listaPeriodoEscolar.get(0).getPeriodo();
+            System.out.println("PeriodoS" + periodoS);
+        }
+
         listaAulas = aulasServicio.aulasActivos();
         listagrupos = gruposServicio.gruposActivos();
         listapersonal = personalServicio.personalActivos();
@@ -1047,7 +1054,9 @@ public class HorarioCrearBean implements Serializable {
             //actualizarTabla()
 
             addMessage(FacesMessage.SEVERITY_INFO, "ÉXITO", "EL AULA SE MODIFICÓ CORRECTAMENTE.");
-            activarModoModificar();
+            //activarModoModificar();
+            actualizarTabla();
+            cambiarModoColorTabla("FEA785");
             // Actualizar la tabla visualmente
             PrimeFaces.current().ajax().update("horarioG:grupo");
         } else {
