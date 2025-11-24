@@ -42,5 +42,7 @@ public interface GruposFacadeLocal {
     List<Grupos> buscarGruposCompletos(Carrera reticula, Integer semestre, PeriodoEscolar periodo);
     
     List<Grupos> buscarGruposPorCampoGrupo(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String grupo);
+    
+    List<Grupos> buscarGruposPorCampoDepartamento(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String claveArea);
 
 }

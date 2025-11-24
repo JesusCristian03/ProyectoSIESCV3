@@ -18,6 +18,9 @@ public interface PersonalServicioLocal {
     Personal buscarPorId(String rfc);
 
     List<Personal> buscarTodos();
+    
     List<Personal> personalActivos();
+    
+    List<Personal> personalPorArea(String clavearea);
     
 }

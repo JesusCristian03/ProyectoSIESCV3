@@ -36,5 +36,10 @@ public class PersonalServicio implements PersonalServicioLocal {
     public List<Personal> personalActivos() {
         return personalFacade.personalesActivos();
     }
+    @Override
+    public List<Personal> personalPorArea(String clavearea){
+    return personalFacade.personalPorDepartamento(clavearea);
+    
+    }
 
 }

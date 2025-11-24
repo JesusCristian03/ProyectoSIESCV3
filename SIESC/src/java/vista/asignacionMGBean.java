@@ -10,15 +10,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import modelo.Carrera;
+import modelo.Grupos;
+import modelo.HorarioAsignatura;
+import modelo.HorarioCrear;
+import modelo.Horarios;
 import modelo.Organigrama;
 import modelo.PeriodoEscolar;
 import modelo.Permisos;
 import modelo.Personal;
 import modelo.Usuario;
 import servicio.CarreraServicioLocal;
+import servicio.GruposServicioLocal;
+import servicio.HorarioServicioLocal;
 import servicio.OrganigramaServicioLocal;
 import servicio.PeriodoEscolarServicioLocal;
 import servicio.PermisoServicioLocal;
@@ -32,6 +39,10 @@ import servicio.PersonalServicioLocal;
 @SessionScoped
 public class asignacionMGBean implements Serializable {
 
+    @EJB
+    private HorarioServicioLocal horarioServicio;
+    @EJB
+    private GruposServicioLocal gruposServicio;
     @EJB
     private PeriodoEscolarServicioLocal periodoEscolarServicio;
     @EJB
@@ -49,18 +60,40 @@ public class asignacionMGBean implements Serializable {
     private List<PeriodoEscolar> listaPeriodos;
     private List<Integer> semestres;
     private List<Personal> listaDocentes;
+    private List<HorarioAsignatura> listaHorarioCrear;
 
     private Usuario usuario;
     private String periodoSeleccionado;
-    private Integer semestreSeleccionado = 0;
+    private Integer semestreSeleccionado;
     private Integer carreraSeleccionada;
     private String departamentoSeleccionado;
     private String docenteRFC;
+    private HorarioAsignatura horarioCrearSeleccionado;
 
     /**
      * Creates a new instance of asignacionMGBean
      */
     public asignacionMGBean() {
+    }
+
+    private void addMessage(FacesMessage.Severity severity, String titulo, String detalle) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, titulo, detalle));
+    }
+
+    public void validacionCampos() {
+        if ((departamentoSeleccionado != null && !"".equals(departamentoSeleccionado))
+                && (carreraSeleccionada != null && carreraSeleccionada != 0)
+                && (periodoSeleccionado != null && !"".equals(periodoSeleccionado))
+                && (semestreSeleccionado != null && !"".equals(semestreSeleccionado))) {
+
+            addMessage(FacesMessage.SEVERITY_INFO, "CAMPOS COMPLETOS",
+                    "Area: " + departamentoSeleccionado
+                    + " Carrera: " + carreraServicio.buscarPorId(carreraSeleccionada).getNombreCarrera()
+                    + " Periodo: " + periodoSeleccionado
+                    + " Semestre: " + semestreSeleccionado);
+
+        }
+
     }
 
     public void inicializar(ActionEvent event) {
@@ -73,24 +106,165 @@ public class asignacionMGBean implements Serializable {
         listaCarreras = carreraServicio.traerListaCarrera();
         listaPermisos = permisoServicio.buscarCarreras(usuario.getUsuario());
         listaPeriodos = periodoEscolarServicio.periodosEscolaresActivos();
-        periodoSeleccionado = listaPeriodos.get(0).getPeriodo();       
+        periodoSeleccionado = listaPeriodos.get(0).getPeriodo();
         semestres = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             semestres.add(i);
         }
         listaDocentes = personalServicio.personalActivos();
 
-
     }
 
     public void prueba() {
-
+        System.out.println("-------------------------------------MENSAJE----------------------------------");
         System.out.println("DepartamentoSeleccionado ClaveArea(String):" + departamentoSeleccionado);
         System.out.println("CarreraSeleccionado Reticula(Integer):" + carreraSeleccionada);
         System.out.println("SemestreSeleccionado S(Integer)" + semestreSeleccionado);
         System.out.println("DocenteSeleciconado docenteRFC(String)" + docenteRFC);
         System.out.println("PeriodoSeleccionado p.periodo(String)" + periodoSeleccionado);
+        System.out.println("-------------------------------------MENSAJE----------------------------------");
 
+    }
+
+    public void cambioPeriodo() {
+
+        prueba();
+        validacionCampos();
+    }
+
+    public void cambioDepartamento() {
+
+        listaDocentes = personalServicio.personalPorArea(departamentoSeleccionado);
+        System.out.println("Tamaño listadocentes" + listaDocentes.size());
+        prueba();
+        listaHorarioCrear = gruposServicio.buscarGruposPorDepartamento(carreraSeleccionada, semestreSeleccionado, periodoSeleccionado, departamentoSeleccionado);
+        System.out.println("listaHorarioCrear->" + listaHorarioCrear.size());
+        validacionCampos();
+    }
+
+    public void cambioCarrera() {
+        prueba();
+        listaHorarioCrear = gruposServicio.buscarGruposPorDepartamento(carreraSeleccionada, semestreSeleccionado, periodoSeleccionado, departamentoSeleccionado);
+        System.out.println("listaHorarioCrear->" + listaHorarioCrear.size());
+        validacionCampos();
+
+    }
+
+    public void cambioSemestre() {
+        prueba();
+        listaHorarioCrear = gruposServicio.buscarGruposPorDepartamento(carreraSeleccionada, semestreSeleccionado, periodoSeleccionado, departamentoSeleccionado);
+        System.out.println("listaHorarioCrear->" + listaHorarioCrear.size());
+        validacionCampos();
+
+    }
+
+    public void filaSeleccionada() {
+        listaDocentes = personalServicio.personalPorArea(departamentoSeleccionado);
+        System.out.println("HorarioSeleccionado" + horarioCrearSeleccionado);
+                addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA",
+                    "Materia"+horarioCrearSeleccionado.getAsignatura()
+                +" Clave: "+horarioCrearSeleccionado.getMateria()
+                +" Grupo: "+horarioCrearSeleccionado.getGrupo());
+
+    }
+
+    public void accionEliminar() {
+        if (horarioCrearSeleccionado != null) {
+            Grupos g = gruposServicio.buscarPorIdInt(horarioCrearSeleccionado.getId());
+            g.setRfc(null);
+            gruposServicio.actualizar(g);
+            List<Horarios> lh = horarioServicio.buscarHorarioPorMateriayGrupo(
+                    carreraSeleccionada,
+                    semestreSeleccionado,
+                    periodoSeleccionado,
+                    horarioCrearSeleccionado.getMateria(),
+                    horarioCrearSeleccionado.getGrupo());
+            for (Horarios h : lh) {
+                h.setRfc(null);
+                horarioServicio.actualizar(h);
+            }
+            addMessage(FacesMessage.SEVERITY_INFO, "ACTUALIZANDO",
+                    "SE HA ELIMINADO DOCENTE");
+            listaHorarioCrear = gruposServicio.buscarGruposPorDepartamento(carreraSeleccionada, semestreSeleccionado, periodoSeleccionado, departamentoSeleccionado);
+        }
+    }
+
+    public void guardarMaestro() {
+        HorarioAsignatura ha = null;
+
+        Personal maestro = personalServicio.buscarPorId(docenteRFC);
+
+        for (HorarioAsignatura h : listaHorarioCrear) {
+            if (h.getId() == horarioCrearSeleccionado.getId()) {
+                // Aquí actualizas el objeto real
+                h.setDocente(maestro.getNombreEmpleado()
+                        + " " + maestro.getApellidoPaterno()
+                        + " " + maestro.getApellidoMaterno());
+                ha = h;
+                break;
+            }
+        }
+
+        if (ha != null) {
+            System.out.println("=================================");
+            System.out.println("Grupo: " + ha.getGrupo());
+            System.out.println("IdGrupo: " + ha.getId());
+            System.out.println("Materia: " + ha.getMateria());
+            System.out.println("Asignatura: " + ha.getAsignatura());
+            System.out.println("Docente: " + ha.getDocente());
+            System.out.println("Lunes: " + ha.getLunes());
+            System.out.println("Martes: " + ha.getMartes());
+            System.out.println("Miércoles: " + ha.getMiercoles());
+            System.out.println("Jueves: " + ha.getJueves());
+            System.out.println("Viernes: " + ha.getViernes());
+            System.out.println("Sábado: " + ha.getSabado());
+            System.out.println("=================================");
+
+            Grupos g = gruposServicio.buscarPorIdInt(ha.getId());
+            Personal objetorfc = personalServicio.buscarPorId(docenteRFC);
+            g.setRfc(objetorfc);
+            gruposServicio.actualizar(g);
+
+            List<Horarios> lh = horarioServicio.buscarHorarioPorMateriayGrupo(
+                    carreraSeleccionada,
+                    semestreSeleccionado,
+                    periodoSeleccionado,
+                    horarioCrearSeleccionado.getMateria(),
+                    ha.getGrupo());
+            System.out.println("===== PARÁMETROS PARA buscarHorariosPorGrupos =====");
+            System.out.println("Carrera: " + carreraServicio.buscarPorId(carreraSeleccionada));
+            System.out.println("Carrera (ID): " + carreraSeleccionada);
+            System.out.println("Semestre: " + semestreSeleccionado);
+            System.out.println("Periodo: " + periodoEscolarServicio.buscarPorId(periodoSeleccionado));
+            System.out.println("Periodo (ID): " + periodoSeleccionado);
+            System.out.println("Materia(NNN): " + horarioCrearSeleccionado.getMateria());
+            System.out.println("====================================================");
+            for (Horarios h : lh) {
+                h.setRfc(objetorfc);
+                horarioServicio.actualizar(h);
+            }
+            addMessage(FacesMessage.SEVERITY_INFO, "ACTUALIZANDO",
+                    "DOCENTE:" + objetorfc.getNombreEmpleado() + " " + objetorfc.getApellidoPaterno() + " " + objetorfc.getApellidoMaterno() + " SE HA INSERTADO.");
+
+        }
+
+        docenteRFC = "";
+    }
+
+    public HorarioAsignatura getHorarioCrearSeleccionado() {
+        return horarioCrearSeleccionado;
+    }
+
+    public void setHorarioCrearSeleccionado(HorarioAsignatura horarioCrearSeleccionado) {
+        this.horarioCrearSeleccionado = horarioCrearSeleccionado;
+    }
+
+    public List<HorarioAsignatura> getListaHorarioCrear() {
+        return listaHorarioCrear;
+    }
+
+    public void setListaHorarioCrear(List<HorarioAsignatura> listaHorarioCrear) {
+        this.listaHorarioCrear = listaHorarioCrear;
     }
 
     public Integer getCarreraSeleccionada() {
@@ -132,8 +306,6 @@ public class asignacionMGBean implements Serializable {
     public void setPeriodoSeleccionado(String periodoSeleccionado) {
         this.periodoSeleccionado = periodoSeleccionado;
     }
-
-   
 
     public Usuario getUsuario() {
         return usuario;

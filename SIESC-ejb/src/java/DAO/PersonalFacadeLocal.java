@@ -28,6 +28,9 @@ public interface PersonalFacadeLocal {
     List<Personal> findRange(int[] range);
 
     int count();
+    
     List<Personal> personalesActivos();
+    
+    List<Personal> personalPorDepartamento(String clavearea);
     
 }
