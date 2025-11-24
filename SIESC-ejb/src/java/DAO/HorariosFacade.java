@@ -124,6 +124,28 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
         return lista;
     }
 
+    //Horario Asignatura Por Semestre de la Carrera
+    @Override
+    public List<Horarios> buscarHorarioPorDepartamento(String periodo, Integer reticula, Integer semestre, String clavearea) {
+        List<Horarios> lista = null;
+
+        String sqlHorario = "SELECT h FROM  Horarios h WHERE h.periodo.periodo=:periodo "
+                + "and h.idGrupo.idMateriaCarrera.semestreReticula=:semestre "
+                + "and h.idGrupo.idMateriaCarrera.reticula.reticula=:reticula "
+                + "and h.idGrupo.idMateriaCarrera.materia.claveArea.claveArea=:claveArea";
+
+        Query queryPersonal = em.createQuery(sqlHorario);
+
+        queryPersonal.setParameter("periodo", periodo);
+        queryPersonal.setParameter("semestre", semestre);
+        queryPersonal.setParameter("reticula", reticula);
+        queryPersonal.setParameter("claveArea", clavearea);
+
+        lista = (List<Horarios>) (queryPersonal.getResultList());
+
+        return lista;
+    }
+
     //Horario Todas las Asignaturas de la Carrera
     public List<Horarios> horarioAsignatura(String periodo, Integer reticula) {
         List<Horarios> lista = null;
@@ -225,7 +247,7 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
 
         return lista;
     }
-    
+
     @Override
     public List<Horarios> buscarHorariosPorMateria(Carrera reticula, int semestre, PeriodoEscolar periodo, String materia) {
         List<Horarios> lista = null;
@@ -251,6 +273,32 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
         return lista;
     }
 
+    @Override
+    public List<Horarios> buscarHorariosPorMateriayGrupo(Carrera reticula, int semestre, PeriodoEscolar periodo, String materia, String grupo) {
+        List<Horarios> lista = null;
+        System.out.println("BUSCANDO HORARIOS POR MATERIA:");
+
+        String sql = "SELECT h FROM Horarios h "
+                + "JOIN h.idGrupo g "
+                + "JOIN g.idMateriaCarrera mc "
+                + "WHERE g.reticula = :reticula "
+                + "AND mc.semestreReticula = :semestre "
+                + "AND g.periodo = :periodo "
+                + "AND g.materia = :Materia "
+                + "AND g.grupo = :Grupo";
+
+        Query query = em.createQuery(sql);
+
+        query.setParameter("reticula", reticula);
+        query.setParameter("semestre", semestre);
+        query.setParameter("periodo", periodo);
+        query.setParameter("Materia", materia);
+        query.setParameter("Grupo", grupo);
+
+        lista = (List<Horarios>) query.getResultList();
+
+        return lista;
+    }
 
     @Override
     public List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula) {
@@ -258,7 +306,7 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
         System.out.println("BUSCANDO HORARIOS: -> ");
 
         String sql = "SELECT h FROM Horarios h "
-                + "JOIN h.idGrupo g "              
+                + "JOIN h.idGrupo g "
                 + "WHERE g.reticula = :reticula "
                 + "AND g.periodo = :periodo "
                 + "AND h.aula = :Aula";

@@ -39,4 +39,8 @@ public interface HorarioServicioLocal {
     List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula);
     
     Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula);
+    
+    List<Horarios> buscarHorarioPorMateria(int reticula, int semestre, String periodo, String materia);
+    
+    List<Horarios> buscarHorarioPorMateriayGrupo(int reticula, int semestre, String periodo, String materia, String grupo);
 }

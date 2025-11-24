@@ -11,41 +11,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <ui:composition template="./templateAcademico.xhtml">
-
-
-
         <ui:define name="content">
-
-
-
-
 
             <h:form id="formAsigGrupo">
 
                 <div class="card" style="padding:20px; margin:auto; max-width:100%;">
                     <h2 style="text-align:center; color:#0d47a1;">ASIGNACIÓN Y ACTUALIZACIÓN<br/>DE DOCENTES A GRUPOS</h2>
 
-
+                    <p:growl id="growlAsignacion" showDetail="true" sticky="false" life="4000"/>
                     <!-- PANEL PRINCIPAL -->
                     <p:panel header="DATOS PARA LA ASIGNACIÓN DE DOCENTES" styleClass="panel-azul">
-                        <p:panelGrid columns="2" layout="grid" styleClass="ui-fluid">
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-fluid sin-borde">
 
 
                             <p:outputLabel value="Departamento:" />
                             <p:selectOneMenu value="#{asignacionMGBean.departamentoSeleccionado}"
                                              filter="true" 
                                              filterMatchMode="contains" >
-                                <p:ajax listener="#{asignacionMGBean.prueba}"/>
+                                <p:ajax listener="#{asignacionMGBean.cambioDepartamento}" update="formAsigGrupo tablaDatos growlAsignacion"/>
                                 <f:selectItem itemLabel="Seleccione un departamento" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems value="#{asignacionMGBean.listaDepartamentos}" var="dep"
-                                               itemLabel="#{dep.descripcionArea}" itemValue="#{dep.claveArea}" />
+                                               itemLabel="#{dep.descripcionArea} (#{dep.claveArea})" itemValue="#{dep.claveArea}" />
                             </p:selectOneMenu>
 
                             <p:outputLabel value="Carrera:" />
                             <p:selectOneMenu value="#{asignacionMGBean.carreraSeleccionada}"
                                              filter="true" 
                                              filterMatchMode="contains" >
-                                <p:ajax listener="#{asignacionMGBean.prueba}" update=""/>
+                                <p:ajax listener="#{asignacionMGBean.cambioCarrera}" update="tablaDatos growlAsignacion"/>
                                 <f:selectItem itemLabel="Selecciones una carrera" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems 
                                     value="#{asignacionMGBean.listaPermisos}" 
@@ -61,7 +54,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              value="#{asignacionMGBean.periodoSeleccionado}"
                                              filter="true" 
                                              filterMatchMode="contains" >
-                                <p:ajax listener="#{asignacionMGBean.prueba}" update="" />
+                                <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="growlAsignacion tablaDatos" />
                                 <f:selectItem itemLabel="Seleccione el Periodo" itemValue="" />
                                 <f:selectItems 
                                     value="#{asignacionMGBean.listaPeriodos}" 
@@ -76,32 +69,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              value="#{asignacionMGBean.semestreSeleccionado}"
                                              filter="true" 
                                              filterMatchMode="contains" >
-                                <p:ajax listener="#{asignacionMGBean.prueba}" update="" />
-                                <f:selectItem itemLabel="Todos" itemValue="" />
+                                <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="tablaDatos growlAsignacion" />
+                                <f:selectItem itemLabel="Selecciona un semestre" itemValue="" />
                                 <f:selectItems value="#{asignacionMGBean.semestres}" var="s"
                                                itemLabel="#{s}" itemValue="#{s}" />
                             </p:selectOneMenu>
 
-                            <p:outputLabel value="Docente:" />
-                            <p:selectOneMenu value="#{asignacionMGBean.docenteRFC}"
-                                             filter="true" 
-                                             filterMatchMode="contains" >
-                                <p:ajax listener="#{asignacionMGBean.prueba}" update="" />
-                                <f:selectItem itemLabel="Seleccione un profesor" itemValue="" />
-                                <f:selectItems value="#{asignacionMGBean.listaDocentes}" 
-                                               var="pr" 
-                                               itemLabel="#{pr.nombreEmpleado} #{pr.apellidoPaterno} #{pr.apellidoMaterno}" 
-                                               itemValue="#{pr.rfc}" />
-                            </p:selectOneMenu>
-                            <p:outputLabel value="Grupo:" />
 
-                            <p:selectOneMenu value="#{asigGrupoBean.grupo}"
-                                             filter="true" 
-                                             filterMatchMode="contains" >
-                                <p:ajax listener="#{asignacionMGBean.prueba}" update="" />
-                                <f:selectItem itemLabel="Seleccione el grupo" itemValue="" />
-                                <f:selectItems value="#{asigGrupoBean.listaGrupos}" var="g" itemLabel="#{g.clave}" itemValue="#{g}" />
-                            </p:selectOneMenu>
+
 
 
 
@@ -116,35 +91,103 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 </div>
 
                 <div class="card" style="padding:20px; margin:auto; max-width:100%;">
-                    <div style="text-align:center;">
-                        <p:commandButton value="Registrar Docente" icon="pi pi-check" styleClass="p-button-success"
-                                         action="#{asigGrupoBean.registrar}" update="formAsigGrupo" />
-                        <p:commandButton value="Salir" icon="pi pi-times" styleClass="p-button-secondary" />
-                    </div>
 
 
-                    <h3 style="text-align:center; color:#b71c1c; margin-top:25px;">Grupos existentes hasta el momento</h3>
+
+                    <h3 style="text-align:center; margin-top:25px;">GRUPOS</h3>
 
 
-                    <!-- TABLA -->
-                    <p:dataTable value="#{asigGrupoBean.listaHorarios}" var="h" style="margin-top:20px;">
-                        <p:column headerText="Materia">#{h.materia}</p:column>
-                        <p:column headerText="Gpo">#{h.grupo}</p:column>
-                        <p:column headerText="Excl">#{h.exclusivo}</p:column>
-                        <p:column headerText="Docente">#{h.docente}</p:column>
-                        <p:column headerText="Lun">#{h.lunes}</p:column>
-                        <p:column headerText="Mar">#{h.martes}</p:column>
-                        <p:column headerText="Mie">#{h.miercoles}</p:column>
-                        <p:column headerText="Jue">#{h.jueves}</p:column>
-                        <p:column headerText="Vie">#{h.viernes}</p:column>
-                        <p:column headerText="Sab">#{h.sabado}</p:column>
-                        <p:column headerText="Dom">#{h.domingo}</p:column>
-                        <p:column headerText="CAP">#{h.cap}</p:column>
-                        <p:column headerText="INSCR.">#{h.inscr}</p:column>
+                    <p:dataTable value="#{asignacionMGBean.listaHorarioCrear}" 
+                                 var="h"
+                                 styleClass="tabla-horarios"
+                                 style="width:100%;"
+                                 id="tablaDatos"
+                                 selectionMode="single"
+                                 selection="#{asignacionMGBean.horarioCrearSeleccionado}"
+                                 rowKey="#{h.id}" >
+
+                        <p:ajax event="rowSelect"
+                                listener="#{asignacionMGBean.filaSeleccionada}"
+                                update=":formAsigGrupo:dlgMaestros :formAsigGrupo:growlAsignacion"
+                                oncomplete="PF('dlgMaestros').show();" />
+
+                        <!-- Clave -->
+                        <p:column headerText="Clave" style="width:6%;">
+                            #{h.materia}
+                        </p:column>
+
+                        <!-- Asignatura -->
+                        <p:column headerText="Asignatura" style="width:28%; line-height: 1.2;">
+                            <div class="asignatura-box linea-divisora">
+                                <span class="materia">#{h.asignatura}</span>
+                                <div class="linea"></div>
+                                <span class="maestro">#{h.docente}</span>
+                            </div>
+                        </p:column>
+
+                        <!-- Grupo -->
+                        <p:column headerText="Grupo" style="width:6%;">
+                            #{h.grupo}
+                        </p:column>
+
+                        <!-- Días con ancho igual -->
+                        <p:column headerText="Lunes" style="width:8%;">#{h.lunes}</p:column>
+                        <p:column headerText="Martes" style="width:8%;">#{h.martes}</p:column>
+                        <p:column headerText="Miércoles" style="width:8%;">#{h.miercoles}</p:column>
+                        <p:column headerText="Jueves" style="width:8%;">#{h.jueves}</p:column>
+                        <p:column headerText="Viernes" style="width:8%;">#{h.viernes}</p:column>
+                        <p:column headerText="Sábado" style="width:8%;">#{h.sabado}</p:column>
+
+                        <!-- Botón eliminar -->
+                        <p:column style="text-align:center; width:3%;">
+                            <p:commandButton 
+                                icon="pi pi-trash"
+                                styleClass="btn-basura"
+                                actionListener="#{asignacionMGBean.accionEliminar}"
+                                process="@this"
+                                update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion">
+
+                                <f:setPropertyActionListener 
+                                    target="#{asignacionMGBean.horarioCrearSeleccionado}" 
+                                    value="#{h}" />
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
 
 
+
                 </div>
+
+                <p:dialog id="dlgMaestros" 
+                          widgetVar="dlgMaestros" 
+                          header="Seleccionar Maestro"
+                          modal="true" 
+                          resizable="false" 
+                          width="650">
+
+
+
+                    <p:selectOneMenu value="#{asignacionMGBean.docenteRFC}" 
+                                     filter="true" filterMatchMode="contains"
+                                     style="width:100%;">
+                        <f:selectItem itemLabel="SELECCIONE UN MAESTRO" itemValue="" />
+                        <f:selectItems value="#{asignacionMGBean.listaDocentes}"
+                                       var="pr" 
+                                       itemLabel="#{pr.rfc} / #{pr.nombreEmpleado} #{pr.apellidoPaterno} #{pr.apellidoMaterno}" 
+                                       itemValue="#{pr.rfc}" />
+                    </p:selectOneMenu>
+
+                    <br/><br/>
+
+                    <p:commandButton value="Asignar"
+                                     icon="pi pi-check"
+                                     styleClass="p-button-success"
+                                     actionListener="#{asignacionMGBean.guardarMaestro}"
+                                     update=":formAsigGrupo:tablaDatos"
+                                     oncomplete="PF('dlgMaestros').hide();" />
+
+
+                </p:dialog>
             </h:form>
 
 

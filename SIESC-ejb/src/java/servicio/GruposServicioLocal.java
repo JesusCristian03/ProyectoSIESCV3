@@ -20,7 +20,9 @@ public interface GruposServicioLocal {
     List<Grupos> gruposActivos();
 
     void insertarNuevoGrupo(Grupos grupo);
+    void actualizar(Grupos g);
     Grupos buscarPorId(String x);
+    Grupos buscarPorIdInt(int x);
     public List<Grupos> buscarGrupoSii(Integer reticula, Integer idmateriacarrera, String periodo, String grupo);
     List<Grupos> buscarGruposPorCampoNombre(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String grupo);
     void eliminar(Grupos grupo);
@@ -28,4 +30,6 @@ public interface GruposServicioLocal {
     List<String> buscarGruposCompletos(Carrera reticula, Integer semestre, PeriodoEscolar periodo);
     
     List<HorarioAsignatura> buscarGruposPorCampoGrupoSeleccionada(int reticula, Integer semestre, String periodo, String grupo);
+    
+    List<HorarioAsignatura> buscarGruposPorDepartamento(int reticula, Integer semestre, String periodo, String claveArea);
 }

@@ -18,6 +18,10 @@
         <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 
         <style>
+            /* ===================================================================== */
+            /* ====================   ESTILOS DEL TEMPLATE   ======================= */
+            /* ===================================================================== */
+
             body {
                 font-family: "Segoe UI", sans-serif;
                 margin: 0;
@@ -25,7 +29,6 @@
                 overflow: hidden;
             }
 
-            /* Estructura principal */
             .layout-wrapper {
                 height: 100vh;
                 display: flex;
@@ -87,7 +90,6 @@
                 background-color: #f4f6f9;
             }
 
-
             .pi::before {
                 font-family: 'primeicons' !important;
             }
@@ -102,6 +104,113 @@
                 font-size: 13px;
                 flex-shrink: 0;
             }
+
+
+            /* ===================================================================== */
+            /* ========================   ESTILOS DE TABLA   ======================= */
+            /* ===================================================================== */
+
+            /* Aplica SOLO a la tabla con class="tabla-horarios" */
+            .tabla-horarios * {
+                font-size: 12px !important;
+                text-align: center !important;
+                color: #000 !important; /* Negro */
+            }
+
+            /* Header y footer */
+            .tabla-horarios .ui-datatable-header,
+            .tabla-horarios .ui-datatable-footer {
+                background: #0d47a1;
+                color: #fff !important;
+                font-weight: bold;
+            }
+
+            /* Asignatura: materia */
+            .tabla-horarios .asignatura-box .materia {
+                font-weight: bold;
+                font-size: 13px;
+                color: #000 !important;
+            }
+
+            /* Asignatura: maestro */
+            .tabla-horarios .asignatura-box .maestro {
+                font-size: 11px;
+                color: #000 !important;
+            }
+
+            /* 3 puntitos */
+            .boton-tres-puntos {
+                background: none !important;
+                border: none !important;
+                box-shadow: none !important;
+                color: #000 !important;
+                font-size: 18px !important;
+                padding: 0 !important;
+                width: auto !important;
+                height: auto !important;
+            }
+            .tabla-horarios .linea-divisora .linea {
+                width: 70%;
+                height: 1px;
+                background-color: #ccc; /* línea gris suave */
+                margin: 3px auto;
+            }
+
+
+
+            /* Evita que PrimeFaces pinte la fila seleccionada de amarillo */
+            .ui-datatable .ui-state-highlight {
+                background-color: transparent !important;
+                color: inherit !important;
+            }
+
+            /* ===================================================================== */
+            /* ========================   BORDE TABLA INTERIOR   ======================= */
+            /* ===================================================================== */
+            .sin-borde td,
+            .sin-borde tr,
+            .sin-borde {
+                border: none !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+            /* ===================================================================== */
+            /* ========================   BOTE DE BASURA   ======================= */
+            /* ===================================================================== */
+
+            /* Quitar el fondo amarillo de la fila seleccionada */
+            .ui-state-highlight {
+                background: transparent !important;
+                color: inherit !important;
+            }
+
+            /* Botón de basura rojo, centrado, grande y con fondo */
+            .btn-basura {
+                background-color: #ffe5e5 !important; /* Fondo suave rojo claro */
+                border: none !important;
+                box-shadow: none !important;
+                width: 36px !important;
+                height: 36px !important;
+                border-radius: 8px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
+            }
+
+            /* Icono mas grande y rojo */
+            .btn-basura .pi {
+                font-size: 1.4rem !important;  /* Más grande */
+                color: #d10000 !important;      /* Rojo fuerte */
+            }
+
+            /* Hover: más rojo */
+            .btn-basura:hover {
+                background-color: #ffcccc !important;
+                transform: scale(1.05);
+                transition: 0.15s ease;
+            }
+
         </style>
 
 

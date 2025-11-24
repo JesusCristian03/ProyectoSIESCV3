@@ -39,15 +39,17 @@ public class PersonalFacade extends AbstractFacade<Personal> implements Personal
         
         return lista;
     }
-    
+    @Override
     public List<Personal> personalPorDepartamento(String clavearea) {
         
         Character estatus = 'D';
-        String sqlPeriodoEscolar = "SELECT l FROM Personal l WHERE l.nombramiento=:nombramiento AND l.claveCentro=:claveArea";
+        String sqlPeriodoEscolar = "SELECT l FROM Personal l WHERE l.nombramiento=:nombramiento AND l.areaAcademica.claveArea=:claveArea ";
         Query queryPeriodo = em.createQuery(sqlPeriodoEscolar);
         queryPeriodo.setParameter("nombramiento", estatus);
         queryPeriodo.setParameter("claveArea", clavearea);
+        
         List<Personal> lista = queryPeriodo.getResultList();
+
         
         return lista;
     }

@@ -10,6 +10,7 @@ import DAO.HorariosFacadeLoca;
 import DAO.PeriodoEscolarFacadeLocal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.security.PermitAll;
@@ -74,6 +75,17 @@ public class GruposServicio implements GruposServicioLocal {
     }
 
     @Override
+    public Grupos buscarPorIdInt(int x) {
+        return gruposFacade.find(x);
+    }
+
+    @Override
+    public void actualizar(Grupos g) {
+        gruposFacade.edit(g);
+
+    }
+
+    @Override
     public List<Grupos> buscarGrupoSii(Integer reticula, Integer idmateriacarrera, String periodo, String grupo) {
         return gruposFacade.buscarGrupoSii(reticula, idmateriacarrera, periodo, grupo);
     }
@@ -119,6 +131,25 @@ public class GruposServicio implements GruposServicioLocal {
     }
 
     @Override
+    public List<HorarioAsignatura> buscarGruposPorDepartamento(int reticula, Integer semestre, String periodo, String claveArea) {
+        PeriodoEscolar p = periodoEscolarFacade.find(periodo);
+        Carrera r = carreraFacade.find(reticula);
+
+        System.out.println("--------------SERVICIO MATERIA----------------");
+        System.out.println("Carrera:" + r);
+        System.out.println("Semestre:" + semestre);
+        System.out.println("PeriodoEscolar:" + p);
+
+        List<Grupos> gruposDisponibles = gruposFacade.buscarGruposPorCampoDepartamento(r, semestre, p, claveArea);
+        List<Horarios> horariosDisponibles = horariosFacade.buscarHorarioPorDepartamento(periodo, reticula, semestre, claveArea);
+        //HorarioAsignatura horario = new HorarioAsignatura();
+        System.out.println("Se han encontrado gruposDisponibles.size:" + gruposDisponibles.size());
+        System.out.println("Se han encontrado horariosDisponibles:" + horariosDisponibles.size());
+        return acomodarListaHorarios(gruposDisponibles, horariosDisponibles);
+
+    }
+
+    @Override
     public List<HorarioAsignatura> buscarGruposPorCampoGrupoSeleccionada(int reticula, Integer semestre, String periodo, String grupo) {
         PeriodoEscolar p = periodoEscolarFacade.find(periodo);
         Carrera r = carreraFacade.find(reticula);
@@ -148,8 +179,18 @@ public class GruposServicio implements GruposServicioLocal {
             horarioAsignatura.setMateria(grupo.getMateria());
             horarioAsignatura.setAsignatura(grupo.getIdMateriaCarrera().getMateria().getNombreCompletoMateria());
             horarioAsignatura.setId(grupo.getIdGrupo());
-
-            // horarioAsignatura.setDocente(grupo.getRfc().getNombreEmpleado());
+            // ===== VALIDACIÓN NUEVA =====
+            if (grupo.getRfc() != null) {
+                // el docente sí existe
+                horarioAsignatura.setDocente(
+                        grupo.getRfc().getNombreEmpleado() + " "
+                        + grupo.getRfc().getApellidoPaterno() + " "
+                        + grupo.getRfc().getApellidoMaterno());
+            } else {
+                // no existe docente asignado
+                horarioAsignatura.setDocente("Sin docente");
+            }
+            // ============================
             // Recorremos los horarios y asignamos según el día
             for (Horarios horario : horariosDisponibles) {
                 if (horario.getIdGrupo().equals(grupo)) { // Coincide grupo
@@ -197,6 +238,15 @@ public class GruposServicio implements GruposServicioLocal {
 
             listaHorarioAsignaturas.add(horarioAsignatura);
         }
+        /**
+         * --------------------------------------------- ORDENAMIENTO POR: 1.
+         * Materia (alfabético) 2. Grupo (alfabético)
+         * ---------------------------------------------
+         */
+        listaHorarioAsignaturas.sort(
+                Comparator.comparing(HorarioAsignatura::getMateria)
+                        .thenComparing(HorarioAsignatura::getGrupo)
+        );
 
         for (HorarioAsignatura h : listaHorarioAsignaturas) {
             System.out.println("=================================");

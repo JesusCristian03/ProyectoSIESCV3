@@ -23,6 +23,10 @@ import modelo.PeriodoEscolar;
 public class HorarioServicio implements HorarioServicioLocal {
 
     @EJB
+    private PeriodoEscolarServicioLocal periodoEscolarServicio;
+    @EJB
+    private CarreraServicioLocal carreraServicio;
+    @EJB
     private HorariosFacadeLoca horariosFacade;
 
     // Add business logic below. (Right-click in editor and choose
@@ -71,11 +75,27 @@ public class HorarioServicio implements HorarioServicioLocal {
     @Override
     public void actualizar(Horarios horarios) {
         horariosFacade.edit(horarios);
+        System.out.println("Horario a actualizar->" + horarios);
     }
 
     @Override
     public Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula) {
         return horariosFacade.buscarHorarioPorEmpalme(diaSemana, horaInicial, horaFinal, aula);
+    }
+
+    @Override
+    public List<Horarios> buscarHorarioPorMateria(int reticula, int semestre, String periodo, String materia) {
+        Carrera reticulaObjeto = carreraServicio.buscarPorId(reticula);
+        PeriodoEscolar periodoObjeto = periodoEscolarServicio.buscarPorId(periodo);
+        
+        return horariosFacade.buscarHorariosPorMateria(reticulaObjeto, semestre, periodoObjeto, materia);
+    }
+     @Override
+    public List<Horarios> buscarHorarioPorMateriayGrupo(int reticula, int semestre, String periodo, String materia, String grupo) {
+        Carrera reticulaObjeto = carreraServicio.buscarPorId(reticula);
+        PeriodoEscolar periodoObjeto = periodoEscolarServicio.buscarPorId(periodo);
+        
+        return horariosFacade.buscarHorariosPorMateriayGrupo(reticulaObjeto, semestre, periodoObjeto, materia,grupo);
     }
 
 }
