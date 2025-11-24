@@ -94,10 +94,10 @@ public class LoginBean implements Serializable {
         Estudiante estudiante = null;
 
         String redireccion = null;
-        //System.out.println("Entra a login"); 
+       
         estudianteLogin.setNoDeControl(usuario);
         estudianteLogin.setNip(Integer.parseInt(contrasena));
-        //System.out.println("Entra a login");    
+        System.out.println("Entra a login");    
         try {
             estudiante = estudianteServicio.loginEstudiante(estudianteLogin);
             if (estudiante != null) {
@@ -105,7 +105,8 @@ public class LoginBean implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("estudiante", estudiante);
 
-                redireccion = "estudiante/index.xhtml?faces-redirect=true";
+                redireccion = "../estudiante/index.xhtml?faces-redirect=true";
+                System.out.println("Redireccion: "+redireccion);
             }
         } catch (Exception e) {
 
