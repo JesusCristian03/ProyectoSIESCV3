@@ -1,0 +1,241 @@
+/* ==========================================================
+   ENCABEZADO
+   ========================================================== */
+.encabezado {
+    background-color: #0a3d62;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+    border-bottom: 4px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.encabezado .titulo-bloque {
+    text-align: center;
+    flex: 1;
+}
+
+.encabezado img {
+    height: 60px;
+}
+
+/* ==========================================================
+   FONDO Y TIPOGRAFÍA
+   ========================================================== */
+body {
+    background: #f5f8ff;
+    background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
+                      url("#{resource['assets/fondo-grid.png']}");
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ==========================================================
+   BIENVENIDA
+   ========================================================== */
+.inicio-header {
+    color: #0a3d62;
+    padding: 2rem;
+    text-align: left;
+    animation: fadeIn 1s ease;
+}
+
+.inicio-header h1 {
+    font-size: 2.6rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+}
+
+.inicio-header p {
+    font-size: 1.2rem;
+    color: #445b75;
+}
+
+/* ==========================================================
+   BOTONES PREMIUM
+   ========================================================== */
+.botones-inicio {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 22px; 
+    margin-top: 2rem;
+    animation: slideUp 1.2s ease;
+}
+
+.botones-inicio .ui-button { 
+    width: 310px;
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    padding: 16px 0 !important; 
+    border-radius: 14px !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+    gap: 12px;
+    border: none !important;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.15); 
+}
+
+.botones-inicio .ui-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 45%;
+    height: 100%;
+    background: rgba(255,255,255,0.25);
+    transform: skewX(-25deg);
+    transition: 0.4s;
+}
+
+.botones-inicio .ui-button:hover::before {
+    left: 120%;
+}
+
+.botones-inicio .ui-button .ui-button-text,
+.botones-inicio .ui-button-icon { 
+    color: #fff !important; 
+}
+
+.btn-aspirante { background: #0A5FA5 !important; }
+.btn-estudiante { background: #0F7AC0 !important; }
+.btn-admin { background: #2B4C68 !important; }
+
+.btn-aspirante:hover { background: #1278C8 !important; }
+.btn-estudiante:hover { background: #1392E6 !important; }
+.btn-admin:hover { background: #3F6788 !important; }
+
+/* ==========================================================
+   ANIMACIONES
+   ========================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+.footer {
+    background-color: #0a3d62;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.footer a {
+    color: white;
+    font-size: 1.8rem;
+    margin: 0 15px;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #4da8ff;
+}
+
+/* ==========================================================
+   PANELGRID — ALINEACIÓN COLUMNAS
+   ========================================================== */
+.leftCol,.rightCol {
+    display: flex;
+    align-items: flex-start;        /* <-- ESTO ARREGLA LA ALTURA */
+     padding: 0 .5rem; 
+    box-sizing: border-box;
+    align-items: center  /* <-- ALINEA AMBAS COLUMNAS EN EL CENTRO VERTICAL */
+}
+
+/* izquierda a la izquierda */
+.leftCol { justify-content: flex-start; }
+
+/* derecha a la derecha */
+.rightCol { justify-content: flex-end; }
+
+/* forzar que los outputPanel ocupen todo el ancho */
+.leftCol > .ui-outputpanel,
+.rightCol > .ui-outputpanel {
+    width: 100%;
+}
+
+/* ==========================================================
+   CARRUSEL
+   ========================================================== */
+.carousel-pro {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.carousel-pro-container {
+    width: 100%;
+   height: 160px;   /* más bajo → ahora se alinea perfecto */
+}
+
+.carousel-pro-image {
+    max-width: 260px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+     margin: 0 auto;   /* Centrado horizontal sin empujar verticalmente */
+}
+
+.ui-carousel-prev,
+.ui-carousel-next {
+    display: none !important;
+}
+
+/* puntos */
+.carousel-dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.carousel-dots .dot {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    background: #d0d4da;
+    margin: 5px;
+    border-radius: 50%;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.carousel-dots .dot.active {
+    background: #0a3d62;
+    transform: scale(1.2);
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+@media (max-width: 768px) {
+    .leftCol, .rightCol {
+        width: 100% !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .carousel-pro-image {
+        max-width: 60%;
+        max-height: 180px;
+    }
+}
+

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="templateEscolares.xhtml">
+
+    <ui:define name="content">
+        <div class="card">
+            <h2 style="margin-bottom:20px;">Alumnos</h2>
+
+            <!-- ===================== BUSCADOR ===================== -->
+            <p:toolbar>
+                <p:toolbarGroup align="right">
+                    <p:inputText id="busqueda" 
+                                 value="#{alumnosBean.filtro}" 
+                                 placeholder="Buscar por nombre, No control, CURP..."
+                                 style="width:300px" />
+
+                    <p:commandButton icon="pi pi-search"
+                                     update="tablaAlumnos"
+                                     actionListener="#{alumnosBean.buscar()}"
+                                     styleClass="p-button-outlined p-button-secondary" />
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <br/>
+
+            <!-- ===================== TABLA ===================== -->
+            <p:dataTable id="tablaAlumnos"
+                         value="#{alumnosBean.listaAlumnos}"
+                         var="alu"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="No se encontraron alumnos"
+                         rowKey="#{alu.noControl}"
+                         styleClass="p-datatable-gridlines">
+
+                <!-- No de Control -->
+                <p:column headerText="N° de Control" style="width:140px;">
+                    <h:outputText value="#{alu.noControl}" />
+                </p:column>
+
+                <!-- Apellido Paterno -->
+                <p:column headerText="Apellido paterno" sortBy="#{alu.apellidoPaterno}">
+                    <h:outputText value="#{alu.apellidoPaterno}" />
+                </p:column>
+
+                <!-- Apellido Materno -->
+                <p:column headerText="Apellido materno">
+                    <h:outputText value="#{alu.apellidoMaterno}" />
+                </p:column>
+
+                <!-- Nombre -->
+                <p:column headerText="Nombre" sortBy="#{alu.nombre}">
+                    <h:outputText value="#{alu.nombre}" />
+                </p:column>
+
+                <!-- CURP -->
+                <p:column headerText="CURP" style="width:220px;">
+                    <h:outputText value="#{alu.curp}" />
+                </p:column>
+
+                <!-- Carrera -->
+                <p:column headerText="Carrera" style="width:180px;">
+                    <h:outputText value="#{alu.carrera}" />
+                </p:column>
+
+                <!-- ===================== CRUD (TRES PUNTITOS) ===================== -->
+                <p:column style="width:60px; text-align:center;">
+                    <p:splitButton icon="pi pi-ellipsis-v" 
+                                   styleClass="p-button-text p-button-plain">
+
+                        <p:menuitem value="Ver" 
+                                    icon="pi pi-eye"
+                                    actionListener="#{alumnosBean.verAlumno(alu)}" 
+                                    update=":dlgVer"
+                                    oncomplete="PF('dlgVer').show()" />
+
+                        <p:menuitem value="Editar" 
+                                    icon="pi pi-pencil"
+                                    actionListener="#{alumnosBean.editarAlumno(alu)}"
+                                    update=":dlgEditar"
+                                    oncomplete="PF('dlgEditar').show()" />
+
+                        <p:menuitem value="Eliminar" 
+                                    icon="pi pi-trash"
+                                    actionListener="#{alumnosBean.prepararEliminar(alu)}"
+                                    update=":dlgEliminar"
+                                    oncomplete="PF('dlgEliminar').show()" />
+
+                    </p:splitButton>
+                </p:column>
+
+            </p:dataTable>
+        </div>
+
+        <!-- ===================== DIALOGO VER ===================== -->
+        <p:dialog widgetVar="dlgVer" id="dlgVer" header="Datos del Alumno" modal="true" width="450">
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="Nombre:" />
+                <h:outputText value="#{alumnosBean.alumnoSeleccionado.nombreCompleto}" />
+
+                <h:outputText value="CURP:" />
+                <h:outputText value="#{alumnosBean.alumnoSeleccionado.curp}" />
+
+                <h:outputText value="Carrera:" />
+                <h:outputText value="#{alumnosBean.alumnoSeleccionado.carrera}" />
+            </h:panelGrid>
+        </p:dialog>
+
+        <!-- ===================== DIALOGO EDITAR ===================== -->
+        <p:dialog widgetVar="dlgEditar" id="dlgEditar" header="Editar Alumno" modal="true" width="600">
+            <h:form id="formEditar">
+                <h:panelGrid columns="2" cellpadding="6">
+                    <h:outputText value="Nombre:" />
+                    <p:inputText value="#{alumnosBean.alumnoSeleccionado.nombre}" />
+
+                    <h:outputText value="Apellido Paterno:" />
+                    <p:inputText value="#{alumnosBean.alumnoSeleccionado.apellidoPaterno}" />
+
+                    <h:outputText value="Apellido Materno:" />
+                    <p:inputText value="#{alumnosBean.alumnoSeleccionado.apellidoMaterno}" />
+
+                    <h:outputText value="CURP:" />
+                    <p:inputText value="#{alumnosBean.alumnoSeleccionado.curp}" />
+
+                    <h:outputText value="Carrera:" />
+                    <p:inputText value="#{alumnosBean.alumnoSeleccionado.carrera}" />
+                </h:panelGrid>
+
+                <p:commandButton value="Guardar cambios" 
+                                 actionListener="#{alumnosBean.guardarCambios()}"
+                                 update="tablaAlumnos"
+                                 oncomplete="PF('dlgEditar').hide()" />
+            </h:form>
+        </p:dialog>
+
+        <!-- ===================== DIALOGO ELIMINAR ===================== -->
+        <p:dialog widgetVar="dlgEliminar" id="dlgEliminar"
+                  header="Confirmar eliminación" modal="true" width="400">
+            <p:panel>
+                <p>¿Seguro que deseas eliminar al alumno?</p>
+                <br/>
+                <p:commandButton value="Eliminar" 
+                                 actionListener="#{alumnosBean.eliminar()}"
+                                 update="tablaAlumnos"
+                                 oncomplete="PF('dlgEliminar').hide()" 
+                                 styleClass="p-button-danger" />
+
+                <p:commandButton value="Cancelar"
+                                 onclick="PF('dlgEliminar').hide()" 
+                                 styleClass="p-button-secondary" />
+            </p:panel>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>
+</html>
