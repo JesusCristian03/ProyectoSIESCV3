@@ -108,12 +108,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
                         <p:ajax event="rowSelect"
                                 listener="#{asignacionMGBean.filaSeleccionada}"
+                                process="@this"
                                 update=":formAsigGrupo:dlgMaestros :formAsigGrupo:growlAsignacion"
                                 oncomplete="PF('dlgMaestros').show();" />
-
+                      
                         <!-- Clave -->
                         <p:column headerText="Clave" style="width:6%;">
                             #{h.materia}
+                        </p:column>
+                          <p:column headerText="ID">
+                            #{h.id}
                         </p:column>
 
                         <!-- Asignatura -->
@@ -143,13 +147,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <p:commandButton 
                                 icon="pi pi-trash"
                                 styleClass="btn-basura"
-                                actionListener="#{asignacionMGBean.accionEliminar}"
+                                actionListener="#{asignacionMGBean.accionEliminar(h)}"
                                 process="@this"
-                                update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion">
+                                update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion"
+                                onclick="event.stopPropagation();">
 
-                                <f:setPropertyActionListener 
-                                    target="#{asignacionMGBean.horarioCrearSeleccionado}" 
-                                    value="#{h}" />
+
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
