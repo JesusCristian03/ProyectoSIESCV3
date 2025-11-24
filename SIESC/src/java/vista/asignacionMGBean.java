@@ -168,20 +168,22 @@ public class asignacionMGBean implements Serializable {
 
     }
 
-    public void accionEliminar() {
-        if (horarioCrearSeleccionado != null) {
-            Grupos g = gruposServicio.buscarPorIdInt(horarioCrearSeleccionado.getId());
+    public void accionEliminar(HorarioAsignatura ha) {
+        if (ha != null) {
+            Grupos g = gruposServicio.buscarPorIdInt(ha.getId());
             g.setRfc(null);
             gruposServicio.actualizar(g);
             List<Horarios> lh = horarioServicio.buscarHorarioPorMateriayGrupo(
                     carreraSeleccionada,
                     semestreSeleccionado,
                     periodoSeleccionado,
-                    horarioCrearSeleccionado.getMateria(),
-                    horarioCrearSeleccionado.getGrupo());
+                    ha.getMateria(),
+                    ha.getGrupo());
+            System.out.println("HorarioCrearSeleccionado"+ha);
             for (Horarios h : lh) {
                 h.setRfc(null);
                 horarioServicio.actualizar(h);
+                System.out.println("Actualize");
             }
             addMessage(FacesMessage.SEVERITY_INFO, "ACTUALIZANDO",
                     "SE HA ELIMINADO DOCENTE");
