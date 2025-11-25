@@ -64,25 +64,18 @@ public class HorarioCrearBean implements Serializable {
     private PersonalServicioLocal personalServicio;
     @EJB
     private OrganigramaServicioLocal organigramaServicio;
-
     @EJB
     private AulasServicioLocal aulasServicio;
-
     @EJB
     private PermisoServicioLocal permisoServicio;
-
     @EJB
     private MateriasCarrerasServicioLocal materiasCarrerasServicio;
-
     @EJB
     private PeriodoEscolarServicioLocal periodoEscolarServicio;
-
     @EJB
     private CarreraServicioLocal carreraServicio;
-
     @EJB
     private HorarioServicioLocal horarioServicio;
-
     @EJB
     private GruposServicioLocal gruposServicio;
 

@@ -38,7 +38,6 @@ import servicio.PersonalServicioLocal;
 @Named(value = "asignacionMGBean")
 @SessionScoped
 public class asignacionMGBean implements Serializable {
-
     @EJB
     private HorarioServicioLocal horarioServicio;
     @EJB
