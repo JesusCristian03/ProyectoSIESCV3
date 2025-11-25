@@ -74,6 +74,48 @@
 
 
                             </p:panelGrid>
+                            
+                            
+<h:panelGroup layout="block" styleClass="ultima-legend-horizontal">
+    
+        <div class="ultima-legend-small legend-cyan">
+        Elegir
+    </div>
+ 
+    
+    <div class="ultima-legend-small legend-yellow">
+        Reprobado
+    </div>
+    
+        <div class="ultima-legend-small legend-orange">
+        Reprobado 2
+    </div>
+
+    <div class="ultima-legend-small legend-red">
+        reprobado
+    </div>
+
+    <div class="ultima-legend-small legend-green">
+        aprovado
+    </div>
+
+
+    <div class="ultima-legend-small legend-purple">
+        nose
+    </div>
+
+    <div class="ultima-legend-small legend-brown">
+        nose
+    </div>
+
+    <div class="ultima-legend-small legend-pink">
+        no se
+    </div>
+
+</h:panelGroup>
+
+
+
 
                         </p:panel>
                     </h:form>
@@ -81,6 +123,10 @@
 
 
                     <h:form id="seleccion">
+                        
+
+                        
+                        
                         <p:tabView id="tabVista" cache="false">
 
                             <p:ajax event="tabChange" listener="#{inscripcionesBean.onTabChange}" update="@this :seleccion:tabVista:panelGrupos" />
@@ -99,9 +145,9 @@
 
                                 <p:dataTable id="tablaReticula" value="#{inscripcionesBean.listaM}" var="asignatura" rowStyleClass="registroPrueba" showGridlines="true">                                        
 
-                                    <p:column styleClass="#{asignatura.semestre1.color}">
-                                        <f:facet name="header">
-                                            <h:outputText value="Semestre 1" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                    <p:column styleClass="#{asignatura.semestre2.color}">
+                                        <f:facet name="header" >
+                                        <div class="tabla-header">Semestre 1</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -131,7 +177,7 @@
 
                                     <p:column styleClass="#{asignatura.semestre2.color}">
                                         <f:facet name="header">
-                                            <h:outputText value="Semestre 2" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                           <div class="tabla-header">Semestre 2</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -160,7 +206,7 @@
                                     </p:column>
                                     <p:column styleClass="#{asignatura.semestre3.color}">
                                         <f:facet name="header">
-                                            <h:outputText value="Semestre 3" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                           <div class="tabla-header">Semestre 3</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -189,7 +235,7 @@
                                     </p:column>
                                     <p:column styleClass="#{asignatura.semestre4.color}">
                                         <f:facet name="header">
-                                            <h:outputText value="Semestre 4" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                            <div class="tabla-header">Semestre 4</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -217,7 +263,7 @@
                                     </p:column>
                                     <p:column styleClass="#{asignatura.semestre5.color}">
                                         <f:facet name="header">
-                                            <h:outputText value="Semestre 5" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                           <div class="tabla-header">Semestre 5</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -245,7 +291,7 @@
                                     </p:column>
                                     <p:column styleClass="#{asignatura.semestre6.color}">
                                         <f:facet name="header">
-                                            <h:outputText value="Semestre 6" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                            <div class="tabla-header">Semestre 6</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -275,7 +321,7 @@
                                     <p:column styleClass="#{asignatura.semestre7.color}">
 
                                         <f:facet name="header">
-                                            <h:outputText value="Semestre 7" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                           <div class="tabla-header">Semestre 7</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -304,7 +350,7 @@
                                     </p:column>
                                     <p:column styleClass="#{asignatura.semestre8.color}">
                                         <f:facet name="header">
-                                            <h:outputText value="Semestre 8" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                            <div class="tabla-header">Semestre 8</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -333,7 +379,7 @@
                                     </p:column>
                                     <p:column styleClass="#{asignatura.semestre9.color}">
                                         <f:facet name="header">
-                                            <h:outputText value="Semestre 9" style="font-size:13px; font-weight:bold; text-align:center; display:block;" />
+                                            <div class="tabla-header">Semestre 9</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">

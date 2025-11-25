@@ -17,12 +17,23 @@ body {
 .layout-topbar {
     background-color: #003366;
     color: white;
-    height: 65px;
+    height: 60px;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding:  20px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16);
     z-index: 1000;
+}
+
+.menu-toggle-btn {
+   
+    color: white;
+    cursor: pointer;
+    margin-left: 50px; /* espacio que daja el icono al principio */
+     
+}
+.menu-toggle-btn i {
+    font-size: 2.5rem !important; /* tamaño del icono */
 }
 
 .layout-topbar .title {
@@ -30,19 +41,15 @@ body {
     text-align: center;
     font-size: 1.25rem;
     font-weight: 600;
+   
 }
 
-.menu-toggle-btn {
-    font-size: 1.5rem;
-    color: white;
-    cursor: pointer;
-    margin-right: 5px;
-}
+
 
 /* ===== SIDEBAR ===== */
 .layout-sidebar {
     width: 260px;
-    background-color: #fff;
+    background-color: #E9F2F7 !important; /* azul claro */
     border-right: 1px solid #ddd;
     overflow-y: auto;
     padding: 15px;
@@ -69,28 +76,131 @@ body {
     background-color: #f4f6f9;
 }
 
-/* ===== PANEL (CONTENEDOR) ===== */
-.ui-panel,
-.ui-panel-content,
-.ui-widget-content {
+
+
+
+
+/* ============================
+   ESTILO PERSONALIZADO PANELMENU
+   ============================ */
+
+.custom-menu.ui-panelmenu {
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 10px;
     background: #ffffff !important;
-    border-radius: 12px !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
 }
 
-/* Panel ancho completo */
-.ui-panel {
-    width: 100% !important;
-    box-sizing: border-box !important;
+/* Encabezados (titulo de las secciones) */
+.custom-menu .ui-panelmenu-header {
+    background: #006FA6 !important;     /* azul recomendado */
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem;
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    margin-bottom: 5px;
 }
 
-/* Título del panel */
-.ui-panel-titlebar {
-    background: #3f51b5 !important;
-    color: white !important;
-    font-weight: bold !important;
+/* Hover en encabezado */
+.custom-menu .ui-panelmenu-header:hover {
+    background: #0088B8 !important;   /* tono más claro (hover) */
+    cursor: pointer;
+}
+
+/* Items interiores del menú */
+.custom-menu .ui-panelmenu-content {
+    background: #f5f8fb !important;   /* gris suave tipo Ultima */
+    border-radius: 0 0 8px 8px !important;
+}
+
+/* Estilo de cada elemento */
+.custom-menu .ui-menuitem-link {
+    padding: 8px 14px !important;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #003366 !important;
+}
+
+/* Hover de los items */
+.custom-menu .ui-menuitem-link:hover {
+    background: #e2f3ff !important;
+    color: #004c80 !important;
+}
+
+/* Iconos */
+.custom-menu .ui-menuitem-icon {
+    color: #005599 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== PANEL (CONTENEDOR) ===== */
+/* ================================
+   PANEL PRINCIPAL (custom-card)
+   ================================ */
+.custom-card.ui-panel {
+    border-radius: 14px !important;
+    background: var(--surface-card) !important; /* color Ultima */
+    border: 1px solid var(--surface-border) !important;
+    padding: 0 !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+/* ================================
+   TÍTULO DEL PANEL (custom-title)
+   ================================ */
+.custom-card .ui-panel-titlebar {
+    background: #0088B8 !important;              /* tu color institucional */
+    color: #ffffff !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
     text-align: center !important;
-    border-radius: 12px 12px 0 0 !important;
+   /* border-radius: 14px 14px 0 0 !important;*/
+    padding: .7rem !important;
 }
+
+.custom-title {
+    color: inherit !important; /* usa color del título */
+}
+
+/* ================================
+   GRID INTERNO (custom-grid)
+   ================================ */
+.custom-grid .ui-panelgrid-cell {
+    padding: 8px 0 !important;
+    font-size: .95rem;
+}
+
+.custom-grid .label {
+    font-weight: 600;
+    color: #1c1c1c;
+    text-align: center;
+    padding-right: 15px !important;
+}
+
+.custom-grid .value {
+    color: #333;
+}
+
+
+
+
+
+
+
 
 /* PrimeIcons */
 .pi::before {
@@ -108,42 +218,146 @@ body {
     flex-shrink: 0;
 }
 
+
+
+
+
 /* ============================================================
-   REPARAR TABLA PRIMEFACES SIN AFECTAR COLORES DEL BEAN
+ COLORE DE LA TABLA
    ============================================================ */
 
-/* Fondo independiente */
-.contenedor-principal .ui-datatable,
-.contenedor-principal .ui-datatable .ui-datatable-tablewrapper,
-.contenedor-principal .ui-datatable table {
-    background: white !important;
-    box-shadow: none !important;
-    border-radius: 6px;
+.tabla-header {
+ background-color: #7FC8FF !important; /* azul tipo Prime */
+    color: #000000 !important;
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+     padding: 0px;           /* más alto */
+       width: 100%;
+    display: block;
+    height: 100%;
+
 }
 
-/* Header estilo PrimeFaces */
+
 .ui-datatable thead th {
-    background: #f1f1f1 !important;
-    color: #333 !important;
-    border-color: #ddd !important;
-    font-weight: 600 !important;
+    padding: 0 !important;
 }
 
-/* Filas conservan color del BEAN */
-.ui-datatable tbody td {
-    background: transparent !important;
+
+
+.invisible{
+    display:none;
+}
+.ui-datatable-even {
+    background: #FF0000;
 }
 
-/* Hover limpio */
-.ui-datatable tbody tr:hover td {
-    background: rgba(0,0,0,0.04) !important;
+.ui-datatable-odd {
+    background: #FF00FF;
+}
+.disponible {
+    background-color: #0080C0;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px
+}
+.acreditado {
+    background-color: #A0D79F;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px
+}
+.cursando {
+    background-color: #603060;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px
+}
+.ordinario {
+    background-color: #FFFF66;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px
+}
+.repeticion {
+    background-color: #FF9900;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px
+}
+.especial {
+    background-color: #FF0000;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px
+}
+.nodisponible {
+    background-color: #CCCCCC;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px
+}
+.blanco {
+    background-color: #FFFFFF;
+    padding: 5px;
+    text-align: center;
+    font-size: 11px
+}
+.row-highlight {
+    /*Sirve para resaltar una fila seleccionada (por ejemplo, cuando el usuario da clic)*/
+    background: linear-gradient(90deg, #4a90e2, #007bff) !important;
+    color: #fff !important;
+    font-weight: bold;
+    border-radius: 6px;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
+    transition: all 0.2s ease-in-out;
 }
 
-/* Bordes */
-.ui-datatable table {
-    border-collapse: separate !important;
-    border-spacing: 0 !important;
+
+.ui-datatable tbody tr.ui-state-hover {
+    /*Controla cómo se ve una fila cuando pasas el mouse encima (hover).*/
+    background: #BCBCBC !important;
+    color: #0A0A0A !important;
+    transform: scale(1.01);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
+
+
+.ui-datatable tbody tr {
+    /*Da un estilo base a todas las filas, agregando una línea divisoria:*/
+    border-bottom: 1px solid #dcdcdc;
+}
+.ui-dialog {
+    /*Centra los cuadros de diálogo (p:dialog) en el centro de la pantalla:*/
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.grupos-grid .panel-grupo {
+    transition: all 0.3s ease;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.grupos-grid .panel-grupo:hover {
+    background-color: #e6f0ff;
+    border-color: #2196F3;
+    box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+    transform: translateY(-3px);
+}
+
+
+
+
+
+
+
 
 
 
@@ -158,6 +372,7 @@ body {
     padding: 0px;
     text-align: center;
     animation: fadein 0.8s ease;
+     background-color: #E9F2F7 !important; 
 }
 
 /* Bienvenida inicialmente visible */
@@ -214,9 +429,7 @@ body {
 
 /* ===== DESAPARECER CUANDO SE CARGUE UN CONTENIDO ===== */
 .hide-welcome {
-    opacity: 0;
-    transform: scale(.95);
-    pointer-events: none;
+    display: none !important;
 }
 
 
@@ -334,3 +547,55 @@ body {
                 text-align: center !important;
                 font-size: 11px !important;
             }
+            
+            
+            
+            
+            
+/* Contenedor horizontal */
+.ultima-legend-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;        /* Centra verticalmente */
+    justify-content: center;    /* Centra horizontalmente */
+    
+    padding: 1.2rem 1.4rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--surface-border);
+
+    width: 100%;                /* Para que el centrado funcione completo */
+    text-align: center;
+}
+
+
+
+
+
+
+
+/* Cuadro pequeño con texto dentro */
+.ultima-legend-small {
+    padding: 6px 10px;
+    border-radius: var(--border-radius);
+    font-size: .75rem;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--card-shadow);
+    white-space: nowrap;
+}
+
+/* Colores */
+.legend-yellow { background:#FFEB3B;  }
+.legend-red    { background:#F44336; }
+.legend-green  { background:#4CAF50; }
+.legend-cyan   { background:#00BCD4; }
+.legend-orange { background:#FF9800; }
+.legend-purple { background:#673AB7; }
+.legend-brown  { background:#A0522D; }
+.legend-pink   { background:#E91E63; }
+
+
+

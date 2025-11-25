@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<ui:composition template="./templateAcademico.xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <ui:define name="content">
+        <div class="card">
+            <h2 style="margin-bottom:20px;">Personal</h2>
+
+            <!-- ===================== BUSCADOR ===================== -->
+            <p:toolbar>
+                <p:toolbarGroup align="right">
+                    <p:inputText id="busqueda"
+                                 value="#{personalBean.filtro}"
+                                 placeholder="Buscar por nombre, RFC, CURP..."
+                                 style="width:300px" />
+
+                    <p:commandButton icon="pi pi-search"
+                                     update="tablaPersonal"
+                                     actionListener="#{personalBean.buscar()}"
+                                     styleClass="p-button-outlined p-button-secondary" />
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <br/>
+
+            <!-- ===================== TABLA ===================== -->
+            <p:dataTable id="tablaPersonal"
+                         value="#{personalBean.listaPersonal}"
+                         var="per"
+                         paginator="true"
+                         rows="10"
+                         emptyMessage="No se encontraron registros"
+                         rowKey="#{per.rfc}"
+                         styleClass="p-datatable-gridlines">
+
+                <!-- RFC -->
+                <p:column headerText="RFC" style="width:140px;">
+                    <h:outputText value="#{per.rfc}" />
+                </p:column>
+
+                <!-- Apellido Paterno -->
+                <p:column headerText="Apellido paterno" sortBy="#{per.apellidoPaterno}">
+                    <h:outputText value="#{per.apellidoPaterno}" />
+                </p:column>
+
+                <!-- Apellido Materno -->
+                <p:column headerText="Apellido materno">
+                    <h:outputText value="#{per.apellidoMaterno}" />
+                </p:column>
+
+                <!-- Nombre -->
+                <p:column headerText="Nombre" sortBy="#{per.nombreEmpleado}">
+                    <h:outputText value="#{per.nombreEmpleado}" />
+                </p:column>
+
+                <!-- CURP -->
+                <p:column headerText="CURP" style="width:200px;">
+                    <h:outputText value="#{per.curpEmpleado}" />
+                </p:column>
+
+                <!-- CORREO -->
+                <p:column headerText="Correo" style="width:220px;">
+                    <h:outputText value="#{per.correoElectronico}" />
+                </p:column>
+
+                <!-- ===================== CRUD ===================== -->
+                <p:column style="width:60px; text-align:center;">
+                    <p:splitButton icon="pi pi-ellipsis-v"
+                                   styleClass="p-button-text p-button-plain">
+
+                        <p:menuitem value="Ver"
+                                    icon="pi pi-eye"
+                                    actionListener="#{personalBean.ver(per)}"
+                                    update=":dlgVer"
+                                    oncomplete="PF('dlgVer').show()" />
+
+                        <p:menuitem value="Editar"
+                                    icon="pi pi-pencil"
+                                    actionListener="#{personalBean.editar(per)}"
+                                    update=":dlgEditar"
+                                    oncomplete="PF('dlgEditar').show()" />
+
+                        <p:menuitem value="Eliminar"
+                                    icon="pi pi-trash"
+                                    actionListener="#{personalBean.prepararEliminar(per)}"
+                                    update=":dlgEliminar"
+                                    oncomplete="PF('dlgEliminar').show()" />
+                    </p:splitButton>
+                </p:column>
+
+            </p:dataTable>
+        </div>
+
+        <!-- ===================== DIALOGO VER ===================== -->
+        <p:dialog widgetVar="dlgVer" id="dlgVer" header="Datos del Personal" modal="true" width="450">
+            <h:panelGrid columns="2" cellpadding="6">
+                <h:outputText value="Nombre:" />
+                <h:outputText value="#{personalBean.seleccionado.nombreEmpleado}" />
+
+                <h:outputText value="Apellidos:" />
+                <h:outputText value="#{personalBean.seleccionado.apellidoPaterno} #{personalBean.seleccionado.apellidoMaterno}" />
+
+                <h:outputText value="CURP:" />
+                <h:outputText value="#{personalBean.seleccionado.curpEmpleado}" />
+
+                <h:outputText value="Correo:" />
+                <h:outputText value="#{personalBean.seleccionado.correoElectronico}" />
+
+                <h:outputText value="Sexo:" />
+                <h:outputText value="#{personalBean.seleccionado.sexoEmpleado}" />
+            </h:panelGrid>
+        </p:dialog>
+
+        <!-- ===================== DIALOGO EDITAR ===================== -->
+        <p:dialog widgetVar="dlgEditar" id="dlgEditar" header="Editar Personal" modal="true" width="600">
+            <h:form id="formEditar">
+                <h:panelGrid columns="2" cellpadding="6">
+
+                    <h:outputText value="Nombre:" />
+                    <p:inputText value="#{personalBean.seleccionado.nombreEmpleado}" />
+
+                    <h:outputText value="Apellido Paterno:" />
+                    <p:inputText value="#{personalBean.seleccionado.apellidoPaterno}" />
+
+                    <h:outputText value="Apellido Materno:" />
+                    <p:inputText value="#{personalBean.seleccionado.apellidoMaterno}" />
+
+                    <h:outputText value="CURP:" />
+                    <p:inputText value="#{personalBean.seleccionado.curpEmpleado}" />
+
+                    <h:outputText value="Correo:" />
+                    <p:inputText value="#{personalBean.seleccionado.correoElectronico}" />
+
+                </h:panelGrid>
+
+                <p:commandButton value="Guardar cambios"
+                                 actionListener="#{personalBean.guardar()}"
+                                 update="tablaPersonal"
+                                 oncomplete="PF('dlgEditar').hide()" />
+            </h:form>
+        </p:dialog>
+
+        <!-- ===================== DIALOGO ELIMINAR ===================== -->
+        <p:dialog widgetVar="dlgEliminar" id="dlgEliminar"
+                  header="Confirmar eliminación" modal="true" width="400">
+            <p:panel>
+                <p>¿Seguro que deseas eliminar este registro?</p>
+                <br/>
+
+                <p:commandButton value="Eliminar"
+                                 actionListener="#{personalBean.eliminar()}"
+                                 update="tablaPersonal"
+                                 oncomplete="PF('dlgEliminar').hide()"
+                                 styleClass="p-button-danger" />
+
+                <p:commandButton value="Cancelar"
+                                 onclick="PF('dlgEliminar').hide()"
+                                 styleClass="p-button-secondary" />
+            </p:panel>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>
+</html>
+
