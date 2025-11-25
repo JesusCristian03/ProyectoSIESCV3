@@ -32,5 +32,6 @@ public interface PersonalFacadeLocal {
     List<Personal> personalesActivos();
     
     List<Personal> personalPorDepartamento(String clavearea);
+    List<Personal> traerDocenteApellidoPaterno(String apPaterno);
     
 }

@@ -54,4 +54,16 @@ public class PersonalFacade extends AbstractFacade<Personal> implements Personal
         return lista;
     }
     
+    
+        @Override
+    public List<Personal> traerDocenteApellidoPaterno(String apPaterno) {
+        
+       
+        String sqlPeriodoEscolar = "SELECT l FROM Personal l WHERE l.apellidoPaterno=:apellidopaterno ";
+        Query queryPeriodo = em.createQuery(sqlPeriodoEscolar);
+        queryPeriodo.setParameter("apellidopaterno", apPaterno);
+        List<Personal> lista = queryPeriodo.getResultList();
+        return lista;
+    }
+    
 }

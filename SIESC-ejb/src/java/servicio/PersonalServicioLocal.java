@@ -7,6 +7,7 @@ package servicio;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Personal;
+import modelo.informacionDocente;
 
 /**
  *
@@ -22,5 +23,7 @@ public interface PersonalServicioLocal {
     List<Personal> personalActivos();
     
     List<Personal> personalPorArea(String clavearea);
+    public List<informacionDocente> traerDocentesPorApellidoPaterno(String apPaterno);
+    void eliminarDocentes (Personal docente);
     
 }
