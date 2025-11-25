@@ -43,7 +43,7 @@ public class ControlSesion implements Serializable {
             FacesContext contexto = FacesContext.getCurrentInstance();
             Usuario us = (Usuario) contexto.getExternalContext().getSessionMap().get("usuario");
             if (us == null) {
-                contexto.getExternalContext().redirect("/SIESC/faces/index.xhtml");
+                contexto.getExternalContext().redirect("/SIESC/faces/principal/index.xhtml");
                 mensaje = "Usuario o contraseña inválidos";
             }
         } catch (Exception e) {
