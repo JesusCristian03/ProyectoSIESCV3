@@ -1006,8 +1006,32 @@ public class HorarioCrearBean implements Serializable {
         System.out.println("MAula: " + aulaMateriaSeleccionada);
         System.out.println("MFila: " + filaMateriaSeleccionada);
         System.out.println("MColumna: " + columnaMateriaSeleccionada);
-
+        asignarValorDirectoEnCelda();
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA", nombreMateriaSeleccionada + "  " + aulaMateriaSeleccionada);
+    }
+
+    public void asignarValorDirectoEnCelda() {
+
+        // 1. Obtener la fila directa
+        HorarioCrear hc = listaHorarioCrear.get(filaMateriaSeleccionada - 1);
+        // 3. Cambiar color
+        modificarColor(hc, columnaMateriaSeleccionada, "#FC5110", "#FFFFFF");
+
+        System.out.println("Asignado directo en fila " + filaMateriaSeleccionada
+                + ", columna " + columnaMateriaSeleccionada
+        );
+
+    }
+
+    public void limpiarVariablesDeEstadoModificar() {
+   // Limpiar variables y estado
+       // nombreMateriaSeleccionada = null;
+        //aulaMateriaSeleccionada = null;
+        //    eliminando = false;
+       // modoSeleccionMateria = false;
+        actualizarTabla();
+        
+        cambiarModoColorTabla("FEA785");
     }
 
     public void confirmarModificarMateria() {//Se actualiza el aula que he escogido en la ventana emergente de modificar dentro de la BD y del bean y la vista 

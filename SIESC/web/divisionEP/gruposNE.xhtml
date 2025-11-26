@@ -46,7 +46,7 @@
                                                  style="width:100%" 
                                                  filter="true" 
                                                  filterMatchMode="contains"
-                                                  disabled="#{horarioCrearBean.desactivarCampos}">                                    
+                                                 disabled="#{horarioCrearBean.desactivarCampos}">                                    
                                     <p:ajax listener="#{horarioCrearBean.cambioSemestre}" update="asignatura grupo panelBotones panelBotonesModoGrupoAulas" />
                                     <f:selectItem itemLabel="SELECCIONA UN SEMESTRE" itemValue="0" noSelectionOption="true"/>
                                     <f:selectItem itemLabel="SEMESTRE 1" itemValue="1"/>
@@ -100,9 +100,9 @@
                                              requiredMessage="CAMPO NOMBRE GRUPO ES OBLIGATORIO."
                                              style="width:400px"
                                              disabled="#{horarioCrearBean.desactivarCampos}">
-
                                     <!-- Este bloque hace que al escribir o cambiar, se llame al método -->
                                     <p:ajax event="input" listener="#{horarioCrearBean.cambioGrupo}" update="grupo panelBotones panelBotonesModoGrupoAulas" process="@this"/>
+
                                 </p:inputText>
 
 
@@ -177,7 +177,7 @@
                         <p:remoteCommand name="asignarMateriaSeleccionadaM" 
                                          actionListener="#{horarioCrearBean.asignarMateriaSeleccionadaM}"                                         
                                          oncomplete="PF('confirmModificarDialogWidget').show()"
-                                         update="confirmModificarDialog growl"
+                                         update="confirmModificarDialog growl grupo"
                                          process="@this" />
 
                         <p:remoteCommand name="asignarMateriaIntercambiar" 
@@ -222,7 +222,7 @@
                                                          or horarioCrearBean.activarModificar 
                                                          or horarioCrearBean.modoIntercambio 
                                                          or !horarioCrearBean.booleanBotonInsertar}" /> 
-                            
+
                             <p:commandButton 
                                 value="Eliminar Materia" 
                                 icon="pi pi-trash" 
@@ -241,7 +241,7 @@
                             </p:commandButton>
 
                             <p:commandButton  
-                                value="Modificar Materia"  
+                                value="Modificar Aula"  
                                 icon="pi pi-pencil"  
                                 styleClass="p-button-rounded"  
                                 style="background-color:orange; color:white; border: 2px solid orange;"  
@@ -462,12 +462,12 @@
                             actualizarCursorCeldas();
                             console.log("Modo intercambio activo:", modoIntercambiar);
                             }
-                            
+
                             function desactivandoModoTodo() {
                             modoIntercambiar = false;
                             modoEliminar = false;
                             modoModificar = false;
-                            actualizarCursorCeldas();                          
+                            actualizarCursorCeldas();
                             }
 
                             // ================== ACTUALIZAR CURSOR ==================
@@ -565,16 +565,14 @@
                             // Obtener la fila y columna de destino
                             const filaDestino = fila;
                             const columnaDestino = columna;
-                       
                             // Puedes enviar estos valores al bean
                             moverMateriaSeleccionada([
                             { name: 'filaDestino', value: filaDestino },
                             { name: 'columnaDestino', value: columnaDestino }
                             ]);
-                            
                             //console.log("Enviando a moverMateriaSeleccionada:", filaDestino, columnaDestino, aulaDestino);
-                            console.log("Contenido{",contenido,"}")
-                            console.log("Enviando a 1moverMateriaSeleccionada:", filaDestino, columnaDestino);
+                            console.log("Contenido{", contenido, "}")
+                                    console.log("Enviando a 1moverMateriaSeleccionada:", filaDestino, columnaDestino);
                             // Quitar el resaltado
 
                             console.log("ENTRE PARA MOVER MATERIA A DESTINO");
@@ -836,46 +834,91 @@
                         </p:confirmDialog>
 
                         <!-- ✅ VENTANA EMERGENTE DE MODIFICAR AULA -->
-                        <p:dialog id="confirmModificarDialog"
-                                  header="Modificar Aula"
-                                  widgetVar="confirmModificarDialogWidget"
-                                  modal="true"
-                                  closable="false"
-                                  >
 
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <h:outputText value="Materia:" />
-                                <h:outputText value="#{horarioCrearBean.nombreMateriaSeleccionada}" 
-                                              style="font-weight:bold; color:#e67e22;" />
-                                <h:outputText value="Aula actual:" />
-                                <h:outputText value="#{horarioCrearBean.aulaMateriaSeleccionada}" />
+<!-- ✅ VENTANA EMERGENTE DE MODIFICAR AULA -->
+<p:dialog id="confirmModificarDialog"
+          header="Modificar Aula"
+          widgetVar="confirmModificarDialogWidget"
+          modal="true"
+          closable="false"
+          responsive="true"
+          style="max-width:450px;">
 
-                                <h:outputText value="Nueva aula:" />
-                                <p:selectOneMenu value="#{horarioCrearBean.nuevaAulaSeleccionada}">
-                                    <p:ajax/>
-                                    <f:selectItem itemLabel="Seleccione un aula" itemValue="" noSelectionOption="true"/>
-                                    <f:selectItems value="#{horarioCrearBean.listaAulas}" var="a" itemLabel="#{a.aula}" itemValue="#{a.aula}" />
-                                </p:selectOneMenu>
-                            </h:panelGrid>
+    <!-- FORMULARIO ORDENADO -->
+    <h:panelGrid columns="1" style="width:100%;" cellspacing="8">
 
-                            <p:separator />
+        <!-- Grupo: Materia -->
+        <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
 
-                            <h:panelGroup layout="block" style="display:flex; justify-content:space-between; gap:1rem; width:100%; margin-top:1rem;">
-                                <p:commandButton value="Confirmar" 
-                                                 icon="pi pi-check"
-                                                 process="@form"
-                                                 styleClass="ui-button-success"
-                                                 actionListener="#{horarioCrearBean.confirmarModificarMateria}"
-                                                 update="grupo growl panelBotones"
-                                                 oncomplete="PF('confirmModificarDialogWidget').hide();" />
+            <h:outputText value="Materia:" style="font-weight:bold;" />
+            <h:outputText value="#{horarioCrearBean.nombreMateriaSeleccionada}" 
+                          style="color:#2c3e50;" />
 
-                                <p:commandButton value="Cancelar" 
-                                                 icon="pi pi-times"
-                                                 styleClass="ui-button-secondary"
-                                                 onclick="PF('confirmModificarDialogWidget').hide();"
-                                                 type="button" />
-                            </h:panelGroup>
-                        </p:dialog>
+        </h:panelGrid>
+
+        <!-- Grupo: Aula actual -->
+        <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
+
+            <h:outputText value="Aula actual:" style="font-weight:bold;" />
+            <h:outputText value="#{horarioCrearBean.aulaMateriaSeleccionada}" 
+                          style="color:#2c3e50;" />
+
+        </h:panelGrid>
+
+        <!-- Grupo: Nueva aula -->
+        <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
+
+            <h:outputText value="Nueva aula:" style="font-weight:bold;" />
+
+            <p:selectOneMenu value="#{horarioCrearBean.nuevaAulaSeleccionada}"
+                             style="width:100%; font-weight:bold;"
+                            >
+
+                <p:ajax />
+
+                <f:selectItem itemLabel="Seleccione un aula" 
+                              itemValue="" 
+                              noSelectionOption="true" />
+
+                <f:selectItems value="#{horarioCrearBean.listaAulas}" 
+                               var="a" 
+                               itemLabel="#{a.aula}" 
+                               itemValue="#{a.aula}" />
+            </p:selectOneMenu>
+
+        </h:panelGrid>
+
+    </h:panelGrid>
+
+    <p:separator />
+
+    <!-- BOTONES ALINEADOS A LA DERECHA -->
+    <h:panelGroup layout="block" 
+                  style="display:flex; justify-content:flex-end; gap:1rem; width:100%; margin-top:1rem;">
+
+        <!-- Confirmar (azul profesional) -->
+        <p:commandButton value="Confirmar"
+                         icon="pi pi-check"
+                         process="@form"
+                         style="background:#1A73E8; border:none; color:white; font-weight:bold; 
+                                padding:0.6rem 1.4rem; border-radius:6px;"
+                         actionListener="#{horarioCrearBean.confirmarModificarMateria}"
+                         update="grupo growl panelBotones"
+                         oncomplete="PF('confirmModificarDialogWidget').hide();" />
+
+        <!-- Cancelar (gris elegante) -->
+        <p:commandButton value="Cancelar"
+                         icon="pi pi-times"
+                         style="background:#6c757d; border:none; color:white; font-weight:bold; 
+                                padding:0.6rem 1.4rem; border-radius:6px;"
+                         actionListener="#{horarioCrearBean.limpiarVariablesDeEstadoModificar}"
+                         onclick="PF('confirmModificarDialogWidget').hide();"
+                         update="grupo"
+                         type="button" />
+
+    </h:panelGroup>
+
+</p:dialog>
 
 
                     </h:form>

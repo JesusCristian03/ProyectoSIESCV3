@@ -150,6 +150,25 @@ public class GruposServicio implements GruposServicioLocal {
     }
 
     @Override
+    public List<HorarioAsignatura> buscarGruposPorMaestro(int reticula, Integer semestre, String periodo, String rfc) {
+        PeriodoEscolar p = periodoEscolarFacade.find(periodo);
+        Carrera r = carreraFacade.find(reticula);
+
+        System.out.println("--------------SERVICIO MATERIA----------------");
+        System.out.println("Carrera:" + r);
+        System.out.println("Semestre:" + semestre);
+        System.out.println("PeriodoEscolar:" + p);
+
+        List<Grupos> gruposDisponibles = gruposFacade.buscarGruposPorCampoMaestro(r, semestre, p, rfc);
+        List<Horarios> horariosDisponibles = horariosFacade.buscarHorarioPorMaestro(periodo, reticula, semestre, rfc);
+        //HorarioAsignatura horario = new HorarioAsignatura();
+        System.out.println("Se han encontrado gruposDisponibles.size:" + gruposDisponibles.size());
+        System.out.println("Se han encontrado horariosDisponibles:" + horariosDisponibles.size());
+        return acomodarListaHorarios(gruposDisponibles, horariosDisponibles);
+
+    }
+
+    @Override
     public List<HorarioAsignatura> buscarGruposPorCampoGrupoSeleccionada(int reticula, Integer semestre, String periodo, String grupo) {
         PeriodoEscolar p = periodoEscolarFacade.find(periodo);
         Carrera r = carreraFacade.find(reticula);

@@ -100,11 +100,17 @@ public class EntidadFederativa implements Serializable {
         }
         return true;
     }
+    
+
 
     @Override
-    public String toString() {
-        return "modelo.EntidadFederativa[ identidad=" + identidad + " ]";
-    }
+public String toString() {
+    return "EntidadFederativa{" +
+            "id=" + identidad +
+            ", nombre='" + nombreEntidad + '\'' +
+            ", clave='" + claveEntidad + '\'' +
+            '}';
+}
 
     @XmlTransient
     public List<AlumnosGenerales> getAlumnosGeneralesList() {

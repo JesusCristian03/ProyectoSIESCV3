@@ -145,6 +145,27 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
 
         return lista;
     }
+    
+    @Override
+    public List<Horarios> buscarHorarioPorMaestro(String periodo, Integer reticula, Integer semestre, String RFC) {
+        List<Horarios> lista = null;
+
+        String sqlHorario = "SELECT h FROM  Horarios h WHERE h.periodo.periodo=:periodo "
+                + "and h.idGrupo.idMateriaCarrera.semestreReticula=:semestre "
+                + "and h.idGrupo.idMateriaCarrera.reticula.reticula=:reticula "
+                + "and h.idGrupo.rfc.rfc=:rfc";
+
+        Query queryPersonal = em.createQuery(sqlHorario);
+
+        queryPersonal.setParameter("periodo", periodo);
+        queryPersonal.setParameter("semestre", semestre);
+        queryPersonal.setParameter("reticula", reticula);
+        queryPersonal.setParameter("rfc", RFC);
+
+        lista = (List<Horarios>) (queryPersonal.getResultList());
+
+        return lista;
+    }
 
     //Horario Todas las Asignaturas de la Carrera
     public List<Horarios> horarioAsignatura(String periodo, Integer reticula) {

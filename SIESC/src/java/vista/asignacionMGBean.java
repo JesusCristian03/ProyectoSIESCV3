@@ -8,6 +8,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -38,6 +39,7 @@ import servicio.PersonalServicioLocal;
 @Named(value = "asignacionMGBean")
 @SessionScoped
 public class asignacionMGBean implements Serializable {
+
     @EJB
     private HorarioServicioLocal horarioServicio;
     @EJB
@@ -60,6 +62,7 @@ public class asignacionMGBean implements Serializable {
     private List<Integer> semestres;
     private List<Personal> listaDocentes;
     private List<HorarioAsignatura> listaHorarioCrear;
+    private List<HorarioAsignatura> listaHorarioCrearMaestros;
 
     private Usuario usuario;
     private String periodoSeleccionado;
@@ -160,10 +163,34 @@ public class asignacionMGBean implements Serializable {
     public void filaSeleccionada() {
         listaDocentes = personalServicio.personalPorArea(departamentoSeleccionado);
         System.out.println("HorarioSeleccionado" + horarioCrearSeleccionado);
-                addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA",
-                    "Materia"+horarioCrearSeleccionado.getAsignatura()
-                +" Clave: "+horarioCrearSeleccionado.getMateria()
-                +" Grupo: "+horarioCrearSeleccionado.getGrupo());
+
+        System.out.println("horarioCrearSeleccionado.getDocente()" + horarioCrearSeleccionado.getDocente());
+        if (!"Sin docente".equals(horarioCrearSeleccionado.getDocente())) {
+            Personal p = null;
+            for (int i = 0; i < listaDocentes.size(); i++) {
+                p = listaDocentes.get(i);
+
+                String nombreCompleto = p.getNombreEmpleado() + " " + p.getApellidoPaterno() + " " + p.getApellidoMaterno();
+                System.out.println("Comparando: horarioCrearSeleccionado.getDocente() = "
+                        + horarioCrearSeleccionado.getDocente()
+                        + " con " + nombreCompleto);
+
+                if (horarioCrearSeleccionado.getDocente().equals(nombreCompleto)) {
+                    System.out.println("¡Coincidencia encontrada!");
+                    System.out.println("Docente: " + nombreCompleto);
+                    break;
+                }
+            }
+            docenteRFC = p.getRfc();
+        } else {
+            docenteRFC = "";
+
+        }
+
+        addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA",
+                "MATERIA: " + horarioCrearSeleccionado.getAsignatura()
+                + " CLAVE: " + horarioCrearSeleccionado.getMateria()
+                + " GRUPO: " + horarioCrearSeleccionado.getGrupo());
 
     }
 
@@ -178,7 +205,7 @@ public class asignacionMGBean implements Serializable {
                     periodoSeleccionado,
                     ha.getMateria(),
                     ha.getGrupo());
-            System.out.println("HorarioCrearSeleccionado"+ha);
+            System.out.println("HorarioCrearSeleccionado" + ha);
             for (Horarios h : lh) {
                 h.setRfc(null);
                 horarioServicio.actualizar(h);
@@ -250,6 +277,30 @@ public class asignacionMGBean implements Serializable {
         }
 
         docenteRFC = "";
+    }
+
+    public void verHorarioMaestro() {
+        System.out.println("RFC:"+docenteRFC);
+        listaHorarioCrearMaestros = gruposServicio.buscarGruposPorMaestro(carreraSeleccionada,
+                semestreSeleccionado,
+                periodoSeleccionado,
+                docenteRFC);
+
+    }
+
+    public List<HorarioAsignatura> getListaHorarioCrearMaestros() {
+        return listaHorarioCrearMaestros;
+    }
+
+    public void setListaHorarioCrearMaestros(List<HorarioAsignatura> listaHorarioCrearMaestros) {
+        this.listaHorarioCrearMaestros = listaHorarioCrearMaestros;
+    }
+
+    public List<HorarioAsignatura> getListaHorarioSeleccionado() {
+        if (horarioCrearSeleccionado != null) {
+            return Collections.singletonList(horarioCrearSeleccionado); // Lista de un solo elemento
+        }
+        return Collections.emptyList(); // Lista vacía si es null
     }
 
     public HorarioAsignatura getHorarioCrearSeleccionado() {

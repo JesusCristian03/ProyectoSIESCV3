@@ -4,8 +4,10 @@
  */
 package servicio;
 
+import java.util.List;
 import javax.ejb.Local;
 import modelo.Estudiante;
+import modelo.informacionEstudiante;
 
 /**
  *
@@ -19,5 +21,9 @@ public interface EstudianteServicioLocal {
     Estudiante loginEstudiante(Estudiante estudiante);
     
     void insertarEstudiante(Estudiante estudiante);
+    
+    List<informacionEstudiante> traerEstudiantesPorApellidoPaterno(String apPaterno);
+    
+    void eliminarEstudiante(Estudiante e);
     
 }
