@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-      background-color: #003366;
+    background-color: #003366;
 }
 
 /* Estructura principal */
@@ -13,27 +13,26 @@ body {
     flex-direction: column;
 }
 
-/* ===== TOPBAR ===== */
+/* ===== TOPBAR ENCABEZADO ===== */
 .layout-topbar {
-    background-color: #003366;
+    background-color: #003366 !important;
     color: white;
     height: 60px;
     display: flex;
     align-items: center;
-    padding:  20px;
+    padding: 20px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16);
     z-index: 1000;
 }
 
 .menu-toggle-btn {
-   
     color: white;
     cursor: pointer;
-    margin-left: 50px; /* espacio que daja el icono al principio */
-     
+    margin-left: 10px;
 }
+
 .menu-toggle-btn i {
-    font-size: 2.5rem !important; /* tamaño del icono */
+    font-size: 2.5rem !important;
 }
 
 .layout-topbar .title {
@@ -41,15 +40,20 @@ body {
     text-align: center;
     font-size: 1.25rem;
     font-weight: 600;
-   
 }
 
+.ui-button .ui-button-text {
+    padding: 0 !important;
+    line-height: 1.2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
 
-
-/* ===== SIDEBAR ===== */
+/* ===== SIDEBAR  EN DONDE ESTA EL MENU===== */
 .layout-sidebar {
     width: 260px;
-    background-color: #E9F2F7 !important; /* azul claro */
+    background-color: #E3F2FD !important; /* base del menu*/
     border-right: 1px solid #ddd;
     overflow-y: auto;
     padding: 15px;
@@ -68,120 +72,158 @@ body {
     overflow: hidden;
 }
 
-/* Contenedor principal más cerca del header */
 .layout-main {
     flex: 1;
-    padding: 1rem 2rem !important; /* Más pegado al header */
+    padding: 1rem 2rem !important;
     overflow-y: auto;
     background-color: #f4f6f9;
+    text-align: center;
+    animation: fadein 0.8s ease;
 }
 
-
-
-
-
-/* ============================
-   ESTILO PERSONALIZADO PANELMENU
-   ============================ */
+/* ===== PANELMENU  ===== */
 
 .custom-menu.ui-panelmenu {
-    border: 1px solid var(--surface-border) !important;
-    border-radius: 10px;
+    border: 1px solid rgba(0, 191, 214, 0.35) !important;
+    border-radius: 12px;
     background: #ffffff !important;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.10);
 }
 
-/* Encabezados (titulo de las secciones) */
+/* Encabezados de cada sección */
 .custom-menu .ui-panelmenu-header {
-    background: #006FA6 !important;     /* azul recomendado */
+    background: linear-gradient(90deg, #037DBE, #037DBE) !important;
     color: #ffffff !important;
     font-weight: 600 !important;
-    font-size: 0.95rem;
-    padding: 10px 12px !important;
-    border-radius: 8px !important;
-    margin-bottom: 5px;
+    font-size: 0.97rem;
+    padding: 10px 14px !important;
+    border-radius: 10px !important;
+    margin-bottom: 6px;
+    transition: background 0.25s;
 }
 
-/* Hover en encabezado */
 .custom-menu .ui-panelmenu-header:hover {
-    background: #0088B8 !important;   /* tono más claro (hover) */
+    background: linear-gradient(90deg, #27D2E8, #00A4C2) !important;
     cursor: pointer;
 }
 
-/* Items interiores del menú */
+/* Contenido interno */
 .custom-menu .ui-panelmenu-content {
-    background: #f5f8fb !important;   /* gris suave tipo Ultima */
-    border-radius: 0 0 8px 8px !important;
+    background: #F3FBFD;
+    padding: 4px 0;
 }
 
-/* Estilo de cada elemento */
+/* Items dentro de cada menú */
 .custom-menu .ui-menuitem-link {
     padding: 8px 14px !important;
     border-radius: 6px;
     font-size: 0.9rem;
     color: #003366 !important;
+    transition: background 0.2s, color 0.2s;
 }
 
-/* Hover de los items */
 .custom-menu .ui-menuitem-link:hover {
-    background: #e2f3ff !important;
-    color: #004c80 !important;
+    background: #E3F2FD !important;  /* suave  cuando pasa el mause por cada opcion*/
+    color: #00264d !important;
 }
 
-/* Iconos */
+/* Iconos institucionales */
 .custom-menu .ui-menuitem-icon {
-    color: #005599 !important;
+    color: #007DA6 !important;
+}
+
+/* ===== ESTILO ACTIVO REAL DEL PANELMENU ===== */
+
+/* Texto activo */
+.custom-menu .ui-menuitem-link.ui-state-active,
+.custom-menu .ui-menuitem-link.ui-state-highlight,
+.custom-menu .ui-menuitem-link.ui-state-hover.ui-state-active {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+/* Fondo activo */
+.custom-menu .ui-menuitem-link.ui-state-active,
+.custom-menu .ui-menuitem-link.ui-state-highlight {
+    background: #00BFD6 !important;
+}
+
+/* Icono activo */
+.custom-menu .ui-menuitem-icon.ui-state-active,
+.custom-menu .ui-menuitem-icon.ui-state-highlight {
+    color: #ffffff !important;
 }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-/* ===== PANEL (CONTENEDOR) ===== */
 /* ================================
    PANEL PRINCIPAL (custom-card)
    ================================ */
 .custom-card.ui-panel {
     border-radius: 14px !important;
-    background: var(--surface-card) !important; /* color Ultima */
+    background: var(--surface-card) !important;
     border: 1px solid var(--surface-border) !important;
     padding: 0 !important;
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
-/* ================================
-   TÍTULO DEL PANEL (custom-title)
-   ================================ */
 .custom-card .ui-panel-titlebar {
-    background: #0088B8 !important;              /* tu color institucional */
+    background: #0088B8 !important;
     color: #ffffff !important;
     font-size: 1.1rem !important;
     font-weight: 600 !important;
     text-align: center !important;
-   /* border-radius: 14px 14px 0 0 !important;*/
     padding: .7rem !important;
+    border-radius: 14px 14px 0 0 !important;
 }
 
 .custom-title {
-    color: inherit !important; /* usa color del título */
+    color: inherit !important;
 }
 
 /* ================================
    GRID INTERNO (custom-grid)
    ================================ */
-.custom-grid .ui-panelgrid-cell {
-    padding: 8px 0 !important;
-    font-size: .95rem;
+.custom-grid, .custom-panelgrid, .flat-panelgrid {
+    border: none !important;
+    background-color: #E3F2FD !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+     
+}
+/* PanelGrid plano, sin borde ni sombra */
+.custom-panelgrid,
+.custom-panelgrid .ui-panelgrid-cell,
+.custom-panelgrid .label,
+.custom-panelgrid .value,
+.custom-panelgrid .ui-widget-content {
+    border: none !important;          /* Quita todos los bordes */
+    box-shadow: none !important;      /* Quita cualquier sombra */
+    background: #E3F2FD !important;   /* Fondo azul muy suave */
+    padding: 8px 10px !important;     /* Espacio interno */
+    border-radius: 8px !important;    /* Esquinas ligeramente redondeadas */
+}
+/* Eliminar todos los bordes del panelGrid */
+.flat-panelgrid,
+.flat-panelgrid .ui-panelgrid-cell,
+.flat-panelgrid .label,
+.flat-panelgrid .value,
+.flat-panelgrid .ui-widget-content {
+    border: none !important;
+    background: #FFFFFF!important; /* blanco de fondo */
+    padding: 8px 10px !important;
+    border-radius: 8px !important; /* opcional, esquinas suaves */
+    box-shadow: none !important;   /* elimina sombra si existiera */
+}
+
+.flat-panelgrid .label {
+    font-weight: 600;
+    color: #1c1c1c;
+    text-align: center;
+    padding-right: 15px !important;
 }
 
 .custom-grid .label {
@@ -195,10 +237,14 @@ body {
     color: #333;
 }
 
-
-
-
-
+.aguilucho-image {
+    height: 428px;
+    width: auto;      /* mantiene la proporción */
+    max-width: 100%;  /* evita que se salga del contenedor */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    margin-bottom: 20px; 
+}
 
 
 
@@ -218,95 +264,30 @@ body {
     flex-shrink: 0;
 }
 
-
-
-
-
 /* ============================================================
- COLORE DE LA TABLA
+   COLORES DE LA TABLA
    ============================================================ */
-
 .tabla-header {
- background-color: #7FC8FF !important; /* azul tipo Prime */
-    color: #000000 !important;
+    background-color: #0088A6 !important;
+    color: #ffffff !important;
     text-align: center;
     font-weight: bold;
     font-size: 13px;
-     padding: 0px;           /* más alto */
-       width: 100%;
+    width: 100%;
     display: block;
-    height: 100%;
-
+    padding: 10px !important;
+    height: auto !important;
 }
-
 
 .ui-datatable thead th {
     padding: 0 !important;
 }
 
-
-
-.invisible{
-    display:none;
-}
-.ui-datatable-even {
-    background: #FF0000;
+.invisible {
+    display: none;
 }
 
-.ui-datatable-odd {
-    background: #FF00FF;
-}
-.disponible {
-    background-color: #0080C0;
-    padding: 5px;
-    text-align: center;
-    font-size: 11px
-}
-.acreditado {
-    background-color: #A0D79F;
-    padding: 5px;
-    text-align: center;
-    font-size: 11px
-}
-.cursando {
-    background-color: #603060;
-    color: white;
-    padding: 5px;
-    text-align: center;
-    font-size: 11px
-}
-.ordinario {
-    background-color: #FFFF66;
-    padding: 5px;
-    text-align: center;
-    font-size: 11px
-}
-.repeticion {
-    background-color: #FF9900;
-    padding: 5px;
-    text-align: center;
-    font-size: 11px
-}
-.especial {
-    background-color: #FF0000;
-    padding: 5px;
-    text-align: center;
-    font-size: 11px
-}
-.nodisponible {
-    background-color: #CCCCCC;
-    padding: 5px;
-    text-align: center;
-    font-size: 11px
-}
-.blanco {
-    background-color: #FFFFFF;
-    padding: 5px;
-    text-align: center;
-    font-size: 11px
-}
 .row-highlight {
-    /*Sirve para resaltar una fila seleccionada (por ejemplo, cuando el usuario da clic)*/
     background: linear-gradient(90deg, #4a90e2, #007bff) !important;
     color: #fff !important;
     font-weight: bold;
@@ -315,9 +296,7 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
-
 .ui-datatable tbody tr.ui-state-hover {
-    /*Controla cómo se ve una fila cuando pasas el mouse encima (hover).*/
     background: #BCBCBC !important;
     color: #0A0A0A !important;
     transform: scale(1.01);
@@ -325,13 +304,11 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
-
 .ui-datatable tbody tr {
-    /*Da un estilo base a todas las filas, agregando una línea divisoria:*/
     border-bottom: 1px solid #dcdcdc;
 }
+
 .ui-dialog {
-    /*Centra los cuadros de diálogo (p:dialog) en el centro de la pantalla:*/
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
@@ -352,44 +329,67 @@ body {
     transform: translateY(-3px);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ===== CONTENEDOR PRINCIPAL ===== */
-.layout-main {
-    padding: 0px;
+/* Panel con encabezado azul */
+.ui-panel .ui-panel-titlebar {
+    background: #007bbd !important;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 15px;
     text-align: center;
-    animation: fadein 0.8s ease;
-     background-color: #E9F2F7 !important; 
+    border-radius: 6px 6px 0 0 !important;
 }
 
-/* Bienvenida inicialmente visible */
+/* Tabla bordes y fondo */
+#tablaHorarioSeleccionado {
+    border: 1px solid #cce4f6 !important;
+}
+
+#tablaHorarioSeleccionado .ui-datatable-header,
+#tablaHorarioSeleccionado th.ui-state-default {
+    background: #0b84d8 !important;
+    color: #fff !important;
+    font-weight: bold;
+    text-align: center !important;
+    border-color: #0a70b6 !important;
+}
+
+#tablaHorarioSeleccionado tbody td {
+    background: #f7fbff !important;
+    border-color: #d3e6f6 !important;
+}
+
+#tablaHorarioSeleccionado tbody tr:hover td {
+    background: #e3f1ff !important;
+}
+
+/* Botones azul intenso */
+#toolbarBotones .ui-button {
+    background: #006bb3 !important;
+    border: none !important;
+    color: white !important;
+    font-weight: bold;
+    border-radius: 6px !important;
+}
+
+#toolbarBotones .ui-button.ui-state-disabled {
+    background: #9fc5e8 !important;
+    opacity: 0.6;
+}
+
+/* Bienvenida */
 .welcome-box {
     max-width: 1300px;
     margin: 0 auto;
     padding: 5px;
     background: #ffffff;
     border-radius: 5px;
- 
     transition: opacity .5s ease, transform .5s ease;
 }
 
 .welcome-title {
     font-size: 28px;
     font-weight: 700;
-    color: #3f51b5; /* azul bonito */
+    color: #3f51b5;
     margin-bottom: 10px;
 }
 
@@ -399,7 +399,6 @@ body {
     margin-bottom: 20px;
 }
 
-
 .welcome-image {
     height: 350px;
     border-radius: 12px;
@@ -407,7 +406,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* Textos debajo de la imagen */
 .welcome-label {
     font-size: 20px;
     font-weight: bold;
@@ -421,165 +419,90 @@ body {
     color: #444;
 }
 
- /* Animación */
 @keyframes fadein {
     from { opacity:0; transform: translateY(15px); }
     to { opacity:1; transform: translateY(0); }
 }
 
-/* ===== DESAPARECER CUANDO SE CARGUE UN CONTENIDO ===== */
 .hide-welcome {
     display: none !important;
 }
 
+/* Mensajes */
+.mensaje-exito  .ui-panel-content {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border: 2px solid #28a745 !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+}
 
+.mensaje-naranja .ui-panel-content {
+    background-color: #ffe5b4 !important;
+    color: #9c5c00 !important;
+    border: 2px solid #ff9800 !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+}
 
+.mensaje-amarillo .ui-panel-content {
+    background-color: #fff9c4 !important;
+    color: #856404 !important;
+    border: 2px solid #ffeb3b !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+}
 
+.mensaje-error  .ui-panel-content{
+    background-color: #f8d7da !important;
+    color: #721c24 !important;
+    border: 2px solid #dc3545 !important;
+    padding: 10px !important;
+    border-radius: 6px !important;
+}
 
+.mensaje-info .ui-panel-content {
+    background-color: #cce5ff !important;
+    color: #004085 !important;
+    border: 2px solid #007bff !important;
+    border-radius: 6px !important;
+    padding: 10px;
+}
 
+/* Estados de disponibilidad */
+.disponible { background-color: #0080C0 !important; color: #fff !important; }
+.acreditado { background-color: #A0D79F !important; }
+.cursando { background-color: #603060 !important; color: white !important; }
+.ordinario { background-color: #FFFF66 !important; }
+.repeticion { background-color: #FF9900 !important; }
+.especial { background-color: #FF0000 !important; color: white !important; }
+.nodisponible { background-color: #CCCCCC !important; }
+.blanco { background-color: #FFFFFF !important; }
 
+.disponible, .acreditado, .cursando, .ordinario, .repeticion, .especial, .nodisponible, .blanco {
+    padding: 5px !important;
+    text-align: center !important;
+    font-size: 11px !important;
+}
 
-
-
-
-
-/* ===== ESTILO DE MENSJES ===== */
-
-
-            .mensaje-exito  .ui-panel-content{
-                background-color: #d4edda !important;
-                color: #155724 !important;
-                border: 2px solid #28a745 !important;
-                padding: 10px !important;
-                border-radius: 6px !important;
-            }
-            .mensaje-naranja .ui-panel-content {
-                background-color: #ffe5b4 !important; /* naranja claro */
-                color: #9c5c00 !important;           /* texto marrón oscuro */
-                border: 2px solid #ff9800 !important; /* borde naranja intenso */
-                padding: 10px !important;
-                border-radius: 6px !important;
-            }
-            .mensaje-amarillo .ui-panel-content {
-                background-color: #fff9c4 !important; /* amarillo claro */
-                color: #856404 !important;           /* texto oscuro */
-                border: 2px solid #ffeb3b !important; /* borde amarillo intenso */
-                padding: 10px !important;
-                border-radius: 6px !important;
-            }
-
-            .mensaje-error  .ui-panel-content{
-
-                background-color: #f8d7da !important;
-                color: #721c24 !important;
-                border: 2px solid #dc3545 !important;
-                padding: 10px !important;
-                border-radius: 6px !important;
-            }
-
-            .mensaje-info .ui-panel-content {
-                background-color: #cce5ff !important;
-                color: #004085 !important;
-                border: 2px solid #007bff !important;
-                border-radius: 6px !important;
-                padding: 10px;
-
-            }
-
-
-
-
-            .disponible {
-                background-color: #0080C0 !important;
-                padding: 5px !important;
-                text-align: center !important;
-                font-size: 11px !important;
-                color: #ffffff !important; /* para asegurar contraste */
-            }
-
-            .acreditado {
-                background-color: #A0D79F !important;
-                padding: 5px !important;
-                text-align: center !important;
-                font-size: 11px !important;
-            }
-
-            .cursando {
-                background-color: #603060 !important;
-                color: white !important;
-                padding: 5px !important;
-                text-align: center !important;
-                font-size: 11px !important;
-            }
-
-            .ordinario {
-                background-color: #FFFF66 !important;
-                padding: 5px !important;
-                text-align: center !important;
-                font-size: 11px !important;
-            }
-
-            .repeticion {
-                background-color: #FF9900 !important;
-                padding: 5px !important;
-                text-align: center !important;
-                font-size: 11px !important;
-            }
-
-            .especial {
-                background-color: #FF0000 !important;
-                padding: 5px !important;
-                text-align: center !important;
-                font-size: 11px !important;
-                color: white !important;
-            }
-
-            .nodisponible {
-                background-color: #CCCCCC !important;
-                padding: 5px !important;
-                text-align: center !important;
-                font-size: 11px !important;
-            }
-
-            .blanco {
-                background-color: #FFFFFF !important;
-                padding: 5px !important;
-                text-align: center !important;
-                font-size: 11px !important;
-            }
-            
-            
-            
-            
-            
-/* Contenedor horizontal */
+/* Simbología */
 .ultima-legend-horizontal {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    align-items: center;        /* Centra verticalmente */
-    justify-content: center;    /* Centra horizontalmente */
-    
+    align-items: center;
+    justify-content: center;
     padding: 1.2rem 1.4rem;
     border-radius: var(--border-radius);
-    border: 1px solid var(--surface-border);
-
-    width: 100%;                /* Para que el centrado funcione completo */
+    width: 100%;
     text-align: center;
 }
 
-
-
-
-
-
-
-/* Cuadro pequeño con texto dentro */
 .ultima-legend-small {
     padding: 6px 10px;
     border-radius: var(--border-radius);
-    font-size: .75rem;
-    font-weight: 600;
+    font-size: .5rem;
+    font-weight: 200;
     color: #fff;
     display: flex;
     align-items: center;
@@ -587,15 +510,19 @@ body {
     white-space: nowrap;
 }
 
-/* Colores */
-.legend-yellow { background:#FFEB3B;  }
-.legend-red    { background:#F44336; }
-.legend-green  { background:#4CAF50; }
-.legend-cyan   { background:#00BCD4; }
-.legend-orange { background:#FF9800; }
-.legend-purple { background:#673AB7; }
-.legend-brown  { background:#A0522D; }
-.legend-pink   { background:#E91E63; }
+.legend-yellow { background:#FFEB3B; color: #FFFFFF;}
+.legend-red    { background:#F44336; color: #FFFFFF;}
+.legend-green  { background:#4CAF50; color: #FFFFFF;}
+.legend-cyan   { background:#00BCD4; color: #FFFFFF;}
+.legend-orange { background:#FF9800; color: #FFFFFF;}
+.legend-purple { background:#673AB7; color: #FFFFFF;}
+.legend-brown  { background:#A0522D; color: #FFFFFF;}
+.legend-pink   { background:#E91E63; color: #FFFFFF;}
 
-
-
+.legend-title {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: #0088B8 !important;
+    text-align: center !important;
+    margin-bottom: 0.5rem !important;
+}

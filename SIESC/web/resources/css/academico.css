@@ -1,0 +1,305 @@
+/* =========================================================
+   BASE DEL SITIO 
+========================================================= */
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #003366;
+}
+
+/* Estructura principal */
+.layout-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.layout-topbar {
+    background-color: #00BCD4;
+    color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    z-index: 1000;
+}
+
+.menu-toggle-btn {
+    color: white;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.menu-toggle-btn i {
+    font-size: 2.5rem !important;
+}
+
+.layout-topbar .title {
+    flex: 1;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.layout-sidebar {
+    width: 260px;
+    background-color: #E9F2F7 !important;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.layout-sidebar.collapsed {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+========================================================= */
+
+.layout-main-container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.layout-main {
+    flex: 1;
+    padding: 1rem 2rem !important;
+    overflow-y: auto;
+    background-color: #f4f6f9;
+}
+
+/* =========================================================
+   PANEL MENU PERSONALIZADO
+========================================================= */
+
+.custom-menu.ui-panelmenu {
+    border: 1px solid var(--surface-border) !important;
+    border-radius: 10px;
+    background: #ffffff !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+
+.custom-menu .ui-panelmenu-header {
+    background: #00BCD4 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    margin-bottom: 5px;
+}
+
+.custom-menu .ui-panelmenu-header:hover {
+    background: #00B0C4 !important;
+}
+
+.custom-menu .ui-panelmenu-content {
+    background: #f5f8fb !important;
+    border-radius: 0 0 8px 8px !important;
+}
+
+.custom-menu .ui-menuitem-link {
+    padding: 8px 14px !important;
+    border-radius: 6px;
+    color: #003366 !important;
+}
+
+.custom-menu .ui-menuitem-link:hover {
+    background: #00BCD4 !important;
+    color: #004c80 !important;
+}
+
+.custom-menu .ui-menuitem-icon {
+    color: #005599 !important;
+}
+
+/* =========================================================
+   PANEL PERSONALIZADO
+========================================================= */
+
+.custom-card.ui-panel {
+    border-radius: 14px !important;
+    border: 1px solid var(--surface-border) !important;
+    background: var(--surface-card) !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.custom-card .ui-panel-titlebar {
+    background: #0088B8 !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    padding: .7rem !important;
+}
+
+.custom-title {
+    color: inherit !important;
+}
+
+/* PanelGrid general */
+.custom-grid .ui-panelgrid-cell {
+    padding: 8px 0 !important;
+}
+
+.custom-grid .label {
+    font-weight: 600;
+    color: #1c1c1c;
+    text-align: center;
+}
+
+.custom-grid .value {
+    color: #333;
+}
+
+/* =========================================================
+   TABLAS
+========================================================= */
+
+.tabla-header {
+    background-color: #0088A6 !important;
+    color: #ffffff !important;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px !important;
+    width: 100%;
+}
+
+.ui-datatable thead th {
+    padding: 0 !important;
+}
+
+/* Fila par/impar — las dejo pero DESACTIVADAS
+.ui-datatable-even { background: #FF0000; }
+.ui-datatable-odd  { background: #FF00FF; }
+*/
+
+/* Fila seleccionada */
+.row-highlight {
+    background: linear-gradient(90deg, #4a90e2, #007bff) !important;
+    color: #fff !important;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: 0.2s ease-in-out;
+}
+
+/* Hover */
+.ui-datatable tbody tr.ui-state-hover {
+    background: #BCBCBC !important;
+    color: #0A0A0A !important;
+}
+
+/* Bordes filas */
+.ui-datatable tbody tr {
+    border-bottom: 1px solid #dcdcdc;
+}
+
+/* =========================================================
+   COLORES DE ESTADO (NO DUPLICADOS)
+========================================================= */
+
+.disponible   { background-color:#0080C0 !important; color:#fff !important; }
+.acreditado   { background-color:#A0D79F !important; }
+.cursando     { background-color:#603060 !important; color:#fff !important; }
+.ordinario    { background-color:#FFFF66 !important; }
+.repeticion   { background-color:#FF9900 !important; }
+.especial     { background-color:#FF0000 !important; color:#fff !important; }
+.nodisponible { background-color:#CCCCCC !important; }
+.blanco       { background-color:#FFFFFF !important; }
+
+/* =========================================================
+   MENSAJES (NO EDITAR COLOR — VIENE DEL BEAN)
+========================================================= */
+
+.mensaje-exito .ui-panel-content {
+    background-color: #d4edda !important;
+    border: 2px solid #28a745 !important;
+}
+
+.mensaje-naranja .ui-panel-content {
+    background-color: #ffe5b4 !important;
+    border: 2px solid #ff9800 !important;
+}
+
+.mensaje-amarillo .ui-panel-content {
+    background-color: #fff9c4 !important;
+    border: 2px solid #ffeb3b !important;
+}
+
+.mensaje-error .ui-panel-content {
+    background-color: #f8d7da !important;
+    border: 2px solid #dc3545 !important;
+}
+
+.mensaje-info .ui-panel-content {
+    background-color: #cce5ff !important;
+    border: 2px solid #007bff !important;
+}
+
+/* =========================================================
+   SIMBOLOGÍA
+========================================================= */
+
+.ultima-legend-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+    padding: 1.2rem;
+    border: 1px solid var(--surface-border);
+    border-radius: var(--border-radius);
+}
+
+/* Mantener, pero DESACTIVADA:
+.ultima-legend-vertical {
+}
+*/
+
+/* Mantener, pero DESACTIVADA:
+.ultima-legend-small {
+    width: 26px !important;
+    height: 14px !important;
+    font-size: .45rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+*/
+
+/* Colores simbología */
+.legend-yellow { background:#FFEB3B; }
+.legend-red    { background:#F44336; }
+.legend-green  { background:#4CAF50; }
+.legend-cyan   { background:#00BCD4; }
+.legend-orange { background:#FF9800; }
+.legend-purple { background:#673AB7; }
+.legend-brown  { background:#A0522D; }
+.legend-pink   { background:#E91E63; }
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.layout-footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}

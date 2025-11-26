@@ -7,7 +7,6 @@
       xmlns:p="http://primefaces.org/ui">
 
 
-
     <body>
 
 
@@ -27,16 +26,12 @@
 
 
                             <f:facet name="header">
-                                <h:outputText value="Información del Estudiante" 
-                                              styleClass="custom-title" />
+                                <h:outputText value="Información del Estudiante" styleClass="custom-title" />
                             </f:facet>
 
-
-
-                            <p:panelGrid columns="2"
-                                         style="width:95%; margin:0 auto;"
-                                         columnClasses="label,value"
-                                         styleClass="custom-grid">
+                             <p:panelGrid columns="2" styleClass="custom-panelgrid" style="width:95%; margin:0 auto;">
+                                             
+                                <p:panelGrid columns="2" style="width:95%; margin:0 auto;" columnClasses="label,value" styleClass="flat-panelgrid">
 
                                 <p:outputLabel value="No. de Control:" />
                                 <p:outputLabel value="#{inscripcionesBean.estudiante.noDeControl}" />
@@ -74,9 +69,17 @@
 
 
                             </p:panelGrid>
-                            
-                            
-<h:panelGroup layout="block" styleClass="ultima-legend-horizontal">
+                                 <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="aguilucho-image"  />
+                              
+
+                                 
+                             </p:panelGrid>
+
+
+
+                         <div class="legend-title">Interpretación del Avance del Alumno</div>
+                              <h:panelGroup layout="block" styleClass="ultima-legend-horizontal">
+                                  
     
         <div class="ultima-legend-small legend-cyan">
         Elegir
@@ -112,8 +115,9 @@
         no se
     </div>
 
-</h:panelGroup>
 
+                         
+</h:panelGroup>
 
 
 

@@ -12,23 +12,45 @@
         <title>Sistema Escolar ITC - Estudiantes</title>
 
         <!-- Ultima Theme -->
-        <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-        <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
- <h:outputStylesheet library="css" name="estudiantes.css"/>
-
         
+  
 
+        <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+       <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+  <h:outputStylesheet  library="css" name="estudiantes.css"/>
+  
 
+  
+  <style>
+      
+      
+      
+  </style>
+  
+  
+  
+<script>
+    // Variable para saber si el sidebar está abierto o cerrado
+    let sidebarOpen = true; // Por defecto abierto
 
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.layout-sidebar');
 
-        <script>
-            function toggleSidebar() {
-                document.querySelector('.layout-sidebar').classList.toggle('collapsed');
-            }
-        </script>
+        if(sidebarOpen) {
+            // Cerrar
+            sidebar.classList.add('collapsed');
+            sidebarOpen = false;
+        } else {
+            // Abrir
+            sidebar.classList.remove('collapsed');
+            sidebarOpen = true;
+        }
+    }
+</script>
+
 
     </h:head>
 
@@ -40,17 +62,19 @@
 
             <!-- ================= TOPBAR ================= -->
             <div class="layout-topbar">
+                
+               
                 <div class="menu-toggle-btn" onclick="toggleSidebar()">
-                    <i class="pi pi-align-left"></i>
+                    <i class="pi pi-bars"></i>
                 </div>
 
-                <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;  margin-left:30px;" />
+                 <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;  margin-left:30px;" />
 
                 <div class="title">SISTEMA ESCOLAR – ESTUDIANTES</div>
 
                 <h:form>
-                    <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
-                                     action="#{controlSesion.cerrarSesion}" ajax="false" />
+                    <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"  
+                                     action="#{controlSesion.cerrarSesion}" ajax="false" styleClass="cerrar-sesion-btn" />
                 </h:form>
             </div>
 
