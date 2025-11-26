@@ -131,7 +131,6 @@ public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacade
 
         return lista;
     }
-    
 
     @Override
     public List<Grupos> buscarGruposCompletos(Carrera reticula, Integer semestre, PeriodoEscolar periodo) {
@@ -154,7 +153,8 @@ public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacade
 
         return lista;
     }
-     @Override
+
+    @Override
     public List<Grupos> buscarGruposPorCampoDepartamento(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String claveArea) {
         List<Grupos> lista = null;
         System.out.println("BUSCANDO GRUPO: -> ");
@@ -172,6 +172,30 @@ public class GruposFacade extends AbstractFacade<Grupos> implements GruposFacade
         queryPersonal.setParameter("semestre", semestre);
         queryPersonal.setParameter("periodo", periodo);
         queryPersonal.setParameter("claveArea", claveArea);
+
+        lista = (List<Grupos>) (queryPersonal.getResultList());
+
+        return lista;
+    }
+
+    @Override
+    public List<Grupos> buscarGruposPorCampoMaestro(Carrera reticula, Integer semestre, PeriodoEscolar periodo, String RFC) {
+        List<Grupos> lista = null;
+        System.out.println("BUSCANDO GRUPO: -> ");
+        String sqlPermisos = "SELECT g FROM Grupos g "
+                + "JOIN g.idMateriaCarrera mc "
+                + "WHERE g.reticula = :reticula "
+                + "AND mc.semestreReticula = :semestre "
+                + "AND g.periodo = :periodo "
+                + "AND g.rfc.rfc = :rfc";
+
+        //System.out.println("Consulta " + sqlPermisos);
+        Query queryPersonal = em.createQuery(sqlPermisos);
+
+        queryPersonal.setParameter("reticula", reticula);
+        queryPersonal.setParameter("semestre", semestre);
+        queryPersonal.setParameter("periodo", periodo);
+        queryPersonal.setParameter("rfc", RFC);
 
         lista = (List<Grupos>) (queryPersonal.getResultList());
 

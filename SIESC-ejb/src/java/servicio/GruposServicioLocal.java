@@ -32,4 +32,6 @@ public interface GruposServicioLocal {
     List<HorarioAsignatura> buscarGruposPorCampoGrupoSeleccionada(int reticula, Integer semestre, String periodo, String grupo);
     
     List<HorarioAsignatura> buscarGruposPorDepartamento(int reticula, Integer semestre, String periodo, String claveArea);
+    
+    List<HorarioAsignatura> buscarGruposPorMaestro(int reticula, Integer semestre, String periodo, String rfc);
 }

@@ -12,7 +12,7 @@ import javax.persistence.Id;
  *
  * @author gacev
  */
-@Entity
+@Entity 
 public class HorarioCrear implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id

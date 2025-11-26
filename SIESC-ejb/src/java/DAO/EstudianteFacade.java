@@ -35,13 +35,22 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> implements Estu
         Estudiante aux = null;
         String sql = "SELECT e FROM Estudiante e WHERE e.noDeControl =:control AND e.nip =:nip";
         Query query = em.createQuery(sql);
-        query.setParameter("control",estudiante.getNoDeControl());        
-        query.setParameter("nip",estudiante.getNip());
+        query.setParameter("control", estudiante.getNoDeControl());
+        query.setParameter("nip", estudiante.getNip());
         List<Estudiante> lista = query.getResultList();
-        if(!lista.isEmpty()){
-            aux = lista.get(0);            
-        }        
+        if (!lista.isEmpty()) {
+            aux = lista.get(0);
+        }
         return aux;
     }
-    
+
+    @Override
+    public List<Estudiante> traerEstudiantesPorApellidoPaterno(String apPaterno) {
+        String sql = "SELECT e FROM Estudiante e WHERE e.apellidoPaterno =:apellidopaterno";
+        Query query = em.createQuery(sql);
+        query.setParameter("apellidopaterno", apPaterno);
+        List<Estudiante> lista = query.getResultList();
+        return lista;
+    }
+
 }
