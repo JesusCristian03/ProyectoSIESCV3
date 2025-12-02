@@ -4,7 +4,20 @@
  */
 package vista;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -14,14 +27,19 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import modelo.AvisosReinscripcion;
 import modelo.Estudiante;
 import modelo.HistoriaAlumno;
@@ -46,7 +64,7 @@ import servicio.SeleccionMateriasServicioLocal;
  * @author gacev
  */
 @Named(value = "inscripcionesBean")
-@SessionScoped
+@ViewScoped
 public class InscripcionesBean implements Serializable {
 
     @EJB
@@ -97,12 +115,45 @@ public class InscripcionesBean implements Serializable {
     private int creditosSeleccionados = 0;
     private String mensaje;
     private String colorMensaje; // clase CSS
+    private Boolean modoImprimir = false, modoInsertar = false, modoEliminar = false;
 
     private int Mrojas = 0, Mamarillas = 0, Mnaranjas = 0, Mazules = 0;
     List<int[]> listaRojas = new ArrayList<>();
     List<int[]> listaNaranjas = new ArrayList<>();
     List<int[]> listaAmarillas = new ArrayList<>();
     List<int[]> listaAzules = new ArrayList<>();
+
+    public int getCreditosSeleccionados() {
+        return creditosSeleccionados;
+    }
+
+    public void setCreditosSeleccionados(int creditosSeleccionados) {
+        this.creditosSeleccionados = creditosSeleccionados;
+    }
+
+    public Boolean getModoImprimir() {
+        return modoImprimir;
+    }
+
+    public Boolean getModoInsertar() {
+        return modoInsertar;
+    }
+
+    public void setModoInsertar(Boolean modoInsertar) {
+        this.modoInsertar = modoInsertar;
+    }
+
+    public Boolean getModoEliminar() {
+        return modoEliminar;
+    }
+
+    public void setModoEliminar(Boolean modoEliminar) {
+        this.modoEliminar = modoEliminar;
+    }
+
+    public void setModoImprimir(Boolean modoImprimir) {
+        this.modoImprimir = modoImprimir;
+    }
 
     public String getMensaje() {
         return mensaje;
@@ -368,20 +419,85 @@ public class InscripcionesBean implements Serializable {
         this.listaHorarioAsignatura = listaHorarioAsignatura;
     }
 
-    // Metodos 
+    public void resetearSiEsRecarga() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+
+        if (!fc.isPostback()) {
+            // Es recarga o entrada nueva → limpiar todo
+            // Reinicia TODAS las variables que deben empezar limpias
+            creditosSeleccionados = 0;
+            listaHorarioASeleccionadas = new ArrayList<>();
+            grupoSeleccionado = null;
+            materiaDeTabla = null;
+
+            listaHorarioAsignatura = new ArrayList<>();
+            listaHorarioASeleccionadas = new ArrayList<>();
+            listaHorariosGenerados = new ArrayList<>();
+            listaPeriodoEscolar = new ArrayList<>();
+            listaSM = new ArrayList();
+            listaGC = new ArrayList();
+            listaM = new ArrayList();
+
+            grupoSeleccionado = new HorarioAsignatura();
+            vr = new AvisosReinscripcion();
+            materiaSeleccionada = new MateriasCarreras();
+            periodoActual = new PeriodoEscolar();
+            materiaDeTabla = new ReticulaDatos();
+
+            periodo = "";
+            materia = "";
+            promedio = 0.0;
+            grupoBloqueado = false;
+            modoGrupo = false;
+            grupo = "";
+            creditosSeleccionados = 0;
+            mensaje = "";
+            colorMensaje = ""; // clase CSS
+            modoImprimir = false;
+            modoInsertar = false;
+            modoEliminar = false;
+
+            Mrojas = 0;
+            Mamarillas = 0;
+            Mnaranjas = 0;
+            Mazules = 0;
+            listaRojas = new ArrayList<>();
+            listaNaranjas = new ArrayList<>();
+            listaAmarillas = new ArrayList<>();
+            listaAzules = new ArrayList<>();
+            // Reinicia cualquier otra lista o valor
+
+            iniciarInscripcion();
+        }
+    }
+
+
+
     public void iniciarInscripcion() {
         //Esa lista se asigna a tu bean (listaM) y luego se usa en la página JSF para mostrar la retícula de materias.
         listaM = materiasCarrerasServicio.buscarMaterias(estudiante);
         periodoActual = periodoEscolarServicio.buscarPorId(periodoEscolarServicio.periodoActual());
         ///-----------------------------------------------------------
         PeriodoEscolar prueba = periodoEscolarServicio.buscarPorId("20251");//Componer porque no hay como tal 
-        //............................................................
+        //.............................................................
+
         vr = avisosReinscripcionServicio.buscarAvisoReinscripcion(estudiante, prueba);//Para conseguir el limite de creditos
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+
+        //Reinicializar valores
+        Mrojas = 0;
+        Mamarillas = 0;
+        Mnaranjas = 0;
+        Mazules = 0;
+        listaRojas = new ArrayList<>();
+        listaNaranjas = new ArrayList<>();
+        listaAmarillas = new ArrayList<>();
+        listaAzules = new ArrayList<>();
+        
         guardandoPosicionesDeCadaTipoDeColor();//Contar cuantas materias hay de cada color.
         validaciones();
 
-        List<HistoriaAlumno> listaHA = historiaAlumnoServicio.buscarAsignaturas(estudiante.getNoDeControl());
+        // List<HistoriaAlumno> listaHA = historiaAlumnoServicio.buscarAsignaturas(estudiante.getNoDeControl());
         promedio = estudiante.getPromedioAritmeticoAcumulado();
         listaGC = gruposServicio.buscarGruposCompletos(estudiante.getReticula(), estudiante.getSemestre(), periodoActual);
 
@@ -395,6 +511,119 @@ public class InscripcionesBean implements Serializable {
                 .getExternalContext()
                 .getFlash()
                 .put("colorMensaje", colorMensaje);
+    }
+
+    public void generarPDF() {
+        try {
+
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ExternalContext ec = fc.getExternalContext();
+
+            ec.responseReset();
+            ec.setResponseContentType("application/pdf");
+            ec.setResponseHeader("Content-Disposition",
+                    "attachment; filename=Horario_" + estudiante.getNoDeControl() + ".pdf");
+
+            OutputStream out = ec.getResponseOutputStream();
+
+            // ======= CREACIÓN DEL PDF =======
+            // Ajustamos márgenes para no tapar header/footer
+            Document pdf = new Document(PageSize.LETTER, 40, 40, 120, 80); // left, right, top, bottom
+
+            // Cargar imágenes
+            Image headerImg = Image.getInstance(ec.getRealPath("/resources/imagenes/pdfDiseños/header.png"));
+            Image footerImg = Image.getInstance(ec.getRealPath("/resources/imagenes/pdfDiseños/footer.png"));
+
+            // Registrar evento de header/footer
+            PdfWriter writer = PdfWriter.getInstance(pdf, out);
+            writer.setPageEvent(new HeaderFooterPDF(headerImg, footerImg));
+
+            pdf.open();
+
+            // ======= FUENTES =======
+            Font tituloFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
+            Font subTituloFont = new Font(Font.FontFamily.HELVETICA, 13, Font.BOLD);
+            Font infoLabelFont = new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD);
+            Font infoFont = new Font(Font.FontFamily.HELVETICA, 11, Font.NORMAL);
+            Font tableHeaderFont = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);
+            Font tableContentFont = new Font(Font.FontFamily.HELVETICA, 9, Font.NORMAL);
+
+            // ======= ESPACIO EXTRA PARA HEADER =======
+            pdf.add(Chunk.NEWLINE);
+            pdf.add(Chunk.NEWLINE);
+
+            // ======= TÍTULO CENTRADO =======
+            Paragraph titulo = new Paragraph("INSTITUTO TECNOLÓGICO DE CUAUTLA", tituloFont);
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            pdf.add(titulo);
+
+            Paragraph subtitulo = new Paragraph("HORARIO DE INSCRIPCIÓN\n\n", subTituloFont);
+            subtitulo.setAlignment(Element.ALIGN_CENTER);
+            pdf.add(subtitulo);
+
+            // ======= DATOS DEL ESTUDIANTE =======
+            pdf.add(new Paragraph("NO. DE CONTROL: " + estudiante.getNoDeControl(), infoLabelFont));
+            pdf.add(new Paragraph(
+                    "NOMBRE: " + (estudiante.getApellidoPaterno() + " "
+                            + estudiante.getApellidoMaterno() + " "
+                            + estudiante.getNombreAlumno()).toUpperCase(),
+                    infoFont));
+            pdf.add(new Paragraph("CARRERA: " + estudiante.getReticula().getNombreCarrera().toUpperCase(), infoFont));
+            pdf.add(new Paragraph("SEMESTRE: " + estudiante.getSemestre().toString().toUpperCase(), infoFont));
+            pdf.add(new Paragraph("PERIODO: " + periodoActual.getIdentificacionLarga().toUpperCase(), infoFont));
+            pdf.add(Chunk.NEWLINE);
+
+            // ======= TABLA DE HORARIOS =======
+            PdfPTable table = new PdfPTable(10);
+            table.setWidthPercentage(100);
+
+            // Encabezados
+            String[] columnas = {"Grupo", "Materia", "Asignatura", "Docente",
+                "Lunes", "Martes", "Miércoles", "Jueves",
+                "Viernes", "Sábado"};
+            for (String col : columnas) {
+                PdfPCell cell = new PdfPCell(new Phrase(col, tableHeaderFont));
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(cell);
+            }
+
+            // Contenido de la tabla
+            for (HorarioAsignatura h : listaHorarioASeleccionadas) {
+                PdfPCell[] celdas = new PdfPCell[]{
+                    new PdfPCell(new Phrase(h.getGrupo(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getMateria(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getAsignatura(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getDocente(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getLunes(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getMartes(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getMiercoles(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getJueves(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getViernes(), tableContentFont)),
+                    new PdfPCell(new Phrase(h.getSabado(), tableContentFont))
+                };
+                for (PdfPCell celda : celdas) {
+                    celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    table.addCell(celda);
+                }
+            }
+
+            pdf.add(table);
+
+            pdf.close();
+            fc.responseComplete();
+            addMessage(FacesMessage.SEVERITY_INFO, "IMPRIMIENDO...", "Tu horario se ha impreso");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+// ======= FUNCIÓN AUXILIAR PARA CENTRAR CELDAS =======
+    private PdfPCell celdaCentro(String texto, Font f) {
+        PdfPCell cell = new PdfPCell(new Phrase(texto, f));
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        return cell;
     }
 
     public void recuperarPanelFlash() {
@@ -452,7 +681,7 @@ public class InscripcionesBean implements Serializable {
         System.out.println("-----------------------------------------");
 
         try {
-            iniciarInscripcion();
+           // iniciarInscripcion();
 
             FacesContext.getCurrentInstance()
                     .getExternalContext()
@@ -533,9 +762,8 @@ public class InscripcionesBean implements Serializable {
         if (Mazules != 0) {
             //  addMessage(FacesMessage.SEVERITY_INFO, "MATERIAS DISPONIBLES ", "SELECCIONA TUS MATERIAS");
             mostrarPanel("Selecciona materias disponibles [ Materias " + listaAzules.size() + "]", "mensaje-info");
-            
-            // Caso 1: el semestre del alumno es PAR y s es IMPAR
 
+            // Caso 1: el semestre del alumno es PAR y s es IMPAR
             for (int i = 0; i < listaAzules.size(); i++) {
                 Reticula r = listaM.get(listaAzules.get(i)[0]);
                 try {
@@ -586,7 +814,7 @@ public class InscripcionesBean implements Serializable {
             Reticula r = listaM.get(j);
             System.out.println("===== Retícula #" + (j + 1) + " =====");
 
-            for (int s = 1; s <= 9; s++) { // Recorro los 9 semestres
+            for (int s = 1; s <= 10; s++) { // Recorro los 10 semestres
                 try {
                     // Obtener el semestre actual dinámicamente
                     ReticulaDatos rd = (ReticulaDatos) r.getClass()
@@ -631,7 +859,6 @@ public class InscripcionesBean implements Serializable {
 
     public void verHorarios(String grupo) {
         this.grupo = grupo;
-
         listaHorarioAsignatura = gruposServicio.buscarGruposPorCampoGrupoSeleccionada(estudiante.getReticula().getReticula(),
                 estudiante.getSemestre(),
                 periodoActual.getPeriodo(),
@@ -642,6 +869,7 @@ public class InscripcionesBean implements Serializable {
         // Aquí recuperas la materia seleccionada desde el component binding
         System.out.println("Materia Escogida->" + materia + "disponible?:->" + materia.getDisponible());
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA", materia.getNombreMateria());
+
         materiaDeTabla = materia;
         materiaDeTabla.setDisponible(true);
 
@@ -689,8 +917,8 @@ public class InscripcionesBean implements Serializable {
 
                 System.out.println("===== Retícula #" + (j + 1) + " =====");
 
-                // Recorremos los 9 semestres dinámicamente
-                for (int s = 1; s <= 9; s++) {//Recorro los semestres de cada reticula
+                // Recorremos los 10 semestres dinámicamente
+                for (int s = 1; s <= 10; s++) {//Recorro los semestres de cada reticula
                     try {
                         // Obtener el semestre actual usando reflexión
                         ReticulaDatos rd = (ReticulaDatos) r.getClass()
@@ -741,6 +969,43 @@ public class InscripcionesBean implements Serializable {
 
         addMessage(FacesMessage.SEVERITY_INFO, "HORARIO GUARDADO", "SE HA GUARDADO EL HORARIO");
         creditosSeleccionados = 0; //Para contabilizar de nuevo
+
+        modoImprimir = true;
+        modoInsertar = true;
+        modoEliminar = true;
+    }
+
+    public void eliminarHorario(HorarioAsignatura item) {
+        System.out.println("Item:" + item);
+        listaHorarioASeleccionadas.remove(item);
+        for (int j = 0; j < listaM.size(); j++) { // Recorro cada retícula
+            Reticula r = listaM.get(j);
+            System.out.println("===== Retícula #" + (j + 1) + " =====");
+
+            for (int s = 1; s <= 10; s++) { // Recorro los 10 semestres
+                try {
+                    // Obtener el semestre actual dinámicamente
+                    ReticulaDatos rd = (ReticulaDatos) r.getClass()
+                            .getMethod("getSemestre" + s)
+                            .invoke(r);
+
+                    if (rd != null) {
+                        System.out.println("Semestre " + s + ": " + rd.getNombreMateria());
+                        if (rd.getMateria().equals(item.getMateria())) {
+                            rd.setDisponible(true);
+                            rd.setColor("disponible");
+                            creditosSeleccionados -= Integer.parseInt(rd.getCreditos());
+                        }
+                    } else {
+                        System.out.println("Semestre " + s + ": vacío");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Error al obtener Semestre " + s + ": " + e.getMessage());
+                }
+            }
+            System.out.println("-----------------------------------");
+        }
     }
 
     public void eliminarHorario() {//Mañana 06-11-2025
@@ -751,6 +1016,7 @@ public class InscripcionesBean implements Serializable {
         grupoBloqueado = false;//Para bloquear los grupos si ya he seleccionado
         restaurarHorarioReticula();
         listaHorarioASeleccionadas = new ArrayList();
+        modoImprimir = false;
 
         creditosSeleccionados = 0;//Para reinicializacion. 
 
@@ -803,7 +1069,7 @@ public class InscripcionesBean implements Serializable {
                         return;
                     default:
                         grupoBloqueado = true;
-                        addMessage(FacesMessage.SEVERITY_INFO, "GRUPOS NO DISPONIBLES", "SELECCIONA DESDE RETICULA");
+                        addMessage(FacesMessage.SEVERITY_INFO, "GRUPOS NO DISPONIBLES", "NO PUEDES SELECCIONAR, AUTORIZA JEFE DE CARRERA");
                         return;
                 }
 
@@ -836,6 +1102,20 @@ public class InscripcionesBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(severity, titulo, detalle));
     }
 
+    public void limpiarEspaciosInicioHorarios(List<HorarioAsignatura> lista) {
+
+        for (HorarioAsignatura h : lista) {
+
+            // Limpiar cada día quitando espacios del inicio (trim left)
+            h.setLunes((h.getLunes() != null) ? h.getLunes().replaceAll("^\\s+", "") : "");
+            h.setMartes((h.getMartes() != null) ? h.getMartes().replaceAll("^\\s+", "") : "");
+            h.setMiercoles((h.getMiercoles() != null) ? h.getMiercoles().replaceAll("^\\s+", "") : "");
+            h.setJueves((h.getJueves() != null) ? h.getJueves().replaceAll("^\\s+", "") : "");
+            h.setViernes((h.getViernes() != null) ? h.getViernes().replaceAll("^\\s+", "") : "");
+            h.setSabado((h.getSabado() != null) ? h.getSabado().replaceAll("^\\s+", "") : "");
+        }
+    }
+
     public void onSeleccionarGrupo() {
 
         System.out.println("===============SELECCIONADO==================");
@@ -859,10 +1139,11 @@ public class InscripcionesBean implements Serializable {
         if (creditosSeleccionados <= vr.getCreditosAutorizados()) {
             boolean empalme = false;
             SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
-
+            limpiarEspaciosInicioHorarios(listaHorarioASeleccionadas);
+            limpiarEspaciosInicioHorarios(Arrays.asList(grupoSeleccionado));
             for (HorarioAsignatura hc : listaHorarioASeleccionadas) {
                 // Recorremos cada día
-                Map<String, String> dias = new HashMap<>();
+                Map<String, String> dias = new LinkedHashMap<>();
                 dias.put("lunes", hc.getLunes());
                 dias.put("martes", hc.getMartes());
                 dias.put("miercoles", hc.getMiercoles());
@@ -873,6 +1154,7 @@ public class InscripcionesBean implements Serializable {
                 for (Map.Entry<String, String> entry : dias.entrySet()) {
                     String dia = entry.getKey();
                     String horariosExistentes = entry.getValue();
+
                     String horariosNuevo = null;
 
                     switch (dia) {
@@ -895,6 +1177,8 @@ public class InscripcionesBean implements Serializable {
                             horariosNuevo = grupoSeleccionado.getSabado();
                             break;
                     }
+                    System.out.println("horariosExistentes[" + horariosExistentes + "]");
+                    System.out.println("horariosNuevo[" + horariosNuevo + "]");
 
                     if (horariosExistentes != null && horariosNuevo != null) {
                         // Separar rangos por el separador usado
@@ -914,8 +1198,13 @@ public class InscripcionesBean implements Serializable {
                                     Date finN = formatoHora.parse(hN[1].trim());
 
                                     // Verificar si se empalman
-                                    if (!(finN.before(inicioE) || inicioN.after(finE))) {
+                                    System.out.println("inicioE = " + inicioE);
+                                    System.out.println("finE = " + finE);
+                                    System.out.println("inicioN = " + inicioN);
+                                    System.out.println("finN = " + finN);
+                                    if (inicioN.before(finE) && finN.after(inicioE)) {
                                         empalme = true;
+                                        creditosSeleccionados -= Integer.parseInt(materiaDeTabla.getCreditos());
                                         addMessage(FacesMessage.SEVERITY_WARN, "EMPALME DETECTADO",
                                                 "La materia " + grupoSeleccionado.getAsignatura()
                                                 + " tiene horario que se empalma en " + dia);
@@ -947,6 +1236,7 @@ public class InscripcionesBean implements Serializable {
                 listaHorarioASeleccionadas.add(grupoSeleccionado);
             }
         } else {
+            creditosSeleccionados -= Integer.parseInt(materiaDeTabla.getCreditos());
             addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS AUTORIZADOS ALCANZADOS",
                     "NO PUEDES SELECCIONAR MAS MATERIAS");
         }

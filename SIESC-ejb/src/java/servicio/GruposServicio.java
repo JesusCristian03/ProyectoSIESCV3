@@ -198,6 +198,7 @@ public class GruposServicio implements GruposServicioLocal {
             horarioAsignatura.setMateria(grupo.getMateria());
             horarioAsignatura.setAsignatura(grupo.getIdMateriaCarrera().getMateria().getNombreCompletoMateria());
             horarioAsignatura.setId(grupo.getIdGrupo());
+            horarioAsignatura.setCreditos(""+grupo.getIdMateriaCarrera().getCreditosMateria());
             // ===== VALIDACIÓN NUEVA =====
             if (grupo.getRfc() != null) {
                 // el docente sí existe

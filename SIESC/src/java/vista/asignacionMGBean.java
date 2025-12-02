@@ -7,9 +7,16 @@ package vista;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -181,7 +188,10 @@ public class asignacionMGBean implements Serializable {
                     break;
                 }
             }
+
             docenteRFC = p.getRfc();
+            verHorarioMaestro();
+
         } else {
             docenteRFC = "";
 
@@ -217,10 +227,159 @@ public class asignacionMGBean implements Serializable {
         }
     }
 
+    public void limpiarEspaciosInicioHorarios(List<HorarioAsignatura> lista) {
+
+        for (HorarioAsignatura h : lista) {
+
+            // Limpiar cada día quitando espacios del inicio (trim left)
+            h.setLunes((h.getLunes() != null) ? h.getLunes().replaceAll("^\\s+", "") : "");
+            h.setMartes((h.getMartes() != null) ? h.getMartes().replaceAll("^\\s+", "") : "");
+            h.setMiercoles((h.getMiercoles() != null) ? h.getMiercoles().replaceAll("^\\s+", "") : "");
+            h.setJueves((h.getJueves() != null) ? h.getJueves().replaceAll("^\\s+", "") : "");
+            h.setViernes((h.getViernes() != null) ? h.getViernes().replaceAll("^\\s+", "") : "");
+            h.setSabado((h.getSabado() != null) ? h.getSabado().replaceAll("^\\s+", "") : "");
+        }
+    }
+
     public void guardarMaestro() {
         HorarioAsignatura ha = null;
 
         Personal maestro = personalServicio.buscarPorId(docenteRFC);
+
+        if (!listaHorarioCrearMaestros.isEmpty()) {
+            boolean empalme = false;
+            SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+            limpiarEspaciosInicioHorarios(listaHorarioCrearMaestros);
+            limpiarEspaciosInicioHorarios(Arrays.asList(horarioCrearSeleccionado));
+            System.out.println("=========== INICIANDO VERIFICACION DE EMPALMES ===========");
+            System.out.println("Total de horarios existentes del maestro: " + listaHorarioCrearMaestros.size());
+            System.out.println("Horario NUEVO seleccionado:");
+            System.out.println(" - Lunes:" + horarioCrearSeleccionado.getLunes());
+            System.out.println(" - Martes:" + horarioCrearSeleccionado.getMartes());
+            System.out.println(" - Miércoles:" + horarioCrearSeleccionado.getMiercoles());
+            System.out.println(" - Jueves:" + horarioCrearSeleccionado.getJueves());
+            System.out.println(" - Viernes:" + horarioCrearSeleccionado.getViernes());
+            System.out.println(" - Sábado:" + horarioCrearSeleccionado.getSabado());
+            System.out.println("===========================================================");
+
+            for (HorarioAsignatura hc : listaHorarioCrearMaestros) {
+                // Recorremos cada día 
+                System.out.println("\n--- NUEVA MATERIA EXISTENTE A COMPARAR ---");
+                System.out.println("Asignatura existente: " + hc.getAsignatura());
+                System.out.println("Docente:" + hc.getDocente());
+                System.out.println("Grupo:" + hc.getGrupo());
+                System.out.println("Lunes:" + hc.getLunes());
+                System.out.println("Martes:" + hc.getMartes());
+                System.out.println("Miércoles:" + hc.getMiercoles());
+                System.out.println("Jueves:" + hc.getJueves());
+                System.out.println("Viernes:" + hc.getViernes());
+                System.out.println("Sábado:" + hc.getSabado());
+                System.out.println("------------------------------------------------------------");
+
+                Map<String, String> dias = new LinkedHashMap<>();
+
+                dias.put("lunes", hc.getLunes());
+                dias.put("martes", hc.getMartes());
+                dias.put("miercoles", hc.getMiercoles());
+                dias.put("jueves", hc.getJueves());
+                dias.put("viernes", hc.getViernes());
+                dias.put("sabado", hc.getSabado());
+
+                for (Map.Entry<String, String> entry : dias.entrySet()) {
+                    String dia = entry.getKey();
+                    String horariosExistentes = entry.getValue();
+                    String horariosNuevo = null;
+
+                    switch (dia) {
+                        case "lunes":
+                            System.out.println("Entro a lunes");
+                            horariosNuevo = horarioCrearSeleccionado.getLunes();
+                            break;
+                        case "martes":
+                            horariosNuevo = horarioCrearSeleccionado.getMartes();
+                            break;
+                        case "miercoles":
+                            horariosNuevo = horarioCrearSeleccionado.getMiercoles();
+                            break;
+                        case "jueves":
+                            horariosNuevo = horarioCrearSeleccionado.getJueves();
+                            break;
+                        case "viernes":
+                            horariosNuevo = horarioCrearSeleccionado.getViernes();
+                            break;
+                        case "sabado":
+                            horariosNuevo = horarioCrearSeleccionado.getSabado();
+                            break;
+                    }
+                    // ====== IMPRIMIENDO VALORES ANTES DE SPLIT ======
+                    System.out.println("\nDía revisado: " + dia);
+                    System.out.println("Horarios EXISTENTES raw: [" + horariosExistentes + "]");
+                    System.out.println("Horarios NUEVOS raw:      [" + horariosNuevo + "]");
+                    System.out.println("------------------------------------------------");
+
+                    if (horariosExistentes != null && !"".equals(horariosExistentes)
+                            && horariosNuevo != null && !"".equals(horariosNuevo)) {
+                        // Separar rangos por el separador usado
+                        String[] rangosExistentes = horariosExistentes.split("   ");
+                        String[] rangosNuevo = horariosNuevo.split("   ");
+
+                        for (String rangoE : rangosExistentes) {
+                            for (String rangoN : rangosNuevo) {
+                                // Parsear horas
+                                String[] hE = rangoE.split(" - ");
+                                String[] hN = rangoN.split(" - ");
+
+                                System.out.println("Rangos existentes encontrados: " + Arrays.toString(rangosExistentes));
+                                System.out.println("Rangos nuevos encontrados:     " + Arrays.toString(rangosNuevo));
+
+                                System.out.println("---- DEPURANDO HORARIOS ----");
+                                System.out.println("Dia: " + dia);
+                                System.out.println("Horarios existentes (raw): [" + horariosExistentes + "]");
+                                System.out.println("Horarios nuevo (raw): [" + horariosNuevo + "]");
+                                System.out.println("Rango existente: [" + rangoE + "]");
+                                System.out.println("Rango nuevo: [" + rangoN + "]");
+                                System.out.println("Partes hE: " + Arrays.toString(hE));
+                                System.out.println("Partes hN: " + Arrays.toString(hN));
+
+                                try {
+                                    System.out.println("Parseando existente inicio: " + hE[0] + "  fin: " + hE[1]);
+                                    System.out.println("Parseando nuevo inicio: " + hN[0] + "  fin: " + hN[1]);
+                                    Date inicioE = formatoHora.parse(hE[0].trim());
+                                    Date finE = formatoHora.parse(hE[1].trim());
+                                    Date inicioN = formatoHora.parse(hN[0].trim());
+                                    Date finN = formatoHora.parse(hN[1].trim());
+
+                                    // Verificar si se empalman
+                                    if (inicioN.before(finE) && finN.after(inicioE)) {
+                                        empalme = true;
+                                        addMessage(FacesMessage.SEVERITY_WARN, "EMPALME DETECTADO",
+                                                "La materia " + horarioCrearSeleccionado.getAsignatura()
+                                                + " tiene horario que se empalma en " + dia);
+                                        break;
+                                    }
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (empalme) {
+                                break;
+                            }
+                        }
+                    }
+                    if (empalme) {
+                        break;
+                    }
+                }
+                if (empalme) {
+                    break;
+                }
+            }
+
+            if (empalme) {
+                System.out.println("Encontre");
+                return;
+            }
+        }
 
         for (HorarioAsignatura h : listaHorarioCrear) {
             if (h.getId() == horarioCrearSeleccionado.getId()) {
@@ -280,7 +439,7 @@ public class asignacionMGBean implements Serializable {
     }
 
     public void verHorarioMaestro() {
-        System.out.println("RFC:"+docenteRFC);
+        System.out.println("RFC:" + docenteRFC);
         listaHorarioCrearMaestros = gruposServicio.buscarGruposPorMaestro(carreraSeleccionada,
                 semestreSeleccionado,
                 periodoSeleccionado,

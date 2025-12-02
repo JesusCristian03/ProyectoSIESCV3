@@ -19,105 +19,69 @@
             <ui:define name="content">
 
                 <f:view>
-
-
+                     <!-- AQUI VA EL METADATA -->
+                <f:metadata>
+                    <f:event type="preRenderView" listener="#{inscripcionesBean.resetearSiEsRecarga}" />
+                </f:metadata>
+  
                     <h:form>
                         <p:panel styleClass="custom-card" style="width:100%; margin: 0 auto; display:block;">
 
 
                             <f:facet name="header">
-                                <h:outputText value="Información del Estudiante" styleClass="custom-title" />
+                                <h:outputText value="INFORMACIÓN DEL ESTUDIANTE" styleClass="custom-title" />
                             </f:facet>
 
-                             <p:panelGrid columns="2" styleClass="custom-panelgrid" style="width:95%; margin:0 auto;">
-                                             
+                            <p:panelGrid columns="2" styleClass="custom-panelgrid" style="width:95%; margin:0 auto;">
+
                                 <p:panelGrid columns="2" style="width:95%; margin:0 auto;" columnClasses="label,value" styleClass="flat-panelgrid">
 
-                                <p:outputLabel value="No. de Control:" />
-                                <p:outputLabel value="#{inscripcionesBean.estudiante.noDeControl}" />
+                                    <p:outputLabel value="No. de Control:" />
+                                    <p:outputLabel value="#{inscripcionesBean.estudiante.noDeControl}" />
 
-                                <p:outputLabel value="Estudiante:" />
-                                <p:outputLabel value="#{inscripcionesBean.estudiante.apellidoPaterno}
-                                               #{inscripcionesBean.estudiante.apellidoMaterno}
-                                               #{inscripcionesBean.estudiante.nombreAlumno}" />
+                                    <p:outputLabel value="Estudiante:" />
+                                    <p:outputLabel value="#{inscripcionesBean.estudiante.apellidoPaterno}
+                                                   #{inscripcionesBean.estudiante.apellidoMaterno}
+                                                   #{inscripcionesBean.estudiante.nombreAlumno}" />
 
-                                <p:outputLabel value="Carrera:" />
-                                <p:outputLabel value="#{inscripcionesBean.estudiante.reticula.nombreCarrera}" />
+                                    <p:outputLabel value="Carrera:" />
+                                    <p:outputLabel value="#{inscripcionesBean.estudiante.reticula.nombreCarrera}" />
 
-                                <p:outputLabel value="Semestre:" />
-                                <p:outputLabel value="#{inscripcionesBean.estudiante.semestre}" />
+                                    <p:outputLabel value="Semestre:" />
+                                    <p:outputLabel value="#{inscripcionesBean.estudiante.semestre}" />
 
-                                <p:outputLabel value="Periodo Escolar:" />
-                                <p:outputLabel value="#{inscripcionesBean.periodoActual.identificacionLarga}" />
+                                    <p:outputLabel value="Periodo Escolar:" />
+                                    <p:outputLabel value="#{inscripcionesBean.periodoActual.identificacionLarga}" />
 
-                                <p:outputLabel value="Calificación:" />
-                                <p:outputLabel value="#{inscripcionesBean.promedio}" />
-                                <f:metadata>
-                                    <f:viewAction action="#{inscripcionesBean.recuperarPanelFlash}" />
-                                </f:metadata>
+                                    <p:outputLabel value="Calificación:" />
+                                    <p:outputLabel value="#{inscripcionesBean.promedio}" />
+                                    <f:metadata>
+                                        <f:viewAction action="#{inscripcionesBean.recuperarPanelFlash}" />
+                                    </f:metadata>
 
-                                <p:outputLabel value="Especialidad:" />
-                                <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" />
-                                
-                                <p:outputLabel value="Estatus:" />
-                                <p:panel id="mensajePanel"
-                                         style="width:95%; margin: 10px auto;"
-                                         styleClass="#{inscripcionesBean.colorMensaje}">
-                                    <h:outputText value="#{inscripcionesBean.mensaje}" />
-                                </p:panel>
-                                
+                                    <p:outputLabel value="Especialidad:" />
+                                    <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" />
+
+                                    <p:outputLabel value="Estatus:" />
+                                    <p:panel id="mensajePanel"
+                                             style="width:95%; margin: 10px auto;"
+                                             styleClass="#{inscripcionesBean.colorMensaje}">
+                                        <h:outputText value="#{inscripcionesBean.mensaje}" />
+                                    </p:panel>
+
+
+
+                                </p:panelGrid>
+                                <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="aguilucho-image"  />
+
 
 
                             </p:panelGrid>
-                                 <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="aguilucho-image"  />
-                              
-
-                                 
-                             </p:panelGrid>
 
 
 
-                         <div class="legend-title">Interpretación del Avance del Alumno</div>
-                              <h:panelGroup layout="block" styleClass="ultima-legend-horizontal">
-                                  
-    
-        <div class="ultima-legend-small legend-cyan">
-        Elegir
-    </div>
- 
-    
-    <div class="ultima-legend-small legend-yellow">
-        Reprobado
-    </div>
-    
-        <div class="ultima-legend-small legend-orange">
-        Reprobado 2
-    </div>
-
-    <div class="ultima-legend-small legend-red">
-        reprobado
-    </div>
-
-    <div class="ultima-legend-small legend-green">
-        aprovado
-    </div>
 
 
-    <div class="ultima-legend-small legend-purple">
-        nose
-    </div>
-
-    <div class="ultima-legend-small legend-brown">
-        nose
-    </div>
-
-    <div class="ultima-legend-small legend-pink">
-        no se
-    </div>
-
-
-                         
-</h:panelGroup>
 
 
 
@@ -127,10 +91,10 @@
 
 
                     <h:form id="seleccion">
-                        
 
-                        
-                        
+
+
+
                         <p:tabView id="tabVista" cache="false">
 
                             <p:ajax event="tabChange" listener="#{inscripcionesBean.onTabChange}" update="@this :seleccion:tabVista:panelGrupos" />
@@ -146,12 +110,12 @@
 
 
 
-
+                                <div class="legend-title">AVANCE DEL ALUMNO</div>
                                 <p:dataTable id="tablaReticula" value="#{inscripcionesBean.listaM}" var="asignatura" rowStyleClass="registroPrueba" showGridlines="true">                                        
 
                                     <p:column styleClass="#{asignatura.semestre2.color}">
                                         <f:facet name="header" >
-                                        <div class="tabla-header">Semestre 1</div>
+                                            <div class="tabla-header">Semestre 1</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -181,7 +145,7 @@
 
                                     <p:column styleClass="#{asignatura.semestre2.color}">
                                         <f:facet name="header">
-                                           <div class="tabla-header">Semestre 2</div>
+                                            <div class="tabla-header">Semestre 2</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -210,7 +174,7 @@
                                     </p:column>
                                     <p:column styleClass="#{asignatura.semestre3.color}">
                                         <f:facet name="header">
-                                           <div class="tabla-header">Semestre 3</div>
+                                            <div class="tabla-header">Semestre 3</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -267,7 +231,7 @@
                                     </p:column>
                                     <p:column styleClass="#{asignatura.semestre5.color}">
                                         <f:facet name="header">
-                                           <div class="tabla-header">Semestre 5</div>
+                                            <div class="tabla-header">Semestre 5</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -325,7 +289,7 @@
                                     <p:column styleClass="#{asignatura.semestre7.color}">
 
                                         <f:facet name="header">
-                                           <div class="tabla-header">Semestre 7</div>
+                                            <div class="tabla-header">Semestre 7</div>
                                         </f:facet>
 
                                         <div style="text-align:center;">
@@ -410,7 +374,56 @@
                                             <h:outputText value="#{asignatura.semestre9.calificacion}" style="font-size:12px;" />
                                         </div>
                                     </p:column>
+                                    <p:column styleClass="#{asignatura.semestre10.color}">
+                                        <f:facet name="header">
+                                            <div class="tabla-header">Semestre 10</div>
+                                        </f:facet>
+
+                                        <div style="text-align:center;">
+                                            <h:outputText value="#{asignatura.semestre10.materia}" style="font-size:12px; color: #{asignatura.semestre10.color=='cursando' ? '#FFFFFF' : '#090811'};" />
+                                        </div>
+
+                                        <p:commandLink  
+                                            value="#{asignatura.semestre10.nombreMateria}" 
+                                            rendered="#{asignatura.semestre10.disponible eq 'true'}"
+                                            actionListener="#{inscripcionesBean.onMateriaClick(asignatura.semestre10)}"
+                                            update=":seleccion:tabVista:tablaHorarioSeleccionandoEmergente 
+                                            :seleccion:tabVista:toolbarBotones 
+                                            :seleccion:tabVista:growlMensajes"
+                                            oncomplete="PF('selecionMateria').show()"
+                                            style="color:#090811; font-size:12px; text-decoration:none; font-weight:normal;"
+                                            onmouseover="this.style.color = '#FFFFFF';"
+                                            onmouseout="this.style.color = '#090811';" />
+
+                                        <h:outputText value="#{asignatura.semestre10.nombreMateria}" 
+                                                      rendered="#{not asignatura.semestre10.disponible eq 'true'}"
+                                                      style="font-size:12px; color: #{asignatura.semestre10.color=='cursando' ? '#FFFFFF' : '#090811'};" />
+
+                                        <div style="color:#090811; text-align:center;">
+                                            <h:outputText value="#{asignatura.semestre10.calificacion}" style="font-size:12px;" />
+                                        </div>
+                                    </p:column>
                                 </p:dataTable>
+
+
+                                <h:panelGroup layout="block" styleClass="legend-wrapper">
+
+                                    <div class="legend-container">
+                                        <div class="legend-header">CÓDIGO DE COLORES</div>
+
+                                        <div class="legend-row">
+                                            <div class="legend-cell acreditada">Acreditada</div>
+                                            <div class="legend-cell cursando">Cursando</div>
+                                            <div class="legend-cell cursada-prioridad">Cursada Sin Acreditar Prioridad para seleccionar</div>
+                                            <div class="legend-cell curso-especial">A Curso Especial</div>
+                                            <div class="legend-cell curso-reprobado">Curso Esp. Reprobado</div>
+                                            <div class="legend-cell materia-posible">Materia posible a seleccionar si requisitos OK</div>
+                                            <div class="legend-cell materia-no-permitida">Materia no permitida hasta avance</div>
+                                        </div>
+                                    </div>
+
+                                </h:panelGroup>
+
 
                                 <p:dialog id="dlg" 
                                           header="Selecciona Grupo" 
@@ -440,7 +453,8 @@
                                                 :seleccion:tabVista:tablaReticula 
                                                 :seleccion:tabVista:tablaHorarioSeleccionado
                                                 :seleccion:tabVista:toolbarBotones 
-                                                :seleccion:tabVista:growlMensajes"
+                                                :seleccion:tabVista:growlMensajes 
+                                                :seleccion:tabVista:panelCreditos"
                                                 oncomplete="PF('selecionMateria').hide();" />
 
                                         <p:column headerText="Grupo" style="width:4%;"><h:outputText value="#{item.grupo}" /></p:column>   
@@ -451,7 +465,8 @@
                                             </p:selectBooleanCheckbox>
                                         </p:column>
                                         <p:column headerText="Materia" style="width:8%;"><h:outputText value="#{item.materia}" /></p:column> 
-                                        <p:column headerText="Asignatura" style="width:18%;"><h:outputText value="#{item.asignatura}" /></p:column> 
+                                        <p:column headerText="Asignatura" style="width:15%;"><h:outputText value="#{item.asignatura}" /></p:column> 
+
                                         <p:column headerText="Docente" style="width:11%;"><h:outputText value="#{item.docente}" /></p:column> 
                                         <p:column headerText="Lunes" style="width:10%;"><h:outputText value="#{item.lunes}" /></p:column>
                                         <p:column headerText="Martes" style="width:10%;"><h:outputText value="#{item.martes}" /></p:column> 
@@ -474,47 +489,85 @@
                                                  scrollable="true" scrollHeight="400"
                                                  emptyMessage="No hay horarios seleccionados">
 
-                                        <p:column headerText="Grupo" style="width:4%; font-size:13px; text-align:center">
+                                        <p:column headerText="Asignatura / Docente" style="width:18%; font-size:13px; text-align:center;">
+
+                                            <h:panelGroup layout="block" style="text-align:center; padding:4px 0;">
+
+                                                <!-- Asignatura -->
+                                                <div style=";">
+                                                    #{item.materia} #{item.asignatura}
+                                                </div>
+
+                                                <!-- Línea divisora -->
+                                                <hr style="margin:4px 0; border:0; border-top:1px solid #ccc;" />
+
+                                                <!-- Docente -->
+                                                <div style="font-size:12px; color:#444;">
+                                                    #{item.docente}
+                                                </div>
+
+                                            </h:panelGroup>
+
+                                        </p:column>
+                                        <p:column headerText="Grupo" style="width:8%; font-size:13px; text-align:center;">
                                             <h:outputText value="#{item.grupo}" />
                                         </p:column>
-                                        <p:column headerText="Materia" style="width:8%; font-size:13px; text-align:center;">
-                                            <h:outputText value="#{item.materia}" />
+                                        <p:column headerText="Creditos" style="width:5%; font-size:13px; text-align:center;">
+                                            <h:outputText value="#{item.creditos}" />
                                         </p:column>
-                                        <p:column headerText="Asignatura" style="width:15%; font-size:13px; text-align:center;">
-                                            <h:outputText value="#{item.asignatura}" />
-                                        </p:column>
-                                        <p:column headerText="Docente" style="width:15%; font-size:13px; text-align:center;">
-                                            <h:outputText value="#{item.docente}" />
-                                        </p:column>
-                                        <p:column headerText="Lunes" style="width:10%; font-size:13px; text-align:center;">
+
+
+                                        <p:column headerText="Lunes" style="width:11%; font-size:13px; text-align:center;">
                                             <h:outputText value="#{item.lunes}" />
                                         </p:column>
-                                        <p:column headerText="Martes" style="width:10%; font-size:13px; text-align:center;">
+                                        <p:column headerText="Martes" style="width:11%; font-size:13px; text-align:center;">
                                             <h:outputText value="#{item.martes}" />
                                         </p:column>
-                                        <p:column headerText="Miércoles" style="width:10%; font-size:13px; text-align:center;">
+                                        <p:column headerText="Miércoles" style="width:11%; font-size:13px; text-align:center;">
                                             <h:outputText value="#{item.miercoles}" />
                                         </p:column>
-                                        <p:column headerText="Jueves" style="width:10%; font-size:13px; text-align:center;">
+                                        <p:column headerText="Jueves" style="width:11%; font-size:13px; text-align:center;">
                                             <h:outputText value="#{item.jueves}" />
                                         </p:column>
-                                        <p:column headerText="Viernes" style="width:10%; font-size:13px; text-align:center;">
+                                        <p:column headerText="Viernes" style="width:11%; font-size:13px; text-align:center;">
                                             <h:outputText value="#{item.viernes}" />
                                         </p:column>
-                                        <p:column headerText="Sábado" style="width:9%; font-size:13px; text-align:center;">
+                                        <p:column headerText="Sábado" style="width:10%; font-size:13px; text-align:center;">
                                             <h:outputText value="#{item.sabado}" />
                                         </p:column>
+
+                                        <p:column headerText="" style="width:7%; text-align:center">
+                                            <p:commandButton icon="pi pi-trash"
+                                                             styleClass="btn-icon-square"
+                                                             update="tablaHorarioSeleccionado 
+                                                             :seleccion:tabVista:toolbarBotones
+                                                             :seleccion:tabVista:tablaReticula 
+                                                             :seleccion:tabVista:panelCreditos"
+                                                             actionListener="#{inscripcionesBean.eliminarHorario(item)}"
+                                                             title="Eliminar"
+                                                             process="@this"/>
+                                        </p:column>
+
                                     </p:dataTable>
+                                    <!-- Créditos arriba en una fila independiente -->
+                                    <h:panelGroup id="panelCreditos" style="margin-top:20px; font-size:14px; font-weight:bold; color:#003366;">
+                                        CRÉDITOS: #{inscripcionesBean.creditosSeleccionados}
+                                    </h:panelGroup>
 
                                     <!-- Botones -->
                                     <p:toolbar id="toolbarBotones" style="margin-top:10px;">
+
+
                                         <p:toolbarGroup>
+
+
                                             <p:commandButton value="Guardar Horario" 
                                                              icon="pi pi-save" 
                                                              action="#{inscripcionesBean.guardarHorario}" 
                                                              update="tablaHorarioSeleccionado 
                                                              :seleccion:tabVista:toolbarBotones :seleccion:tabVista:growlMensajes"
-                                                             disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas}" />
+                                                             disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas
+                                                                         or inscripcionesBean.modoInsertar}" />
 
                                             <p:commandButton value="Eliminar Horario" 
                                                              icon="pi pi-trash" 
@@ -522,9 +575,19 @@
                                                              update="tablaHorarioSeleccionado 
                                                              :seleccion:tabVista:panelGrupos
                                                              :seleccion:tabVista:tablaReticula
-                                                             :seleccion:tabVista:toolbarBotones :seleccion:tabVista:growlMensajes" 
+                                                             :seleccion:tabVista:toolbarBotones 
+                                                             :seleccion:tabVista:growlMensajes 
+                                                             :seleccion:tabVista:panelCreditos" 
                                                              style="margin-left:10px;" 
-                                                             disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas}" />
+                                                             disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas or inscripcionesBean.modoEliminar}" />
+
+                                            <p:commandButton value="Imprimir Horario"
+                                                             icon="pi pi-print"
+                                                             actionListener="#{inscripcionesBean.generarPDF}"
+                                                             ajax="false"
+                                                             style="margin-left:10px;"
+                                                             update=":seleccion:tabVista:growlMensajes :seleccion:tabVista:toolbarBotones"
+                                                             disabled="#{!inscripcionesBean.modoImprimir}"/>
                                         </p:toolbarGroup>
                                     </p:toolbar>
                                 </p:panel>
@@ -611,11 +674,11 @@
                                 </p:dialog>
 
                                 <p:outputPanel id="panelGrupos" styleClass="#{inscripcionesBean.grupoBloqueado ? 'bloqueado' : ''}">
-                                    <p:dataGrid value="#{inscripcionesBean.listaGC}" var="grupo"
-                                                columns="3"
+                                    <p:dataGrid value="#{inscripcionesBean.listaGC}" 
+                                                var="grupo"
+                                                columns="4"
                                                 styleClass="grupos-grid"
                                                 layout="grid">
-
                                         <!-- HACER CLICKEABLE TODO EL PANEL -->
                                         <p:commandLink style="text-decoration:none; color:inherit;"
                                                        oncomplete="PF('selecionMateriaGrupo').show()"
@@ -624,7 +687,7 @@
                                                        disabled="#{inscripcionesBean.grupoBloqueado}">
 
                                             <p:panel styleClass="panel-grupo clickable-panel"
-                                                     style="text-align:center; padding:15px; cursor:pointer;">
+                                                     style="width:100%; text-align:center; padding:15px; cursor:pointer;">
 
                                                 <h:panelGrid columns="1" style="width:100%; text-align:center;" cellpadding="5">
 
@@ -644,7 +707,12 @@
 
 
                         </p:tabView>
-
+                   
+                        <h:outputScript>
+                            window.onbeforeunload = function(event) {
+                            return "Si recargas la página, los datos del formulario se perderán.";
+                            };
+                        </h:outputScript>>
 
                     </h:form>
                 </f:view>

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templateEstudiante.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form id="formAutorizacion" style="width:70%; margin:auto; margin-top:20px;">
+                        <!-- Número de control -->
+                        <p:panel header="Autorización Académica" style="border-radius:10px;">
+                            <p:panelGrid columns="2" columnClasses="col1,col2" style="width:100%;">
+
+
+                                <h:outputLabel value="Número de control:" for="numControl" />
+                                <p:inputText id="numControl" value="#{autorizacionBean.numeroControl}" />
+
+
+                                <h:outputLabel value="Alumno:" />
+                                <h:outputText value="#{autorizacionBean.nombreAlumno}" style="font-weight:bold;" />
+
+
+                                <h:outputLabel value="Se autoriza a:" />
+                                <p:selectOneMenu value="#{autorizacionBean.periodoSeleccionado}">
+                                    <f:selectItems value="#{autorizacionBean.listaPeriodos}" />
+                                </p:selectOneMenu>
+
+
+                                <h:outputLabel value="Tipo de autorización:" />
+                                <p:selectOneMenu value="#{autorizacionBean.tipoAutorizacion}">
+                                    <f:selectItem itemLabel="Carga mínima" itemValue="carga_minima" />
+                                    <f:selectItem itemLabel="Cruce de materias" itemValue="cruce" />
+                                    <f:selectItem itemLabel="Cursar materia requisitada" itemValue="requisitada" />
+                                    <f:selectItem itemLabel="Sobrecarga" itemValue="sobrecarga" />
+                                    <f:selectItem itemLabel="Más de 12 semestres" itemValue="12_semestres" />
+                                    <f:selectItem itemLabel="Omitir cursos de repetición/especiales" itemValue="omitir_repeticion" />
+                                </p:selectOneMenu>
+
+
+                            </p:panelGrid>
+
+
+                            <p:separator style="margin-top:15px; margin-bottom:15px;" />
+
+
+                            <!-- Tabla de autorizaciones registradas -->
+                            <p:dataTable value="#{autorizacionBean.listaAutorizaciones}" var="a" style="width:100%;">
+                                <p:column headerText="Fecha">
+                                    <h:outputText value="#{a.fecha}" />
+                                </p:column>
+                                <p:column headerText="Autorización">
+                                    <h:outputText value="#{a.tipo}" />
+                                </p:column>
+                                <p:column headerText="Materia">
+                                    <h:outputText value="#{a.materia}" />
+                                </p:column>
+                                <p:column headerText="Autorizó">
+                                    <h:outputText value="#{a.autorizo}" />
+                                </p:column>
+                                <p:column headerText="Eliminar">
+                                    <p:commandButton icon="pi pi-trash" styleClass="ui-button-danger"
+                                                     action="#{autorizacionBean.eliminar(a)}"
+                                                     update="formAutorizacion" />
+                                </p:column>
+                            </p:dataTable>
+
+
+                        </p:panel>
+                    </h:form>
+                </f:view>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

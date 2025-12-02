@@ -278,110 +278,111 @@
                                              onclick="PF('firmaWV').clear();" />
                         </p:panelGrid>
 
-                    <!-- ================= DATOS FAMILIARES ================= -->
-                    <h3 class="section-title">
-                        <i class="pi pi-users"></i> Datos Familiares
-                    </h3>
+                        <!-- ================= DATOS FAMILIARES ================= -->
+                        <h3 class="section-title">
+                            <i class="pi pi-users"></i> Datos Familiares
+                        </h3>
 
-                    <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
-                        <p:outputLabel value="Nombre del Padre" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombrePadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                        </p:inputText>
+                        <p:panelGrid columns="3" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-4">
+                            <p:outputLabel value="Nombre del Padre" />
+                            <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombrePadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <p:outputLabel value="Domicilio(calle y numero)" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCallePadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                        </p:inputText>
+                            <p:outputLabel value="Domicilio(calle y numero)" />
+                            <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCallePadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <p:outputLabel value="colonia" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColoniaPadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                        </p:inputText>
+                            <p:outputLabel value="colonia" />
+                            <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColoniaPadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <p:outputLabel value="Ciudad o Estado" />
-                        <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioPadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                            <f:selectItems
-                                value="#{altaEstudiantesBean.listaEntidadFederativa}"
-                                var="ent"
-                                itemValue="#{ent.identidad}"
-                                itemLabel="#{ent.nombreEntidad}" />
-                        </p:selectOneMenu>
+                            <p:outputLabel value="Ciudad o Estado" />
+                            <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioPadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                                <f:selectItems
+                                    value="#{altaEstudiantesBean.listaEntidadFederativa}"
+                                    var="ent"
+                                    itemValue="#{ent.identidad}"
+                                    itemLabel="#{ent.nombreEntidad}" />
+                            </p:selectOneMenu>
 
-                        <p:outputLabel value="Teléfono" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoPadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                        </p:inputText>
+                            <p:outputLabel value="Teléfono" />
+                            <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoPadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <h:outputLabel for="ocupacionPadre" value="Ocupación del padre:" />
-                        <p:inputText id="ocupacionPadre" value="#{altaEstudiantesBean.alumnoGeneral.ocupacionPadre}">
-                            <p:ajax />
-                        </p:inputText>
+                            <h:outputLabel for="ocupacionPadre" value="Ocupación del padre:" />
+                            <p:inputText id="ocupacionPadre" value="#{altaEstudiantesBean.alumnoGeneral.ocupacionPadre}">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <h:outputLabel for="domicilioCiudadPadre" value="Domicilio / Ciudad (padre):" />
-                        <p:inputText id="domicilioCiudadPadre" value="#{altaEstudiantesBean.alumnoGeneral.domicilioCiudadPadre}">
-                            <p:ajax />
-                        </p:inputText>
-                    </p:panelGrid>
+                            <h:outputLabel for="domicilioCiudadPadre" value="Domicilio / Ciudad (padre):" />
+                            <p:inputText id="domicilioCiudadPadre" value="#{altaEstudiantesBean.alumnoGeneral.domicilioCiudadPadre}">
+                                <p:ajax />
+                            </p:inputText>
+                        </p:panelGrid>
 
 
-                    <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
-                        <p:outputLabel value="Nombre de la Madre" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombreMadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                        </p:inputText>
+                        <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                            <p:outputLabel value="Nombre de la Madre" />
+                            <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombreMadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <p:outputLabel value="Domicilio(calle y numero)" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCalleMadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                        </p:inputText>
+                            <p:outputLabel value="Domicilio(calle y numero)" />
+                            <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCalleMadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <p:outputLabel value="Colonia" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColoniaMadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                        </p:inputText>
+                            <p:outputLabel value="Colonia" />
+                            <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColoniaMadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <p:outputLabel value="Ciudad o Estado" />
-                        <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioMadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                            <f:selectItems
-                                value="#{altaEstudiantesBean.listaEntidadFederativa}"
-                                var="ent"
-                                itemValue="#{ent.identidad}"
-                                itemLabel="#{ent.nombreEntidad}" />
-                        </p:selectOneMenu>
+                            <p:outputLabel value="Ciudad o Estado" />
+                            <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioMadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                                <f:selectItems
+                                    value="#{altaEstudiantesBean.listaEntidadFederativa}"
+                                    var="ent"
+                                    itemValue="#{ent.identidad}"
+                                    itemLabel="#{ent.nombreEntidad}" />
+                            </p:selectOneMenu>
 
-                        <p:outputLabel value="Teléfono" />
-                        <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoMadre}" styleClass="ui-inputfield">
-                            <p:ajax />
-                        </p:inputText>
+                            <p:outputLabel value="Teléfono" />
+                            <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoMadre}" styleClass="ui-inputfield">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <h:outputLabel for="ocupacionMadre" value="Ocupación de la madre:" />
-                        <p:inputText id="ocupacionMadre" value="#{altaEstudiantesBean.alumnoGeneral.ocupacionMadre}">
-                            <p:ajax />
-                        </p:inputText>
+                            <h:outputLabel for="ocupacionMadre" value="Ocupación de la madre:" />
+                            <p:inputText id="ocupacionMadre" value="#{altaEstudiantesBean.alumnoGeneral.ocupacionMadre}">
+                                <p:ajax />
+                            </p:inputText>
 
-                        <h:outputLabel for="domicilioCiudadMadre" value="Domicilio / Ciudad (madre):" />
-                        <p:inputText id="domicilioCiudadMadre" value="#{altaEstudiantesBean.alumnoGeneral.domicilioCiudadMadre}">
-                            <p:ajax />
-                        </p:inputText>
+                            <h:outputLabel for="domicilioCiudadMadre" value="Domicilio / Ciudad (madre):" />
+                            <p:inputText id="domicilioCiudadMadre" value="#{altaEstudiantesBean.alumnoGeneral.domicilioCiudadMadre}">
+                                <p:ajax />
+                            </p:inputText>
 
-                    </p:panelGrid>
+                        </p:panelGrid>
 
-                    <!-- ================= BOTONES ================= -->
-                    <div class="buttons-container">
-                        <p:commandButton value="Dar de Alta"
-                                         action="#{altaEstudiantesBean.guardarPrueba}"
-                                         update=""
-                                         process="@this"
-                                         icon="pi pi-check"
-                                         styleClass="ui-button-success"/>
-                        <p:button value="Regresar"
-                                  outcome="listaAspirantes"
-                                  icon="pi pi-arrow-left"
-                                  styleClass="ui-button-secondary"/>
-                    </div>
+
+                        <div class="buttons-container">
+                            <p:commandButton value="Dar de Alta"
+                                             action="#{altaEstudiantesBean.guardarPrueba}"
+                                             update=""
+                                             process="@this"
+                                             icon="pi pi-check"
+                                             styleClass="ui-button-success"/>
+                            <p:button value="Regresar"
+                                      outcome="listaAspirantes"
+                                      icon="pi pi-arrow-left"
+                                      styleClass="ui-button-secondary"/>
+                        </div>
+                          </p:panelGrid>
                 </p:panel>
             </h:form>
 

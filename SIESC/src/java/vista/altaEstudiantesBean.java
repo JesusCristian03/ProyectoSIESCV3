@@ -16,10 +16,12 @@ import modelo.AlumnosGenerales;
 import modelo.Carrera;
 import modelo.EntidadFederativa;
 import modelo.Estudiante;
+import modelo.PeriodoEscolar;
 import servicio.AlumnosGeneralesServicioLocal;
 import servicio.CarreraServicioLocal;
 import servicio.EntidadFederativaServicioLocal;
 import servicio.EstudianteServicioLocal;
+import servicio.PeriodoEscolarServicioLocal;
 
 /**
  *
@@ -29,6 +31,8 @@ import servicio.EstudianteServicioLocal;
 @SessionScoped
 public class altaEstudiantesBean implements Serializable {
 
+    @EJB
+    private PeriodoEscolarServicioLocal periodoEscolarServicio;
     @EJB
     private AlumnosGeneralesServicioLocal alumnosGeneralesServicio;
     @EJB
@@ -57,11 +61,12 @@ public class altaEstudiantesBean implements Serializable {
     private String numeroControl = "";
     private String sexo = "";
     private String estadoCivil = "";
+    private String periodoIngresoIt = "";
 
     private Integer numeroMunicipioEstudiante = 0;
     private Integer numeroMunicipioPadre = 0;
     private Integer numeroMunicipioMadre = 0;
-    private Integer anioIngreso = 0;
+    private String anioIngreso;
     private Integer reticula = 0;
 
     @PostConstruct
@@ -89,7 +94,7 @@ public class altaEstudiantesBean implements Serializable {
         //Por si lo necesitamos para armar el domicilio
         ciudad = estudiante.getCiudadProcedencia();
         alumnoGeneral.setNombre(estudiante.getNombreAlumno());
-
+        alumnoGeneral.setIngresoMensual(null);
         //Asignamos la entidad Federativa. 
         for (EntidadFederativa e : listaEntidadFederativa) {
             System.out.println(e);
@@ -114,10 +119,12 @@ public class altaEstudiantesBean implements Serializable {
         estudiante.setCreditosCursados(0);
         estudiante.setPromedioFinalAlcanzado((double) 0);
         estudiante.setFechaActualizacion(fechaActualizacion);
+        PeriodoEscolar p = periodoEscolarServicio.buscarPorId(periodoIngresoIt);
+        estudiante.setPeriodoIngresoIt(p);
+
         estudiante.setSexo(sexo.charAt(0));
         estudiante.setEstadoCivil(estadoCivil.charAt(0));
         //  estudiante.setl
-
         alumnoGeneral.setEntidadFederativa(entidadFederativa);
 
         estudiante.setCarrera(carreraServicio.buscarPorId(reticula).getCarrera());
@@ -136,9 +143,11 @@ public class altaEstudiantesBean implements Serializable {
         // private String domicilioColonia
         //LE damos al estudiante
         System.out.println(">>> No Control recibido: " + estudiante.getNoDeControl());
+         alumnoGeneral.setNoDeControl(estudiante);
+         alumnosGeneralesServicio.insertarAlumnoGeneral(alumnoGeneral);
         estudianteServicio.insertarEstudiante(estudiante);
-        alumnoGeneral.setNoDeControl(estudiante);
-        alumnosGeneralesServicio.insertarAlumnoGeneral(alumnoGeneral);
+       
+       
         System.out.println("INSERTO ALUMNO GENERAL Y ESTUDIANTE");
     }
 
@@ -146,9 +155,24 @@ public class altaEstudiantesBean implements Serializable {
 
         estudiante.setSexo(sexo.charAt(0));
         estudiante.setEstadoCivil(estadoCivil.charAt(0));
+        estudiante.setNoDeControl(numeroControl);
+        EntidadFederativa entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioEstudiante);
+        estudiante.setEntidadProcedencia(entidadFederativa.getNombreEntidad());
 
+        PeriodoEscolar p = periodoEscolarServicio.buscarPorId(periodoIngresoIt);
+        estudiante.setPeriodoIngresoIt(p);
+        estudiante.setCarrera(carreraServicio.buscarPorId(reticula).getCarrera());
+        entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioMadre);
+        alumnoGeneral.setDomicilioEntidadFedMadre(entidadFederativa);
+
+        
+
+        entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioPadre);
+        alumnoGeneral.setDomicilioEntidadFedPadre(entidadFederativa);
+
+        System.out.println("Periodo Ingreso Codigo");
         System.out.println("===== DEBUG ESTUDIANTE =====");
-        System.out.println("Número de control: " + numeroControl);
+        System.out.println("Número de control: " + estudiante.getNoDeControl());
 
         System.out.println("Apellido paterno: " + estudiante.getApellidoPaterno());
         System.out.println("Apellido materno: " + estudiante.getApellidoMaterno());
@@ -168,20 +192,29 @@ public class altaEstudiantesBean implements Serializable {
         System.out.println("Código postal: " + alumnoGeneral.getCodigoPostal());
         System.out.println("Ciudad procedencia: " + estudiante.getCiudadProcedencia());
 
-        System.out.println("Entidad federativa (ID): " + numeroMunicipioEstudiante);
+        System.out.println("Entidad federativa (ID): " + estudiante.getEntidadProcedencia());
 
         System.out.println("Teléfono: " + alumnoGeneral.getTelefono());
         System.out.println("Municipio: " + alumnoGeneral.getMunicipio());
         System.out.println("Teléfono emergencia: " + alumnoGeneral.getTelefonoEmergencia());
 
         System.out.println("\n===== DEBUG: DATOS ESCOLARES =====");
-        System.out.println("Retícula/Carrera: " + reticula);
+        System.out.println("Retícula/Carrera: " + estudiante.getCarrera());
         System.out.println("Especialidad: " + estudiante.getEspecialidad());
 
         System.out.println("Periodo Ingreso IT: " + estudiante.getPeriodoIngresoIt());
+        
+        
+        
+     
         System.out.println("Año Ingreso: " + anioIngreso);
-
         System.out.println("Tipo de Ingreso: " + tipoIngreso);
+        
+        
+        
+        
+        
+        
 
         System.out.println("Plan de Estudio: " + estudiante.getPlanDeEstudios());
         System.out.println("Nivel Escolar: " + estudiante.getNivelEscolar());
@@ -193,13 +226,12 @@ public class altaEstudiantesBean implements Serializable {
         System.out.println("Escuela Procedencia: " + estudiante.getEscuelaProcedencia());
         System.out.println("Domicilio Escuela: " + estudiante.getDomicilioEscuela());
 
-        System.out.println("Firma (base64 o binario): " + firma);
-
+        //System.out.println("Firma (base64 o binario): " + firma);
         System.out.println("\n===== DEBUG: DATOS FAMILIARES PADRE=====");
         System.out.println("Nombre del Padre: " + alumnoGeneral.getNombrePadre());
         System.out.println("Domicilio Calle Padre: " + alumnoGeneral.getDomicilioCallePadre());
         System.out.println("Colonia Padre: " + alumnoGeneral.getDomicilioColoniaPadre());
-        System.out.println("Ciudad/Estado Padre (id municipio): " + numeroMunicipioPadre);
+        System.out.println("Estado Padre (id municipio): " + alumnoGeneral.getDomicilioEntidadFedPadre());
         System.out.println("Teléfono Padre: " + alumnoGeneral.getDomicilioTelefonoPadre());
         System.out.println("Ocupación Padre: " + alumnoGeneral.getOcupacionPadre());
         System.out.println("Domicilio Ciudad Padre: " + alumnoGeneral.getDomicilioCiudadPadre());
@@ -208,13 +240,21 @@ public class altaEstudiantesBean implements Serializable {
         System.out.println("Nombre de la Madre: " + alumnoGeneral.getNombreMadre());
         System.out.println("Domicilio Calle Madre: " + alumnoGeneral.getDomicilioCalleMadre());
         System.out.println("Colonia Madre: " + alumnoGeneral.getDomicilioColoniaMadre());
-        System.out.println("Ciudad/Estado Madre (id municipio): " + numeroMunicipioMadre);
+        System.out.println("Estado Madre (id municipio): " + alumnoGeneral.getDomicilioEntidadFedMadre());
         System.out.println("Teléfono Madre: " + alumnoGeneral.getDomicilioTelefonoMadre());
         System.out.println("Ocupación Madre: " + alumnoGeneral.getOcupacionMadre());
         System.out.println("Domicilio Ciudad Madre: " + alumnoGeneral.getDomicilioCiudadMadre());
 
         System.out.println("\n===== FIN DEBUG =====");
 
+    }
+
+    public String getPeriodoIngresoIt() {
+        return periodoIngresoIt;
+    }
+
+    public void setPeriodoIngresoIt(String periodoIngresoIt) {
+        this.periodoIngresoIt = periodoIngresoIt;
     }
 
     public String getSexo() {
@@ -383,11 +423,11 @@ public class altaEstudiantesBean implements Serializable {
         this.alumnoGeneral = alumnoGeneral;
     }
 
-    public Integer getAnioIngreso() {
+    public String getAnioIngreso() {
         return anioIngreso;
     }
 
-    public void setAnioIngreso(Integer anioIngreso) {
+    public void setAnioIngreso(String anioIngreso) {
         this.anioIngreso = anioIngreso;
     }
 

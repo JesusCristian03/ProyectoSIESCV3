@@ -12,44 +12,44 @@
         <title>Sistema Escolar ITC - Estudiantes</title>
 
         <!-- Ultima Theme -->
-        
-  
+
 
         <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-       <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
-  <h:outputStylesheet  library="css" name="estudiantes.css"/>
-  
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+        <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+        <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 
-  
-  <style>
-      
-      
-      
-  </style>
-  
-  
-  
-<script>
-    // Variable para saber si el sidebar está abierto o cerrado
-    let sidebarOpen = true; // Por defecto abierto
+        <h:outputStylesheet  library="css" name="estudiantes.css"/>
 
-    function toggleSidebar() {
-        const sidebar = document.querySelector('.layout-sidebar');
 
-        if(sidebarOpen) {
-            // Cerrar
-            sidebar.classList.add('collapsed');
-            sidebarOpen = false;
-        } else {
-            // Abrir
-            sidebar.classList.remove('collapsed');
-            sidebarOpen = true;
-        }
-    }
-</script>
+
+        <style>
+
+
+
+        </style>
+
+
+
+        <script>
+            // Variable para saber si el sidebar está abierto o cerrado
+            let sidebarOpen = true; // Por defecto abierto
+
+            function toggleSidebar() {
+                const sidebar = document.querySelector('.layout-sidebar');
+
+                if (sidebarOpen) {
+                    // Cerrar
+                    sidebar.classList.add('collapsed');
+                    sidebarOpen = false;
+                } else {
+                    // Abrir
+                    sidebar.classList.remove('collapsed');
+                    sidebarOpen = true;
+                }
+            }
+        </script>
 
 
     </h:head>
@@ -62,13 +62,13 @@
 
             <!-- ================= TOPBAR ================= -->
             <div class="layout-topbar">
-                
-               
+
+
                 <div class="menu-toggle-btn" onclick="toggleSidebar()">
                     <i class="pi pi-bars"></i>
                 </div>
 
-                 <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;  margin-left:30px;" />
+                <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;  margin-left:30px;" />
 
                 <div class="title">SISTEMA ESCOLAR – ESTUDIANTES</div>
 
@@ -108,9 +108,9 @@
                                             icon="pi pi-book" 
                                             ajax="true"/>
 
-                                <p:menuitem value="Grupos Disponibles" 
-                                            actionListener="#{horarioBean.buscarFaltas}" 
-                                            action="justificaDocente" 
+                                <p:menuitem value="Autorizacion Academica" 
+
+                                            action="/estudiante/autorizacionAcademica?faces-redirect=true" 
                                             icon="pi pi-users"/>
 
                                 <p:menuitem value="Horario Inscripcion" 
@@ -214,51 +214,51 @@
                 </div>
 
                 <!-- ================= CONTENIDO ================= -->
-<div class="layout-main">
+                <div class="layout-main">
 
-    <!-- CAJA DE BIENVENIDA -->
-                <h:panelGroup id="welcomeBox" layout="block"
-              rendered="#{view.viewId eq '/estudiante/index.xhtml'}"
-              styleClass="welcome-box">
+                    <!-- CAJA DE BIENVENIDA -->
+                    <h:panelGroup id="welcomeBox" layout="block"
+                                  rendered="#{view.viewId eq '/estudiante/index.xhtml'}"
+                                  styleClass="welcome-box">
 
-    <h3 class="welcome-title">Bienvenido al Departamento de Académico</h3>
-    <p class="welcome-subtitle">Selecciona una opción del menú lateral para comenzar.</p>
+                        <h3 class="welcome-title">Bienvenido al Departamento de Académico</h3>
+                        <p class="welcome-subtitle">Selecciona una opción del menú lateral para comenzar.</p>
 
-    <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="welcome-image"/>
+                        <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="welcome-image"/>
 
-    <p class="welcome-label">AGUILUCHOS</p>
-    <p class="welcome-label-small">ITC</p>
+                        <p class="welcome-label">AGUILUCHOS</p>
+                        <p class="welcome-label-small">ITC</p>
 
-</h:panelGroup>
+                    </h:panelGroup>
 
-    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
-    <ui:insert name="content" />
+                    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
+                    <ui:insert name="content" />
 
-</div>
-                
+                </div>
 
-                
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    function hideWelcomeBox() {
-        const box = document.getElementById("welcomeBox");
-        if (box) {
-            box.classList.add("hide-welcome");
-        }
-    }
 
-    // 1. Ocultar cuando se hace clic en el menú
-    document.querySelectorAll(".ui-menuitem-link, .ui-panelmenu .ui-menuitem-link")
-        .forEach(item => item.addEventListener("click", hideWelcomeBox));
 
-    // 2. OCULTAR DESPUÉS de cualquier actualización AJAX
-    if (window.PrimeFaces) {
-        PrimeFaces.onAjaxCompletion(function() {
-            hideWelcomeBox();
-        });
-    }
-});
-</script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        function hideWelcomeBox() {
+                            const box = document.getElementById("welcomeBox");
+                            if (box) {
+                                box.classList.add("hide-welcome");
+                            }
+                        }
+
+                        // 1. Ocultar cuando se hace clic en el menú
+                        document.querySelectorAll(".ui-menuitem-link, .ui-panelmenu .ui-menuitem-link")
+                                .forEach(item => item.addEventListener("click", hideWelcomeBox));
+
+                        // 2. OCULTAR DESPUÉS de cualquier actualización AJAX
+                        if (window.PrimeFaces) {
+                            PrimeFaces.onAjaxCompletion(function () {
+                                hideWelcomeBox();
+                            });
+                        }
+                    });
+                </script>
 
 
 
@@ -272,8 +272,8 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
 
     </h:body>
-    
-   
+
+
 
 </html>
 

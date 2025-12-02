@@ -27,6 +27,7 @@ public class Reticula implements Serializable{
     private ReticulaDatos semestre7 = new ReticulaDatos();
     private ReticulaDatos semestre8 = new ReticulaDatos();
     private ReticulaDatos semestre9 = new ReticulaDatos();
+    private ReticulaDatos semestre10 = new ReticulaDatos();
 
     public String getNoDeControl() {
         return noDeControl;
@@ -107,4 +108,13 @@ public class Reticula implements Serializable{
     public void setSemestre9(ReticulaDatos semestre9) {
         this.semestre9 = semestre9;
     }
+
+    public ReticulaDatos getSemestre10() {
+        return semestre10;
+    }
+
+    public void setSemestre10(ReticulaDatos semestre10) {
+        this.semestre10 = semestre10;
+    }
+    
 }

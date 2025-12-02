@@ -30,6 +30,17 @@ public class HorarioAsignatura implements Serializable {
     private String materia = "";
     private String docente = "";
     private Boolean global = false;
+    private String creditos="";
+
+    public String getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(String creditos) {
+        this.creditos = creditos;
+    }
+    
+    
 
     public Boolean getGlobal() {
         return global;

@@ -167,6 +167,11 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
                     aux.getSemestre9().setColor(color);
                     aux.getSemestre9().setDisponible(disponible);
                 }
+                if (historiaA.getMateria().getMateria().equals(aux.getSemestre10().getMateria())) {
+                    aux.getSemestre10().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
+                    aux.getSemestre10().setColor(color);
+                    aux.getSemestre10().setDisponible(disponible);
+                }
             }
         }
         //Devuelve la lista completa de Reticula, cada una con sus 9 semestres (ReticulaDatos) llenos con materia, calificación, color y disponibilidad.
@@ -226,6 +231,9 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
                 break;
             case 9:
                 reticula.setSemestre9(reticulaDatos);
+                break;
+            case 10:
+                reticula.setSemestre10(reticulaDatos);
                 break;
         }
     }

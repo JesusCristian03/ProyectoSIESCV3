@@ -95,8 +95,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
                     <h3 style="text-align:center; margin-top:25px;">GRUPOS</h3>
-
-
                     <p:dataTable value="#{asignacionMGBean.listaHorarioCrear}" 
                                  var="h"
                                  styleClass="tabla-horarios"
@@ -105,13 +103,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                  selectionMode="single"
                                  selection="#{asignacionMGBean.horarioCrearSeleccionado}"
                                  rowKey="#{h.id}" >
-
                         <p:ajax event="rowSelect"
                                 listener="#{asignacionMGBean.filaSeleccionada}"
                                 process="@this"
-                                update=":formAsigGrupo:dlgMaestros :formAsigGrupo:growlAsignacion"
+                                update=":formAsigGrupo:dlgMaestros 
+                                :formAsigGrupo:growlAsignacion 
+                                :formAsigGrupo:tablaHorariosMaestro"
                                 oncomplete="PF('dlgMaestros').show();" />
-
                         <!-- Clave -->
                         <p:column headerText="Clave" style="width:6%;">
                             #{h.materia}
@@ -151,8 +149,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 process="@this"
                                 update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion"
                                 onclick="event.stopPropagation();">
-
-
                             </p:commandButton>
                         </p:column>
                     </p:dataTable>
@@ -160,27 +156,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
                 </div>
+                <p:dialog id="dlgMaestros"  
+                          widgetVar="dlgMaestros"
+                          header="Asignar Maestro"
+                          modal="true"
+                          resizable="false"
+                          width="1250">
 
-                <p:dialog id="dlgMaestros" 
-                          widgetVar="dlgMaestros" 
-                          header="Seleccionar Maestro"
-                          modal="true" 
-                          resizable="false" 
-                          width="750">
-
-                    <!-- Tabla con información del horario seleccionado -->
+                    <!-- Horario seleccionado -->
                     <p:dataTable value="#{asignacionMGBean.listaHorarioSeleccionado}" 
                                  var="h" 
                                  styleClass="tabla-horarios"
-                                 style="width:100%; margin-bottom:10px;"
+                                 style="width:100%; margin-bottom:15px;"
                                  rowKey="#{h.id}">
 
-                        <!-- Clave -->
-                        <p:column headerText="Clave" style="width:6%;">
-                            #{h.materia}
-                        </p:column>
+                        <p:column headerText="Clave" style="width:6%;">#{h.materia}</p:column>
 
-                        <!-- Asignatura -->
                         <p:column headerText="Asignatura" style="width:28%; line-height:1.2;">
                             <div class="asignatura-box linea-divisora">
                                 <span class="materia">#{h.asignatura}</span>
@@ -189,24 +180,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             </div>
                         </p:column>
 
-                        <!-- Grupo -->
-                        <p:column headerText="Grupo" style="width:6%;">
-                            #{h.grupo}
-                        </p:column>
+                        <p:column headerText="Grupo" style="width:6%;">#{h.grupo}</p:column>
 
-                        <!-- Días -->
                         <p:column headerText="Lunes" style="width:8%;">#{h.lunes}</p:column>
                         <p:column headerText="Martes" style="width:8%;">#{h.martes}</p:column>
                         <p:column headerText="Miércoles" style="width:8%;">#{h.miercoles}</p:column>
                         <p:column headerText="Jueves" style="width:8%;">#{h.jueves}</p:column>
                         <p:column headerText="Viernes" style="width:8%;">#{h.viernes}</p:column>
                         <p:column headerText="Sábado" style="width:8%;">#{h.sabado}</p:column>
+
                     </p:dataTable>
 
-                    <!-- SelectOneMenu para asignar maestro -->
+
+                    <!-- Selección de maestro -->
                     <p:selectOneMenu value="#{asignacionMGBean.docenteRFC}" 
                                      filter="true" filterMatchMode="contains"
-                                     style="width:100%;">
+                                     style="width:100%; margin-bottom:15px;">
+                        <p:ajax listener="#{asignacionMGBean.verHorarioMaestro}" update=":formAsigGrupo:tablaDatos :formAsigGrupo:tablaHorariosMaestro"/>
                         <f:selectItem itemLabel="SELECCIONE UN MAESTRO" itemValue="" />
                         <f:selectItems value="#{asignacionMGBean.listaDocentes}"
                                        var="pr" 
@@ -214,76 +204,59 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                        itemValue="#{pr.rfc}" />
                     </p:selectOneMenu>
 
-                    <br/><br/>
-                    <div style="display:flex; justify-content:space-between; gap:10px; margin-top:10px;">
-                        <!-- Botón de asignar -->
+                    <!-- Botón Asignar -->
+                    <div style="display:flex; justify-content:flex-end; margin-top:10px;">
                         <p:commandButton value="Asignar"
                                          icon="pi pi-check"
-                                         styleClass="p-button-success"
+                                         styleClass="btn-asignar"
                                          actionListener="#{asignacionMGBean.guardarMaestro}"
-                                         update=":formAsigGrupo:tablaDatos"
-                                         oncomplete="PF('dlgMaestros').hide();"
-                                         style="flex:1;" />
-
-                        <!-- Botón de asignar maestro -->
-                        <p:commandButton value="Ver Horario Maestro"
-                                         icon="pi pi-id-card"
-                                         styleClass="p-button-primary"
-                                         actionListener="#{asignacionMGBean.verHorarioMaestro}"
-                                         update=":formAsigGrupo:tablaDatos :formAsigGrupo:dlgHorariosMaestro"
-                                         oncomplete="PF('dlgHorariosMaestro').hide();"
-                                         style="flex:1;" />
+                                         update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion"
+                                         oncomplete="PF('dlgMaestros').hide();" />
                     </div>
-                </p:dialog>
 
-                <!-- Dialog para mostrar horarios del maestro -->
-                <p:dialog id="dlgHorariosMaestro"
-                          widgetVar="dlgHorariosMaestro"
-                          header="Horarios del Maestro"
-                          modal="true"
-                          resizable="false"
-                          width="700">
+                    <!-- Horario del maestro (se actualiza automáticamente al seleccionar uno) -->
+                    <p:panel header="Horario del Maestro Seleccionado" style="margin-top:15px;">
 
-                    <p:dataTable value="#{asignacionMGBean.listaHorarioCrearMaestros}"
-                                 var="h"
-                                 styleClass="tabla-horarios"
-                                 style="width:100%;"
-                                 rowKey="#{h.id}">
+                        <!-- CONTENEDOR CON SCROLL VERTICAL -->
+                        <div style="max-height:200px; overflow-y:auto;">
 
-                        <!-- Clave -->
-                        <p:column headerText="Clave" style="width:6%;">
-                            #{h.materia}
-                        </p:column>
+                            <p:dataTable value="#{asignacionMGBean.listaHorarioCrearMaestros}"
+                                         var="hm"
+                                         id="tablaHorariosMaestro"
+                                         styleClass="tabla-horarios"
+                                         style="width:100%;"
+                                         rowKey="#{hm.id}">
 
-                        <p:column headerText="ID">
-                            #{h.id}
-                        </p:column>
+                                <p:column headerText="Clave" style="width:6%;">#{hm.materia}</p:column>
 
-                        <!-- Asignatura -->
-                        <p:column headerText="Asignatura" style="width:28%; line-height:1.2;">
-                            <div class="asignatura-box linea-divisora">
-                                <span class="materia">#{h.asignatura}</span>
-                                <div class="linea"></div>
-                                <span class="maestro">#{h.docente}</span>
-                            </div>
-                        </p:column>
+                                <p:column headerText="Asignatura" style="width:28%; line-height:1.2;">
+                                    <div class="asignatura-box linea-divisora">
+                                        <span class="materia">#{hm.asignatura}</span>
+                                        <div class="linea"></div>
+                                        <span class="maestro">#{hm.docente}</span>
+                                    </div>
+                                </p:column>
 
-                        <!-- Grupo -->
-                        <p:column headerText="Grupo" style="width:6%;">
-                            #{h.grupo}
-                        </p:column>
+                                <p:column headerText="Grupo" style="width:6%;">#{hm.grupo}</p:column>
 
-                        <!-- Días con ancho igual -->
-                        <p:column headerText="Lunes" style="width:8%;">#{h.lunes}</p:column>
-                        <p:column headerText="Martes" style="width:8%;">#{h.martes}</p:column>
-                        <p:column headerText="Miércoles" style="width:8%;">#{h.miercoles}</p:column>
-                        <p:column headerText="Jueves" style="width:8%;">#{h.jueves}</p:column>
-                        <p:column headerText="Viernes" style="width:8%;">#{h.viernes}</p:column>
-                        <p:column headerText="Sábado" style="width:8%;">#{h.sabado}</p:column>
+                                <p:column headerText="Lunes" style="width:8%;">#{hm.lunes}</p:column>
+                                <p:column headerText="Martes" style="width:8%;">#{hm.martes}</p:column>
+                                <p:column headerText="Miércoles" style="width:8%;">#{hm.miercoles}</p:column>
+                                <p:column headerText="Jueves" style="width:8%;">#{hm.jueves}</p:column>
+                                <p:column headerText="Viernes" style="width:8%;">#{hm.viernes}</p:column>
+                                <p:column headerText="Sábado" style="width:8%;">#{hm.sabado}</p:column>
 
-                    </p:dataTable>
+                            </p:dataTable>
+
+                        </div>
+                    </p:panel>
+
+
+
+
 
                 </p:dialog>
+
             </h:form>
 
 

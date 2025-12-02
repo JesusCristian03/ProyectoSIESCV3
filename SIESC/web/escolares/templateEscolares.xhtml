@@ -6,245 +6,317 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<h:head>
-    <title>Departamento de Escolares - SIESC</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-    <!-- Ultima Theme -->
-    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
-
-    <style>
-        body {
-            font-family: "Segoe UI", sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        /* Estructura principal */
-        .layout-wrapper {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* ===== TOPBAR ===== */
-        .layout-topbar {
-            background-color: #003366;
-            color: white;
-            height: 65px;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-            z-index: 1000;
-        }
-
-        .layout-topbar .title {
-            flex: 1;
-            text-align: center;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .menu-toggle-btn {
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            margin-right: 15px;
-        }
-
-        /* ===== SIDEBAR ===== */
-        .layout-sidebar {
-            width: 260px;
-            background-color: #fff;
-            border-right: 1px solid #ddd;
-            overflow-y: auto;
-            padding: 15px;
-        }
-
-        .layout-sidebar.collapsed {
-            width: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        /* ===== MAIN ===== */
-        .layout-main-container {
-            flex: 1;
-            display: flex;
-            overflow: hidden;
-        }
-
-        .layout-main {
-            flex: 1;
-            padding: 2rem;
-            overflow-y: auto;
-            background-color: #f4f6f9;
-        }
-
-        
-        .pi::before {
-    font-family: 'primeicons' !important;
-}
-
-        /* ===== FOOTER ===== */
-        .layout-footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            height: 40px;
-            line-height: 40px;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-    </style>
-
-    <script>
-        function toggleSidebar() {
-            document.querySelector('.layout-sidebar').classList.toggle('collapsed');
-        }
-    </script>
-</h:head>
+    <h:head>
+        <title>Departamento de Escolares - SIESC</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 
-<h:body>
 
-<div class="layout-wrapper">
 
-    <!-- ================= TOPBAR ================= -->
-    <div class="layout-topbar">
-        <div class="menu-toggle-btn" onclick="toggleSidebar()">
-            <i class="pi pi-bars"></i>
+        <style>
+            body {
+                font-family: "Segoe UI", sans-serif;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            /* Estructura principal */
+            .layout-wrapper {
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* ===== TOPBAR ===== */
+            .layout-topbar {
+                background-color: #003366;
+                color: white;
+                height: 65px;
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+                box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+                z-index: 1000;
+            }
+
+            .layout-topbar .title {
+                flex: 1;
+                text-align: center;
+                font-size: 1.25rem;
+                font-weight: 600;
+            }
+
+            .menu-toggle-btn {
+                font-size: 1.5rem;
+                color: white;
+                cursor: pointer;
+                margin-right: 15px;
+            }
+
+            /* ===== SIDEBAR ===== */
+            .layout-sidebar {
+                width: 260px;
+                background-color: #fff;
+                border-right: 1px solid #ddd;
+                overflow-y: auto;
+                padding: 15px;
+            }
+
+            .layout-sidebar.collapsed {
+                width: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            /* ===== MAIN ===== */
+            .layout-main-container {
+                flex: 1;
+                display: flex;
+                overflow: hidden;
+            }
+
+            .layout-main {
+                flex: 1;
+                padding: 2rem;
+                overflow-y: auto;
+                background-color: #f4f6f9;
+            }
+
+
+            .pi::before {
+                font-family: 'primeicons' !important;
+            }
+
+            /* ===== FOOTER ===== */
+            .layout-footer {
+                background-color: #003366;
+                color: white;
+                text-align: center;
+                height: 40px;
+                line-height: 40px;
+                font-size: 13px;
+                flex-shrink: 0;
+            }
+
+        </style>
+        <style>
+            /* Quita padding de las celdas */
+            .ui-panelgrid .ui-panelgrid-cell {
+                padding: 5px !important;
+            }
+
+            /* Uniforma altura de todos los inputs */
+            .ui-inputfield,
+            .ui-selectonemenu,
+            .ui-selectonemenu-label {
+                height: 50px !important;
+                min-height: 50px !important;
+                box-sizing: border-box;
+            }
+
+
+            /* ============================================
+               ALTURA UNIFORME PARA EL INPUT DEL DATEPICKER
+               ============================================ */
+            .ui-calendar,
+            .p-datepicker,
+            .ui-inputwrapper-filled input {
+                padding: 0px !important;
+                height: 36px !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Ajuste del input interno */
+            .ui-calendar input.ui-inputfield {
+                height: 100% !important;
+                padding: 3px 6px !important;
+            }
+
+            /* Botón del icono (calendar button) */
+            .ui-datepicker-trigger {
+                height: 100% !important;
+                padding: 0 8px !important;
+            }
+
+
+            /* ============================================
+               ESCALAR EL CALENDARIO POPUP (HACERLO MÁS CHICO)
+               ============================================ */
+            .ui-datepicker,
+            .p-datepicker-panel {
+                transform: scale(0.8);
+                transform-origin: top left;
+            }
+
+            /* Evitar espacios en blanco después de escalar */
+            .ui-datepicker {
+                width: auto !important;
+            }
+
+            /* Ajustes internos del calendario */
+            .ui-datepicker table td a,
+            .ui-datepicker table td span {
+                padding: 2px 4px !important;
+                font-size: 0.85em !important;
+            }
+
+            .ui-datepicker-title {
+                font-size: 0.9em !important;
+            }
+
+            .ui-datepicker-header {
+                padding: 4px !important;
+            }
+
+
+
+        </style>
+
+        <script>
+            function toggleSidebar() {
+                document.querySelector('.layout-sidebar').classList.toggle('collapsed');
+            }
+        </script>
+    </h:head>
+
+
+    <h:body>
+
+        <div class="layout-wrapper">
+
+            <!-- ================= TOPBAR ================= -->
+            <div class="layout-topbar">
+                <div class="menu-toggle-btn" onclick="toggleSidebar()">
+                    <i class="pi pi-bars"></i>
+                </div>
+
+                <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
+
+                <div class="title">DEPARTAMENTO DE ESCOLARES</div>
+
+                <h:form styleClass="logout-btn">
+                    <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
+                                     action="#{controlSesion.cerrarSesion}" ajax="false" />
+                </h:form>
+            </div>
+
+            <div class="layout-main-container">
+
+                <!-- ================= SIDEBAR ================= -->
+                <div class="layout-sidebar">
+                    <h:form>
+
+                        <p:panelMenu style="width:100%;" styleClass="custom-menu">
+                            <!-- 1 ALUMNO -->
+                            <p:submenu label="Alumnos" icon="pi pi-users">
+                                <p:menuitem value="Alta de Alumnos" outcome="/escolares/altaEstudiantes.xhtml"
+                                            actionListener="#{altaEstudiantesBean.inicializacion}"
+                                            icon="pi pi-user-plus" />
+                                <p:menuitem value="Modificaciones de datos del Alumno" outcome="/escolares/alumnosBusqueda.xhtml"
+                                            actionListener="#{alumnosBusquedaBean.inicializacion}"
+                                            icon="pi pi-user-edit" />
+                                <p:menuitem value="Eliminación de alumnos" outcome="/escolares/listaAspirantes.xhtml"
+                                            icon="pi pi-user-minus" />
+                                <p:menuitem value="Alta Nuevo de alumnos" outcome="/escolares/altaNuevoEstudiantes.xhtml"
+                                            actionListener="#{altaEstudiantesBean.inicializacion}"
+                                            icon="pi pi-user-minus" />
+                                <p:menuitem value="Adeudos" outcome="/escolares/listaAspirantes.xhtml"
+                                            icon="pi pi-exclamation-circle" />
+                                <p:menuitem value="Registro de titulados" outcome="/escolares/listaAspirantes.xhtml"
+                                            icon="pi pi-file-edit" />
+                                <p:menuitem value="Generar número de control" outcome="/escolares/listaAspirantes.xhtml"
+                                            icon="pi pi-hashtag" />
+                                <p:menuitem value="Recuperar Semestres" outcome="/escolares/listaAspirantes.xhtml"
+                                            icon="pi pi-history" />
+                                <p:menuitem value="Redactar mensaje" outcome="/escolares/listaAspirantes.xhtml"
+                                            icon="pi pi-envelope" />
+                                <p:menuitem value="NIPs de alumnos" outcome="/escolares/listaAspirantes.xhtml"
+                                            icon="pi pi-key" />
+                            </p:submenu>
+
+                            <!-- 2 HISTORIAL -->
+                            <p:submenu label="Historial académico" icon="pi pi-book">
+                                <p:menuitem value="Consultar historial" icon="pi pi-search" />
+                                <p:menuitem value="Imprimir historial" icon="pi pi-print" />
+                            </p:submenu>
+
+                            <!-- 3 CALIFICACIONES Y ACTAS -->
+                            <p:submenu label="Calificaciones y Actas" icon="pi pi-file">
+                                <p:menuitem value="Captura de calificaciones" icon="pi pi-pencil" />
+                                <p:menuitem value="Generar actas" icon="pi pi-file-pdf" />
+                            </p:submenu>
+
+                            <!-- 4 INSCRIPCIONES -->
+                            <p:submenu label="Inscripciones" icon="pi pi-check-square">
+                                <p:menuitem value="Inscripciones" icon="pi pi-user-check" />
+                                <p:menuitem value="Reinscripciones" icon="pi pi-refresh" />
+                            </p:submenu>
+
+                            <!-- 5 CARRERAS -->
+                            <p:submenu label="Carreras" icon="pi pi-briefcase">
+                                <p:menuitem value="Gestión de carreras" icon="pi pi-cog" />
+                                <p:menuitem value="Asignar planes" icon="pi pi-sitemap" />
+                            </p:submenu>
+
+                            <!-- 6 ESPECIALIDADES -->
+                            <p:submenu label="Especialidades" icon="pi pi-star">
+                                <p:menuitem value="Gestión de especialidades" icon="pi pi-cog" />
+                                <p:menuitem value="Asignar materias a especialidad" icon="pi pi-list" />
+                            </p:submenu>
+
+                            <!-- 7 PLAN CURRICULAR -->
+                            <p:submenu label="Plan curricular" icon="pi pi-folder-open">
+                                <p:menuitem value="Ver plan curricular" icon="pi pi-eye" />
+                                <p:menuitem value="Editar plan curricular" icon="pi pi-pencil" />
+                            </p:submenu>
+
+                            <!-- 8 EXÁMENES ESPECIALES -->
+                            <p:submenu label="Exámenes especiales" icon="pi pi-star-fill">
+                                <p:menuitem value="Solicitud de exámenes" icon="pi pi-file-edit" />
+                                <p:menuitem value="Resultado de exámenes" icon="pi pi-chart-bar" />
+                            </p:submenu>
+
+                            <!-- 9 PERIODOS ESCOLARES -->
+                            <p:submenu label="Periodos Escolares" icon="pi pi-calendar">
+                                <p:menuitem value="Gestión de periodos" icon="pi pi-cog" />
+                                <p:menuitem value="Calendario escolar" icon="pi pi-calendar-plus" />
+                            </p:submenu>
+
+                            <!-- 10 ASPIRANTES -->
+                            <p:submenu label="Aspirantes" icon="pi pi-user">
+                                <p:menuitem value="Lista de aspirantes" icon="pi pi-list" />
+                                <p:menuitem value="Resultados de aspirantes" icon="pi pi-chart-line" />
+                            </p:submenu>
+
+                            <!-- 11 CIERRE DE SEMESTRE -->
+                            <p:submenu label="Cierre de semestre" icon="pi pi-lock">
+                                <p:menuitem value="Cierre administrativo" icon="pi pi-folder" />
+                                <p:menuitem value="Reportes de cierre" icon="pi pi-chart-pie" />
+                            </p:submenu>
+
+                        </p:panelMenu>
+                    </h:form>
+                </div>
+
+                <!-- ================= CONTENIDO PRINCIPAL ================= -->
+                <div class="layout-main">
+                    <ui:insert name="content">
+                        <h3>Bienvenido al Departamento de Escolares</h3>
+                        <p>Selecciona una opción del menú lateral para comenzar.</p>
+                        <h:graphicImage library="assets" name="aguiluchos.jpg" style="height:200px;" />
+                    </ui:insert>
+                </div>
+            </div>
+
+            <!-- ================= FOOTER ================= -->
+            <div class="layout-footer">
+                © 2025 Tecnológico Nacional de México Campus Cuautla | Departamento Escolares
+            </div>
+
         </div>
 
-        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
-
-        <div class="title">DEPARTAMENTO DE ESCOLARES</div>
-
-        <h:form styleClass="logout-btn">
-            <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
-                             action="#{controlSesion.cerrarSesion}" ajax="false" />
-        </h:form>
-    </div>
-
-    <div class="layout-main-container">
-
-        <!-- ================= SIDEBAR ================= -->
-        <div class="layout-sidebar">
-            <h:form>
-              
-                <p:panelMenu style="width:100%;" styleClass="custom-menu">
-    <!-- 1 ALUMNO -->
-    <p:submenu label="Alumnos" icon="pi pi-users">
-        <p:menuitem value="Alta de Alumnos" outcome="/escolares/altaEstudiantes.xhtml"
-                    actionListener="#{altaEstudiantesBean.inicializacion}"
-                    icon="pi pi-user-plus" />
-        <p:menuitem value="Modificaciones de datos del Alumno" outcome="/escolares/alumnosBusqueda.xhtml"
-                    actionListener="#{alumnosBusquedaBean.inicializacion}"
-                    icon="pi pi-user-edit" />
-        <p:menuitem value="Eliminación de alumnos" outcome="/escolares/listaAspirantes.xhtml"
-                    icon="pi pi-user-minus" />
-        <p:menuitem value="Adeudos" outcome="/escolares/listaAspirantes.xhtml"
-                    icon="pi pi-exclamation-circle" />
-        <p:menuitem value="Registro de titulados" outcome="/escolares/listaAspirantes.xhtml"
-                    icon="pi pi-file-edit" />
-        <p:menuitem value="Generar número de control" outcome="/escolares/listaAspirantes.xhtml"
-                    icon="pi pi-hashtag" />
-        <p:menuitem value="Recuperar Semestres" outcome="/escolares/listaAspirantes.xhtml"
-                    icon="pi pi-history" />
-        <p:menuitem value="Redactar mensaje" outcome="/escolares/listaAspirantes.xhtml"
-                    icon="pi pi-envelope" />
-        <p:menuitem value="NIPs de alumnos" outcome="/escolares/listaAspirantes.xhtml"
-                    icon="pi pi-key" />
-    </p:submenu>
-
-    <!-- 2 HISTORIAL -->
-    <p:submenu label="Historial académico" icon="pi pi-book">
-        <p:menuitem value="Consultar historial" icon="pi pi-search" />
-        <p:menuitem value="Imprimir historial" icon="pi pi-print" />
-    </p:submenu>
-
-    <!-- 3 CALIFICACIONES Y ACTAS -->
-    <p:submenu label="Calificaciones y Actas" icon="pi pi-file">
-        <p:menuitem value="Captura de calificaciones" icon="pi pi-pencil" />
-        <p:menuitem value="Generar actas" icon="pi pi-file-pdf" />
-    </p:submenu>
-
-    <!-- 4 INSCRIPCIONES -->
-    <p:submenu label="Inscripciones" icon="pi pi-check-square">
-        <p:menuitem value="Inscripciones" icon="pi pi-user-check" />
-        <p:menuitem value="Reinscripciones" icon="pi pi-refresh" />
-    </p:submenu>
-
-    <!-- 5 CARRERAS -->
-    <p:submenu label="Carreras" icon="pi pi-briefcase">
-        <p:menuitem value="Gestión de carreras" icon="pi pi-cog" />
-        <p:menuitem value="Asignar planes" icon="pi pi-sitemap" />
-    </p:submenu>
-
-    <!-- 6 ESPECIALIDADES -->
-    <p:submenu label="Especialidades" icon="pi pi-star">
-        <p:menuitem value="Gestión de especialidades" icon="pi pi-cog" />
-        <p:menuitem value="Asignar materias a especialidad" icon="pi pi-list" />
-    </p:submenu>
-
-    <!-- 7 PLAN CURRICULAR -->
-    <p:submenu label="Plan curricular" icon="pi pi-folder-open">
-        <p:menuitem value="Ver plan curricular" icon="pi pi-eye" />
-        <p:menuitem value="Editar plan curricular" icon="pi pi-pencil" />
-    </p:submenu>
-
-    <!-- 8 EXÁMENES ESPECIALES -->
-    <p:submenu label="Exámenes especiales" icon="pi pi-star-fill">
-        <p:menuitem value="Solicitud de exámenes" icon="pi pi-file-edit" />
-        <p:menuitem value="Resultado de exámenes" icon="pi pi-chart-bar" />
-    </p:submenu>
-
-    <!-- 9 PERIODOS ESCOLARES -->
-    <p:submenu label="Periodos Escolares" icon="pi pi-calendar">
-        <p:menuitem value="Gestión de periodos" icon="pi pi-cog" />
-        <p:menuitem value="Calendario escolar" icon="pi pi-calendar-plus" />
-    </p:submenu>
-
-    <!-- 10 ASPIRANTES -->
-    <p:submenu label="Aspirantes" icon="pi pi-user">
-        <p:menuitem value="Lista de aspirantes" icon="pi pi-list" />
-        <p:menuitem value="Resultados de aspirantes" icon="pi pi-chart-line" />
-    </p:submenu>
-
-    <!-- 11 CIERRE DE SEMESTRE -->
-    <p:submenu label="Cierre de semestre" icon="pi pi-lock">
-        <p:menuitem value="Cierre administrativo" icon="pi pi-folder" />
-        <p:menuitem value="Reportes de cierre" icon="pi pi-chart-pie" />
-    </p:submenu>
-
-                </p:panelMenu>
-            </h:form>
-        </div>
-
-        <!-- ================= CONTENIDO PRINCIPAL ================= -->
-        <div class="layout-main">
-            <ui:insert name="content">
-                <h3>Bienvenido al Departamento de Escolares</h3>
-                <p>Selecciona una opción del menú lateral para comenzar.</p>
-                 <h:graphicImage library="assets" name="aguiluchos.jpg" style="height:200px;" />
-            </ui:insert>
-        </div>
-    </div>
-
-    <!-- ================= FOOTER ================= -->
-    <div class="layout-footer">
-        © 2025 Tecnológico Nacional de México Campus Cuautla | Departamento Escolares
-    </div>
-
-</div>
-
-</h:body>
+    </h:body>
 
 
 </html>
