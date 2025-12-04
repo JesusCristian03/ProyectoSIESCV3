@@ -2,7 +2,6 @@
 # BUILD & DIST FOLDERS
 # ===========================
 /build/
-<<<<<<< HEAD
 /dist/
 /SIESC/build/
 /SIESC/dist/
@@ -11,15 +10,9 @@
 
 # ===========================
 # NETBEANS PRIVATE CONFIG
-# (estos sí deben ignorarse)
 # ===========================
 nbproject/private/
 **/nbproject/private/
-**/nbproject/private/**
-
-# PRIVATE PROPERTIES (cambian por PC)
-**/nbproject/private/private.properties
-**/nbproject/private/private.xml
 
 # ===========================
 # NO IGNORAR ESTOS:
@@ -35,9 +28,3 @@ nbproject/private/
 # ===========================
 Thumbs.db
 .DS_Store
-=======
-SIESC/nbproject/private/
-
-
-
->>>>>>> origin/main
