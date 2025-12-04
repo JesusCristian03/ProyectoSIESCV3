@@ -155,7 +155,9 @@ body {
 }
 
 
-
+        
+        
+        
 
 
         /* ===== FOOTER ===== */
@@ -175,4 +177,93 @@ body {
         
         .pi::before {
     font-family: 'primeicons' !important;
+}
+
+
+
+
+
+
+
+
+
+/* ===== ALTA ESTUDIANTES  ===== */
+
+                .form-title {
+                    text-align: center;
+                    font-size: 28px;
+                    font-weight: bold;
+                    color: #1976D2;
+                    margin-bottom: 20px;
+                }
+
+                .card.custom-panel {
+                    background: #f9fbfc !important;
+                    border: 1px solid #cbd5e1;
+                    border-radius: 12px !important;
+                    padding: 20px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+                }
+
+                .section-title {
+                    margin-top: 30px;
+                    margin-bottom: 15px;
+                    font-size: 20px;
+                    font-weight: bold;
+                    text-align: center;
+                    color: #1976D2;
+                    border-bottom: 2px solid #BBDEFB;
+                    padding-bottom: 5px;
+                }
+
+                .ui-inputfield {
+                    border-radius: 8px !important;
+                    box-shadow: none !important;
+                }
+
+                .buttons-container {
+                    margin-top: 35px;
+                    display: flex;
+                    justify-content: center;
+                    gap: 25px;
+                }
+                
+                
+                
+/* ==== PANEL PRINCIPAL ==== */
+.custom-panel {
+    background-color: #f7f9fc !important;   /* Color suave */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+}
+
+/* ==== PANELGRID (cuadros donde van los inputs) ==== */
+.clean-panelgrid .ui-panelgrid-content {
+    background-color: #ffffff !important;   /* Fondo blanco */
+    border: none !important;
+    box-shadow: none !important;
+    padding: 15px !important;
+    border-radius: 8px !important;
+}
+
+.clean-panelgrid .ui-widget-content {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Quitar bordes internos */
+.clean-panelgrid table {
+    border: none !important;
+}
+
+.clean-panelgrid td {
+    border: none !important;
+}
+
+/* Quitar borde cuando un componente recibe focus */
+.ui-inputfield:focus {
+    box-shadow: none !important;
+    outline: none !important;
 }

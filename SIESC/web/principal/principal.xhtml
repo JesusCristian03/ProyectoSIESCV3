@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
     <title>Portal Institucional</title>
@@ -23,82 +24,134 @@
 </h:head>
 
 <h:body>
+       <div class="layout-wrapper">
 
-    <!-- ENCABEZADO -->
+          <!-- ENCABEZADO -->
 
-    <div class="encabezado" style="display:flex; align-items:center;">
+            <div class="encabezado" style="display:flex; align-items:center;">
     
-        <div style="display:flex; align-items:center; gap:30px;">
-        <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" alt="Logo Institucional" />
-     
-      
-    </div>
+                 <div style="display:flex; align-items:center; gap:30px;">
+                   <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" alt="Logo Institucional" />
+    
+                 </div>
         
-                <h2 class="titulo-encabezado">
-     SISTEMA INTEGRAL DE INFORMACIÓN  
-   
-      </h2>
+                 <h2 class="titulo-encabezado">
+                    SISTEMA INTEGRAL DE INFORMACIÓN  
+                 </h2>
 
-    <div>
-        <a>Informacion</a>
-        <a>Contacto</a>
-    </div>
-</div>
-
-
-<p:panel header="Instituto Tecnológico de Cuautla" styleClass="panel-azul">
-
-    <p:panelGrid columns="2" layout="grid" styleClass="ui-fluid"   columnClasses="leftCol,rightCol">   <!-- <- aquí -->
-
-       
-            <div class="inicio-header">
-                <h1>BIENVENID@S</h1>
-                <p>Bienvenido al sistema de gestión institucional. Selecciona tu tipo de usuario para continuar.</p>
+                 <div>
+                       <a>Informacion</a>
+                        <a>Contacto</a>
+                 </div>
             </div>
-       
 
-      
-            <div class="carousel-pro">
-                <p:carousel value="#{inicioBean.imagenes}" var="img"
-                            numVisible="1" numScroll="1"
-                            circular="true" autoplayInterval="4000"
-                            widgetVar="carouselPro"
-                            styleClass="carousel-pro-container">
-                    <p:graphicImage library="assets"
-                                    name="#{img}"
-                                    styleClass="carousel-pro-image"/>
-                </p:carousel>
+         
+             <div class="main-content">
+        
+                 <p:panel styleClass="panel-azul">
+                                <f:facet name="header">
+                                   <h:outputText value="INSTITUTO TECNOLOGICO DE CUAUTLA MORELOS" styleClass="custom-title" />
+                                </f:facet>
+                     
+                     
+                            <p:panelGrid columns="2" styleClass="custom-panelgrid" style="width:100%; margin:0 auto;">
+                                             
+                                
+                                <p:column>
+                             <div class="inicio-header">
+                                   <h1 class="titulo-principal">BIENVENID@S</h1>
 
-                <div id="carousel-dots" class="carousel-dots"></div>
-            </div>
-      
+                                   <p class="texto-intro">
+                                     Bienvenido al sistema de gestión institucional. Selecciona tu tipo de usuario para continuar.
+                                   </p>
 
-    </p:panelGrid>
+                                      
+                             </div>
+                                    
+                                                         <!-- BOTONES DE INICIO -->
+                    <div class="botones-inicio">
 
-</p:panel>
-
-
-
-
-
-
-
-
-
-    <!-- BOTONES DE INICIO -->
-<div class="botones-inicio">
-
-    <p:button value="Aspirante" icon="pi pi-id-card"
+                   <p:button value="Aspirante" icon="pi pi-id-card"
               styleClass="btn-aspirante"/>
 
-    <p:button value="Estudiante" icon="pi pi-user-plus"
+                    <p:button value="Estudiante" icon="pi pi-user-plus"
               outcome="loginEstudiante.xhtml"
               styleClass="btn-estudiante"/>
 
-    <p:button value="Personal Administrativo" icon="pi pi-briefcase"
+                   <p:button value="Personal Administrativo" icon="pi pi-briefcase"
               outcome="loginAdministrativos.xhtml"
               styleClass="btn-admin"/>
+                     </div>
+                                                         
+                                                         
+                                                         
+                                                      <div class="link-semestre-container">
+    <a href="https://pit.cuautla.tecnm.mx/PIT/" target="_blank" class="link-semestre">
+        <i class="pi pi-hand-pointer"></i>
+        Eres de 1° semestre o 2° semestre, da clic aquí
+    </a>
 </div>
+
+
+
+
+
+                                </p:column>
+                              
+                                
+                                 <p:column>
+                             <div class="carousel-pro">
+                                 <p:carousel value="#{inicioBean.imagenes}" var="img"
+                                      numVisible="1" numScroll="1"
+                                      circular="true" autoplayInterval="6000"
+                                      widgetVar="carouselPro"
+                                      styleClass="carousel-pro-container">
+                                 <p:graphicImage library="assets"
+                                    name="#{img}"
+                                    styleClass="carousel-pro-image"/>
+                                  </p:carousel>
+                            </div>
+                              </p:column>
+                              </p:panelGrid>
+
+                     
+                      <p:panelGrid columns="2" styleClass="custom-panelgrid" style="width:100%; margin:0 auto;">
+                                             
+                                
+                                <p:column>
+                               <div class="tarjeta-info">
+                                                 <h2 class="subtitulo">Misión</h2>
+                                                   <p>
+                                                         Formar seres humanos reflexivos, éticos, emprendedores, multiculturales y con sólidos conocimientos
+                                                               científicos y técnicos, capaces de transformar positivamente su entorno.
+                                                     </p>
+                                 </div>
+                                    
+                                    
+                                </p:column>
+                                    <p:column>
+                                        <div class="tarjeta-info">
+                                             <h2 class="subtitulo">Visión</h2>
+                                                      <p>
+                                                         Ser la primera opción de educación superior tecnológica pública en el estado, reconocida por el destacado
+                                                         desempeño de sus egresados en el ámbito nacional e internacional, manteniendo un crecimiento sostenido en
+                                                          su capacidad, competitividad e innovación académicas.
+                                                       </p>
+                                          </div>
+                                    </p:column>
+                           
+                              </p:panelGrid>
+                 </p:panel>
+
+
+
+
+
+
+             
+             
+             </div>
+
 
     
     
@@ -111,6 +164,8 @@
       
         <a href="https://www.youtube.com/@tecnm-cuautla" target="_blank"><i class="pi pi-youtube"></i></a>
         <a href="https://web.facebook.com/search/top?q=tecnologico%20de%20cuautla" target="_blank"><i class="pi pi-facebook"></i></a>
+        <a href="https://www.instagram.com/tecnmcuautla?igsh=bWViOGhtZ2NtN2Y5" target="_blank"><i class="pi pi-camera"></i></a>
+         <a href="https://www.instagram.com/tecnmcuautla?igsh=bWViOGhtZ2NtN2Y5" target="_blank"><i class="pi pi-music"></i></a>
     </div>
 
     
@@ -149,6 +204,10 @@
     }
     //]]>
 </script>
+             
+    
+     </div>
+
 </h:body>
 </html>
 

@@ -30,7 +30,8 @@
                         <i class="pi pi-id-card"></i> Datos Generales
                     </h3>
 
-                    <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                    <p:panelGrid columns="4" styleClass="ui-fluid clean-panelgrid" columnClasses="ui-g-12 ui-md-3">
+
 
                         <p:outputLabel value="No. Control" />
                         <p:inputText value="#{altaEstudiantesBean.numeroControl}" styleClass="ui-inputfield">
@@ -104,7 +105,8 @@
                         <i class="pi pi-home"></i> Domicilio
                     </h3>
 
-                    <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                    <p:panelGrid columns="4" styleClass="ui-fluid clean-panelgrid" columnClasses="ui-g-12 ui-md-3">
+
 
                         <p:outputLabel value="Calle y Número" />
                         <p:inputText value="#{altaEstudiantesBean.domicilioCalle}" styleClass="ui-inputfield">
@@ -161,7 +163,11 @@
                         <i class="pi pi-book"></i> Datos Escolares
                     </h3>
 
-                    <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                    <p:panelGrid columns="3" styleClass="ui-fluid clean-panelgrid" columnClasses="ui-g-12 ui-md-3">
+                        
+
+
+
 
                         <!-- Carrera y Retícula -->
                         <p:outputLabel value="Carrera y Retícula" />
@@ -278,6 +284,7 @@
                                              onclick="PF('firmaWV').clear();" />
                         </p:panelGrid>
 
+
                         <!-- ================= DATOS FAMILIARES ================= -->
                         <h3 class="section-title">
                             <i class="pi pi-users"></i> Datos Familiares
@@ -288,6 +295,7 @@
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombrePadre}" styleClass="ui-inputfield">
                                 <p:ajax />
                             </p:inputText>
+
 
                             <p:outputLabel value="Domicilio(calle y numero)" />
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCallePadre}" styleClass="ui-inputfield">
@@ -326,11 +334,13 @@
                         </p:panelGrid>
 
 
+
                         <p:panelGrid columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
                             <p:outputLabel value="Nombre de la Madre" />
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombreMadre}" styleClass="ui-inputfield">
                                 <p:ajax />
                             </p:inputText>
+
 
                             <p:outputLabel value="Domicilio(calle y numero)" />
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCalleMadre}" styleClass="ui-inputfield">
@@ -367,7 +377,9 @@
                                 <p:ajax />
                             </p:inputText>
 
+
                         </p:panelGrid>
+
 
 
                         <div class="buttons-container">
@@ -388,44 +400,7 @@
 
             <!-- ================= ESTILOS ADICIONALES ================= -->
             <style>
-                .form-title {
-                    text-align: center;
-                    font-size: 28px;
-                    font-weight: bold;
-                    color: #1976D2;
-                    margin-bottom: 20px;
-                }
 
-                .card.custom-panel {
-                    background: #f9fbfc !important;
-                    border: 1px solid #cbd5e1;
-                    border-radius: 12px !important;
-                    padding: 20px;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-                }
-
-                .section-title {
-                    margin-top: 30px;
-                    margin-bottom: 15px;
-                    font-size: 20px;
-                    font-weight: bold;
-                    text-align: center;
-                    color: #1976D2;
-                    border-bottom: 2px solid #BBDEFB;
-                    padding-bottom: 5px;
-                }
-
-                .ui-inputfield {
-                    border-radius: 8px !important;
-                    box-shadow: none !important;
-                }
-
-                .buttons-container {
-                    margin-top: 35px;
-                    display: flex;
-                    justify-content: center;
-                    gap: 25px;
-                }
             </style>
         </ui:define>
     </ui:composition>
