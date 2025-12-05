@@ -4,7 +4,9 @@
  */
 package servicio;
 
+import DAO.MateriaFacadeLocal;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,16 +19,24 @@ import modelo.Materia;
 @Stateless
 public class MateriaServicio implements MateriaServicioLocal {
 
+    @EJB
+    private MateriaFacadeLocal materiaFacade;
+
     @PersistenceContext
     private EntityManager em;
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-     @Override
+    @Override
     public Materia findByMateria(String materia) {
         return em.createNamedQuery("Materia.findByMateria", modelo.Materia.class)
                 .setParameter("materia", materia)
                 .getSingleResult();
+    }
+
+    @Override
+    public Materia buscarMateria(String x) {
+        return materiaFacade.find(x);
     }
 
     // Buscar por nombre completo
@@ -38,7 +48,7 @@ public class MateriaServicio implements MateriaServicioLocal {
     }
 
     // Buscar por nombre abreviado
-     @Override
+    @Override
     public List<Materia> findByNombreAbreviado(String nombreAbreviado) {
         return em.createNamedQuery("Materia.findByNombreAbreviadoMateria", modelo.Materia.class)
                 .setParameter("nombreAbreviadoMateria", nombreAbreviado)

@@ -6,17 +6,15 @@ package servicio;
 
 import java.util.List;
 import javax.ejb.Local;
-import modelo.Materia;
+import modelo.AutorizacionInscripcion;
 
 /**
  *
  * @author cris_
  */
 @Local
-public interface MateriaServicioLocal {
-    List<Materia> findByNombreCompleto(String nombreCompleto);
-    List<Materia> findByNombreAbreviado(String nombreAbreviado);
-    Materia findByMateria(String materia);
-    Materia buscarMateria(String x);
-    
+public interface AutorizacionInscripcionServicioLocal {
+    void eliminar(AutorizacionInscripcion ai);
+    void insertar (AutorizacionInscripcion x);
+    List<AutorizacionInscripcion> buscarAutorizacionesAlumno(String periodo, String noControl);
 }

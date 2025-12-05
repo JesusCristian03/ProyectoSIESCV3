@@ -48,6 +48,7 @@ body {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+        height: 40px !important;
 }
 
 /* ===== SIDEBAR  EN DONDE ESTA EL MENU===== */
@@ -170,13 +171,14 @@ body {
 }
 
 .custom-card .ui-panel-titlebar {
-    background: #0088B8 !important;
+    background: #1976D2 !important;
     color: #ffffff !important;
     font-size: 1.1rem !important;
     font-weight: 600 !important;
     text-align: center !important;
     padding: .7rem !important;
     border-radius: 14px 14px 0 0 !important;
+     height:30px !important;
 }
 
 .custom-title {
@@ -269,7 +271,7 @@ body {
    COLORES DE LA TABLA
    ============================================================ */
 .tabla-header {
-    background-color: #0088A6 !important;
+    background-color: #1976D2 !important;
     color: #ffffff !important;
     text-align: center;
     font-weight: bold;
@@ -337,16 +339,39 @@ body {
 }
 
 
-/* Panel con encabezado azul */
+/* Header del panel */
 .ui-panel .ui-panel-titlebar {
-    background: #007bbd !important;
+    background: #003366 !important;
     color: #fff !important;
     font-weight: bold;
     font-size: 15px;
     text-align: center;
     border-radius: 6px 6px 0 0 !important;
+    height: 30px !important;         /* El alto que quieras */
+    line-height: 30px !important;     /* MISMO valor para centrar verticalmente */
+    padding: 0 !important;
 }
 
+/* Eliminar márgenes internos del título */
+.ui-panel .ui-panel-title {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Solo afecta a paneles que tengan styleClass="panel-azul" */
+.panel-azul .ui-panel-titlebar {
+    background: #003366 !important;
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 6px 6px 0 0 !important;
+
+    height: 40px !important;        /* tu altura */
+    line-height: 40px !important;   /* debe coincidir */
+    padding: 0 !important;
+}
 /* Tabla bordes y fondo */
 #tablaHorarioSeleccionado {
     border: 1px solid #cce4f6 !important;
@@ -354,7 +379,7 @@ body {
 
 #tablaHorarioSeleccionado .ui-datatable-header,
 #tablaHorarioSeleccionado th.ui-state-default {
-    background: #0b84d8 !important;
+    background: #1976D2 !important;
     color: #fff !important;
     font-weight: bold;
     text-align: center !important;
@@ -544,7 +569,7 @@ body {
 .legend-title {
     font-size: 1.1rem !important;
     font-weight: 600 !important;
-    color: #0088B8 !important;
+    color: #1976D2 !important;
     text-align: center !important;
     margin-bottom: 0.5rem !important;
 }
@@ -588,7 +613,7 @@ body {
 
 /* Encabezado */
 .legend-header {
-    background-color: #003366;
+    background-color: #1976D2;
     color: white;
     padding: 8px 12px;
     font-size: 15px;
@@ -676,5 +701,24 @@ body {
     color: #ff3333 !important;               /* icono más claro */
 }
 
+
+/* Hace que cada celda del panelGrid apile el contenido verticalmente */
+.ui-panelgrid .ui-panelgrid-cell {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 8px 12px;
+}
+
+/* Margen entre el label y el control */
+.ui-panelgrid .ui-panelgrid-cell > *:not(:first-child) {
+    margin-top: 6px;
+}
+
+/* Para que el select e input ocupen todo el ancho */
+.ui-inputfield, 
+.ui-selectonemenu {
+    width: 100% !important;
+}
 
 

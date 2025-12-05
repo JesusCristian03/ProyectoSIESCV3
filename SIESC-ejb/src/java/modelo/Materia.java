@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Materia.findByNombreAbreviadoMateria", query = "SELECT m FROM Materia m WHERE m.nombreAbreviadoMateria = :nombreAbreviadoMateria")})
 public class Materia implements Serializable {
 
+    @OneToMany(mappedBy = "materiaAfectada")
+    private List<AutorizacionInscripcion> autorizacionInscripcionList;
+
     @OneToMany(mappedBy = "materia")
     private List<RequisitosMateria> requisitosMateriaList;
     @OneToMany(mappedBy = "materiaRelacion")
@@ -218,6 +221,15 @@ public class Materia implements Serializable {
 
     public void setRequisitosMateriaList1(List<RequisitosMateria> requisitosMateriaList1) {
         this.requisitosMateriaList1 = requisitosMateriaList1;
+    }
+
+    @XmlTransient
+    public List<AutorizacionInscripcion> getAutorizacionInscripcionList() {
+        return autorizacionInscripcionList;
+    }
+
+    public void setAutorizacionInscripcionList(List<AutorizacionInscripcion> autorizacionInscripcionList) {
+        this.autorizacionInscripcionList = autorizacionInscripcionList;
     }
     
 }

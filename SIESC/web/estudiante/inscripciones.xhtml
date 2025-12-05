@@ -19,11 +19,11 @@
             <ui:define name="content">
 
                 <f:view>
-                     <!-- AQUI VA EL METADATA -->
-                <f:metadata>
-                    <f:event type="preRenderView" listener="#{inscripcionesBean.resetearSiEsRecarga}" />
-                </f:metadata>
-  
+                    <!-- AQUI VA EL METADATA -->
+                    <f:metadata>
+                        <f:event type="preRenderView" listener="#{inscripcionesBean.resetearSiEsRecarga}" />
+                    </f:metadata>
+
                     <h:form>
                         <p:panel styleClass="custom-card" style="width:100%; margin: 0 auto; display:block;">
 
@@ -457,7 +457,7 @@
                                                 :seleccion:tabVista:panelCreditos"
                                                 oncomplete="PF('selecionMateria').hide();" />
 
-                                        <p:column headerText="Grupo" style="width:4%;"><h:outputText value="#{item.grupo}" /></p:column>   
+                                        <p:column headerText="Grupo" style="width:4%;"><h:outputText value="#{item.grupo}"/></p:column>   
                                         <!-- ✅ Nueva columna para el campo Global -->
                                         <p:column headerText="Global" style="width:6%;">
                                             <p:selectBooleanCheckbox value="#{item.global}">
@@ -566,6 +566,7 @@
                                                              action="#{inscripcionesBean.guardarHorario}" 
                                                              update="tablaHorarioSeleccionado 
                                                              :seleccion:tabVista:toolbarBotones :seleccion:tabVista:growlMensajes"
+                                                             style="height:40px; background:#1976D2; font-size:16px; padding:0 10px 0 30px; margin-left:10px;"
                                                              disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas
                                                                          or inscripcionesBean.modoInsertar}" />
 
@@ -578,14 +579,14 @@
                                                              :seleccion:tabVista:toolbarBotones 
                                                              :seleccion:tabVista:growlMensajes 
                                                              :seleccion:tabVista:panelCreditos" 
-                                                             style="margin-left:10px;" 
+                                                             style="height:40px; background:#1976D2; font-size:16px; padding:0 10px 0 30px; margin-left:10px;"
                                                              disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas or inscripcionesBean.modoEliminar}" />
 
                                             <p:commandButton value="Imprimir Horario"
                                                              icon="pi pi-print"
                                                              actionListener="#{inscripcionesBean.generarPDF}"
                                                              ajax="false"
-                                                             style="margin-left:10px;"
+                                                             style="height:40px; background:#1976D2; font-size:16px; padding:0 10px 0 30px; margin-left:10px;"
                                                              update=":seleccion:tabVista:growlMensajes :seleccion:tabVista:toolbarBotones"
                                                              disabled="#{!inscripcionesBean.modoImprimir}"/>
                                         </p:toolbarGroup>
@@ -707,12 +708,12 @@
 
 
                         </p:tabView>
-                   
+
                         <h:outputScript>
                             window.onbeforeunload = function(event) {
                             return "Si recargas la página, los datos del formulario se perderán.";
                             };
-                        </h:outputScript>>
+                        </h:outputScript>
 
                     </h:form>
                 </f:view>

@@ -23,6 +23,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 import modelo.Aulas;
 import modelo.Carrera;
@@ -54,7 +55,7 @@ import servicio.PersonalServicioLocal;
  * @author gacev
  */
 @Named(value = "horarioCrearBean")
-@SessionScoped
+@ViewScoped
 public class HorarioCrearBean implements Serializable {
 
     @EJB
@@ -78,6 +79,107 @@ public class HorarioCrearBean implements Serializable {
     private HorarioServicioLocal horarioServicio;
     @EJB
     private GruposServicioLocal gruposServicio;
+
+    public void resetearSiEsRecarga() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (!fc.isPostback()) {
+            // Listas
+            listaHorarioCrear = new ArrayList<>();
+            listaHorarioBorrar = new ArrayList<>();
+            listaCarrera = new ArrayList<>();
+            listaPermisos = new ArrayList<>();
+            listaPeriodoEscolar = new ArrayList<>();
+            listaMateria = new ArrayList<>();
+            listaSemestres = new ArrayList<>();
+            listaAulas = new ArrayList<>();
+            listagrupos = new ArrayList<>();
+            listagrupogenerado = new ArrayList<>();
+            listapersonal = new ArrayList<>();
+            listaMateriaI = new ArrayList<>();
+            listaHorarios = new ArrayList<>();
+            listaHorariosGenerados = new ArrayList<>();
+            listaHorariosEmpalme = new ArrayList<>();
+            listacoordenadas = new ArrayList<>();
+            horariosAEliminar = new ArrayList<>();
+
+            // Optional
+            horarioExacto = Optional.empty();
+
+            // Objetos
+            usuario = new Usuario();
+            grupo = new Grupos();
+            horario = new Horarios();
+            carreraI = new Carrera();
+            materia = new Materia();
+            materiasCarreras = new MateriasCarreras();
+            periodo = new PeriodoEscolar();
+            aula = new Aulas();
+            aulaBuscada = new Aulas();
+            horariocrear = new HorarioCrear();
+            organigrama = new Organigrama();
+            materiaSeleccionada = new Horarios();
+
+            // Banderas booleanas
+            puedeguardar = false;
+            camposllenos = false;
+            modoIntercambio = false;
+            modoSeleccionMateria = false;
+
+            booleanBuscarAula = false;
+            booleanBuscarGrupo = false;
+
+            booleanBotonInsertar = false;
+            booleanBotonEliminar = false;
+            booleanBotonModificar = false;
+            booleanBotonIntercambiar = false;
+            booleanBotonAula = false;
+            booleanBotonGrupo = false;
+
+            booleanCampoCarrera = false;
+            booleanCampoSemestre = false;
+            booleanCampoAula = false;
+            booleanCampoPeriodo = false;
+            booleanCampoGrupo = false;
+
+            seleccionadocarreramateria2 = false;
+            eliminando = false;
+            desactivarCampos = false;
+            activarModificar = false;
+
+            // Variables String
+            nombreMateriaSeleccionada = "";
+            aulaMateriaSeleccionada = "";
+            nuevaAulaSeleccionada = "";
+            carreraS = "";
+            asignaturaS = "";
+            posicionesSeleccionadas = "";
+            periodoS = "";
+            semestreS = "";
+            aulas = "";
+            grupoS = "";
+            personal = "";
+            aulaDestino = "";
+            valorgrupo = "";
+
+            // Variables numéricas
+            filaMateriaSeleccionada = 0;
+            columnaMateriaSeleccionada = 0;
+            filaSeleccionadaAnterior = -1;
+            columnaSeleccionadaAnterior = -1;
+
+            filaDestino = 0;
+            columnaDestino = 0;
+
+            creditos = 0;
+            numestudiantes = 0;
+
+            // Fechas
+            horainicioMateria = null;
+            horainiciofinMateria = null;
+            nuevoHorario();
+        }
+
+    }
 
     private List<HorarioCrear> listaHorarioCrear;
     private List<HorarioCrear> listaHorarioBorrar;//Muestra los horarios que va a eliminar.
@@ -1024,13 +1126,13 @@ public class HorarioCrearBean implements Serializable {
     }
 
     public void limpiarVariablesDeEstadoModificar() {
-   // Limpiar variables y estado
-       // nombreMateriaSeleccionada = null;
+        // Limpiar variables y estado
+        // nombreMateriaSeleccionada = null;
         //aulaMateriaSeleccionada = null;
         //    eliminando = false;
-       // modoSeleccionMateria = false;
+        // modoSeleccionMateria = false;
         actualizarTabla();
-        
+
         cambiarModoColorTabla("FEA785");
     }
 

@@ -421,7 +421,7 @@ public class InscripcionesBean implements Serializable {
 
     public void resetearSiEsRecarga() {
         FacesContext fc = FacesContext.getCurrentInstance();
-
+        System.out.println("Ejecuto resetear");
         if (!fc.isPostback()) {
             // Es recarga o entrada nueva → limpiar todo
             // Reinicia TODAS las variables que deben empezar limpias
@@ -466,12 +466,10 @@ public class InscripcionesBean implements Serializable {
             listaAmarillas = new ArrayList<>();
             listaAzules = new ArrayList<>();
             // Reinicia cualquier otra lista o valor
-
+            System.out.println("entro a iniciar");
             iniciarInscripcion();
         }
     }
-
-
 
     public void iniciarInscripcion() {
         //Esa lista se asigna a tu bean (listaM) y luego se usa en la página JSF para mostrar la retícula de materias.
@@ -493,7 +491,7 @@ public class InscripcionesBean implements Serializable {
         listaNaranjas = new ArrayList<>();
         listaAmarillas = new ArrayList<>();
         listaAzules = new ArrayList<>();
-        
+
         guardandoPosicionesDeCadaTipoDeColor();//Contar cuantas materias hay de cada color.
         validaciones();
 
@@ -557,7 +555,7 @@ public class InscripcionesBean implements Serializable {
             titulo.setAlignment(Element.ALIGN_CENTER);
             pdf.add(titulo);
 
-            Paragraph subtitulo = new Paragraph("HORARIO DE INSCRIPCIÓN\n\n", subTituloFont);
+            Paragraph subtitulo = new Paragraph("HORARIO DE REINSCRIPCIÓN\n\n", subTituloFont);
             subtitulo.setAlignment(Element.ALIGN_CENTER);
             pdf.add(subtitulo);
 
@@ -664,7 +662,7 @@ public class InscripcionesBean implements Serializable {
         System.out.println("-----------------------------------------");
 
         // --- Validaciones ---
-        if (ahora.isBefore(fechaSeleccion)) {
+        /* if (ahora.isBefore(fechaSeleccion)) {
             System.out.println("[INFO] Aún no es tu hora, acceso bloqueado.");
             addMessage(FacesMessage.SEVERITY_WARN, "Aún no puedes inscribirte", "Tu horario empieza a las: " + fechaSeleccion);
             return;
@@ -675,13 +673,62 @@ public class InscripcionesBean implements Serializable {
             addMessage(FacesMessage.SEVERITY_ERROR, "Tiempo expirado", "Tu ventana de inscripción terminó");
             return;
         }
-
-        // ✔ Acceso permitido
+        // 5. Si todo está correcto, continúa aquí
         System.out.println("[OK] Estás dentro del tiempo permitido, redirigiendo...");
         System.out.println("-----------------------------------------");
 
+         */
+        // 1. Validación de nulls (si algo es null, salimos)
+        if (vr.getAutorizaEscolar() == null
+                || vr.getAdeudaBiblioteca() == null
+                || vr.getAdeudaEscolar() == null
+                || vr.getAdeudaFinancieros() == null
+                || vr.getAdeudoEspecial() == null
+                || vr.getBaja() == null
+                || vr.getEgresa() == null
+                || vr.getEncuesto() == null) {
+
+            addMessage(FacesMessage.SEVERITY_ERROR, "DATOS INCOMPLETOS", "CONTACTA A ESCOLAR");
+            return; // ← salir inmediatamente
+        }
+
+        // 2. Imprimir valores
+        System.out.println("AutorizaEscolar: " + vr.getAutorizaEscolar());
+        System.out.println("AdeudaBiblioteca: " + vr.getAdeudaBiblioteca());
+        System.out.println("AdeudaEscolar: " + vr.getAdeudaEscolar());
+        System.out.println("AdeudaFinancieros: " + vr.getAdeudaFinancieros());
+        System.out.println("AdeudoEspecial: " + vr.getAdeudoEspecial());
+        System.out.println("Baja: " + vr.getBaja());
+        System.out.println("Egresa: " + vr.getEgresa());
+        System.out.println("Encuesto: " + vr.getEncuesto());
+        // 3. Validar adeudos
+        if (!(vr.getAutorizaEscolar() == 'S'
+                && vr.getAdeudaBiblioteca() == 'N'
+                && vr.getAdeudaEscolar() == 'N'
+                && vr.getAdeudaFinancieros() == 'N'
+                && vr.getAdeudoEspecial() == 'N')) {
+
+            addMessage(FacesMessage.SEVERITY_ERROR, "ADEUDO PENDIENTE", "NO TE PUEDES REINSCRIBIR");
+            return;
+        }
+
+        // 4. Validar situación escolar
+        if (!(vr.getBaja() == 'N'
+                && vr.getEgresa() == 'N'
+                && vr.getEncuesto() == 'S')) {
+
+            addMessage(FacesMessage.SEVERITY_ERROR, "REINSCRIPCIÓN NO DISPONIBLE POR SITUACION ESCOLAR", "NO TE PUEDES REINSCRIBIR");
+            return;
+        }
+
+        if (vr.getSemeste()>12) {
+            addMessage(FacesMessage.SEVERITY_ERROR, "REINSCRIPCIÓN NO DISPONIBLE", "NO TE PUEDES REINSCRIBIR POR SEMESTRE INVÁLIDO");
+            return; 
+            
+        }
+        // Aquí ya puedes continuar con la lógica
         try {
-           // iniciarInscripcion();
+            // iniciarInscripcion();
 
             FacesContext.getCurrentInstance()
                     .getExternalContext()
@@ -694,6 +741,7 @@ public class InscripcionesBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void validaciones() {

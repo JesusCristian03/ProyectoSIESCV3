@@ -11,20 +11,66 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Sistema Escolar ITC - Estudiantes</title>
 
-        <!-- Ultima Theme -->
-
-
-        <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-        <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 
         <h:outputStylesheet  library="css" name="estudiantes.css"/>
 
 
 
         <style>
+            /* Quita padding de las celdas */
+            .ui-panelgrid .ui-panelgrid-cell {
+                padding: 5px !important;
+            }
+
+            /* Uniforma altura de todos los inputs */
+            .ui-inputfield,
+            .ui-selectonemenu,
+            .ui-selectonemenu-label {
+                height: 50px !important;
+                min-height: 50px !important;
+                box-sizing: border-box;
+            }
+
+
+            /* Tabla estilizada */
+            .tabla-autorizaciones {
+                border-radius: 10px;
+                overflow: hidden;
+                font-size: 14px;
+            }
+
+            /* Encabezados */
+            .tabla-autorizaciones .ui-datatable-header,
+            .tabla-autorizaciones th {
+                background: #1976D2 !important;
+                color: white !important;
+                font-weight: bold;
+                text-align: center;
+                padding: 10px !important;
+            }
+
+            /* Celdas */
+            .tabla-autorizaciones td {
+                padding: 8px 12px !important;
+                border-bottom: 1px solid #e0e0e0 !important;
+            }
+
+            /* Hover de las filas */
+            .tabla-autorizaciones tbody tr:hover {
+                background: #f1f7ff !important;
+            }
+
+            /* Centrado de columnas */
+            .col-centrada {
+                text-align: center !important;
+            }
+
+            /* Botón de eliminar */
+            .boton-eliminar {
+                border-radius: 6px !important;
+                padding: 6px 10px !important;
+            }
+
 
 
 
@@ -109,8 +155,8 @@
                                             ajax="true"/>
 
                                 <p:menuitem value="Autorizacion Academica" 
-
                                             action="/estudiante/autorizacionAcademica?faces-redirect=true" 
+                                            actionListener="#{autorizacionBean.inicializacion}"
                                             icon="pi pi-users"/>
 
                                 <p:menuitem value="Horario Inscripcion" 

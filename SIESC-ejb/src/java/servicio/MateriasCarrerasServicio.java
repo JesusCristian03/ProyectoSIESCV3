@@ -110,6 +110,7 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
                         break;
                 }
             }
+            
             for (int ren = 0; ren < listaR.size(); ren++) {
                 Reticula aux = listaR.get(ren);
                 //Por cada materia en la historia académica, se busca en cada semestre de cada renglón si coincide la materia.

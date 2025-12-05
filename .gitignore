@@ -2,7 +2,6 @@
 # BUILD & DIST FOLDERS
 # ===========================
 /build/
-<<<<<<< HEAD
 /dist/
 /SIESC/build/
 /SIESC/dist/
@@ -16,7 +15,11 @@
 nbproject/private/
 **/nbproject/private/
 **/nbproject/private/**
-
+nbproject/private/
+nbproject/build-impl.xml
+nbproject/genfiles.properties
+build/
+dist/
 # PRIVATE PROPERTIES (cambian por PC)
 **/nbproject/private/private.properties
 **/nbproject/private/private.xml
@@ -35,9 +38,3 @@ nbproject/private/
 # ===========================
 Thumbs.db
 .DS_Store
-=======
-SIESC/nbproject/private/
-
-
-
->>>>>>> origin/main

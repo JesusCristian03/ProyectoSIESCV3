@@ -21,15 +21,19 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.view.ViewScoped;
+import modelo.AvisosReinscripcion;
 import modelo.Carrera;
 import modelo.Grupos;
 import modelo.HorarioAsignatura;
 import modelo.HorarioCrear;
 import modelo.Horarios;
+import modelo.MateriasCarreras;
 import modelo.Organigrama;
 import modelo.PeriodoEscolar;
 import modelo.Permisos;
 import modelo.Personal;
+import modelo.ReticulaDatos;
 import modelo.Usuario;
 import servicio.CarreraServicioLocal;
 import servicio.GruposServicioLocal;
@@ -44,7 +48,7 @@ import servicio.PersonalServicioLocal;
  * @author cris_
  */
 @Named(value = "asignacionMGBean")
-@SessionScoped
+@ViewScoped
 public class asignacionMGBean implements Serializable {
 
     @EJB
@@ -104,12 +108,42 @@ public class asignacionMGBean implements Serializable {
         }
 
     }
+    public void resetearSiEsRecarga() {
+    FacesContext fc = FacesContext.getCurrentInstance();
 
-    public void inicializar(ActionEvent event) {
+    if (!fc.isPostback()) {
+
+        // Listas
+        listaDepartamentos = new ArrayList<>();
+        listaCarreras = new ArrayList<>();
+        listaPermisos = new ArrayList<>();
+        listaPeriodos = new ArrayList<>();
+        semestres = new ArrayList<>();
+        listaDocentes = new ArrayList<>();
+        listaHorarioCrear = new ArrayList<>();
+        listaHorarioCrearMaestros = new ArrayList<>();
+
+        // Objetos
+        usuario = new Usuario();
+        horarioCrearSeleccionado = new HorarioAsignatura();
+
+        // Valores simples
+        periodoSeleccionado = "";
+        semestreSeleccionado = null;
+        carreraSeleccionada = null;
+        departamentoSeleccionado = "";
+        docenteRFC = "";
+        inicializar();
+ 
+    }
+}
+
+    public void inicializar() {
         // 4. Obtiene el contexto actual de JSF (para trabajar con sesión, request, etc.)
         FacesContext contexto = FacesContext.getCurrentInstance();
         // 5. Recupera el objeto "usuario" guardado en la sesión
         usuario = (Usuario) contexto.getExternalContext().getSessionMap().get("usuario");
+        System.out.println("Usuario "+usuario);
         listaDepartamentos = organigramaServicio.traerListaOrganigrama();
         //departamentoSeleccionado = new Organigrama();
         listaCarreras = carreraServicio.traerListaCarrera();
@@ -168,6 +202,8 @@ public class asignacionMGBean implements Serializable {
     }
 
     public void filaSeleccionada() {
+        listaHorarioCrearMaestros = new ArrayList();
+
         listaDocentes = personalServicio.personalPorArea(departamentoSeleccionado);
         System.out.println("HorarioSeleccionado" + horarioCrearSeleccionado);
 

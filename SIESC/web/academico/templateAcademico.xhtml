@@ -11,13 +11,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <!-- Ultima Theme -->
 
-        <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-        <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-        <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+        <h:outputStylesheet  library="css" name="estudiantes.css"/>
 
         <style>
+            .ui-panelgrid-cell {
+                padding-top: 5px !important;
+                padding-bottom: 5px !important;
+            }
+
             /* ===================================================================== */
             /* ====================   ESTILOS DEL TEMPLATE   ======================= */
             /* ===================================================================== */
@@ -214,11 +215,11 @@
             /* Boton: Asignar*/
 
             .btn-asignar {
-                background: #003366 !important;
+                background: #037DBE !important;
                 width: 200px;
-                height:50px;
+                height:45px;
                 border: none !important;
-                padding: 10px 22px !important;
+                padding: 0px 22px !important;
                 font-weight: bold !important;
                 font-size: 14px !important;
                 transition: transform 0.2s ease, background 0.2s ease;
@@ -295,7 +296,7 @@
 
                                 <p:submenu label="DOCENTES" icon="pi pi-users">
                                     <p:submenu label="BASE" icon="pi pi-users">
-                                        <p:menuitem value="Asignacion a grupo" action="/academico/AsignacionActualizacion.xhtml"
+                                        <p:menuitem value="Asignacion a grupo" action="/academico/AsignacionActualizacion?faces-redirect=true"
                                                     icon="pi pi-user-plus" actionListener="#{asignacionMGBean.inicializar}"/>
 
                                         <p:menuitem value="Asignacion temporal " outcome=""

@@ -59,6 +59,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PeriodoEscolar.findByFinCalDocentes", query = "SELECT p FROM PeriodoEscolar p WHERE p.finCalDocentes = :finCalDocentes")})
 public class PeriodoEscolar implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "periodo")
+    private List<AutorizacionInscripcion> autorizacionInscripcionList;
+
     @OneToMany(mappedBy = "periodo")
     private List<AvisosReinscripcion> avisosReinscripcionList;
 
@@ -503,6 +506,15 @@ public class PeriodoEscolar implements Serializable {
 
     public void setAvisosReinscripcionList(List<AvisosReinscripcion> avisosReinscripcionList) {
         this.avisosReinscripcionList = avisosReinscripcionList;
+    }
+
+    @XmlTransient
+    public List<AutorizacionInscripcion> getAutorizacionInscripcionList() {
+        return autorizacionInscripcionList;
+    }
+
+    public void setAutorizacionInscripcionList(List<AutorizacionInscripcion> autorizacionInscripcionList) {
+        this.autorizacionInscripcionList = autorizacionInscripcionList;
     }
     
 }
