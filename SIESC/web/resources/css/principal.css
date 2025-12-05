@@ -2,7 +2,7 @@ body {
     font-family: "Segoe UI", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #E3F2FD;
+    background-color: #037DBE !important;
     overflow: hidden; /* evita scroll del body */
 }
 
@@ -17,11 +17,25 @@ body {
 /* CONTENIDO PRINCIPAL */
 /* CONTENIDO SCROLLEABLE */
 .main-content {
-    margin-top: 92px; /* deja espacio para el header */
-    margin-bottom: 95px; /* deja espacio para el footer */
-    height: calc(100vh - 150px); /* altura restante */
+    margin-top: 80px; /* deja espacio para el header */
+    margin-bottom: 80px; /* deja espacio para el footer */
+    height: calc(200vh - 50px); /* altura restante */
     overflow-y: auto; /* EL SCROLL AQUÍ */
-    padding: 20px;
+    padding: 0px;
+
+}
+
+/* PanelGrid plano, sin borde ni sombra */
+.main-content,
+.main-content .ui-panelgrid-cell,
+.main-content .label,
+.main-content .value,
+.main-content .ui-widget-content {
+    border: none !important;          /* Quita todos los bordes */
+    box-shadow: none !important;      /* Quita cualquier sombra */
+    background: #FFFFFF !important;   /* Fondo blanco muy suave */
+  
+   
 }
 
 
@@ -34,9 +48,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1rem;
-    border-bottom: 4px solid white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: .5rem;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
     position: fixed;
     top: 0;
@@ -46,14 +59,49 @@ body {
 }
 
 
-.encabezado .titulo-bloque {
+.titulo-encabezado {
     text-align: center;
-    flex: 1;
+    color: white; /* o el color que uses */
+    margin: 0;
+    padding: 0;
 }
+
+.titulo-grande {
+    font-size: 28px;   /* tamaño de la primera línea */
+    font-weight: 700;
+}
+
+.titulo-chico {
+    font-size: 18px;   /* más chico */
+    font-weight: 400;
+}
+
 
 .encabezado img {
     height: 60px;
 }
+
+.link-informacion-container {
+    text-align: center;        /* Centra el contenido */
+    margin-top: 20px;
+} 
+.link-informacion {
+    font-size: 1.3rem;
+    color: #445b75;
+    font-weight: bold;
+
+    text-decoration: none;
+    display: inline-flex;      /* Para centrar texto */
+    align-items: center;
+    gap: 8px;
+
+}
+
+.link-informacion:hover {
+    color: #0047a1;
+    text-decoration: underline;
+}
+
 
 
 
@@ -115,6 +163,7 @@ body {
     font-size: 1.3rem;
     color: #445b75;
     margin-bottom: 2rem;
+    padding: 20px;
 }
 
 /* Tarjetas de Misión y Visión */
@@ -179,6 +228,8 @@ body {
     gap: 22px; 
     margin-top: 2rem;
     animation: slideUp 1.2s ease;
+    
+      padding: 10px;
 }
 
 .botones-inicio .ui-button { 
@@ -251,6 +302,7 @@ body {
     font-weight: bold;
     border: none !important;
     text-align: center !important;  /* Esto centra el contenido del header */
+        padding: .5rem;
 }
 
 /* Título dentro del facet */
@@ -281,7 +333,7 @@ body {
     box-shadow: none !important;      /* Quita cualquier sombra */
     background: #FFFFFF !important;   /* Fondo azul muy suave */
     padding: 8px 10px !important;     /* Espacio interno */
-    border-radius: 8px !important;    /* Esquinas ligeramente redondeadas */
+   
 }
 .custom-panelgrid .ui-panelgrid-cell {
     width: 50%;
@@ -306,7 +358,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 0;
+   padding: 40px;
     margin: 0;
     width: auto;      /* mantiene la proporción */
     max-width: 100%;  /* evita que se salga del contenedor */
