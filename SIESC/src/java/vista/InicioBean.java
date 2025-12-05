@@ -28,9 +28,13 @@ public class InicioBean implements Serializable {
 
     public InicioBean() {
         imagenes = Arrays.asList(
-            "itcuautla.png",
-            "logo2.png",
-            "itc.png"
+                "itc.png",
+            "inicio1.jpg",
+            "inicio2.webp",
+            "inicio3.webp",
+            "inicio4.enc",
+            "inicio5.webp"
+            
         );
     }
     

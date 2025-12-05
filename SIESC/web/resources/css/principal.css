@@ -1,58 +1,222 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #037DBE !important;
+    overflow: hidden; /* evita scroll del body */
+}
+
+/* Estructura principal */
+.layout-wrapper {
+    min-height: 100vh;      /* Ocupa toda la pantalla */
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* CONTENIDO PRINCIPAL */
+/* CONTENIDO SCROLLEABLE */
+.main-content {
+    margin-top: 80px; /* deja espacio para el header */
+    margin-bottom: 80px; /* deja espacio para el footer */
+    height: calc(200vh - 50px); /* altura restante */
+    overflow-y: auto; /* EL SCROLL AQUÍ */
+    padding: 0px;
+
+}
+
+/* PanelGrid plano, sin borde ni sombra */
+.main-content,
+.main-content .ui-panelgrid-cell,
+.main-content .label,
+.main-content .value,
+.main-content .ui-widget-content {
+    border: none !important;          /* Quita todos los bordes */
+    box-shadow: none !important;      /* Quita cualquier sombra */
+    background: #FFFFFF !important;   /* Fondo blanco muy suave */
+  
+   
+}
+
+
 /* ==========================================================
    ENCABEZADO
    ========================================================== */
 .encabezado {
-    background-color: #0a3d62;
+    background-color:#003366;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1rem;
-    border-bottom: 4px solid white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: .5rem;
+       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }
 
-.encabezado .titulo-bloque {
+
+.titulo-encabezado {
     text-align: center;
-    flex: 1;
+    color: white; /* o el color que uses */
+    margin: 0;
+    padding: 0;
 }
+
+.titulo-grande {
+    font-size: 28px;   /* tamaño de la primera línea */
+    font-weight: 700;
+}
+
+.titulo-chico {
+    font-size: 18px;   /* más chico */
+    font-weight: 400;
+}
+
 
 .encabezado img {
     height: 60px;
 }
 
-/* ==========================================================
-   FONDO Y TIPOGRAFÍA
-   ========================================================== */
-body {
-    background: #f5f8ff;
-    background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
-                      url("#{resource['assets/fondo-grid.png']}");
-    background-size: cover;
-    background-attachment: fixed;
-    font-family: 'Poppins', sans-serif;
+.link-informacion-container {
+    text-align: center;        /* Centra el contenido */
+    margin-top: 20px;
+} 
+.link-informacion {
+    font-size: 1.3rem;
+    color: #445b75;
+    font-weight: bold;
+
+    text-decoration: none;
+    display: inline-flex;      /* Para centrar texto */
+    align-items: center;
+    gap: 8px;
+
 }
+
+.link-informacion:hover {
+    color: #0047a1;
+    text-decoration: underline;
+}
+
+
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+.footer {
+    background-color: #003366;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    flex-shrink: 0; /* Evita que se encoja */
+}
+
+
+
+.footer a {
+    color: white;
+    font-size: 1.8rem;
+    margin: 0 15px;
+    transition: 0.3s;
+}
+
+.footer a:hover {
+    color: #4da8ff;
+}
+
+
+
 
 /* ==========================================================
    BIENVENIDA
    ========================================================== */
+
+
 .inicio-header {
+    padding: .5rem 1rem;
+    text-align: center;
     color: #0a3d62;
-    padding: 2rem;
-    text-align: left;
-    animation: fadeIn 1s ease;
+    animation: fadeIn 0.8s ease;
 }
 
-.inicio-header h1 {
-    font-size: 2.6rem;
-    font-weight: 600;
-    margin-bottom: .5rem;
+/* Título principal */
+.titulo-principal {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #033B70;      /* azul institucional más elegante */
+    margin-bottom: 1rem;
 }
 
-.inicio-header p {
-    font-size: 1.2rem;
+/* Texto de introducción */
+.texto-intro {
+    font-size: 1.3rem;
     color: #445b75;
+    margin-bottom: 2rem;
+    padding: 20px;
 }
+
+/* Tarjetas de Misión y Visión */
+.tarjeta-info {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.4rem;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    border-left: 6px solid #037DBE; /* línea azul elegante */
+    text-align: left;
+}
+
+/* Títulos interiores */
+.subtitulo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #037DBE;
+    margin-bottom: 0.6rem;
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.link-semestre-container {
+    text-align: center;        /* Centra el contenido */
+    margin-top: 20px;
+}
+
+.link-semestre {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1565c0;
+    text-decoration: none;
+    display: inline-flex;      /* Para centrar icono + texto */
+    align-items: center;
+    gap: 8px;
+}
+
+.link-semestre:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+}
+
+.link-semestre i {
+    font-size: 1.5rem;
+}
+
+
+
 
 /* ==========================================================
    BOTONES PREMIUM
@@ -64,6 +228,8 @@ body {
     gap: 22px; 
     margin-top: 2rem;
     animation: slideUp 1.2s ease;
+    
+      padding: 10px;
 }
 
 .botones-inicio .ui-button { 
@@ -124,105 +290,100 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ==========================================================
-   FOOTER
-   ========================================================== */
-.footer {
-    background-color: #0a3d62;
-    color: white;
-    padding: 2rem;
-    text-align: center;
-    margin-top: 3rem;
-}
 
-.footer a {
-    color: white;
-    font-size: 1.8rem;
-    margin: 0 15px;
-    transition: 0.3s;
-}
-
-.footer a:hover {
-    color: #4da8ff;
-}
 
 /* ==========================================================
    PANELGRID — ALINEACIÓN COLUMNAS
    ========================================================== */
-.leftCol,.rightCol {
-    display: flex;
-    align-items: flex-start;        /* <-- ESTO ARREGLA LA ALTURA */
-     padding: 0 .5rem; 
-    box-sizing: border-box;
-    align-items: center  /* <-- ALINEA AMBAS COLUMNAS EN EL CENTRO VERTICAL */
+/* Panel azul */
+.panel-azul .ui-panel-titlebar {
+    background-color: #037DBE !important;
+    color: white !important;
+    font-weight: bold;
+    border: none !important;
+    text-align: center !important;  /* Esto centra el contenido del header */
+        padding: .5rem;
 }
 
-/* izquierda a la izquierda */
-.leftCol { justify-content: flex-start; }
-
-/* derecha a la derecha */
-.rightCol { justify-content: flex-end; }
-
-/* forzar que los outputPanel ocupen todo el ancho */
-.leftCol > .ui-outputpanel,
-.rightCol > .ui-outputpanel {
+/* Título dentro del facet */
+.custom-title {
+    display: block;
     width: 100%;
+    text-align: center;             /* Centra el texto */
+    color: white !important;
+    font-weight: bold;
 }
+
+
+.custom-grid, .custom-panelgrid, .flat-panelgrid {
+    border: none !important;
+    background-color: #E3F2FD !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+     
+}
+/* PanelGrid plano, sin borde ni sombra */
+.custom-panelgrid,
+.custom-panelgrid .ui-panelgrid-cell,
+.custom-panelgrid .label,
+.custom-panelgrid .value,
+.custom-panelgrid .ui-widget-content {
+    border: none !important;          /* Quita todos los bordes */
+    box-shadow: none !important;      /* Quita cualquier sombra */
+    background: #FFFFFF !important;   /* Fondo azul muy suave */
+    padding: 8px 10px !important;     /* Espacio interno */
+   
+}
+.custom-panelgrid .ui-panelgrid-cell {
+    width: 50%;
+    vertical-align: top;
+     vertical-align: top !important;
+}
+
+
+
+
+
+
+
+
+
 
 /* ==========================================================
    CARRUSEL
    ========================================================== */
 .carousel-pro {
-    width: 100%;
-    margin: 0;
-    padding: 0;
     display: flex;
-   
-}
-
-.carousel-pro-container {
+    justify-content: center;
+    align-items: center;
     width: 100%;
-   height: 160px;   /* más bajo → ahora se alinea perfecto */
+   padding: 40px;
+    margin: 0;
+    width: auto;      /* mantiene la proporción */
+    max-width: 100%;  /* evita que se salga del contenedor */
 }
 
 .carousel-pro-image {
-    max-width: 260px;
-    max-height: 200px;
-    width: auto;
+    max-width: 380px;   /* Más grande y bonito */
+    max-height: 280px;
+    width: 100%;
     height: auto;
     object-fit: contain;
     border-radius: 12px;
     display: block;
      margin: 0 auto;   /* Centrado horizontal sin empujar verticalmente */
+             justify-content: center !important;
+        align-items: center !important;
 }
+
+
+
 
 .ui-carousel-prev,
 .ui-carousel-next {
     display: none !important;
 }
-
-/* puntos */
-.carousel-dots {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.carousel-dots .dot {
-    width: 12px;
-    height: 12px;
-    display: inline-block;
-    background: #d0d4da;
-    margin: 5px;
-    border-radius: 50%;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.carousel-dots .dot.active {
-    background: #0a3d62;
-    transform: scale(1.2);
-}
-
 /* ==========================================================
    RESPONSIVE
    ========================================================== */
@@ -239,3 +400,10 @@ body {
     }
 }
 
+
+
+
+/* PrimeIcons */
+.pi::before {
+    font-family: 'primeicons' !important;
+}
