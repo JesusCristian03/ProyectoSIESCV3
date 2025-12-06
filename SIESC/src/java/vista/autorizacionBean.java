@@ -86,6 +86,7 @@ public class autorizacionBean implements Serializable {
     }
 
     public void insertar() {
+        AutorizacionInscripcion aiN = new AutorizacionInscripcion();
         if (tipoAutorizacion.equals("-")) {
             addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "No haz seleccionado ningún tipo de autorización.");
             return;
@@ -97,7 +98,7 @@ public class autorizacionBean implements Serializable {
 
                 if (ai.getTipoAutorizacion().equals(tipoAutorizacion)) {
                     addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "No puedes autorizar nuevamente a "
-                            + capitalizar(estudiante.getNombreAlumno()) + " con:" + convertirSigla(tipoAutorizacion));
+                            + capitalizar(estudiante.getNombreAlumno()) + " con:" + capitalizar(convertirSigla(tipoAutorizacion)));
                     return;
                 }
             }
@@ -108,57 +109,56 @@ public class autorizacionBean implements Serializable {
                 System.out.println("ai.getTipoAutorizacion() = " + ai.getTipoAutorizacion());
                 System.out.println("tipoAutorizacion = " + tipoAutorizacion);
                 System.out.println("asignaturaEscogida = " + asignaturaEscogida);
-                System.out.println("ai.getMateriaAfectada().getMateria():"+ai.getMateriaAfectada().getMateria());
+                System.out.println("ai.getMateriaAfectada().getMateria():" + ai.getMateriaAfectada().getMateria());
                 System.out.println("------------------------");
                 if (ai.getTipoAutorizacion().equals(tipoAutorizacion)
                         && ai.getMateriaAfectada().getMateria().equals(asignaturaEscogida)) {
-                   /* addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "No puedes autorizar nuevamente a "
+                    /* addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "No puedes autorizar nuevamente a "
                             + capitalizar(estudiante.getNombreAlumno())  + " con: " + convertirSigla(tipoAutorizacion)+" con materia "+ai.getMateriaAfectada().getMateria());*/
-                    addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "Autorización repetida"); 
-                   return;
+                    addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "Autorización repetida");
+                    return;
                 }
             }
-
+            Materia materiaAfectada = materiaServicio.buscarMateria(asignaturaEscogida);
+            aiN.setMateriaAfectada(materiaAfectada);
         }
 
-        AutorizacionInscripcion ai = new AutorizacionInscripcion();
-        Materia materiaAfectada = materiaServicio.buscarMateria(asignaturaEscogida);
         PeriodoEscolar pe = periodoEscolarServicio.buscarPorId(periodoSeleccionado);
         // Estudiante e = estudianteServicio.buscarPorID(nombreAlumno);
-        ai.setPeriodo(pe);
-        ai.setNoDeControl(estudiante);
-        ai.setTipoAutorizacion(tipoAutorizacion);
-        ai.setMotivoAutorizacion(motivoAutorizacion);
-        ai.setQuienAutoriza(usuario.getUsuario());
+        aiN.setPeriodo(pe);
+        aiN.setNoDeControl(estudiante);
+        aiN.setTipoAutorizacion(tipoAutorizacion);
+        aiN.setMotivoAutorizacion(motivoAutorizacion);
+        aiN.setQuienAutoriza(usuario.getUsuario());
         Date fechaHoraActual = new Date();
-        ai.setFechaHoraAutoriza(fechaHoraActual);
-        ai.setMateriaAfectada(materiaAfectada);
+        aiN.setFechaHoraAutoriza(fechaHoraActual);
 
-        System.out.println("ai" + ai);
+        System.out.println("ai" + aiN);
 
-        listaAutorizaciones.add(ai);
-        autorizacionInscripcionServicio.insertar(ai);
+        listaAutorizaciones.add(aiN);
+        autorizacionInscripcionServicio.insertar(aiN);
         addMessage(FacesMessage.SEVERITY_INFO, "AUTORIZACIÓN", "Se ha insertado nueva autorización");
     }
+
     public static String capitalizar(String texto) {
-    if (texto == null || texto.isEmpty()) {
-        return texto;
-    }
-
-    texto = texto.toLowerCase();
-    String[] partes = texto.split(" ");
-    StringBuilder sb = new StringBuilder();
-
-    for (String p : partes) {
-        if (!p.isEmpty()) {
-            sb.append(Character.toUpperCase(p.charAt(0)))
-              .append(p.substring(1))
-              .append(" ");
+        if (texto == null || texto.isEmpty()) {
+            return texto;
         }
-    }
 
-    return sb.toString().trim();
-}
+        texto = texto.toLowerCase();
+        String[] partes = texto.split(" ");
+        StringBuilder sb = new StringBuilder();
+
+        for (String p : partes) {
+            if (!p.isEmpty()) {
+                sb.append(Character.toUpperCase(p.charAt(0)))
+                        .append(p.substring(1))
+                        .append(" ");
+            }
+        }
+
+        return sb.toString().trim();
+    }
 
     public void cambioEstudiante() {
         System.out.println("AutorizacionBean {"

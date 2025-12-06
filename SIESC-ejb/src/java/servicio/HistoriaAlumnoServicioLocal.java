@@ -20,4 +20,6 @@ public interface HistoriaAlumnoServicioLocal {
 
     List<HistoriaAlumno> buscarAsignaturas(String noDeCcontrol);
     
+    List<HistoriaAlumno> buscarPorEstudianteMateria(String materia, String noControl);
+    
 }

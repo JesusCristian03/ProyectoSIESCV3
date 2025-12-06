@@ -24,8 +24,8 @@
                         <f:event type="preRenderView" listener="#{inscripcionesBean.resetearSiEsRecarga}" />
                     </f:metadata>
 
-                    <h:form>
-                        <p:panel styleClass="custom-card" style="width:100%; margin: 0 auto; display:block;">
+                    <h:form id="formEstudiante">
+                        <p:panel id="panelEstudiante" styleClass="custom-card" style="width:100%; margin: 0 auto; display:block;">
 
 
                             <f:facet name="header">
@@ -113,7 +113,7 @@
                                 <div class="legend-title">AVANCE DEL ALUMNO</div>
                                 <p:dataTable id="tablaReticula" value="#{inscripcionesBean.listaM}" var="asignatura" rowStyleClass="registroPrueba" showGridlines="true">                                        
 
-                                    <p:column styleClass="#{asignatura.semestre2.color}">
+                                    <p:column styleClass="#{asignatura.semestre1.color}">
                                         <f:facet name="header" >
                                             <div class="tabla-header">Semestre 1</div>
                                         </f:facet>
@@ -454,7 +454,8 @@
                                                 :seleccion:tabVista:tablaHorarioSeleccionado
                                                 :seleccion:tabVista:toolbarBotones 
                                                 :seleccion:tabVista:growlMensajes 
-                                                :seleccion:tabVista:panelCreditos"
+                                                :seleccion:tabVista:panelCreditos 
+                                                :formEstudiante:panelEstudiante"
                                                 oncomplete="PF('selecionMateria').hide();" />
 
                                         <p:column headerText="Grupo" style="width:4%;"><h:outputText value="#{item.grupo}"/></p:column>   
@@ -542,7 +543,8 @@
                                                              update="tablaHorarioSeleccionado 
                                                              :seleccion:tabVista:toolbarBotones
                                                              :seleccion:tabVista:tablaReticula 
-                                                             :seleccion:tabVista:panelCreditos"
+                                                             :seleccion:tabVista:panelCreditos 
+                                                             :formEstudiante:panelEstudiante"
                                                              actionListener="#{inscripcionesBean.eliminarHorario(item)}"
                                                              title="Eliminar"
                                                              process="@this"/>
@@ -578,7 +580,8 @@
                                                              :seleccion:tabVista:tablaReticula
                                                              :seleccion:tabVista:toolbarBotones 
                                                              :seleccion:tabVista:growlMensajes 
-                                                             :seleccion:tabVista:panelCreditos" 
+                                                             :seleccion:tabVista:panelCreditos 
+                                                             :formEstudiante:panelEstudiante" 
                                                              style="height:40px; background:#1976D2; font-size:16px; padding:0 10px 0 30px; margin-left:10px;"
                                                              disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas or inscripcionesBean.modoEliminar}" />
 

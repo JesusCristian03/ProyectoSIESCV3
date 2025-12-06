@@ -31,4 +31,6 @@ public interface HistoriaAlumnosFacadeLocal {
 
     List<HistoriaAlumno> buscarReticula(String noDeControl);
     
+    List<HistoriaAlumno> buscarEstudianteMateria(String Materia, String noControl);
+    
 }

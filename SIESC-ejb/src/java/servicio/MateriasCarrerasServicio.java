@@ -110,7 +110,7 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
                         break;
                 }
             }
-            
+
             for (int ren = 0; ren < listaR.size(); ren++) {
                 Reticula aux = listaR.get(ren);
                 //Por cada materia en la historia académica, se busca en cada semestre de cada renglón si coincide la materia.
@@ -127,58 +127,79 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
                     /*Color de celda según situación de la materia.
                     Texto de calificación + tipo de examen.
                     Si el botón o acción para inscribirse está habilitada.*/
+                    asignar(aux.getSemestre1(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre2().getMateria())) {
                     aux.getSemestre2().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre2().setColor(color);
                     aux.getSemestre2().setDisponible(disponible);
+                    asignar(aux.getSemestre2(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre3().getMateria())) {
                     aux.getSemestre3().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre3().setColor(color);
                     aux.getSemestre3().setDisponible(disponible);
+                    asignar(aux.getSemestre3(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre4().getMateria())) {
                     aux.getSemestre4().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre4().setColor(color);
                     aux.getSemestre4().setDisponible(disponible);
+                    asignar(aux.getSemestre4(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre5().getMateria())) {
                     aux.getSemestre5().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre5().setColor(color);
                     aux.getSemestre5().setDisponible(disponible);
+                    asignar(aux.getSemestre5(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre6().getMateria())) {
                     aux.getSemestre6().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre6().setColor(color);
                     aux.getSemestre6().setDisponible(disponible);
+                    asignar(aux.getSemestre6(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre7().getMateria())) {
                     aux.getSemestre7().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre7().setColor(color);
                     aux.getSemestre7().setDisponible(disponible);
+                    asignar(aux.getSemestre7(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre8().getMateria())) {
                     aux.getSemestre8().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre8().setColor(color);
                     aux.getSemestre8().setDisponible(disponible);
+                    asignar(aux.getSemestre8(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre9().getMateria())) {
                     aux.getSemestre9().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre9().setColor(color);
                     aux.getSemestre9().setDisponible(disponible);
+                    asignar(aux.getSemestre9(), historiaA, color, disponible);
                 }
                 if (historiaA.getMateria().getMateria().equals(aux.getSemestre10().getMateria())) {
                     aux.getSemestre10().setCalificacion(String.valueOf(historiaA.getCalificacion()) + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
                     aux.getSemestre10().setColor(color);
                     aux.getSemestre10().setDisponible(disponible);
+                    asignar(aux.getSemestre10(), historiaA, color, disponible);
                 }
             }
         }
         //Devuelve la lista completa de Reticula, cada una con sus 9 semestres (ReticulaDatos) llenos con materia, calificación, color y disponibilidad.
 
-
         return listaR;
+    }
+
+    private void asignar(ReticulaDatos semestre, HistoriaAlumno historiaA, String color, boolean disponible) {
+        semestre.setCalificacion(historiaA.getCalificacion() + " / " + historiaA.getTipoEvaluacion().getTipoEvaluacion());
+        semestre.setColor(color);
+        semestre.setDisponible(disponible);
+
+        System.out.println(">>> INSERTADO: "
+                + semestre.getMateria()
+                + " | Calificación: " + semestre.getCalificacion()
+                + " | Color: " + semestre.getColor()
+                + " | Disponible: " + semestre.getDisponible());
     }
 
     @Override
@@ -194,7 +215,7 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
         reticulaDatos.setMateria(materia.getMateria().getMateria());//el código de la materia.
         reticulaDatos.setNombreMateria(materia.getMateria().getNombreAbreviadoMateria());//el nombre abreviado de la materia.
         reticulaDatos.setClave(materia.getClaveOficialMateria());//la clave oficial de la materia en la carrera.
-        reticulaDatos.setCreditos(""+materia.getCreditosMateria());
+        reticulaDatos.setCreditos("" + materia.getCreditosMateria());
         //Se compara el semestre de la materia (materia.getSemestreReticula()) con el semestre actual del estudiante (semestre).
         if (materia.getSemestreReticula() <= semestre) {
             //Se marca como disponible (disponible = true) y el color se pone en "disponible".
