@@ -45,5 +45,6 @@ public class AutorizacionInscripcionFacade extends AbstractFacade<AutorizacionIn
         return lista;
 
     }
+    
 
 }

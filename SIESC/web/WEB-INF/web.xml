@@ -34,6 +34,14 @@
         <extension>eot</extension>
         <mime-type>application/x-font-eot</mime-type>
     </mime-mapping>
+    <mime-mapping>
+        <extension>webp</extension>
+        <mime-type>image/webp</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>enc</extension>
+        <mime-type>application/octet-stream</mime-type>
+    </mime-mapping>
     <filter>
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <filter-class>

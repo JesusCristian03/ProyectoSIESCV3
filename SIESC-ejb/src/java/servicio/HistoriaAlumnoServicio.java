@@ -33,6 +33,11 @@ public class HistoriaAlumnoServicio implements HistoriaAlumnoServicioLocal {
     public List<HistoriaAlumno> buscarAsignaturas(String noDeCcontrol) {
         return historiaAlumnoFacade.buscarReticula(noDeCcontrol);
     }
+    @Override
+    public List<HistoriaAlumno> buscarPorEstudianteMateria(String materia, String noControl){
+    return historiaAlumnoFacade.buscarEstudianteMateria(materia, noControl);
+    
+    }
 
     
     

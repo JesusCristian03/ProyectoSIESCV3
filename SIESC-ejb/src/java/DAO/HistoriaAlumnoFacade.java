@@ -41,4 +41,17 @@ public class HistoriaAlumnoFacade extends AbstractFacade<HistoriaAlumno> impleme
         return lista;
     }
     
+    
+     @Override
+    public List<HistoriaAlumno> buscarEstudianteMateria(String Materia, String noControl) {
+        List<HistoriaAlumno> lista = null;
+        String sqlHistoriaA = "SELECT h FROM HistoriaAlumno h WHERE h.noDeControl.noDeControl=:control and h.materia.materia=:materia order by h.periodo";
+        Query queryPersonal = em.createQuery(sqlHistoriaA);
+ 
+        queryPersonal.setParameter("control", noControl);        
+        queryPersonal.setParameter("materia", Materia);        
+        lista = queryPersonal.getResultList();
+        return lista;
+    }
+    
 }
