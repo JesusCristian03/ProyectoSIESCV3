@@ -11,176 +11,161 @@
 <ui:define name="content">
 
 <style>
-    body {
-        background-color: #eef2f7;
-        font-family: 'Segoe UI', sans-serif;
-    }
+ /* ======== GLOBAL ======== */
+body {
+    background: #ffffff;               /* Azul claro institucional */
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+}
 
-    /* ----------- CARD PRINCIPAL ----------- */
+/* ======== CONTENEDOR PRINCIPAL ======== */
+.login-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+    display: flex;
+    width: 92%;
+    max-width: 900px;
+    background: #ffffff;
+    border-radius: 10px;
+   
+    overflow: hidden;
+}
+
+/* ======== LADO IMAGEN ======== */
+.login-image {
+    flex: 1;
+    background: #003366;
+}
+
+.login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ======== FORMULARIO ======== */
+.login-card {
+    flex: 1;
+    padding: 2rem 2.2rem;
+    text-align: center;
+}
+
+/* LOGO */
+.login-logo {
+    width: 70px;
+    margin-bottom: 0.8rem;
+}
+
+/* TÍTULO */
+h2 {
+    color: #003366;
+    font-size: 1.6rem;
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* SUBTÍTULO */
+.subtitulo-login {
+    color: #5d6675;
+    font-size: 0.95rem;
+    margin-bottom: 1.4rem;
+    font-weight: 400;
+}
+
+/* ======== INPUTS ======== */
+.ui-inputgroup {
+    margin-bottom: 0.9rem !important;
+}
+
+.ui-inputgroup-addon {
+    background: #003366;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px 0 0 6px;
+    padding: 0.8rem;
+}
+
+input.ui-inputfield,
+.ui-password input {
+    width: 100%;
+    padding: 0.85rem;
+    border: 1px solid #cfd6e0;
+    border-radius: 0 6px 6px 0;
+    background: #ffffff;
+    font-size: 0.95rem;
+    transition: border-color .2s ease;
+}
+
+/* FOCUS: azul institucional */
+input.ui-inputfield:focus,
+.ui-password input:focus {
+    border-color: #003366;
+    outline: none;
+}
+
+/* ======== BOTÓN LOGIN ======== */
+.ui-commandbutton {
+    background: #003366;
+    border: none;
+    color: #ffffff;
+    font-weight: 500;
+    padding: 0.9rem;
+    border-radius: 6px;
+    width: 100%;
+    margin-top: 0.6rem;
+    transition: background .2s ease;
+}
+
+
+
+.ui-commandbutton:hover {
+    background: #00264d;
+}
+
+/* Corrige alineación del texto interno del botón */ 
+.ui-button .ui-button-text { 
+    padding: 0 !important; 
+    line-height: 2 !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; }
+
+/* ======== TEXTOS PEQUEÑOS ======== */
+.mensaje-motivacional {
+    margin-top: 1.2rem;
+    color: #5d6675;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.pie-login {
+    margin-top: 1.6rem;
+    color: #7a8291;
+    font-size: 0.75rem;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
     .login-wrapper {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        align-items: stretch;
-        width: 90%;
-        max-width: 800px;
-        background: #ffffff;
-        border-radius: 22px;
-        overflow: hidden;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-      
-    }
-
-    /* Lado de la imagen */
-    .login-image {
-        flex: 1;
-        background: #003366;
+        flex-direction: column;
+        max-width: 420px;
+        border-radius: 10px;
     }
 
     .login-image img {
-        width: 100%;
-        height: 80%;
-        object-fit: cover;
+        height: 160px;
     }
+}
 
-    /* Lado del formulario */
-    .login-card {
-        flex: 1;
-     
-        padding: 1rem 2rem !important;
-        text-align: center;
-    }
-
-    /* Logo */
-    .login-logo {
-        width: 80px;
-        margin-bottom: 0rem;
-    }
-
-    /* Título */
-    h2 {
-        color: #003366;
-        margin-bottom: 0.5rem;
-        font-weight: 700;
-        font-size: 2rem;
-    }
-
-    /* Subtítulo institucional */
-    .subtitulo-login {
-        margin-top: 0rem;
-        margin-bottom: 1rem;
-        color: #555;
-        font-size: 1rem;
-        letter-spacing: 0.3px;
-    }
-
-    /* -------- INPUTS -------- */
-    .ui-inputgroup-addon {
-        background: #003366;
-        color: #ffffff;
-        border: none;
-        border-radius: 8px 0 0 8px;
-        padding: 0.9rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    input.ui-inputfield,
-    .ui-password input {
-        width: 100%;
-        padding: 1rem;
-        border: 1px solid #c5c5c5;
-        border-radius: 0 8px 8px 0;
-        background: #f5f8ff;
-        transition: 0.3s ease;
-    }
-
-    /* Espaciado entre inputs */
-    .ui-inputgroup {
-        margin-bottom: .5rem !important;
-    }
-
-    /* Input focus */
-    input.ui-inputfield:focus,
-    .ui-password input:focus {
-        border-color: #007bff;
-        background: #ffffff;
-        box-shadow: 0 0 8px rgba(0,123,255,0.3);
-        outline: none;
-    }
-
-    /* ----------- BOTÓN ----------- */
-    .ui-commandbutton {
-        background: #ffb428;
-        border: none;
-        color: #ffffff;
-        font-weight: 600;
-        width: 100%;
-        padding: 1rem;
-        border-radius: 10px;
-        margin-top: 0.5rem;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        transition: 0.28s ease;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(255, 180, 40, 0.4);
-    }
-
-    .ui-commandbutton:hover {
-        background: #e0a31f;
-        box-shadow: 0 6px 15px rgba(255, 180, 40, 0.55);
-        transform: translateY(-2px);
-    }
-
-    /* Corrige alineación del texto interno del botón */
-    .ui-button .ui-button-text {
-        padding: 0 !important;
-        line-height: 1.2 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
-    /* Mensaje motivacional */
-    .mensaje-motivacional {
-        margin-top: 1.5rem;
-        color: #777;
-        font-size: 0.9rem;
-        font-style: italic;
-    }
-
-    /* Pie interno */
-    .pie-login {
-        margin-top: 2rem;
-          color: #888;
-        font-size: 0.75rem;
-    }
-
-    /* -------- RESPONSIVE -------- */
-    @media (max-width: 768px) {
-        .login-wrapper {
-            flex-direction: column;
-            width: 95%;
-            max-width: 450px;
-        }
-
-        .login-image img {
-            height: 180px;
-            object-fit: cover;
-        }
-    }
 </style>
 
 <div class="login-wrapper">
 
     <div class="login-image">
-        <p:graphicImage library="assets" name="estudiante.jpg" />
+        <p:graphicImage library="assets" name="aguiluchos.jpg" />
     </div>
 
     <div class="login-card">

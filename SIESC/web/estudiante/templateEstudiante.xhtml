@@ -13,8 +13,12 @@
 
 
         <h:outputStylesheet  library="css" name="estudiantes.css"/>
-
-
+          <!-- Ultima Theme y Layout -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 
         <style>
             /* Quita padding de las celdas */
@@ -134,7 +138,7 @@
                         <p:panelMenu style="width:100%;" styleClass="custom-menu">   
 
                             <!-- =================== INFORMACIÓN ESCOLAR =================== -->
-                            <p:submenu label="Información Escolar" expanded="false">
+                            <p:submenu label="Información Escolar" expanded="false"  icon="pi pi-calendar">
                                 <p:menuitem value="Asistencia" action="index" 
                                             icon="pi pi-calendar"/>
                                 <p:menuitem value="Justificación" 
@@ -267,13 +271,13 @@
                                   rendered="#{view.viewId eq '/estudiante/index.xhtml'}"
                                   styleClass="welcome-box">
 
-                        <h3 class="welcome-title">Bienvenido al Departamento de Académico</h3>
+                        <h3 class="welcome-title">Bienvenido al Departamento Estudiante</h3>
                         <p class="welcome-subtitle">Selecciona una opción del menú lateral para comenzar.</p>
 
                         <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="welcome-image"/>
 
                         <p class="welcome-label">AGUILUCHOS</p>
-                        <p class="welcome-label-small">ITC</p>
+                        
 
                     </h:panelGroup>
 

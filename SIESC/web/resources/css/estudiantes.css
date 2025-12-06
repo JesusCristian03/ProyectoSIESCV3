@@ -1,3 +1,5 @@
+
+/* ===== TEMPLATE ESTUDIANTE ===== */
 body {
     font-family: "Segoe UI", sans-serif;
     margin: 0;
@@ -54,7 +56,8 @@ body {
 /* ===== SIDEBAR  EN DONDE ESTA EL MENU===== */
 .layout-sidebar {
     width: 260px;
-    background-color: #E3F2FD !important; /* base del menu*/
+    background-color: #ffffff !important; /* base del menu*/
+    
     border-right: 1px solid #ddd;
     overflow-y: auto;
     padding: 15px;
@@ -70,17 +73,9 @@ body {
 .layout-main-container {
     flex: 1;
     display: flex;
-    overflow: hidden;
+    overflow: hidden;   
 }
 
-.layout-main {
-    flex: 1;
-    padding: 1rem 2rem !important;
-    overflow-y: auto;
-    background-color: #f4f6f9;
-    text-align: center;
-    animation: fadein 0.8s ease;
-}
 
 /* ===== PANELMENU  ===== */
 
@@ -88,7 +83,7 @@ body {
     border: 1px solid rgba(0, 191, 214, 0.35) !important;
     border-radius: 12px;
     background: #ffffff !important;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.10);   
 }
 
 /* Encabezados de cada sección */
@@ -97,10 +92,11 @@ body {
     color: #ffffff !important;
     font-weight: 600 !important;
     font-size: 0.97rem;
-    padding: 10px 14px !important;
+    padding: 10px 14px !important;    
     border-radius: 10px !important;
     margin-bottom: 6px;
     transition: background 0.25s;
+    
 }
 
 .custom-menu .ui-panelmenu-header:hover {
@@ -156,7 +152,110 @@ body {
 }
 
 
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.layout-main {
+    flex: 1;
+    padding: 0 !important;
+    overflow-y: auto;
+    background-color: #f5f7fb;
+    text-align: center;
+    animation: fadein 0.6s ease;
+}
 
+/* ===== TARJETA DE BIENVENIDA ===== */
+.welcome-box {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 25px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    transition: all .4s ease;
+}
+
+/* ===== TIPOGRAFÍA PROFESIONAL ===== */
+.welcome-title {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #037DBE;
+    letter-spacing: 0.3px;
+    margin-bottom: 8px;
+}
+
+.welcome-subtitle {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: #5e5e5e;
+    margin-bottom: 22px;
+}
+
+.welcome-label {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #003366;
+}
+
+.welcome-label-small {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #4a4a4a;
+}
+
+
+/* ===== IMAGEN ===== */
+.welcome-image {
+    height: 330px;
+    object-fit: contain;
+    margin-bottom: 25px;
+    transition: transform 0.4s ease;
+}
+
+.welcome-image:hover {
+    transform: scale(1.03);
+}
+
+
+
+/* Ocultar sección */
+.hide-welcome {
+    display: none !important;
+}
+
+/* ===== ANIMACIÓN ===== */
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ===== FOOTER ===== */
+.layout-footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+
+
+
+
+/* ================================
+   INSCRIPCIONES
+   ================================ */
 
 
 /* ================================
@@ -256,16 +355,7 @@ body {
     font-family: 'primeicons' !important;
 }
 
-/* ===== FOOTER ===== */
-.layout-footer {
-    background-color: #003366;
-    color: white;
-    text-align: center;
-    height: 40px;
-    line-height: 40px;
-    font-size: 13px;
-    flex-shrink: 0;
-}
+
 
 /* ============================================================
    COLORES DE LA TABLA
@@ -407,64 +497,6 @@ body {
 #toolbarBotones .ui-button.ui-state-disabled {
     background: #9fc5e8 !important;
     opacity: 0.6;
-}
-
-/* Bienvenida */
-.welcome-box {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 5px;
-    background: #ffffff;
-    border-radius: 5px;
-    transition: opacity .5s ease, transform .5s ease;
-}
-
-.welcome-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #3f51b5;
-    margin-bottom: 10px;
-}
-
-.welcome-subtitle {
-    font-size: 16px;
-    color: #5a5a5a;
-    margin-bottom: 20px;
-}
-
-.welcome-image {
-    height: 350px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    margin-bottom: 10px;
-}
-
-.welcome-label {
-    font-size: 20px;
-    font-weight: bold;
-    color: #3f51b5;
-    margin: 5px 0;
-}
-
-.welcome-label-small {
-    font-size: 16px;
-    font-weight: 500;
-    color: #444;
-}
-
-@keyframes fadein {
-    from {
-        opacity:0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity:1;
-        transform: translateY(0);
-    }
-}
-
-.hide-welcome {
-    display: none !important;
 }
 
 /* Mensajes */
@@ -720,5 +752,12 @@ body {
 .ui-selectonemenu {
     width: 100% !important;
 }
+
+
+
+
+
+
+
 
 
