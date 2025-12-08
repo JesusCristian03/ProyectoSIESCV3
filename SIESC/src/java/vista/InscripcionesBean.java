@@ -811,19 +811,22 @@ public class InscripcionesBean implements Serializable {
     int s = 0;
 
     public void validaciones() {
-        /*if (autorizacionesDisponibles[4] != null) {
+        /* if (autorizacionesDisponibles[4] != null) {
             if (autorizacionesDisponibles[4].equals("12")) {
                 mostrarPanel("Semestre rebasado autorizado", "mensaje-info");
+
             }
         } else {
             if (vr.getSemeste() > 12) {
                 mostrarPanel("No te puedes inscribir en semestre inválido", "mensaje-error");
+                bloquearAzules();
                 return;
 
             }
         }
 
         if (validacionRojas()) {
+            bloquearAzules();
             return;
         }
 
@@ -922,11 +925,52 @@ public class InscripcionesBean implements Serializable {
         return false;
     }
 
-    public void validacionAzules() {
+    public void bloquearAzules() {
+        int materiasDisponibles = 0;
         if (Mazules != 0) {
             int semestreAlumno = estudiante.getSemestre();
             //  addMessage(FacesMessage.SEVERITY_INFO, "MATERIAS DISPONIBLES ", "SELECCIONA TUS MATERIAS");
-            mostrarPanel("Selecciona materias disponibles [ Materias " + listaAzules.size() + "]", "mensaje-info");
+
+            // Caso 1: el semestre del alumno es PAR y s es IMPAR
+            for (int i = 0; i < listaAzules.size(); i++) {
+                Reticula r = listaM.get(listaAzules.get(i)[0]);
+                try {
+                    s = listaAzules.get(i)[1];
+
+                    // Obtener el semestre actual dinámicamente
+                    ReticulaDatos rd = (ReticulaDatos) r.getClass()
+                            .getMethod("getSemestre" + s)
+                            .invoke(r);
+                    // IMPRIME LOS VALORES
+                    if (rd != null) {
+                        System.out.println("-----------------------------------");
+                        System.out.println("Analizando materia:");
+                        System.out.println("  s = " + s);
+                        System.out.println("  Disponible = " + rd.getDisponible());
+                        System.out.println("  Color = " + rd.getColor());
+
+                    }
+                    if (rd != null) {
+                        rd.setDisponible(false);
+                        rd.setColor("nodisponible");
+                    } else {
+                        System.out.println("Semestre " + s + ": vacío");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Error al obtener Semestre " + s + ": " + e.getMessage());
+                }
+            }
+
+        }
+
+    }
+
+    public void validacionAzules() {
+        int materiasDisponibles = 0;
+        if (Mazules != 0) {
+            int semestreAlumno = estudiante.getSemestre();
+            //  addMessage(FacesMessage.SEVERITY_INFO, "MATERIAS DISPONIBLES ", "SELECCIONA TUS MATERIAS");
 
             // Caso 1: el semestre del alumno es PAR y s es IMPAR
             for (int i = 0; i < listaAzules.size(); i++) {
@@ -950,49 +994,87 @@ public class InscripcionesBean implements Serializable {
                         // Caso 1: el semestre del alumno es PAR y el semestre de la materia es IMPAR
                         if (semestreAlumno % 2 == 0 && s % 2 != 0) {
                             if (!rd.getDisponible() && !"blanco".equals(rd.getColor())) {
-                                rd.setDisponible(false);
-                                rd.setColor("nodisponible");
+                                // rd.setDisponible(false);
+                                //rd.setColor("nodisponible");
+                                autorizarRequisitoMateria(rd);
                                 System.out.println("Desactivado semestre " + s + " (Alumno par, materia impar)");
                             }
                         } // Caso 2: el semestre del alumno es IMPAR y el semestre de la materia es PAR
                         else if (semestreAlumno % 2 != 0 && s % 2 == 0) {
                             if (!rd.getDisponible() && !"blanco".equals(rd.getColor())) {
-                                rd.setDisponible(false);
-                                rd.setColor("nodisponible");
+                                //rd.setDisponible(false);
+                                // rd.setColor("nodisponible");
+                                autorizarRequisitoMateria(rd);
                                 System.out.println("Desactivado semestre " + s + " (Alumno impar, materia par)");
                             }
                         } // Caso 3 (opcional): si coincide par-par o impar-impar, se activa
                         else {
 
+                            System.out.println("else rd.getMateria()" + rd.getMateria());
+                            //VERIFICACION DE MATERIAS REQUISITADAS
+                            //Busco la materia para ver si tiene un requisito. 
+                            //No siempre debe tener un requisito.
                             RequisitosMateria rm = requisitosMateriaServicio.encontrarAntecedenteMateria(
                                     rd.getMateria());
+                            //Si no tiene requisito puede tomarla
+                            System.out.println("[" + rd.getMateria() + "]");
 
-                            List<HistoriaAlumno> ha = historiaAlumnoServicio.buscarPorEstudianteMateria(
-                                    rm.getMateriaRelacion().getMateria(),
-                                    estudiante.getNoDeControl());
+                            if (rd.getMateria().equals("1R6")) {
+                                System.out.println("EXISTE MAS DE UN RM");
+                                System.out.println("rm.getMateriaRelacion().getMateria:" + rm.getMateriaRelacion().getMateria());
+                                System.out.println("estudiante.getNoDeControl():" + estudiante.getNoDeControl());
 
-                            if (!ha.isEmpty()) {
-                                for (int j = 0; j < ha.size(); j++) {
-                                    HistoriaAlumno hi = ha.get(i);
-                                    if (hi.getCalificacion() == 0) {
-                                        rd.setDisponible(false);
-                                        rd.setColor("nodisponible");
-                                    } else {
-                                        rd.setDisponible(true);
-                                        rd.setColor("disponible");
+                            }
+
+                            if (rm != null) {
+
+                                autorizarRequisitoMateria(rd);//En cuanto encontrara uno tenía que regresar. 
+                                List<HistoriaAlumno> ha = historiaAlumnoServicio.buscarPorEstudianteMateria(
+                                        rm.getMateriaRelacion().getMateria(),
+                                        estudiante.getNoDeControl());
+
+                                System.out.println("Ha.size" + ha.size());
+
+                                //Primero veo si no existe un historial de la materia de la materia del alumno que va a cursar quiere decir que nunca 
+                                //la ha tomado, entonces al no tomarla quiere decir que el antecedente no existe y no puede tomar la siguiente
+                                if (!ha.isEmpty()) {
+
+                                    for (int j = 0; j < ha.size(); j++) {
+                                        HistoriaAlumno hi = ha.get(j);
+                                        //Verifica que la materia requisitada no tenga 0, si tiene 0 quiere decir que no la ha pasado y no puede tomar
+                                        //la siguiente. 
+
+                                        System.out.println("HiPeriodo" + hi.getPeriodo());
+                                        System.out.println("HiMateria" + hi.getMateria().getMateria());
+                                        System.out.println("HiCalificacion" + hi.getCalificacion());
+                                        if (hi.getCalificacion() == 0) {
+                                            rd.setDisponible(false);
+                                            rd.setColor("nodisponible");
+                                        } else {
+                                            rd.setDisponible(true);
+                                            rd.setColor("disponible");
+
+                                        }
 
                                     }
 
+                                } else {
+                                    //Si no hay historial obviamente no hay materia antecedente que no tomo, por lo general no podria tomar la siguiente
+                                    //Aun si no curso la materia, verificamos que si esta autorizada si esta autorizada se activa inmediatamente, puede haber uno o mas.
+
                                 }
+
                             } else {
 
-                                rd.setDisponible(false);
-                                rd.setColor("nodisponible");
+                                rd.setDisponible(true);
+                                rd.setColor("disponible");
                             }
 
-                            // rd.setDisponible(true);
-                            // rd.setColor("disponible");
                             System.out.println("Activado semestre " + s + " (coincide paridad)");
+                        }
+
+                        if (rd.getDisponible()) {
+                            materiasDisponibles++;
                         }
 
                     } else {
@@ -1004,7 +1086,48 @@ public class InscripcionesBean implements Serializable {
                 }
             }
 
+            mostrarPanel("Selecciona materias disponibles [ Materias " + materiasDisponibles + "]", "mensaje-info");
+
         }
+    }
+
+    public Boolean autorizarRequisitoMateria(ReticulaDatos rd) {
+        //La posicoon 2 es para checar si hay al menos una materia requisitdada
+        System.out.println("autorizacionesDisponibles[2]" + autorizacionesDisponibles[2]);
+        if (autorizacionesDisponibles[2] != null) {
+            System.out.println("autorizacionesDisponibles[2]" + autorizacionesDisponibles[2]);
+            if (autorizacionesDisponibles[2].equals("RQ")) {
+                System.out.println("listaAE.size():" + listaAE.size());
+                //Pueden haber varias materias requisitadas, entonces recorro la lista de autorizacios para materias requisitadas
+                for (int j = 0; j < listaAE.size(); j++) {
+                    AutorizacionInscripcion au = listaAE.get(j);
+
+                    if (au.getMateriaAfectada() != null) {//No todas las autorizaciones tienen materia para requisitar.
+                        System.out.println("Au rd.getMateria():" + rd.getMateria());
+                        System.out.println("au.getMateriaAfectada().getMateria():" + au.getMateriaAfectada().getMateria());
+                        if (rd.getMateria().equals(au.getMateriaAfectada().getMateria())) {
+                            rd.setDisponible(true);
+                            rd.setColor("disponible");
+                            return true;
+
+                        } else {
+                            rd.setDisponible(false);
+                            rd.setColor("nodisponible");
+
+                        }
+                    }
+
+                }
+
+            }
+        } else {
+
+//Si no hay ninguna autorizada si la desactiva xd.
+            rd.setDisponible(false);
+            rd.setColor("nodisponible");
+
+        }
+        return false;
     }
 
     public void guardandoPosicionesDeCadaTipoDeColor() {//
@@ -1177,6 +1300,9 @@ public class InscripcionesBean implements Serializable {
     public void eliminarHorario(HorarioAsignatura item) {
         System.out.println("Item:" + item);
         listaHorarioASeleccionadas.remove(item);
+        addMessage(FacesMessage.SEVERITY_WARN, "REMOVIENDO SELECCION",
+                "La materia " + item.getAsignatura()
+                + " se ha removido.");
         for (int j = 0; j < listaM.size(); j++) { // Recorro cada retícula
             Reticula r = listaM.get(j);
             System.out.println("===== Retícula #" + (j + 1) + " =====");
@@ -1339,6 +1465,7 @@ public class InscripcionesBean implements Serializable {
     }
 
     public void onSeleccionarGrupo() {
+        Boolean mensajeAutorizado = null;
 
         System.out.println("===============SELECCIONADO==================");
         System.out.println("Seleccionado: " + grupoSeleccionado);
@@ -1357,6 +1484,27 @@ public class InscripcionesBean implements Serializable {
         System.out.println("================SELECCIONADO=================");
         creditosSeleccionados += Integer.parseInt(materiaDeTabla.getCreditos());
         System.out.println("creditosSeleccionados->" + creditosSeleccionados + "creditosAutorizados->" + vr.getCreditosAutorizados());
+
+        if (autorizacionesDisponibles[3] != null) {
+            if (autorizacionesDisponibles[3].equals("SC")) {
+                if (listaAE != null) {
+                    for (int i = 0; i < listaAE.size(); i++) {
+                        AutorizacionInscripcion x = listaAE.get(i);
+                        if (x.getTipoAutorizacion().equals("SC") && x.getMateriaAfectada().getMateria().equals(grupoSeleccionado.getMateria())) {
+                            MateriasCarreras mc = materiasCarrerasServicio.buscarMateriasCarreraPorMateria(grupoSeleccionado.getMateria());
+                            vr.setCreditosAutorizados(vr.getCreditosAutorizados()
+                                    + mc.getCreditosMateria()
+                            );
+                            addMessage(FacesMessage.SEVERITY_WARN, "SOBRE CARGA",
+                                    "Créditos autorizados: " + vr.getCreditosAutorizados()+
+                            " por "+x.getMateriaAfectada().getMateria());
+                            break;
+                        }
+                    }
+                }
+
+            }
+        }
 
         if (creditosSeleccionados <= vr.getCreditosAutorizados()) {
             boolean empalme = false;
@@ -1425,12 +1573,40 @@ public class InscripcionesBean implements Serializable {
                                     System.out.println("inicioN = " + inicioN);
                                     System.out.println("finN = " + finN);
                                     if (inicioN.before(finE) && finN.after(inicioE)) {
-                                        empalme = true;
-                                        creditosSeleccionados -= Integer.parseInt(materiaDeTabla.getCreditos());
-                                        addMessage(FacesMessage.SEVERITY_WARN, "EMPALME DETECTADO",
-                                                "La materia " + grupoSeleccionado.getAsignatura()
-                                                + " tiene horario que se empalma en " + dia);
-                                        break;
+
+                                        if (autorizacionesDisponibles[1] != null) {
+                                            if (autorizacionesDisponibles[1].equals("CR")) {
+
+                                                for (int i = 0; i < listaAE.size(); i++) {
+                                                    AutorizacionInscripcion ai = listaAE.get(i);
+                                                    if (ai.getTipoAutorizacion().equals("CR")) {
+                                                        if (ai.getMateriaAfectada() != null) {
+                                                            System.out.println("ai.getMateriaAfectada()" + ai.getMateriaAfectada().getMateria());
+                                                            System.out.println("grupoSeleccionado.getMateria()" + grupoSeleccionado.getMateria());
+                                                            if (ai.getMateriaAfectada().getMateria().equals(grupoSeleccionado.getMateria())) {
+                                                                empalme = false;
+                                                                mensajeAutorizado = true;
+                                                                break;
+                                                            } else {
+                                                                empalme = true;
+                                                                mensajeAutorizado = false;
+
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                            }
+                                        } else {
+                                            empalme = true;
+                                            creditosSeleccionados -= Integer.parseInt(materiaDeTabla.getCreditos());
+                                            addMessage(FacesMessage.SEVERITY_WARN, "EMPALME DETECTADO",
+                                                    "La materia " + grupoSeleccionado.getAsignatura()
+                                                    + " tiene horario que se empalma");
+                                            break;
+
+                                        }
+
                                     }
                                 } catch (ParseException e) {
                                     e.printStackTrace();
@@ -1440,6 +1616,7 @@ public class InscripcionesBean implements Serializable {
                                 break;
                             }
                         }
+
                     }
                     if (empalme) {
                         break;
@@ -1482,10 +1659,25 @@ public class InscripcionesBean implements Serializable {
 
                 }
             }
+
+            if (mensajeAutorizado != null) {
+                if (mensajeAutorizado) {
+                    addMessage(FacesMessage.SEVERITY_INFO, "EMPALME AUTORIZADO",
+                            "La materia " + grupoSeleccionado.getAsignatura()
+                            + " tiene horario que se empalma");
+                } else {
+                    addMessage(FacesMessage.SEVERITY_WARN, "EMPALME DETECTADO",
+                            "La materia " + grupoSeleccionado.getAsignatura()
+                            + " tiene horario que se empalma");
+
+                }
+            }
+            mensajeAutorizado = null;
         } else {
             creditosSeleccionados -= Integer.parseInt(materiaDeTabla.getCreditos());
             addMessage(FacesMessage.SEVERITY_WARN, "CREDITOS AUTORIZADOS ALCANZADOS",
-                    "NO PUEDES SELECCIONAR MAS MATERIAS");
+                    "No puedes seleccionar mas materias");
+
         }
 
     }

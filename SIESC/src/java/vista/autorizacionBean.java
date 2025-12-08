@@ -109,15 +109,18 @@ public class autorizacionBean implements Serializable {
                 System.out.println("ai.getTipoAutorizacion() = " + ai.getTipoAutorizacion());
                 System.out.println("tipoAutorizacion = " + tipoAutorizacion);
                 System.out.println("asignaturaEscogida = " + asignaturaEscogida);
-                System.out.println("ai.getMateriaAfectada().getMateria():" + ai.getMateriaAfectada().getMateria());
-                System.out.println("------------------------");
-                if (ai.getTipoAutorizacion().equals(tipoAutorizacion)
-                        && ai.getMateriaAfectada().getMateria().equals(asignaturaEscogida)) {
-                    /* addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "No puedes autorizar nuevamente a "
+                if (ai.getMateriaAfectada() != null) {
+                    System.out.println("ai.getMateriaAfectada().getMateria():" + ai.getMateriaAfectada().getMateria());
+                    System.out.println("------------------------");
+                    if (ai.getTipoAutorizacion().equals(tipoAutorizacion)
+                            && ai.getMateriaAfectada().getMateria().equals(asignaturaEscogida)) {
+                        /* addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "No puedes autorizar nuevamente a "
                             + capitalizar(estudiante.getNombreAlumno())  + " con: " + convertirSigla(tipoAutorizacion)+" con materia "+ai.getMateriaAfectada().getMateria());*/
-                    addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "Autorización repetida");
-                    return;
+                        addMessage(FacesMessage.SEVERITY_WARN, "TIPO AUTORIZACION", "Autorización repetida");
+                        return;
+                    }
                 }
+
             }
             Materia materiaAfectada = materiaServicio.buscarMateria(asignaturaEscogida);
             aiN.setMateriaAfectada(materiaAfectada);

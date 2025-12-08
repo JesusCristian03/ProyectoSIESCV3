@@ -7,6 +7,8 @@ package DAO;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import modelo.RequisitosMateria;
@@ -34,14 +36,24 @@ public class RequisitosMateriaFacade extends AbstractFacade<RequisitosMateria> i
     public RequisitosMateria buscarRequisitoMateria(String codigoM) {
 
         String sqlHorario = "SELECT r FROM RequisitosMateria r "
-                + "WHERE r.materiaRelacion.materia = :Materia "
+                + "WHERE r.materia.materia = :Materia "
                 + "ORDER BY r.materia.materia";
 
         Query query = em.createQuery(sqlHorario);
-       //query.setParameter("Reticula", reticula);
         query.setParameter("Materia", codigoM);
 
-        return (RequisitosMateria) query.getSingleResult();
+        try {
+            return (RequisitosMateria) query.getSingleResult();
+
+        } catch (NoResultException e) {
+            // No encontró nada → regresamos null
+            return null;
+
+        } catch (NonUniqueResultException e) {
+            // Si por error existen 2 registros, tomar el primero:
+            List<RequisitosMateria> lista = query.getResultList();
+            return lista.get(0);
+        }
     }
 
 }
