@@ -1010,5 +1010,33 @@ body {
 
 
 
+            /* ENCABEZADOS */
+            .header-cell {
+                font-weight: bold;
+                background: #003366;
+                color:#FFFFFF;
+                text-transform: capitalize;
+                padding: 6px;
+                text-align: center;
+                width: 100%;
+            }
 
+            /* DATOS */
+            .data-cell {
+                padding: 6px;
+                text-align: center;
+                width:100%;
+                background: #f2f2f2;
+                color: #333;
+                height:100%;
+                display: flex;
+                align-items: center;     /* vertical */
+                justify-content: center; /* horizontal */
+
+            }
+
+            /* espaciado general */
+            .flat-panelgrid .ui-panelgrid-cell {
+                padding: 6px;
+            }
 
