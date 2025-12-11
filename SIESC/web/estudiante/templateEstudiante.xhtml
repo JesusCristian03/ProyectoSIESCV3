@@ -13,17 +13,44 @@
 
 
         <h:outputStylesheet  library="css" name="estudiantes.css"/>
-          <!-- Ultima Theme y Layout -->
-    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+        <style>
+            /* ENCABEZADOS */
+            .header-cell {
+                font-weight: bold;
+                background: #003366;
+                color:#FFFFFF;
+                text-transform: capitalize;
+                padding: 6px;
+                text-align: center;
+                width: 100%;
+            }
+
+            /* DATOS */
+            .data-cell {
+                padding: 6px;
+                text-align: center;
+                width:100%;
+                background: #f2f2f2;
+                color: #333;
+                height:100%;
+                display: flex;
+                align-items: center;     /* vertical */
+                justify-content: center; /* horizontal */
+
+            }
+
+            /* espaciado general */
+            .flat-panelgrid .ui-panelgrid-cell {
+                padding: 6px;
+            }
+
+
+        </style>
 
         <style>
             /* Quita padding de las celdas */
             .ui-panelgrid .ui-panelgrid-cell {
-                padding: 5px !important;
+                padding: 1px !important;
             }
 
             /* Uniforma altura de todos los inputs */
@@ -277,7 +304,7 @@
                         <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="welcome-image"/>
 
                         <p class="welcome-label">AGUILUCHOS</p>
-                        
+
 
                     </h:panelGroup>
 

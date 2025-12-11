@@ -312,7 +312,7 @@ body {
 .flat-panelgrid,
 .flat-panelgrid .ui-panelgrid-cell,
 .flat-panelgrid .label,
-.flat-panelgrid .value,
+.flat-panelgrid .label-column,
 .flat-panelgrid .ui-widget-content {
     border: none !important;
     background: #FFFFFF!important; /* blanco de fondo */

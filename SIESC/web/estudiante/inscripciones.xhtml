@@ -32,51 +32,45 @@
                                 <h:outputText value="INFORMACIÓN DEL ESTUDIANTE" styleClass="custom-title" />
                             </f:facet>
 
-                            <p:panelGrid columns="2" styleClass="custom-panelgrid" style="width:95%; margin:0 auto;">
+                            <p:panelGrid columns="4"
+                                         style="width:95%; margin:0 auto;"
+                                         styleClass="flat-panelgrid">
 
-                                <p:panelGrid columns="2" style="width:95%; margin:0 auto;" columnClasses="label,value" styleClass="flat-panelgrid">
 
-                                    <p:outputLabel value="No. de Control:" />
-                                    <p:outputLabel value="#{inscripcionesBean.estudiante.noDeControl}" />
+                                <p:outputLabel value="no. de control:" styleClass="header-cell"/>
 
-                                    <p:outputLabel value="Estudiante:" />
-                                    <p:outputLabel value="#{inscripcionesBean.estudiante.apellidoPaterno}
-                                                   #{inscripcionesBean.estudiante.apellidoMaterno}
-                                                   #{inscripcionesBean.estudiante.nombreAlumno}" />
+                                <p:outputLabel value="calificación:" styleClass="header-cell"/>
+                                <p:outputLabel value="semestre:" styleClass="header-cell"/>
+                                <p:outputLabel value="periodo escolar:" styleClass="header-cell"/>
 
-                                    <p:outputLabel value="Carrera:" />
-                                    <p:outputLabel value="#{inscripcionesBean.estudiante.reticula.nombreCarrera}" />
 
-                                    <p:outputLabel value="Semestre:" />
-                                    <p:outputLabel value="#{inscripcionesBean.estudiante.semestre}" />
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.noDeControl}" styleClass="data-cell"/>
+                                <p:outputLabel value="#{inscripcionesBean.promedio}" styleClass="data-cell"/>
 
-                                    <p:outputLabel value="Periodo Escolar:" />
-                                    <p:outputLabel value="#{inscripcionesBean.periodoActual.identificacionLarga}" />
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.semestre}" styleClass="data-cell"/>
+                                <p:outputLabel value="#{inscripcionesBean.periodoActual.identificacionLarga}" styleClass="data-cell"/>
 
-                                    <p:outputLabel value="Calificación:" />
-                                    <p:outputLabel value="#{inscripcionesBean.promedio}" />
-                                    <f:metadata>
-                                        <f:viewAction action="#{inscripcionesBean.recuperarPanelFlash}" />
-                                    </f:metadata>
 
-                                    <p:outputLabel value="Especialidad:" />
-                                    <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" />
+                                <p:outputLabel value="estudiante:" styleClass="header-cell"/>
+                                <p:outputLabel value="especialidad:" styleClass="header-cell"/>
+                                <p:outputLabel value="carrera:" styleClass="header-cell"/>
+                                <p:outputLabel value="estatus:" styleClass="header-cell"/>
 
-                                    <p:outputLabel value="Estatus:" />
+
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.apellidoPaterno} #{inscripcionesBean.estudiante.apellidoMaterno} #{inscripcionesBean.estudiante.nombreAlumno}" styleClass="data-cell"/>
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" styleClass="data-cell"/>
+                                <p:outputLabel value="#{inscripcionesBean.estudiante.reticula.nombreCarrera}" styleClass="data-cell"/>
+
+                                <p:outputLabel>
                                     <p:panel id="mensajePanel"
-                                             style="width:95%; margin: 10px auto;"
+                                             style="width:100%; text-align:center;"
                                              styleClass="#{inscripcionesBean.colorMensaje}">
                                         <h:outputText value="#{inscripcionesBean.mensaje}" />
                                     </p:panel>
-
-
-
-                                </p:panelGrid>
-                                <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="aguilucho-image"  />
-
-
+                                </p:outputLabel>
 
                             </p:panelGrid>
+
 
 
 

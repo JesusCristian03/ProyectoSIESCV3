@@ -811,7 +811,7 @@ public class InscripcionesBean implements Serializable {
     int s = 0;
 
     public void validaciones() {
-        /* if (autorizacionesDisponibles[4] != null) {
+        if (autorizacionesDisponibles[4] != null) {
             if (autorizacionesDisponibles[4].equals("12")) {
                 mostrarPanel("Semestre rebasado autorizado", "mensaje-info");
 
@@ -846,7 +846,7 @@ public class InscripcionesBean implements Serializable {
                 return;
             }
 
-        }*/
+        }
         validacionAzules();
 
     }
@@ -968,6 +968,7 @@ public class InscripcionesBean implements Serializable {
 
     public void validacionAzules() {
         int materiasDisponibles = 0;
+        Boolean autorizo=false;
         if (Mazules != 0) {
             int semestreAlumno = estudiante.getSemestre();
             //  addMessage(FacesMessage.SEVERITY_INFO, "MATERIAS DISPONIBLES ", "SELECCIONA TUS MATERIAS");
@@ -977,7 +978,6 @@ public class InscripcionesBean implements Serializable {
                 Reticula r = listaM.get(listaAzules.get(i)[0]);
                 try {
                     s = listaAzules.get(i)[1];
-
                     // Obtener el semestre actual dinámicamente
                     ReticulaDatos rd = (ReticulaDatos) r.getClass()
                             .getMethod("getSemestre" + s)
@@ -1009,9 +1009,10 @@ public class InscripcionesBean implements Serializable {
                             }
                         } // Caso 3 (opcional): si coincide par-par o impar-impar, se activa
                         else {
-
+                            
                             System.out.println("else rd.getMateria()" + rd.getMateria());
-                            //VERIFICACION DE MATERIAS REQUISITADAS
+                            
+                                //VERIFICACION DE MATERIAS REQUISITADAS
                             //Busco la materia para ver si tiene un requisito. 
                             //No siempre debe tener un requisito.
                             RequisitosMateria rm = requisitosMateriaServicio.encontrarAntecedenteMateria(
@@ -1027,8 +1028,8 @@ public class InscripcionesBean implements Serializable {
                             }
 
                             if (rm != null) {
-
-                                autorizarRequisitoMateria(rd);//En cuanto encontrara uno tenía que regresar. 
+                                
+                                autorizo =autorizarRequisitoMateria(rd);//En cuanto encontrara uno tenía que regresar. 
                                 List<HistoriaAlumno> ha = historiaAlumnoServicio.buscarPorEstudianteMateria(
                                         rm.getMateriaRelacion().getMateria(),
                                         estudiante.getNoDeControl());
@@ -1047,7 +1048,9 @@ public class InscripcionesBean implements Serializable {
                                         System.out.println("HiPeriodo" + hi.getPeriodo());
                                         System.out.println("HiMateria" + hi.getMateria().getMateria());
                                         System.out.println("HiCalificacion" + hi.getCalificacion());
-                                        if (hi.getCalificacion() == 0) {
+                                        if (hi.getCalificacion() == 0 && autorizo!=true) {
+                                           // System.out.println("Rd.getDisponible"+ rd.getDisponible());
+                                           // System.out.println("Rd.getColor"+ rd.getColor());
                                             rd.setDisponible(false);
                                             rd.setColor("nodisponible");
                                         } else {
@@ -1101,7 +1104,6 @@ public class InscripcionesBean implements Serializable {
                 //Pueden haber varias materias requisitadas, entonces recorro la lista de autorizacios para materias requisitadas
                 for (int j = 0; j < listaAE.size(); j++) {
                     AutorizacionInscripcion au = listaAE.get(j);
-
                     if (au.getMateriaAfectada() != null) {//No todas las autorizaciones tienen materia para requisitar.
                         System.out.println("Au rd.getMateria():" + rd.getMateria());
                         System.out.println("au.getMateriaAfectada().getMateria():" + au.getMateriaAfectada().getMateria());
