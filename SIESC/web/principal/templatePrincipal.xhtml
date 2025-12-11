@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -24,23 +25,26 @@
     <h:body>
 
 
-        
-    <!-- ENCABEZADO -->
-        <div id="top" class="top"> 
-        <div class="left-section">
-          
-            <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />  
-        </div>
-       
-        </div> 
-        <div>
-            <!-- <div id="left">
-                <ui:insert name="left">
-                    
-                </ui:insert>
+
+    
+    
+            <div class="layout-topbar">
+
+                <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;  margin-left:10px;" />
+
+                <div class="title">SISTEMA ESCOLAR – ESTUDIANTES</div>
+
+                <h:form>
+                    <p:commandButton value="Volver al inicio" icon="pi pi-home"  
+                onclick="window.history.back(); return false;"
+                 styleClass="cerrar-sesion-btn" />
+
+                </h:form>
             </div>
+        
+        <div>
+
             
-            -->
             <div id="content" class="left_content">
                 <ui:insert name="content">Content</ui:insert>
             </div>
@@ -57,21 +61,57 @@
     
     
             <style>
-   /* ======== ENCABEZADO ======== */
-    #top {
-        background-color: #003366;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 25px;
 
-    }
     
+/* ===== TOPBAR ENCABEZADO ===== */
+.layout-topbar {
+    background-color: #003366 !important;
+    color: white;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+    z-index: 1000;
+}
+
+
+.layout-topbar .title {
+    flex: 1;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* ====== BOTÓN VOLVER AL INICIO ====== */
+.cerrar-sesion-btn {
+    background-color: #003366 !important; /* Color  */
+    border: none !important;
+    color: white !important;
+    width: 180px !important; /* tamaño */
+    height: 40px !important;
+    font-size: 15px !important;
+   
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Quita estilos internos de PrimeFaces */
+.cerrar-sesion-btn .ui-button-text {
+    padding: 0 !important;
+    line-height: 1.2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Hover */
+.cerrar-sesion-btn:hover {
+    background-color:#037DBE !important; /* el color que cambia */
+}
+
     
-    #top img {
-        height: 45px;
-    }
          
            /* ========  PIE DE PAGINA ======== */  
                     footer {
@@ -84,6 +124,12 @@
             width: 100%;
             font-size: 13px;
         }
+        
+        
+        /* PrimeIcons */
+.pi::before {
+    font-family: 'primeicons' !important;
+}
             
         </style>
     </h:body>

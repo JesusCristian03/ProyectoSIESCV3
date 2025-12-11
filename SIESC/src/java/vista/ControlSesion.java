@@ -57,7 +57,7 @@ public class ControlSesion implements Serializable {
             // Invalida la sesión actual (cierra sesión)
             contexto.getExternalContext().invalidateSession();
             // Redirige al login
-            contexto.getExternalContext().redirect("/SIESC/faces/index.xhtml");
+            contexto.getExternalContext().redirect("/SIESC/faces/principal/principal.xhtml");
         } catch (Exception e) {
             e.printStackTrace();
         }
