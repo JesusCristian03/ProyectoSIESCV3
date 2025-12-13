@@ -56,15 +56,20 @@ public interface HorariosFacadeLoca {
     
     List<Horarios> buscarHorariosPorMateria(Carrera reticula, int semestre, PeriodoEscolar periodo, String materia);
     
-    List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula);
+    List<Horarios> buscarHorariosPorAulas(PeriodoEscolar periodo, Aulas aula);
     
-    Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula);
+    Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal,
+            Aulas aula, String periodo);
     
     List<Horarios> buscarHorarioPorDepartamento(String periodo, Integer reticula, Integer semestre, String clavearea);
     
     List<Horarios> buscarHorariosPorMateriayGrupo(Carrera reticula, int semestre, PeriodoEscolar periodo, String materia, String grupo);
     
     List<Horarios> buscarHorarioPorMaestro(String periodo, Integer reticula, Integer semestre, String RFC);
+    
+    Horarios buscarHorarioPorEmpalmePorAula(short diaSemana, String horaInicial, String horaFinal,
+            String grupo, Integer reticula, int semestre,
+            String periodo);
 
 
 }

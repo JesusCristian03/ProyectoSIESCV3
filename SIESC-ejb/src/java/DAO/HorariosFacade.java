@@ -145,7 +145,7 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
 
         return lista;
     }
-    
+
     @Override
     public List<Horarios> buscarHorarioPorMaestro(String periodo, Integer reticula, Integer semestre, String RFC) {
         List<Horarios> lista = null;
@@ -322,18 +322,17 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
     }
 
     @Override
-    public List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula) {
+    public List<Horarios> buscarHorariosPorAulas(PeriodoEscolar periodo, Aulas aula) {
         List<Horarios> lista = null;
         System.out.println("BUSCANDO HORARIOS: -> ");
 
         String sql = "SELECT h FROM Horarios h "
                 + "JOIN h.idGrupo g "
-                + "WHERE g.reticula = :reticula "
-                + "AND g.periodo = :periodo "
+                + "WHERE g.periodo = :periodo "
                 + "AND h.aula = :Aula";
 
         Query query = em.createQuery(sql);
-        query.setParameter("reticula", reticula);
+       // query.setParameter("reticula", reticula);
         query.setParameter("periodo", periodo);
         query.setParameter("Aula", aula);
         lista = (List<Horarios>) query.getResultList();
@@ -342,25 +341,63 @@ public class HorariosFacade extends AbstractFacade<Horarios> implements Horarios
     }
 
     @Override
-    public Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula) {
+    public Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal,
+            Aulas aula, String periodo) {
 
         try {
             return em.createQuery(
                     "SELECT h FROM Horarios h "
+                    + "JOIN h.idGrupo g "
                     + "WHERE h.diaSemana = :diaSemana "
                     + "AND FUNCTION('TO_CHAR', h.horaInicial, 'HH24:MI:SS') = :horaInicial "
                     + "AND FUNCTION('TO_CHAR', h.horaFinal, 'HH24:MI:SS') = :horaFinal "
-                    + "AND h.aula = :aula", Horarios.class)
+                    + "AND h.aula = :aula "
+                    + "AND g.periodo.periodo = :periodo",
+                    Horarios.class)
                     .setParameter("diaSemana", diaSemana)
                     .setParameter("horaInicial", horaInicial)
                     .setParameter("horaFinal", horaFinal)
                     .setParameter("aula", aula)
+                    .setParameter("periodo", periodo)
                     .getSingleResult();
+
         } catch (NoResultException e) {
             System.out.println("NO SE ENCONTRO NINGUN EMPALME ENTONCES PUEDE AVANZAR");
             return null;
         }
+    }
 
+    @Override
+    public Horarios buscarHorarioPorEmpalmePorAula(short diaSemana, String horaInicial, String horaFinal,
+            String grupo, Integer reticula, int semestre,
+            String periodo) {
+
+        try {
+            return em.createQuery(
+                    "SELECT h FROM Horarios h "
+                    + "JOIN h.idGrupo g "
+                    + "JOIN g.idMateriaCarrera mc "
+                    + "WHERE h.diaSemana = :diaSemana "
+                    + "AND FUNCTION('TO_CHAR', h.horaInicial, 'HH24:MI:SS') = :horaInicial "
+                    + "AND FUNCTION('TO_CHAR', h.horaFinal, 'HH24:MI:SS') = :horaFinal "
+                    + "AND h.grupo = :grupo "
+                    + "AND g.reticula.reticula = :reticula "
+                    + "AND mc.semestreReticula = :semestre "
+                    + "AND g.periodo.periodo = :periodo",
+                    Horarios.class)
+                    .setParameter("diaSemana", diaSemana)
+                    .setParameter("horaInicial", horaInicial)
+                    .setParameter("horaFinal", horaFinal)
+                    .setParameter("grupo", grupo)
+                    .setParameter("reticula", reticula)
+                    .setParameter("semestre", semestre)
+                    .setParameter("periodo", periodo)
+                    .getSingleResult();
+
+        } catch (NoResultException e) {
+            System.out.println("NO SE ENCONTRO NINGUN EMPALME ENTONCES PUEDE AVANZAR");
+            return null;
+        }
     }
 
 }

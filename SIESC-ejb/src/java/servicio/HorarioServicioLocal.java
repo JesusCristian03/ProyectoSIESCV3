@@ -36,11 +36,15 @@ public interface HorarioServicioLocal {
     
     void actualizar(Horarios horarios);
     
-    List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula);
+    List<Horarios> buscarHorariosPorAulas(PeriodoEscolar periodo, Aulas aula);
     
-    Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula);
+    Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula, String periodo);
     
     List<Horarios> buscarHorarioPorMateria(int reticula, int semestre, String periodo, String materia);
     
     List<Horarios> buscarHorarioPorMateriayGrupo(int reticula, int semestre, String periodo, String materia, String grupo);
+    
+    Horarios buscarHorarioPorEmpalmePorAula(short diaSemana, String horaInicial, String horaFinal,
+            String grupo, Integer reticula, int semestre,
+            String periodo);
 }

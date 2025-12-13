@@ -63,8 +63,8 @@ public class HorarioServicio implements HorarioServicioLocal {
     }
 
     @Override
-    public List<Horarios> buscarHorariosPorAulas(Carrera reticula, PeriodoEscolar periodo, Aulas aula) {
-        return horariosFacade.buscarHorariosPorAulas(reticula, periodo, aula);
+    public List<Horarios> buscarHorariosPorAulas(PeriodoEscolar periodo, Aulas aula) {
+        return horariosFacade.buscarHorariosPorAulas(periodo, aula);
     }
 
     @Override
@@ -79,23 +79,31 @@ public class HorarioServicio implements HorarioServicioLocal {
     }
 
     @Override
-    public Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula) {
-        return horariosFacade.buscarHorarioPorEmpalme(diaSemana, horaInicial, horaFinal, aula);
+    public Horarios buscarHorarioPorEmpalme(short diaSemana, String horaInicial, String horaFinal, Aulas aula, String periodo) {
+        return horariosFacade.buscarHorarioPorEmpalme(diaSemana, horaInicial, horaFinal, aula, periodo);
+    }
+
+    @Override
+    public Horarios buscarHorarioPorEmpalmePorAula(short diaSemana, String horaInicial, String horaFinal,
+            String grupo, Integer reticula, int semestre,
+            String periodo) {
+        return horariosFacade.buscarHorarioPorEmpalmePorAula(diaSemana, horaInicial, horaFinal, grupo, reticula, semestre, periodo);
     }
 
     @Override
     public List<Horarios> buscarHorarioPorMateria(int reticula, int semestre, String periodo, String materia) {
         Carrera reticulaObjeto = carreraServicio.buscarPorId(reticula);
         PeriodoEscolar periodoObjeto = periodoEscolarServicio.buscarPorId(periodo);
-        
+
         return horariosFacade.buscarHorariosPorMateria(reticulaObjeto, semestre, periodoObjeto, materia);
     }
-     @Override
+
+    @Override
     public List<Horarios> buscarHorarioPorMateriayGrupo(int reticula, int semestre, String periodo, String materia, String grupo) {
         Carrera reticulaObjeto = carreraServicio.buscarPorId(reticula);
         PeriodoEscolar periodoObjeto = periodoEscolarServicio.buscarPorId(periodo);
-        
-        return horariosFacade.buscarHorariosPorMateriayGrupo(reticulaObjeto, semestre, periodoObjeto, materia,grupo);
+
+        return horariosFacade.buscarHorariosPorMateriayGrupo(reticulaObjeto, semestre, periodoObjeto, materia, grupo);
     }
 
 }
