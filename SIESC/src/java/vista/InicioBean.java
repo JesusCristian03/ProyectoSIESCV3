@@ -9,10 +9,8 @@ import javax.ejb.LocalBean;
 
 /**
  *
- * @author valer
+ * @author valeria
  */
-
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;

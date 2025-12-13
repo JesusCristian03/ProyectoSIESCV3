@@ -1,20 +1,10 @@
 body {
-    font-family: "Segoe UI", sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #037DBE !important;
+    font-family: "Segoe UI", sans-serif; margin: 0; padding: 0; background-color: #037DBE !important; 
     overflow: hidden; /* evita scroll del body */
 }
-
 /* Estructura principal */
-.layout-wrapper {
-    min-height: 100vh;      /* Ocupa toda la pantalla */
-    display: flex;
-    flex-direction: column;
+.layout-wrapper { min-height: 100vh;      /* Ocupa toda la pantalla */ display: flex; flex-direction: column;
 }
-
-
-/* CONTENIDO PRINCIPAL */
 /* CONTENIDO SCROLLEABLE */
 .main-content {
     margin-top: 80px; /* deja espacio para el header */
@@ -24,58 +14,30 @@ body {
     padding: 0px;
 
 }
-
-/* PanelGrid plano, sin borde ni sombra */
-.main-content,
-.main-content .ui-panelgrid-cell,
-.main-content .label,
-.main-content .value,
-.main-content .ui-widget-content {
+/* PanelGrid plano*/
+.main-content,.main-content .ui-panelgrid-cell,.main-content .label,.main-content .value,.main-content .ui-widget-content {
     border: none !important;          /* Quita todos los bordes */
     box-shadow: none !important;      /* Quita cualquier sombra */
-    background: #FFFFFF !important;   /* Fondo blanco muy suave */
-  
-   
+    background: #FFFFFF !important;   /* Fondo blanco muy suave */ 
 }
-
-
 /* ==========================================================
    ENCABEZADO
    ========================================================== */
 .encabezado {
-    background-color:#003366;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .5rem;
-       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background-color:#003366; color: white;   display: flex; justify-content: space-between;  align-items: center; 
+    padding: .5rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
+    position: fixed; top: 0; left: 0; width: 100%;  z-index: 999;
 }
-
-
-.titulo-encabezado {
-    text-align: center;
-    color: white; /* o el color que uses */
-    margin: 0;
-    padding: 0;
+.titulo-encabezado { text-align: center; color: white;  margin: 0; padding: 0;
 }
-
-.titulo-grande {
-    font-size: 28px;   /* tamaño de la primera línea */
+.titulo-grande { font-size: 28px;   /* tamaño de la primera línea */
     font-weight: 700;
 }
-
 .titulo-chico {
-    font-size: 18px;   /* más chico */
+    font-size: 18px;   /* tamaño*/
     font-weight: 400;
 }
-
 
 .encabezado img {
     height: 60px;
@@ -101,10 +63,6 @@ body {
     color: #0047a1;
     text-decoration: underline;
 }
-
-
-
-
 /* ==========================================================
    FOOTER
    ========================================================== */
@@ -121,9 +79,6 @@ body {
     z-index: 999;
     flex-shrink: 0; /* Evita que se encoja */
 }
-
-
-
 .footer a {
     color: white;
     font-size: 1.8rem;
@@ -134,47 +89,28 @@ body {
 .footer a:hover {
     color: #4da8ff;
 }
-
-
-
-
 /* ==========================================================
    BIENVENIDA
    ========================================================== */
-
-
 .inicio-header {
     padding: .5rem 1rem;
     text-align: center;
     color: #0a3d62;
     animation: fadeIn 0.8s ease;
 }
-
 /* Título principal */
 .titulo-principal {
     font-size: 2.8rem;
     font-weight: 700;
-    color: #033B70;      /* azul institucional más elegante */
+    color: #033B70;     
     margin-bottom: 1rem;
 }
-
 /* Texto de introducción */
 .texto-intro {
     font-size: 1.3rem;
     color: #445b75;
     margin-bottom: 2rem;
     padding: 20px;
-}
-
-/* Tarjetas de Misión y Visión */
-.tarjeta-info {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 1.4rem;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-    border-left: 6px solid #037DBE; /* línea azul elegante */
-    text-align: left;
 }
 
 /* Títulos interiores */
@@ -184,18 +120,15 @@ body {
     color: #037DBE;
     margin-bottom: 0.6rem;
 }
-
-/* Animación suave */
+/* Animación  */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-
 .link-semestre-container {
     text-align: center;        /* Centra el contenido */
     margin-top: 20px;
 }
-
 .link-semestre {
     font-size: 16px;
     font-weight: bold;
@@ -214,12 +147,8 @@ body {
 .link-semestre i {
     font-size: 1.5rem;
 }
-
-
-
-
 /* ==========================================================
-   BOTONES PREMIUM
+   BOTONES 
    ========================================================== */
 .botones-inicio {
     display: flex;

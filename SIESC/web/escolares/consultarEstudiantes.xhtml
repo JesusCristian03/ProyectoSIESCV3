@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="templateEscolares.xhtml">
     <ui:define name="content">
@@ -21,8 +22,8 @@
                     </f:facet>
                 </p:toolbar>
 
-                <p:dataTable id="dtEstudiantes" var="e" value="#{estudianteBean.listaEstudiantes}"
-                             widgetVar="dtEst" paginator="true" rows="10" responsive="true"
+                <p:dataTable id="dtEstudiantes" var="e" value="#{estudianteBe.listaEstudiantes}"
+                             widgetVar="dtEst" paginator="true" rows="10an" 
                              emptyMessage="No se encontraron estudiantes."
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PrevPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                              rowsPerPageTemplate="5,10,20">

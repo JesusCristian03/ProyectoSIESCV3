@@ -252,7 +252,7 @@ body {
 }
 
 /* =========================================================
-   === MOSTRAR SOLO EL ICONO DEL SUBMENU (tu ::before)
+   === MOSTRAR SOLO EL ICONO DEL SUBMENU (:before)
 ========================================================= */
 
 /* Asegura posición del icono */
@@ -275,12 +275,11 @@ body {
    === OCULTAR ICONOS DE PRIMEFACES QUE NO SE USAN
 ========================================================= */
 
-.layout-sidebar.collapsed .ui-panelmenu-header .ui-panelmenu-header-icon,
-.layout-sidebar.collapsed .ui-panelmenu-header .ui-icon,
-.layout-sidebar.collapsed .ui-panelmenu-header .pi,
-.layout-sidebar.collapsed .ui-panelmenu-header > a .ui-panelmenu-icon {
-    display: none !important;
-    pointer-events: none !important;
+
+
+/* Mostrar íconos de menuitem incluso cuando está colapsado */
+.layout-sidebar.collapsed .ui-panelmenu-content .pi {
+    display: inline-block !important;
 }
 
 /* NO ocultar los <i> personalizados del submenu */
