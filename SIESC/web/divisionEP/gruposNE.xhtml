@@ -214,13 +214,24 @@
                         <h:inputHidden id="filaMateriaModificar" value="#{horarioCrearBean.filaMateriaSeleccionada}" />
                         <h:inputHidden id="columnaMateriaModificar" value="#{horarioCrearBean.columnaMateriaSeleccionada}" />
 
-                        <p:remoteCommand name="doRedirect" actionListener="#{horarioCrearBean.redirectToPage}" />
-
-                        <p:remoteCommand name="asignarMateriaSeleccionadaRC" 
-                                         actionListener="#{horarioCrearBean.asignarMateriaSeleccionadaRC}"                                         
-                                         oncomplete="PF('confirmEliminarDialogWidget').show()"
+                        <p:remoteCommand name="asignarMateriaSeleccionadaRCA"
+                                         actionListener="#{horarioCrearBean.asignarMateriaSeleccionadaRCA}"
                                          update="confirmEliminarDialog growl grupo grupoEliminar"
-                                         process="@this" />
+                                         process="@this"
+                                         oncomplete="
+                                         if (args.abrirDialogo) {
+                                         PF('confirmEliminarDialogWidget').show();
+                                         }
+                                         " />
+
+
+
+
+                        <p:remoteCommand name="asignarMateriaSeleccionadaRCG"
+                                         actionListener="#{horarioCrearBean.asignarMateriaSeleccionadaRCG}"
+                                         update="confirmEliminarDialog growl grupo grupoEliminar"
+                                         process="@this"
+                                         oncomplete="PF('confirmEliminarDialogWidget').show();" />
 
                         <p:remoteCommand name="asignarMateriaSeleccionadaM" 
                                          actionListener="#{horarioCrearBean.asignarMateriaSeleccionadaM}"                                         
@@ -228,8 +239,13 @@
                                          update="confirmModificarDialog growl grupo"
                                          process="@this" />
 
-                        <p:remoteCommand name="asignarMateriaIntercambiar" 
-                                         actionListener="#{horarioCrearBean.cambiarMateriaSeleccionadaX}"                                         
+                        <p:remoteCommand name="asignarMateriaIntercambiarG" 
+                                         actionListener="#{horarioCrearBean.cambiarMateriaSeleccionadaXG}"                                         
+                                         oncomplete=""
+                                         update="grupo growl"
+                                         process="@this" />
+                        <p:remoteCommand name="asignarMateriaIntercambiarA" 
+                                         actionListener="#{horarioCrearBean.cambiarMateriaSeleccionadaXA}"                                         
                                          oncomplete=""
                                          update="grupo growl"
                                          process="@this" />
@@ -274,7 +290,7 @@
                                              "
                                              actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
                                              update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
-                                             oncomplete="desactivandoModoTodo();"
+                                             oncomplete="desactivandoModoTodo(); activarModoAula();"
                                              disabled="#{!horarioCrearBean.booleanBotonAula 
                                                          or horarioCrearBean.desactivarCampos}"/>
 
@@ -294,7 +310,7 @@
                                              "
                                              actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
                                              update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
-                                             oncomplete="desactivandoModoTodo();"
+                                             oncomplete="desactivandoModoTodo(); activarModoGrupo();"
                                              disabled="#{!horarioCrearBean.booleanBotonGrupo
                                                          or horarioCrearBean.desactivarCampos}"/>
                         </h:panelGroup>
@@ -367,10 +383,10 @@
                                               color: #{horarioCrearBean.getSepararAtributos(item.miercoles,2)};
                                               "
                                               >
-                                    
+
                                     <h:outputText value=" #{horarioCrearBean.booleanBuscarAula 
-                                                           ? horarioCrearBean.getSepararAtributos(item.miercoles,4)
-                                                           : horarioCrearBean.getSepararAtributos(item.miercoles,0)}"/>
+                                                            ? horarioCrearBean.getSepararAtributos(item.miercoles,4)
+                                                            : horarioCrearBean.getSepararAtributos(item.miercoles,0)}"/>
                                 </h:panelGroup>
                             </p:column>
 
@@ -469,6 +485,16 @@
                             let modoIntercambiar = false;
                             let celdaMateriaSeleccionada = null; // Celda de la materia que vamos a mover
                             let modoAgregar = false;
+                            let modoAula = false;
+                            let modoGrupo = false;
+                            //Activar ModoAula
+                            function activarModoAula(){
+                            modoAula = !modoAula;
+                            }
+                            //Activar modoGrupo
+                            function activarModoGrupo(){
+                            modoGrupo = !modoGrupo;
+                            }
                             // ===============================
                             // Variables para intercambio
                             // ===============================
@@ -541,12 +567,28 @@
 
                             // --- MODO ELIMINAR ---
                             if (modoEliminar &amp;&amp; contenido !== "") {
-                            asignarMateriaSeleccionadaRC([
+
+                            if (modoAula){
+                            const carrera = partes[4];
+                            const semestre = partes[3];
+                            const valorgrupo = partes[2];
+                            asignarMateriaSeleccionadaRCA([
+                            { name: 'nombre', value: nombre },
+                            { name: 'aula', value: aula },
+                            { name: 'carrera', value: carrera },
+                            { name: 'semestre', value: semestre },
+                            { name: 'valorgrupo', value: valorgrupo }
+                            ]);
+                            }
+                            if (modoGrupo){
+                            asignarMateriaSeleccionadaRCG([
                             { name: 'nombre', value: nombre },
                             { name: 'aula', value: aula }
                             ]);
                             document.getElementById('horarioG:nombreMateriaEliminar').value = nombre;
                             document.getElementById('horarioG:aulaMateriaEliminar').value = aula;
+                            }
+
                             //PF('confirmEliminarDialogWidget').show();
                             return;
                             }
@@ -587,12 +629,34 @@
 
                             celdaSeleccionadaIntercambio = panel;
                             // Guardar la información de la materia seleccionada
-                            asignarMateriaIntercambiar([
+                            
+                            if(modoAula){
+                            const carrera = partes[4];
+                            const semestre = partes[3];
+                            const valorgrupo = partes[2];
+                            asignarMateriaIntercambiarA([
+                            { name: 'nombre', value: nombre },
+                            { name: 'aula', value: aula },
+                            { name: 'fila', value: fila },
+                            { name: 'columna', value: columna },
+                            { name: 'carrera', value: carrera },
+                            { name: 'semestre', value: semestre },
+                            { name: 'valorgrupo', value: valorgrupo }
+                            ]);
+                                
+                            }
+                            
+                            if(modoGrupo){
+                            asignarMateriaIntercambiarG([
                             { name: 'nombre', value: nombre },
                             { name: 'aula', value: aula },
                             { name: 'fila', value: fila },
                             { name: 'columna', value: columna }
-                            ]);
+                            ]);  
+                                
+                                
+                            }
+                           
                             console.log("ENTRE PARA SELECCIONAR MATERIA A MOVER");
                             }
                             }
@@ -610,7 +674,7 @@
                             ]);
                             //console.log("Enviando a moverMateriaSeleccionada:", filaDestino, columnaDestino, aulaDestino);
                             console.log("Contenido{", contenido, "}")
-                                    console.log("Enviando a 1moverMateriaSeleccionada:", filaDestino, columnaDestino);
+                            console.log("Enviando a 1moverMateriaSeleccionada:", filaDestino, columnaDestino);
                             // Quitar el resaltado
 
                             console.log("ENTRE PARA MOVER MATERIA A DESTINO");
@@ -880,7 +944,7 @@
                                              update="grupo growl"
                                              />
                         </p:confirmDialog>
-                       <!-- ✅ VENTANA EMERGENTE DE MODIFICAR AULA -->
+                        <!-- ✅ VENTANA EMERGENTE DE MODIFICAR AULA -->
                         <p:dialog id="confirmModificarDialog"
                                   header="Modificar Aula"
                                   widgetVar="confirmModificarDialogWidget"
