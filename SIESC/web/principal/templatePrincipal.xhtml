@@ -8,17 +8,16 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-        
-          <!-- Ultima Theme y Layout -->
+      <link rel="icon" href="#{resource['assets/itc.png']}" type="image/x-icon"/>
+        <title>Sistema Escolar ITC</title>
+   
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
     <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
-  
-        
-        <link rel="icon" href="#{resource['assets/itc.png']}" type="image/x-icon"/>
-        <title>Sistema Escolar ITC</title>
 
     </h:head>
 
@@ -32,7 +31,7 @@
 
                 <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;  margin-left:10px;" />
 
-                <div class="title">SISTEMA ESCOLAR – ESTUDIANTES</div>
+                <div class="title">INSTITUTO TECNOLÓGICO DE CUAUTLA MORELOS</div>
 
                 <h:form>
                     <p:commandButton value="Volver al inicio" icon="pi pi-home"  
@@ -61,7 +60,12 @@
     
     
             <style>
-
+ /* ======== GLOBAL ======== */
+body {
+    background: #ffffff;               /* Azul claro institucional */
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+}
     
 /* ===== TOPBAR ENCABEZADO ===== */
 .layout-topbar {
@@ -135,3 +139,4 @@
     </h:body>
 
 </html>
+

@@ -10,12 +10,48 @@
         <ui:composition template="./templatePrincipal.xhtml">
 
 <ui:define name="content">
+    <div class="login-wrapper">
+        <!-- Lado de la imagen -->
+        <div class="login-image">
+            <p:graphicImage library="imagenes" name="sistema/logo_tec.jpg" />
+        </div>
 
-    <style>
-        body {
-            background-color: #f4f6f9;
-            font-family: 'Segoe UI', sans-serif;
-        }
+
+        <div class="login-card">
+            <h:form>
+                <div class="login-logo">
+                           <i class="pi pi-user"></i>
+                </div>
+                <h2>Iniciar Sesión</h2>
+
+                <div class="ui-inputgroup">
+                    <div class="ui-inputgroup-addon">
+                        <i class="pi pi-user"></i>
+                    </div>
+                    <p:inputText id="usr" value="#{loginBean.usuario}" required="true" placeholder="Usuario" />
+                </div>
+
+                <div class="ui-inputgroup">
+                    <div class="ui-inputgroup-addon">
+                        <i class="pi pi-lock"></i>
+                    </div>
+                            <div class="password-wrapper">
+                    <p:password id="pass" value="#{loginBean.contrasena}" required="true" placeholder="Contraseña" />
+                                         <i class="pi pi-eye toggle-eye"
+               onclick="togglePassword(this)"></i>
+                            </div>
+                </div>
+                <p:commandButton value="Iniciar Sesión" action="#{loginBean.login()}" ajax="false" styleClass="iniciar-sesion" />
+            </h:form>
+        </div>
+    </div>
+
+    
+    
+    
+    
+        <style>
+
 
         /* Contenedor principal centrado */
         .login-wrapper {
@@ -59,6 +95,18 @@
             text-align: center;
         }
 
+        .login-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.login-logo i {
+    font-size: 5rem;      /* Tamaño del icono */
+    color: #3f51b5;       /* Ajusta al color de tu tema Ultima */
+}
+
         h2 {
             color: #003366;
             margin-bottom: 1.5rem;
@@ -83,7 +131,7 @@
         input.ui-inputfield,
         .ui-password input {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.7rem;
             border: 1px solid #ccc;
             border-radius: 0 6px 6px 0;
             transition: border-color 0.3s ease;
@@ -95,21 +143,32 @@
             outline: none;
         }
 
-        .ui-commandbutton {
-            background-color: #007bff;
-            border: none;
-            color: white;
-            font-weight: 600;
-            border-radius: 8px;
-            width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.5rem;
-            transition: background-color 0.3s ease;
-        }
+/* ======== BOTÓN LOGIN ======== */
+.iniciar-sesion {
+     background-color: #003366 !important; /* Color  */
+    border: none !important;
+    color: white !important;
+     font-weight: 500;
+    padding: 0.9rem;
+    border-radius: 6px;
+    width: 80%;
+    margin-top: 0.6rem;
+    transition: background .2s ease;
+}
 
-        .ui-commandbutton:hover {
-            background-color: #0056b3;
-        }
+/* Quita estilos internos de PrimeFaces */
+.iniciar-sesion .ui-button-text {
+    padding: 0 !important;
+    line-height: 1.2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Hover */
+.iniciar-sesion:hover {
+    background-color:#037DBE !important; /* el color que cambia */
+}
 
         footer {
             background-color: #003366;
@@ -134,39 +193,70 @@
                 object-fit: contain;
             }
         }
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.password-wrapper input,
+.ui-password input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 0 6px 6px 0;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+
+.toggle-eye {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.2rem;
+    color: #6b7280;
+}
+
+.toggle-eye:hover {
+    color: #3f51b5;
+}
+.password-wrapper input:focus {
+    border-color: #0066cc;
+    outline: none;
+}
     </style>
+    
+    
+    <script>
+    function togglePassword(icon) {
 
+        // Busca el input REAL generado por PrimeFaces
+        const wrapper = icon.closest('.password-wrapper');
+        const input = wrapper.querySelector('input');
 
-    <div class="login-wrapper">
-        <!-- Lado de la imagen -->
-        <div class="login-image">
-            <p:graphicImage library="imagenes" name="sistema/logo_tec.jpg" />
-        </div>
+        if (!input) {
+            console.error("No se encontró el input password");
+            return;
+        }
 
-
-        <div class="login-card">
-            <h:form>
-                <h2>Iniciar Sesión</h2>
-
-                <div class="ui-inputgroup">
-                    <div class="ui-inputgroup-addon">
-                        <i class="pi pi-user"></i>
-                    </div>
-                    <p:inputText id="usr" value="#{loginBean.usuario}" required="true" placeholder="Usuario" />
-                </div>
-
-                <div class="ui-inputgroup">
-                    <div class="ui-inputgroup-addon">
-                        <i class="pi pi-lock"></i>
-                    </div>
-                    <p:password id="pass" value="#{loginBean.contrasena}" required="true" placeholder="Contraseña" />
-                </div>
-
-                <p:commandButton value="Iniciar Sesión" action="#{loginBean.login()}" ajax="false" />
-            </h:form>
-        </div>
-    </div>
-
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('pi-eye');
+            icon.classList.add('pi-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('pi-eye-slash');
+            icon.classList.add('pi-eye');
+        }
+    }
+</script>
 </ui:define>
 
         </ui:composition>
