@@ -3,350 +3,316 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 
-    <h:head> 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+       <h:head>
+         <link rel="icon" href="#{resource['assets/itc.png']}" type="image/x-icon"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sistema Escolar ITC - División de Estudios Profesionales</title>
 
 
+        <h:outputStylesheet  library="css" name="division.css"/>
 
-
-        <title>Division de estudios profesionales</title>
-        <h:outputStylesheet  library="css" name="estudiantes.css"/>
-
-
-
-
-        
-        <style>
-            /* Quita padding de las celdas */
-            .ui-panelgrid .ui-panelgrid-cell {
-                padding: 5px !important;
-            }
-
-            /* Uniforma altura de todos los inputs */
-            .ui-inputfield,
-            .ui-selectonemenu,
-            .ui-selectonemenu-label {
-                height: 50px !important;
-                min-height: 50px !important;
-                box-sizing: border-box;
-
-            }
-            .ui-inputfield {
-                display: flex !important;
-                align-items: center !important;
-            }
-
-            body {
-                overflow-y: auto !important;
-            }
-
-
-            /* Tabla estilizada */
-            .tabla-autorizaciones {
-                border-radius: 10px;
-                overflow: hidden;
-                font-size: 14px;
-            }
-
-            /* Encabezados */
-            .tabla-autorizaciones .ui-datatable-header,
-            .tabla-autorizaciones th {
-                background: #003366 !important;
-                color: white !important;
-                font-weight: bold;
-                text-align: center;
-                padding: 10px !important;
-                
-            }
-
-            /* Celdas */
-            .tabla-autorizaciones td {
-                padding: 8px 12px !important;
-                border-bottom: 1px solid #e0e0e0 !important;
-            }
-
-            /* Hover de las filas */
-            .tabla-autorizaciones tbody tr:hover {
-                background: #f1f7ff !important;
-            }
-
-            /* Centrado de columnas */
-            .col-centrada {
-                text-align: center !important;
-            }
-
-            /* Botón de eliminar */
-            .boton-eliminar {
-                border-radius: 6px !important;
-                padding: 0px 0px !important;
-            }
+        <h:outputScript library="primeicons" name="primeicons.css"/>
+          <!-- Ultima Theme y Layout -->
+    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 
 
 
-
-        </style>
-        <style>
-            body {
-                background: linear-gradient(to right, #f4f6f9, #eef1f6);
-                font-family: "Segoe UI", sans-serif;
-                margin: 0;
-            }
-            /* ======== ENCABEZADO ======== */
-            #top {
-                background-color: #003366;
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 10px 40px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-                width: 100%;
-                height: 70px; /* altura uniforme */
-                box-sizing: border-box;
-            }
-
-            /* SECCIONES DEL ENCABEZADO */
-            .left-section, .center-section, .right-section {
-                display: flex;
-                align-items: center;
-            }
-
-            /* para que el título quede perfectamente centrado */
-            .center-section {
-                flex: 1;
-                justify-content: center;
-                text-align: center;
-            }
-
-            /* controla el ancho mínimo de los lados */
-            .left-section {
-                gap: 15px;
-                min-width: 200px;
-            }
-
-            .right-section {
-                justify-content: flex-end;
-                min-width: 200px;
-            }
-
-            /* LOGO */
-            #top img {
-                height: 45px;
-            }
-
-            /* TITULO */
-            #top h2 {
-                margin: 0;
-                font-size: 22px;
-                font-weight: bold;
-                color: white;
-                letter-spacing: 0.5px;
-            }
-
-            /* ======== BOTÓN DE CERRAR SESIÓN ======== */
-            .logout-form .ui-button {
-                background-color: transparent !important; /* fondo transparente */
-                border: 2px solid #ffffff !important;     /* borde blanco */
-                color: #ffffff !important;                /* texto blanco */
-                font-weight: 600;
-                transition: all 0.3s ease;
-                padding: 0.6rem 1.2rem;
-                border-radius: 25px;                      /* bordes redondeados */
-                box-shadow: none !important;
-            }
-
-            /* ======== EFECTO AL PASAR O PRESIONAR ======== */
-            .logout-form .ui-button:hover,
-            .logout-form .ui-button:active,
-            .logout-form .ui-button:focus {
-                background-color: #ffffff !important;     /* fondo blanco */
-                color: #003366 !important;                /* texto azul */
-                transform: scale(1.05);
-                box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-            }
-
-            /* Ícono dentro del botón */
-            .logout-form .ui-button .pi {
-                margin-right: 6px;
-                font-size: 1rem;
-            }
-
-            /* RESPONSIVE */
-            @media (max-width: 768px) {
-                .logout-form .ui-button {
-                    padding: 0.5rem 0.9rem;
-                    font-size: 0.9rem;
-                }
-            }
-
-            /* ======== ICONO HAMBURGUESA ======== */
-            .menu-toggle {
-                font-size: 1.8em;
-                cursor: pointer;
-                color: white;
-            }
-
-            /* ======== MENÚ LATERAL ======== */
-            #left {
-                width: 250px;
-                background-color: #ffffff;
-                position: absolute;
-                top: 70px; /* debajo del encabezado */
-                bottom: 40px; /* deja espacio para el footer */
-                left: -260px;
-                padding: 10px;
-                box-shadow: 2px 0 8px rgba(1, 1, 1, 0.1);
-                border-radius: 0 8px 8px 0;
-                overflow-y: auto;
-                transition: left 0.3s ease;
-                z-index: 1000;
-            }
-
-            /* Menú visible */
-            #left.active {
-                left: 0;
-            }
-
-            /* Contenedor de contenido */
-            #content {
-                margin-left: 0;
-                padding: 25px;
-                background-color: #fdfdfd;
-                border-radius: 12px;
-                min-height: calc(100vh - 110px); /* 70 del header + 40 del footer */
-                box-shadow: 0 0 10px rgba(0,0,0,0.05);
-                transition: margin-left 0.3s ease;
-                margin-top: 10px;
-                margin-bottom: 40px; /* deja espacio para el footer */
-            }
-
-            /* Cuando el menú está abierto */
-            #left.active ~ #content {
-                margin-left: 270px;
-            }
-
-            /* ======== FOOTER ======== */
-            footer {
-                background-color: #003366;
-                color: white;
-                text-align: center;
-                padding: 8px;
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                height: 40px;
-                font-size: 13px;
-                line-height: 20px;
-            }
-
-
-            /* ======== RESPONSIVE ======== */
-            @media (max-width: 768px) {
-                #top h2 {
-                    font-size: 16px;
-                }
-
-                #left {
-                    width: 220px;
-                }
-
-                #left.active ~ #content {
-                    margin-left: 0;
-                }
-            }
-        </style>
 
         <script>
-            function toggleMenu() {
-                var menu = document.getElementById('left');
-                menu.classList.toggle('active');
+            // Variable para saber si el sidebar está abierto o cerrado
+            let sidebarOpen = true; // Por defecto abierto
+
+            function toggleSidebar() {
+                const sidebar = document.querySelector('.layout-sidebar');
+
+                if (sidebarOpen) {
+                    // Cerrar
+                    sidebar.classList.add('collapsed');
+                    sidebarOpen = false;
+                } else {
+                    // Abrir
+                    sidebar.classList.remove('collapsed');
+                    sidebarOpen = true;
+                }
             }
+            
+            
+            
+
+function aplicarTooltipsSidebar() {
+    document.querySelectorAll(".ui-panelmenu-header").forEach(function(header) {
+        const enlace = header.querySelector(".ui-panelmenu-header-link");
+        if (enlace) {
+            // Si el submenu tiene data-tooltip, úsalo
+            let texto = header.dataset.tooltip || enlace.innerText.trim();
+
+            enlace.dataset.tooltip = texto;
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", aplicarTooltipsSidebar);
+
+// Reaplicar tooltips cada vez que PrimeFaces renderice algo
+if (window.PrimeFaces) {
+    PrimeFaces.onContentReady(aplicarTooltipsSidebar);
+}
+
+
         </script>
-    </h:head> 
 
-    <h:body> 
-        <!-- ENCABEZADO -->
-        <!-- ENCABEZADO -->
-        <div id="top" class="top"> 
-            <!-- SECCIÓN IZQUIERDA -->
-            <div class="left-section">
-                <i class="pi pi-bars menu-toggle" onclick="toggleMenu()"></i>
-                <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;" />
-            </div>
 
-            <!-- SECCIÓN CENTRAL -->
-            <div class="center-section">
-                <h2>DIVISIÓN DE ESTUDIOS PROFESIONALES</h2>
-            </div>
+    </h:head>
 
-            <!-- SECCIÓN DERECHA -->
-            <div class="right-section">
-                <h:form styleClass="logout-form">
-                    <p:commandButton 
-                        value="Cerrar sesión" 
-                        icon="pi pi-sign-out"
-                        styleClass="ui-button-danger ui-button-rounded ui-button-outlined"
-                        action="#{controlSesion.cerrarSesion}"
-                        ajax="false" />
+    <h:body>
+
+       
+
+        <div class="layout-wrapper">
+
+            <!-- ================= TOPBAR ================= -->
+            <div class="layout-topbar">
+
+
+                <div class="menu-toggle-btn" onclick="toggleSidebar()">
+                    <i class="pi pi-bars"></i>
+                </div>
+
+                <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;  margin-left:30px;" />
+
+                <div class="title">DIVISIÓN DE ESTUDIOS PROFESIONALES</div>
+
+                <h:form>
+                    <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"  
+                                     action="#{controlSesion.cerrarSesion}" ajax="false" styleClass="cerrar-sesion-btn"  />
                 </h:form>
             </div>
+
+
+            <div class="layout-main-container">
+
+                <!-- ================= SIDEBAR ================= -->
+                <div class="layout-sidebar">
+
+                                    <h:form>
+                      <p:panelMenu style="width:100%;" styleClass="custom-menu">  
+                     
+                                                      <!-- =================== MANTENIMIENTO =================== -->
+                            <p:submenu label="Mantenimiento" styleClass="submenu-icon-car"    pt:data-tooltip="Información Escolar" >
+                                      
+                                           <p:submenu label="Grupos" icon="pi pi-users">
+                                            <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="/divisionEP/gruposNE?faces-redirect=true" icon="pi pi-plus-circle"/> 
+                                             <p:menuitem value="Aguste de capacidad"  icon="pi pi-sliders-h" />
+                                             <p:menuitem value="Paralelos"  icon="pi pi-sitemap" />
+                                             <p:menuitem value="Migrar Grupos"  icon="pi pi-refresh" />
+                                           </p:submenu>
+                                
+                                            <p:submenu label="Aulas" icon="pi pi-briefcase">
+                                                  <p:menuitem value="Nueva"  icon="pi pi-plus" />
+                                                  <p:menuitem value="Modificaciones"  icon="pi pi-pencil" />
+                                            </p:submenu>
+                                
+                                          <p:submenu label="Inscripciones" icon="pi pi-calendar">
+                                            <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones" actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-calendar-plus"/> 
+                                             <p:menuitem value="Verano"  icon="pi pi-sun" />
+                                            <p:menuitem value="Autorizacion Academica"  action="/divisionEP/autorizacionAcademica?faces-redirect=true"    actionListener="#{autorizacionBean.inicializacion}"   icon="pi pi-verified"/>
+                                            <p:submenu label="Problemas Reinscripcion" icon="pi pi-exclamation-triangle">
+                                                  <p:menuitem value="Programacion de fechas de atencion"  icon="pi pi-clock" />
+                                                  <p:menuitem value="Seguimiento a problemas"  icon="pi pi-search" />
+                                                  <p:menuitem value="Folios de atencion"  icon="pi pi-file" />
+                                           </p:submenu>
+                                             <p:menuitem value="Configuracion Semestres Permitidos"  icon="pi pi-cog" />
+                                           </p:submenu>
+                                
+                                            <p:menuitem value="NIP's de Alumnos"  icon="pi pi-key" />
+                                            
+                                             <p:submenu label="Residencias" icon="pi pi-home">
+                                                  <p:menuitem value="Registro de Alumnos"  icon="pi pi-user-plus" />
+                                                  <p:menuitem value="autorizar Residencias"  icon="pi pi-verified" />
+                                                  <p:menuitem value="Estatus"  icon="pi pi-info-circle" />
+                                           </p:submenu>
+                                            
+                                            <p:menuitem value="solicitud comite academico"  icon="pi pi-users" />
+                                            
+                                            
+                                             <p:submenu label="Materias" icon="pi pi-book">
+                                                 <p:menuitem value="Verano"  icon="pi pi-sun" />
+                                           </p:submenu>
+                                            
+                           </p:submenu>
+                                                                  <!-- =================== CONSULTAS =================== -->
+                            <p:submenu label="Consultas" styleClass="submenu-icon-car"    pt:data-tooltip="Información Escolar" >
+                                            <p:submenu label="Grupos" icon="pi pi-users">
+                                            <p:menuitem value="Por Carrera Monitoreo"  icon="pi pi-chart-line"/> 
+                                             <p:menuitem value="Por Carrera"  icon="pi pi-sitemap" />
+                                             <p:menuitem value="Por Departamento"  icon="pi pi-building" />
+                                             <p:menuitem value="Menores de 10 Inscritos"  icon="pi pi-exclamation-triangle" />
+                                           </p:submenu>
+                                            <p:submenu label="Aulas" icon="pi pi-building">
+                                                  <p:menuitem value="Disponibilidad de Aulas"  icon="pi pi-check-circle" />
+                                                  <p:menuitem value="Ocupacion de Aulas"  icon="pi pi-clock" />
+                                            </p:submenu>
+                                            <p:menuitem value="Lista de Asistencia"  icon="pi pi-list" />
+                                            <p:submenu label="Alumnos" icon="pi pi-users">
+                                                  <p:menuitem value="Alumnos General"  icon="pi pi-users" />
+                                                  <p:menuitem value="Alumnos Inscriptos"  icon="pi pi-check" />
+                                                  <p:menuitem value="Calificaciones Parciales"  icon="pi pi-chart-bar" />
+                                                  <p:menuitem value="Examenes Especiales"  icon="pi pi-file-edit" />
+                                                  <p:menuitem value="Problables a Egresar"  icon="pi pi-briefcase" />
+                                                  <p:menuitem value="Materias Pendientes"  icon="pi pi-exclamation-circle" />
+                                           </p:submenu>
+                                            <p:submenu label="Materias" icon="pi pi-book">
+                                                  <p:menuitem value="Analisis de Materias"  icon="pi pi-chart-pie" />
+                                                  <p:menuitem value="Materias en Retícula"  icon="pi pi-table" />
+                                                
+                                           </p:submenu>
+                                           <p:menuitem value="Estadisticas"  icon="pi pi-chart-bar" />
+                                           <p:menuitem value="Cargas Académicas"  icon="pi pi-briefcase" />
+                                             <p:submenu label="Residencias" icon="pi pi-home">
+                                                  <p:menuitem value="Residencia por Carrera"  icon="pi pi-chart-bar" />
+                                           </p:submenu>                           
+                            </p:submenu>
+                                                                  
+                                                                  
+                                                                  
+                                                                  <!-- =================== IMPRESION =================== -->
+                            <p:submenu label="Impresion" styleClass="submenu-icon-car"   icon="pi pi-print" pt:data-tooltip="Información Escolar" >
+                            
+                            <p:menuitem value="Horarios por Carrera"  icon="pi pi-calendar" />
+                            <p:menuitem value="Grupos Base"  icon="pi pi-sitemap" />
+                            <p:menuitem value="Créditos inferiores al mínimo"  icon="pi pi-exclamation-triangle" />
+                            <p:menuitem value="Créditos y Materiales Totales"  icon="pi pi-file" />
+                            <p:menuitem value="Promedio de Pgresados"  icon="pi pi-chart-line" />
+                            </p:submenu>
+                                                                   <!-- =================== UTILERIAS =================== -->
+                            <p:submenu label="Utilerias" styleClass="submenu-icon-car"  icon="pi pi-wrench"  pt:data-tooltip="Información Escolar" >
+                            
+                            <p:menuitem value="Cambio de Contraseña"  icon="pi pi-lock" />
+                            
+                            </p:submenu>
+                        </p:panelMenu>
+                </h:form>
+
+                </div>
+
+
+<!-- ================= CONTENIDO ================= -->
+<div class="layout-main">
+
+    <!-- CAJA DE BIENVENIDA ESTUDIANTE -->
+    <h:panelGroup id="welcomeBox" layout="block"
+                  rendered="#{view.viewId eq '/divisionEP/index.xhtml'}"
+                  styleClass="welcome-box">
+<div class="dashboard-header">
+    <h3 class="dashboard-title"> Bienvenid@s al Departamento "División de Estudios Profesionales"</h3>
+
+    <h:graphicImage library="imagenes"
+                    name="sistema/logo_tec.jpg"
+                    styleClass="dashboard-image"/>
+
+    <p class="dashboard-subtitle">
+        Gestión académica del periodo activo
+    </p>
+</div>
+        
+        
+
+        <div class="ui-g dashboard-grid">
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="dashboard-card">
+                    <i class="pi pi-book dashboard-icon"></i>
+                    <span class="dashboard-number">#{divisionBean.totalMaterias}</span>
+                    <span class="dashboard-text">Materias registradas</span>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="dashboard-card">
+                    <i class="pi pi-users dashboard-icon"></i>
+                    <span class="dashboard-number">#{divisionBean.totalGrupos}</span>
+                    <span class="dashboard-text">Grupos creados</span>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="dashboard-card warning">
+                    <i class="pi pi-exclamation-circle dashboard-icon"></i>
+                    <span class="dashboard-number">#{divisionBean.materiasSinGrupo}</span>
+                    <span class="dashboard-text">Materias sin grupo</span>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="dashboard-card">
+                    <i class="pi pi-calendar dashboard-icon"></i>
+                    <span class="dashboard-number">#{divisionBean.periodoActivo}</span>
+                    <span class="dashboard-text">Periodo activo</span>
+                </div>
+            </div>
+
         </div>
 
 
-        <!-- MENÚ LATERAL -->
-        <div id="left"> 
-            <ui:insert name="left">
-                <h:form>
-                    <p:menu toggleable="true">
-                        <p:submenu label="Mantenimiento" expanded="false"> 
-                            <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="/divisionEP/gruposNE?faces-redirect=true" icon="pi pi-plus-circle"/> 
-                            <p:menuitem value="Asistencia" action="index" icon="pi pi-calendar-check"/>
-                            <p:menuitem value="Autorizacion Academica" 
-                                        action="/divisionEP/autorizacionAcademica?faces-redirect=true" 
-                                        actionListener="#{autorizacionBean.inicializacion}"
-                                        icon="pi pi-users"/>
-                            <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-file-edit"/> 
-                            <p:menuitem value="Horarios" action="horarios" icon="pi pi-clock"/> 
-                            <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
-                        </p:submenu> 
-
-                        <p:submenu label="Inscripciones" expanded="false"> 
-                            <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones" actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-calendar-plus"/> 
-                            <p:menuitem value="Autorizacion Academica" 
-                                        action="/divisionEP/autorizacionAcademica?faces-redirect=true" 
-                                        actionListener="#{autorizacionBean.inicializacion}"
-                                        icon="pi pi-users"/>
-                            <p:menuitem value="Grupos Disponibles" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-users"/> 
-                            <p:menuitem value="Horario Inscripcion" action="horarios" icon="pi pi-clock"/> 
-                            <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
-                        </p:submenu> 
-
-                        <p:submenu label="Eval. Docente" expanded="false"> 
-                            <p:menuitem value="Asistencia" action="asistenciaDocente" icon="pi pi-calendar-check"/> 
-                            <p:menuitem value="Justificación" actionListener="#{horarioBean.buscarFaltas}" action="justificaDocente" icon="pi pi-file-edit"/> 
-                            <p:menuitem value="Horarios" action="horarios" icon="pi pi-clock"/> 
-                            <p:menuitem value="Cerrar sesión" action="#{controlSesion.cerrarSesion}" ajax="false" icon="pi pi-sign-out"/> 
-                        </p:submenu>
-                    </p:menu> 
-                </h:form>
-            </ui:insert> 
-        </div> 
-
-        <!-- CONTENIDO -->
-        <div id="content" class="left_content"> 
-            <ui:insert name="content">
-
-            </ui:insert> 
+    </h:panelGroup>
 
 
-        </div> 
 
-        <footer>
-            © 2025 Tecnológico Nacional de México Campus Cuautla | División de Estudios Profesionales
-        </footer>
-    </h:body> 
+
+</div>
+
+
+
+
+
+
+    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
+    <ui:insert name="content" />
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        function hideWelcomeBox() {
+                            const box = document.getElementById("welcomeBox");
+                            if (box) {
+                                box.classList.add("hide-welcome");
+                            }
+                        }
+
+                        // 1. Ocultar cuando se hace clic en el menú
+                        document.querySelectorAll(".ui-menuitem-link, .ui-panelmenu .ui-menuitem-link")
+                                .forEach(item => item.addEventListener("click", hideWelcomeBox));
+
+                        // 2. OCULTAR DESPUÉS de cualquier actualización AJAX
+                        if (window.PrimeFaces) {
+                            PrimeFaces.onAjaxCompletion(function () {
+                                hideWelcomeBox();
+                            });
+                        }
+                    });
+                </script>
+
+
+
+            </div>
+
+            <!-- ================= FOOTER ================= -->
+            <div class="layout-footer">
+                © 2025 Tecnológico Nacional de México Campus Cuautla | División de Estudios Profesionales
+            </div>
+
+        </div>
+
+    </h:body>
+
+
+
 </html>

@@ -7,7 +7,6 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
       <link rel="icon" href="#{resource['assets/itc.png']}" type="image/x-icon"/>
         <title>Sistema Escolar ITC</title>
    
@@ -18,55 +17,34 @@
     <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
     <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
-
     </h:head>
 
     <h:body>
 
-
-
-    
-    
             <div class="layout-topbar">
-
                 <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px;  margin-left:10px;" />
-
                 <div class="title">INSTITUTO TECNOLÓGICO DE CUAUTLA MORELOS</div>
-
                 <h:form>
-                    <p:commandButton value="Volver al inicio" icon="pi pi-home"  
-                onclick="window.history.back(); return false;"
-                 styleClass="cerrar-sesion-btn" />
-
+                    <p:commandButton value="Volver al inicio" icon="pi pi-home" onclick="window.history.back(); return false;"  styleClass="cerrar-sesion-btn" />
                 </h:form>
             </div>
         
-        <div>
-
-            
+        <div>   
             <div id="content" class="left_content">
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </div>
         
-        
-           <!-- PIE DE PAGINA -->
             <footer>
             © 2025 Tecnológico Nacional de México Campus Cuautla 
             </footer>
-    
-    
-    
-    
-    
-            <style>
+           <style>
  /* ======== GLOBAL ======== */
 body {
     background: #ffffff;               /* Azul claro institucional */
     font-family: "Segoe UI", sans-serif;
     margin: 0;
-}
-    
+}    
 /* ===== TOPBAR ENCABEZADO ===== */
 .layout-topbar {
     background-color: #003366 !important;
@@ -78,15 +56,12 @@ body {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16);
     z-index: 1000;
 }
-
-
 .layout-topbar .title {
     flex: 1;
     text-align: center;
     font-size: 1.25rem;
     font-weight: 600;
 }
-
 /* ====== BOTÓN VOLVER AL INICIO ====== */
 .cerrar-sesion-btn {
     background-color: #003366 !important; /* Color  */
@@ -100,7 +75,6 @@ body {
     align-items: center !important;
     justify-content: center !important;
 }
-
 /* Quita estilos internos de PrimeFaces */
 .cerrar-sesion-btn .ui-button-text {
     padding: 0 !important;

@@ -10,6 +10,93 @@
 <ui:composition template="templatePrincipal.xhtml">
 <ui:define name="content">
 
+<div class="login-wrapper">
+
+    <div class="login-image">
+          <p:graphicImage library="imagenes" name="sistema/logo_tec.jpg" />
+    </div>
+
+    <div class="login-card">
+        <h:form>
+                           <div class="login-logo">
+                           <i class="pi pi-user"></i>
+                            </div>
+          
+            <h2>Iniciar Sesión</h2>
+            <p class="subtitulo-login">Sistema Integral de Servicios Escolares</p>
+
+            <!-- Usuario -->
+            <div class="ui-inputgroup">
+                <div class="ui-inputgroup-addon">
+                    <i class="pi pi-user"></i>
+                </div>
+                <p:inputText id="usr" value="#{loginBean.usuario}" required="true" placeholder="Usuario" />
+            </div>
+
+            <!-- Contraseña -->
+            <div class="ui-inputgroup">
+                <div class="ui-inputgroup-addon">
+                    <i class="pi pi-lock"></i>
+                </div>
+        <div class="password-wrapper">
+            <p:password id="pass"
+                        value="#{loginBean.contrasena}"
+                        placeholder="Contraseña"
+                        feedback="false" />
+
+            <i class="pi pi-eye toggle-eye"
+               onclick="togglePassword(this)"></i>
+        </div>
+
+
+
+            </div>
+            
+            
+
+
+            <!-- Botón -->
+            <p:commandButton value="Iniciar Sesión" action="#{loginBean.loginEstudiante()}" ajax="false" styleClass="iniciar-sesion" />
+
+            <!-- Mensaje motivacional -->
+            <p class="mensaje-motivacional">
+                Lo que aprendas hoy construye el mañana que sueñas.
+            </p>
+
+            <!-- Pie interno -->
+            <p class="pie-login">
+              ¿Problemas para acceder?  Contacta a soporte escolar.
+            </p>
+
+        </h:form>
+    </div>
+</div>
+<script>
+    function togglePassword(icon) {
+
+        // Busca el input REAL generado por PrimeFaces
+        const wrapper = icon.closest('.password-wrapper');
+        const input = wrapper.querySelector('input');
+
+        if (!input) {
+            console.error("No se encontró el input password");
+            return;
+        }
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('pi-eye');
+            icon.classList.add('pi-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.remove('pi-eye-slash');
+            icon.classList.add('pi-eye');
+        }
+    }
+</script>
+    
+
+
 <style>
 
 
@@ -28,9 +115,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
             overflow: hidden;
 }
-
 /* ======== LADO IMAGEN ======== */
-        /* Imagen del login */
         .login-image {
             flex: 1;
             display: flex;
@@ -52,8 +137,6 @@
     padding: 2rem 2.2rem;
     text-align: center;
 }
-
-
 .login-logo {
     display: flex;
     justify-content: center;
@@ -217,106 +300,7 @@ input.ui-inputfield:focus,
     outline: none;
 }
 
-
-
-
-
 </style>
-
-<div class="login-wrapper">
-
-    <div class="login-image">
-        
-          <p:graphicImage library="imagenes" name="sistema/logo_tec.jpg" />
-    </div>
-
-    <div class="login-card">
-        <h:form>
-
-                            <div class="login-logo">
-                           <i class="pi pi-user"></i>
-                            </div>
-            <!-- Título -->
-            <h2>Iniciar Sesión</h2>
-
-            <!-- Subtítulo -->
-            <p class="subtitulo-login">Sistema Integral de Servicios Escolares</p>
-
-            <!-- Usuario -->
-            <div class="ui-inputgroup">
-                <div class="ui-inputgroup-addon">
-                    <i class="pi pi-user"></i>
-                </div>
-                <p:inputText id="usr" value="#{loginBean.usuario}" required="true" placeholder="Usuario" />
-            </div>
-
-            <!-- Contraseña -->
-            <div class="ui-inputgroup">
-                <div class="ui-inputgroup-addon">
-                    <i class="pi pi-lock"></i>
-                </div>
-
-
-
-        <div class="password-wrapper">
-            <p:password id="pass"
-                        value="#{loginBean.contrasena}"
-                        placeholder="Contraseña"
-                        feedback="false" />
-
-            <i class="pi pi-eye toggle-eye"
-               onclick="togglePassword(this)"></i>
-        </div>
-
-
-
-            </div>
-            
-            
-
-
-            <!-- Botón -->
-            <p:commandButton value="Iniciar Sesión" action="#{loginBean.loginEstudiante()}" ajax="false" styleClass="iniciar-sesion" />
-
-            <!-- Mensaje motivacional -->
-            <p class="mensaje-motivacional">
-                Lo que aprendas hoy construye el mañana que sueñas.
-            </p>
-
-            <!-- Pie interno -->
-            <p class="pie-login">
-              ¿Problemas para acceder?  Contacta a soporte escolar.
-            </p>
-
-        </h:form>
-    </div>
-</div>
-<script>
-    function togglePassword(icon) {
-
-        // Busca el input REAL generado por PrimeFaces
-        const wrapper = icon.closest('.password-wrapper');
-        const input = wrapper.querySelector('input');
-
-        if (!input) {
-            console.error("No se encontró el input password");
-            return;
-        }
-
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.remove('pi-eye');
-            icon.classList.add('pi-eye-slash');
-        } else {
-            input.type = 'password';
-            icon.classList.remove('pi-eye-slash');
-            icon.classList.add('pi-eye');
-        }
-    }
-</script>
-
-
-
 </ui:define>
 </ui:composition>
 
