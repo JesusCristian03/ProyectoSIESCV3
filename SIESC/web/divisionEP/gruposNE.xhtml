@@ -9,20 +9,25 @@
         <ui:composition template="./templateDEP.xhtml">
 
             <ui:define name="content">
+            
+                   
                 <f:view>
-                    <!-- AQUI VA EL METADATA -->
+                   
                     <f:metadata>
                         <f:event type="preRenderView" listener="#{horarioCrearBean.resetearSiEsRecarga}" />
                     </f:metadata>
-                    <h:form id="horarioG" style="width:80%;  margin:auto; margin-top:20px;">
+                    <h:form id="horarioG" style="width:100%;  margin:auto; margin-top:0px;">
                         <h:outputScript>
                             var maximoSeleccion = #{horarioCrearBean.creditos};
                         </h:outputScript> 
-                        <p:panel header="CREAR GRUPO: " style="margin-bottom:10px;">
-                            <p:panelGrid columns="3" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-4">
+                        <p:panel header="CREAR GRUPO: "  styleClass="panel-crear-grupo">
+                            <p:panelGrid columns="4" styleClass="ui-fluid form-horario" columnClasses="ui-g-12 ui-sm-6 ui-md-3">
                                 <p:outputLabel for="carrera" value="CARRERA:"/>
                                 <p:outputLabel for="periodo" value="PERIODO:"/>
                                 <p:outputLabel for="semestre" value="SEMESTRE:"/>
+                                <p:outputLabel for="asignatura" value="Asignatura: " />
+                                
+                                
                                 <p:selectOneMenu id="carrera" value="#{horarioCrearBean.carreraS}" 
                                                  style="width:100%" 
                                                  filter="true" 
@@ -65,9 +70,8 @@
                                     <f:selectItem itemLabel="SEMESTRE 9" itemValue="9"/>
                                 </p:selectOneMenu>
 
-                                <p:outputLabel for="asignatura" value="Asignatura: " />
-                                <p:outputLabel for="aulas" value="AULA:"/> 
-                                <p:outputLabel for="grupos" value="NOMBRE GRUPO:" />
+                               
+                            
                                 <p:selectOneMenu id="asignatura" 
                                                  value="#{horarioCrearBean.asignaturaS}" 
                                                  style="width:100%" 
@@ -86,7 +90,10 @@
                                                    itemValue="#{listaAsignatura.idMateriaCarrera}" />
                                 </p:selectOneMenu>
 
-
+                                <p:outputLabel for="aulas" value="AULA:"/> 
+                                <p:outputLabel for="grupos" value="NOMBRE GRUPO:" />
+                                <p:outputLabel for="capgrupos" value="ESTUDIANTES"/>
+                                <p:outputLabel for="panelBotonesModoGrupoAulas" value=""/>
                                 <p:selectOneMenu id="aulas" 
                                                  value="#{horarioCrearBean.aulas}" 
                                                  style="width:100%" 
@@ -104,18 +111,12 @@
                                              title="Namegroup"
                                              required="true"
                                              requiredMessage="CAMPO NOMBRE GRUPO ES OBLIGATORIO."
-                                             style="width:400px"
+                                             style="width:275px"
                                              disabled="#{horarioCrearBean.desactivarCampos}">
                                     <!-- Este bloque hace que al escribir o cambiar, se llame al método -->
                                     <p:ajax event="input" listener="#{horarioCrearBean.cambioGrupo}" update="grupo panelBotones panelBotonesModoGrupoAulas" process="@this"/>
 
                                 </p:inputText>
-
-
-                                <p:outputLabel for="capgrupos" value="ESTUDIANTES"/>
-
-                                <p:outputLabel value=""/>
-                                <p:outputLabel value=""/>
 
                                 <p:inputNumber id="capgrupos" 
                                                value="#{horarioCrearBean.numestudiantes}" 
@@ -123,22 +124,71 @@
                                                requiredMessage="El campo es obligatorio"
                                                minValue="0"
                                                maxValue="100"      
-                                               inputStyle="width:400px"
+                                               inputStyle="width:275px"
                                                disabled="#{horarioCrearBean.desactivarCampos}">
                                     <p:ajax />
                                 </p:inputNumber>
 
+         
+                        <h:panelGroup id="panelBotonesModoGrupoAulas"
+                                      layout="block"
+                                      style="display:flex; justify-content: right; gap:10px; margin-bottom:0px; ">
 
+                            <!-- Ícono Modo Aula -->
+                            <p:commandButton icon="pi pi-building"
+                                             title="Modo Aula"
+                                             style="
+                                             width:40px;
+                                             height:40px;
+                                             display:flex;
+                                             justify-content:center;
+                                             align-items:center;
+                                             background-color:#6100B2;
+                                             color:white;
+                                             border-radius:6px;
+                                             border:2px solid #6100B2;
+                                             "
+                                             actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
+                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
+                                             oncomplete="desactivandoModoTodo(); activarModoAula();"
+                                             disabled="#{!horarioCrearBean.booleanBotonAula 
+                                                         or horarioCrearBean.desactivarCampos}"/>
 
-                                <p:growl id="growl" showDetail="true" sticky="false" life="4000"/>
+                            <!-- Ícono Modo Grupo -->
+                            <p:commandButton icon="pi pi-users"
+                                             title="Modo Grupo"
+                                             style="
+                                             width:40px;
+                                             height:40px;
+                                             display:flex;
+                                             justify-content:center;
+                                             align-items:center;
+                                             background-color:#0231B3;
+                                             color:white;
+                                             border-radius:6px;
+                                             border:2px solid #0231B3;
+                                             "
+                                             actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
+                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
+                                             oncomplete="desactivandoModoTodo(); activarModoGrupo();"
+                                             disabled="#{!horarioCrearBean.booleanBotonGrupo
+                                                         or horarioCrearBean.desactivarCampos}"/>
+                        </h:panelGroup>
+                                
+                                  <p:growl id="growl" showDetail="true" sticky="false" life="4000"/>
 
+                          
+                            
+                            
+                            
+                            
                             </p:panelGrid>
 
 
 
 
                             <p:divider />
-                            <p:panelGrid id="panelBotones" columns="4" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-3">
+                            <p:panelGrid id="panelBotones" columns="4" styleClass="ui-fluid panel-botones-sin-borde" columnClasses="ui-g-12 ui-md-3">
                                 <p:commandButton value="Insertar Materia"
                                                  icon="pi pi-save"     
                                                  iconPos="left"             
@@ -202,6 +252,48 @@
                             </p:panelGrid>
 
 
+
+<h:panelGroup layout="block" styleClass="legend-wrapper">
+
+    <div class="legend-container">
+        <div class="legend-header">SIMBOLOGÍA DE ESTADOS</div>
+
+        <div class="legend-row">
+            <div class="legend-cell celda-seleccionada">
+                Celda seleccionada
+            </div>
+
+            <div class="legend-cell celda-insertada">
+                Celda insertada / agregada
+            </div>
+
+            <div class="legend-cell resaltarEliminar">
+                Elemento marcado para eliminar
+            </div>
+
+            <div class="legend-cell celda-intercambio">
+                Intercambio confirmado
+            </div>
+
+            <div class="legend-cell celda-hover-intercambio">
+                Intercambio (hover)
+            </div>
+
+            <div class="legend-cell celda-hover-modificar">
+                Modificar (hover)
+            </div>
+
+            <div class="legend-cell celda-hover-eliminar">
+                Eliminar (hover)
+            </div>
+
+            <div class="legend-cell celda-hover-agregar">
+                Agregar (hover)
+            </div>
+        </div>
+    </div>
+
+</h:panelGroup>
                         </p:panel>
 
                         <h:inputHidden id="posicionesSeleccionadas" value="#{horarioCrearBean.posicionesSeleccionadas}" />
@@ -263,59 +355,11 @@
 
 
 
+                    
+ 
+                        
 
-
-
-
-
-
-
-                        <h:panelGroup id="panelBotonesModoGrupoAulas"
-                                      layout="block"
-                                      style="display:flex; justify-content:flex-end; gap:10px; margin-bottom:10px;">
-
-                            <!-- Ícono Modo Aula -->
-                            <p:commandButton icon="pi pi-building"
-                                             title="Modo Aula"
-                                             style="
-                                             width:40px;
-                                             height:40px;
-                                             display:flex;
-                                             justify-content:center;
-                                             align-items:center;
-                                             background-color:#6100B2;
-                                             color:white;
-                                             border-radius:6px;
-                                             border:2px solid #6100B2;
-                                             "
-                                             actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
-                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
-                                             oncomplete="desactivandoModoTodo(); activarModoAula();"
-                                             disabled="#{!horarioCrearBean.booleanBotonAula 
-                                                         or horarioCrearBean.desactivarCampos}"/>
-
-                            <!-- Ícono Modo Grupo -->
-                            <p:commandButton icon="pi pi-users"
-                                             title="Modo Grupo"
-                                             style="
-                                             width:40px;
-                                             height:40px;
-                                             display:flex;
-                                             justify-content:center;
-                                             align-items:center;
-                                             background-color:#0231B3;
-                                             color:white;
-                                             border-radius:6px;
-                                             border:2px solid #0231B3;
-                                             "
-                                             actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
-                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
-                                             oncomplete="desactivandoModoTodo(); activarModoGrupo();"
-                                             disabled="#{!horarioCrearBean.booleanBotonGrupo
-                                                         or horarioCrearBean.desactivarCampos}"/>
-                        </h:panelGroup>
-
-                        <p:dataTable value="#{horarioCrearBean.listaHorarioCrear}" id="grupo" var="item" editable="true" editMode="cell" widgetVar="tablaWidget" size="small" showGridlines="true">
+                        <p:dataTable value="#{horarioCrearBean.listaHorarioCrear}" id="grupo" var="item" styleClass="tabla-horario" editable="true" editMode="cell" widgetVar="tablaWidget" size="small" showGridlines="true" >
                             <p:ajax event="cellEdit" listener="#{horarioCrearBean.onCellEdit}" update="grupo"/>                           
 
 
@@ -1032,6 +1076,8 @@
 
                     </h:form>
                 </f:view>
+                  
+
             </ui:define>
 
         </ui:composition>

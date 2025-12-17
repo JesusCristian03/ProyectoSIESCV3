@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #003366;
+    background-color: #FFFFFF;
 }
 
 /* Estructura principal */
@@ -207,86 +207,134 @@ body {
 }
 
 
+.submenu-icon-mantenimiento > .ui-panelmenu-header > a::before {
+    content: "\e9ff"; /* pi-wrench */
+    font-family: "primeicons";
+    margin-right: 8px;
+    font-size: 1rem;
+    display: inline-block;
+    color: #003366 !important;
+}
+
+.submenu-icon-consulta > .ui-panelmenu-header > a::before {
+    content: "\e908"; /* pi-search */
+    font-family: "primeicons";
+    margin-right: 8px;
+    font-size: 1rem;
+    display: inline-block;
+    color: #003366 !important;
+}
+.submenu-icon-impresion > .ui-panelmenu-header > a::before {
+    content: "\e94b"; /* pi-print */
+    font-family: "primeicons";
+    margin-right: 8px;
+    font-size: 1rem;
+    display: inline-block;
+    color: #003366 !important;
+}
+.submenu-icon-utilerias > .ui-panelmenu-header > a::before {
+    content: "\e94a"; /* pi-cog */
+    font-family: "primeicons";
+    margin-right: 8px;
+    font-size: 1rem;
+    display: inline-block;
+    color: #003366 !important;
+}
 
 
 
-/* =========================================================
-   === SIDEBAR COLAPSADO (estilo base)
-========================================================= */
+
+
 .layout-sidebar.collapsed {
-    width: 50px !important;
-    padding: 5px !important;
-    overflow: hidden;
-   
-    overflow: visible !important;
+    width: 46px !important;
+    padding: 1px 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
     position: relative;
     z-index: 2000;
 }
 
-
-/* Oculta texto del submenu */
-.layout-sidebar.collapsed .ui-panelmenu-header > a {
-    font-size: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    justify-content: center !important;
-    pointer-events: auto; /* permite clic */
-}
-
-/* Oculta contenido interno */
+.layout-sidebar.collapsed .ui-panelmenu,
 .layout-sidebar.collapsed .ui-panelmenu-content {
-    display: none !important;
-    height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
-
-/* Oculta items internos */
-.layout-sidebar.collapsed .ui-menuitem,
-.layout-sidebar.collapsed .ui-menuitem-link,
-.layout-sidebar.collapsed .ui-menuitem-icon,
-.layout-sidebar.collapsed .ui-menuitem-text {
-    display: none !important;
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a,
+.layout-sidebar.collapsed 
+.ui-menuitem-link {
+    font-size: 0 !important;
 }
-
-/* =========================================================
-   === MOSTRAR SOLO EL ICONO DEL SUBMENU (:before)
-========================================================= */
-
-/* Asegura posición del icono */
-.layout-sidebar.collapsed .ui-panelmenu-header > a::before {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a,
+.layout-sidebar.collapsed 
+.ui-menuitem-link {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 12px 0 !important;
+    width: 100%;
+}
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::before {
+    position: static !important;
+    transform: none !important;
     font-size: 1.3rem !important;
     margin: 0 !important;
+    line-height: 1 !important;
+}
+.layout-sidebar.collapsed 
+.ui-menuitem-icon,
+.layout-sidebar.collapsed 
+.ui-menuitem-link > i.pi {
+    display: inline-block !important;
+    font-size: 1.25rem !important;
+    margin: 0 !important;
+}
+.layout-sidebar.collapsed .ui-panelmenu-header {
+    margin-top: 4px;
 }
 
-/* Color del icono según clase */
-.layout-sidebar.collapsed .submenu-icon-car > .ui-panelmenu-header > a::before,
-.layout-sidebar.collapsed .submenu-icon-pencil > .ui-panelmenu-header > a::before,
-.layout-sidebar.collapsed .submenu-icon-bar > .ui-panelmenu-header > a::before {
+.layout-sidebar.collapsed .ui-menuitem {
+    margin: 2px 0;
+}
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::before {
     color: #ffffff !important;
 }
 
-/* =========================================================
-   === OCULTAR ICONOS DE PRIMEFACES QUE NO SE USAN
-========================================================= */
-
-
-
-/* Mostrar íconos de menuitem incluso cuando está colapsado */
-.layout-sidebar.collapsed .ui-panelmenu-content .pi {
-    display: inline-block !important;
+.layout-sidebar.collapsed 
+.ui-menuitem-icon {
+    color: #cfd8dc !important;
+}
+/* Oculta el icono de expandir/colapsar del submenu */
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a > .ui-panelmenu-icon {
+    display: none !important;
+}
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a span.ui-panelmenu-icon {
+    display: none !important;
 }
 
-/* NO ocultar los <i> personalizados del submenu */
-.layout-sidebar.collapsed .ui-panelmenu-header > a i {
-    display: inline-block !important;
-    pointer-events: none !important;
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a > span.ui-panelmenu-icon {
+    display: none !important;
 }
+.layout-sidebar.collapsed 
+.ui-menuitem-icon,
+.layout-sidebar.collapsed 
+.ui-menuitem-link > i.pi {
+    display: inline-block !important;
+}
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::before {
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+
+
 
 
 
@@ -376,22 +424,20 @@ body {
     flex: 1;
     padding: 0 !important;
     overflow-y: auto;
-    background-color: #ffffff;
+    background-color: #f5f7fb;
+    text-align: center;
     animation: fadein 0.6s ease;
-
 }
 
 /* ===== TARJETA DE BIENVENIDA ===== */
 .welcome-box {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 10px 25px;
+    padding: 40px 25px;
     background: #ffffff;
     border-radius: 14px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    transition: all 0.4s ease;
- 
-
+    transition: all .4s ease;
 }
 
 
@@ -519,3 +565,489 @@ body {
         transform: translateY(0);
     }
 }
+
+
+
+
+
+
+/* =========================================================
+   ===
+========================================================= */
+
+/* =========================================================
+   === GRUPOSNE
+========================================================= */
+
+
+
+/* Encabezado del panel */
+.panel-crear-grupo .ui-panel-titlebar {
+    background-color: #037DBE !important;
+    color: #ffffff !important;
+
+    height: 36px;                /* altura cómoda */
+    padding: 0 12px;             /* solo padding horizontal */
+
+    display: flex;
+    align-items: center;         /* centra verticalmente */
+      justify-content: center;
+    box-sizing: border-box;
+}
+/* Texto del título */
+.panel-crear-grupo .ui-panel-title {
+    font-size: 0.75rem;          /* ~12px */
+    font-weight: 600;
+    line-height: 1;              /* evita empuje vertical */
+    padding: 0;                  /* no padding extra */
+    margin: 0;
+}
+
+
+
+
+
+
+/* Quitar borde del panelGrid */
+.panel-botones-sin-borde.ui-panelgrid,
+.panel-botones-sin-borde .ui-panelgrid-content,
+.panel-botones-sin-borde td {
+    border: none !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Centrar contenido de los botones */
+/* Botones compactos y centrados */
+.panel-botones-sin-borde .ui-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 32px;              /* ↓ tamaño del botón */
+        padding: 0 6px;            /* ↓ reduce ancho */
+    min-width: auto !important;/* anula ancho mínimo del theme */
+    width: auto;               /* se ajusta al contenido */
+   
+    font-size: 0.75rem;        /* ↓ texto */
+    line-height: 1;            /* evita que crezca */
+    border-radius: 6px;        /* look moderno */
+}
+
+/* Separación correcta entre icono y texto */
+/* Icono del botón */
+.panel-botones-sin-borde .ui-button .ui-button-icon-left {
+    font-size: 0.8rem;
+    margin-right: 0.4rem;
+    line-height: 1;
+}
+
+/* Texto del botón */
+.panel-botones-sin-borde .ui-button .ui-button-text {
+    padding: 0;               /* quita padding interno */
+    line-height: 1;
+}
+
+/* Base común para botones de acciones */
+.btn-guardar,
+.btn-eliminar,
+.btn-modificar,
+.btn-intercambiar {
+    color: #ffffff !important;
+    font-weight: 600;
+    border-width: 2px;
+    border-style: solid;
+}
+
+/* Guardar */
+.btn-guardar {
+    background-color: #1565c0;
+    border-color: #1565c0;
+}
+
+/* Eliminar */
+.btn-eliminar {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
+}
+
+/* Modificar */
+.btn-modificar {
+    background-color: #f57c00;
+    border-color: #f57c00;
+}
+
+/* Intercambiar */
+.btn-intercambiar {
+    background-color: #2e7d32;
+    border-color: #2e7d32;
+}
+
+/* Hover */
+.btn-guardar:hover {
+    background-color: #0d47a1;
+    border-color: #0d47a1;
+}
+
+.btn-eliminar:hover {
+    background-color: #b71c1c;
+    border-color: #b71c1c;
+}
+
+.btn-modificar:hover {
+    background-color: #ef6c00;
+    border-color: #ef6c00;
+}
+
+.btn-intercambiar:hover {
+    background-color: #1b5e20;
+    border-color: #1b5e20;
+}
+
+/* Disabled */
+.ui-button.ui-state-disabled,
+.ui-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+
+
+
+
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+
+
+
+
+
+
+
+            /* Quita padding de las celdas */
+            .ui-panelgrid .ui-panelgrid-cell {
+                padding: 5px !important;
+            }
+
+            /* Uniforma altura de todos los inputs */
+            .ui-inputfield,
+            .ui-selectonemenu,
+            .ui-selectonemenu-label {
+                height: 50px !important;
+                min-height: 50px !important;
+                box-sizing: border-box;
+
+            }
+            .ui-inputfield {
+                display: flex !important;
+                align-items: center !important;
+            }
+
+  
+
+
+            /* Tabla estilizada */
+            .tabla-autorizaciones {
+                border-radius: 10px;
+                overflow: hidden;
+                font-size: 14px;
+            }
+
+            /* Encabezados */
+            .tabla-autorizaciones .ui-datatable-header,
+            .tabla-autorizaciones th {
+                background: #003366 !important;
+                color: white !important;
+                font-weight: bold;
+                text-align: center;
+                padding: 10px !important;
+                
+            }
+
+            /* Celdas */
+            .tabla-autorizaciones td {
+                padding: 8px 12px !important;
+                border-bottom: 1px solid #e0e0e0 !important;
+                font-weight: bold !important;
+            }
+
+            /* Hover de las filas */
+            .tabla-autorizaciones tbody tr:hover {
+                background: #f1f7ff !important;
+                font-weight: bold !important;
+            }
+
+            /* Centrado de columnas */
+            .col-centrada {
+                text-align: center !important;
+            }
+
+            /* Botón de eliminar */
+            .boton-eliminar {
+                border-radius: 6px !important;
+                padding: 0px 0px !important;
+            }
+
+
+
+
+/* =========================
+   FORMULARIO HORARIO
+   ========================= */
+
+.form-horario {
+    font-size: 0.78rem; /* ↓ texto general */
+}
+
+
+/* Quitar bordes del panelGrid */
+.form-horario.ui-panelgrid,
+.form-horario .ui-panelgrid-content,
+.form-horario td {
+    border: none !important;
+    background: transparent;
+}
+
+/* Espaciado entre filas */
+.form-horario td {
+    padding: 0.75rem 0.75rem 1rem;
+    vertical-align: top;
+}
+
+/* Etiquetas */
+.form-horario .ui-outputlabel {
+   font-size: 0.75rem !important; 
+    font-weight: 500 !important;
+    color: #546e7a;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+
+
+/* Inputs y selects */
+.form-horario .ui-inputfield,
+.form-horario .ui-selectonemenu {
+    border-radius: 6px;
+    
+     padding: 0.35rem 0.6rem !important;
+    box-shadow: none !important;
+}
+
+
+
+/* Altura consistente en selectOneMenu */
+
+.form-horario .ui-selectonemenu-label {
+    font-size: 0.70rem !important; 
+    padding: 0rem 0.6rem !important;
+    line-height: 1.2;
+        align-items: center !important;
+    justify-content: center !important;
+    font-weight: bold !important;
+}
+
+/* Icono del select (flecha) */
+.form-horario .ui-selectonemenu-trigger {
+    width: 2rem  !important;
+          align-items: center !important;
+    justify-content: center !important;
+}
+
+.form-horario .ui-selectonemenu-trigger .ui-icon {
+   font-size: 0.200rem !important; 
+    color: #78909c;
+}
+
+/* Iconos dentro de inputs */
+.form-horario .ui-inputnumber-button,
+.form-horario .ui-inputnumber-button .ui-icon {
+    font-size: 0.7rem;
+    color: #78909c;
+}
+
+.form-horario td {
+    padding: 0.6rem 0.6rem 0.8rem;
+}
+
+.form-horario .ui-inputfield:focus,
+.form-horario .ui-selectonemenu.ui-state-focus {
+    border-color: #90caf9;
+    box-shadow: 0 0 0 1px rgba(144, 202, 249, 0.4);
+}
+
+
+
+/* Disabled */
+.form-horario .ui-state-disabled,
+.form-horario .ui-state-disabled .ui-inputfield {
+    background-color: #f5f7f9;
+    opacity: 0.7;
+}
+
+/* Input texto y número más largos */
+.form-horario #grupos,
+.form-horario #capgrupos_input {
+    max-width: 400px;
+}
+
+/* Growl alineado */
+.form-horario .ui-growl {
+    margin-top: 1rem;
+}
+
+/* Ocultar icono de lupa del filtro en selectOneMenu */
+.ui-selectonemenu-panel .ui-selectonemenu-filter-container .ui-icon-search {
+    display: none !important;
+}
+
+/* Ajustar padding del input de filtro al quitar la lupa */
+.ui-selectonemenu-panel .ui-selectonemenu-filter {
+    padding-left: 0.75rem;
+}
+
+.ui-selectonemenu-panel .ui-icon-search::before {
+    content: "\e8b6"; /* icono PrimeIcons */
+    font-family: "PrimeIcons";
+    color: #90a4ae;
+    font-size: 0.9rem;
+}
+
+
+
+
+/* ===========================
+   SIMBOLOGÍA / LEYENDA
+=========================== */
+
+.legend-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.legend-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.legend-header {
+    background-color: #8FA3B3 !important;
+    color: #FFFFFF;
+    padding: 1px 12px;
+    font-size: 10px;
+    font-weight: bold;
+    box-sizing: border-box;
+      height: 20px;
+}
+
+.legend-row {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.legend-cell {
+    flex: 1;
+    min-width: 0;
+    height: 45px !important;
+    padding: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+/* =========================
+   ENCABEZADO DATATABLE
+   ========================= */
+
+.tabla-horario.ui-datatable thead th.ui-state-default {
+    background-color: #037DBE !important;
+    color: #ffffff !important;
+    text-align: center;
+
+    padding: 0 !important;          /* elimina padding real */
+    height: 32px !important;        /* altura real */
+    vertical-align: middle;
+}
+
+/* Contenedor interno del texto */
+.tabla-horario.ui-datatable thead th .ui-column-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 32px;                   /* MISMA altura */
+    padding: 0 6px !important;      /* padding mínimo horizontal */
+    line-height: 1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffffff !important;
+}
+
+/* Quita gradientes y sombras del theme */
+.tabla-horario.ui-datatable thead th {
+    background-image: none !important;
+}
+
+
+
+/* Elimina gradiente del theme */
+.tabla-horario.ui-datatable thead th {
+    background-image: none !important;
+}
+
+
+/* Fila completa del encabezado */
+.tabla-horario .ui-datatable-thead > tr > th {
+    background-color: #1565c0 !important;   /* azul institucional */
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    border-color: #0d47a1;
+}
+
+/* Texto del encabezado */
+.tabla-horario .ui-column-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+/* Hover en encabezado (opcional) */
+.tabla-horario .ui-datatable-thead > tr > th:hover {
+    background-color: #0d47a1;
+}
+
+/* Quitar gradientes del theme */
+.tabla-horario .ui-state-default {
+    background-image: none !important;
+}
+

@@ -52,7 +52,7 @@ function aplicarTooltipsSidebar() {
     document.querySelectorAll(".ui-panelmenu-header").forEach(function(header) {
         const enlace = header.querySelector(".ui-panelmenu-header-link");
         if (enlace) {
-            // Si el submenu tiene data-tooltip, úsalo
+            // Si el submenu tiene data-tooltip,
             let texto = header.dataset.tooltip || enlace.innerText.trim();
 
             enlace.dataset.tooltip = texto;
@@ -107,7 +107,7 @@ if (window.PrimeFaces) {
                       <p:panelMenu style="width:100%;" styleClass="custom-menu">  
                      
                                                       <!-- =================== MANTENIMIENTO =================== -->
-                            <p:submenu label="Mantenimiento" styleClass="submenu-icon-car"    pt:data-tooltip="Información Escolar" >
+                            <p:submenu label="Mantenimiento" styleClass="submenu-icon-mantenimiento"    pt:data-tooltip="Información Escolar" >
                                       
                                            <p:submenu label="Grupos" icon="pi pi-users">
                                             <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="/divisionEP/gruposNE?faces-redirect=true" icon="pi pi-plus-circle"/> 
@@ -150,7 +150,7 @@ if (window.PrimeFaces) {
                                             
                            </p:submenu>
                                                                   <!-- =================== CONSULTAS =================== -->
-                            <p:submenu label="Consultas" styleClass="submenu-icon-car"    pt:data-tooltip="Información Escolar" >
+                            <p:submenu label="Consultas" styleClass="submenu-icon-consulta"    pt:data-tooltip="Información Escolar" >
                                             <p:submenu label="Grupos" icon="pi pi-users">
                                             <p:menuitem value="Por Carrera Monitoreo"  icon="pi pi-chart-line"/> 
                                              <p:menuitem value="Por Carrera"  icon="pi pi-sitemap" />
@@ -185,7 +185,7 @@ if (window.PrimeFaces) {
                                                                   
                                                                   
                                                                   <!-- =================== IMPRESION =================== -->
-                            <p:submenu label="Impresion" styleClass="submenu-icon-car"   icon="pi pi-print" pt:data-tooltip="Información Escolar" >
+                            <p:submenu label="Impresion" styleClass="submenu-icon-impresion"   icon="pi pi-print" pt:data-tooltip="Información Escolar" >
                             
                             <p:menuitem value="Horarios por Carrera"  icon="pi pi-calendar" />
                             <p:menuitem value="Grupos Base"  icon="pi pi-sitemap" />
@@ -194,7 +194,7 @@ if (window.PrimeFaces) {
                             <p:menuitem value="Promedio de Pgresados"  icon="pi pi-chart-line" />
                             </p:submenu>
                                                                    <!-- =================== UTILERIAS =================== -->
-                            <p:submenu label="Utilerias" styleClass="submenu-icon-car"  icon="pi pi-wrench"  pt:data-tooltip="Información Escolar" >
+                            <p:submenu label="Utilerias" styleClass="submenu-icon-utilerias"  icon="pi pi-wrench"  pt:data-tooltip="Información Escolar" >
                             
                             <p:menuitem value="Cambio de Contraseña"  icon="pi pi-lock" />
                             
@@ -268,15 +268,15 @@ if (window.PrimeFaces) {
 
 
 
+
+    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
+    <ui:insert name="content" />
 </div>
 
 
 
 
 
-
-    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
-    <ui:insert name="content" />
 
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
