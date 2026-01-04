@@ -167,32 +167,182 @@ if (window.PrimeFaces) {
 
                 </div>
 
+ 
+                
+                
                 <!-- ================= CONTENIDO ================= -->
-                <div class="layout-main">
+<div class="layout-main">
 
-                    <!-- CAJA DE BIENVENIDA -->
-                    <h:panelGroup id="welcomeBox" layout="block"
-                                  rendered="#{view.viewId eq '/estudiante/index.xhtml'}"
-                                  styleClass="welcome-box">
+    <!-- CAJA DE BIENVENIDA ESTUDIANTES -->
+    <h:panelGroup id="welcomeBoxEstudiantes" layout="block"
+                  rendered="#{view.viewId eq '/estudiante/index.xhtml'}"
+                  styleClass="welcome-box">
 
-                        <h3 class="welcome-title">Bienvenido al Departamento Estudiante</h3>
-                        <p class="welcome-subtitle">Selecciona una opción del menú lateral para comenzar.</p>
+        <div class="dashboard-header">
+            <h3 class="dashboard-title">
+                Bienvenid@ al Módulo de Estudiantes
+            </h3>
+           
+            
+            <div class="ui-g-12 ui-md-12 ui-lg-6">
 
-                        <h:graphicImage library="assets" name="aguiluchos.jpg" styleClass="welcome-image"/>
+    <p:panel styleClass="info-panel">
 
-                        <p class="welcome-label">AGUILUCHOS</p>
+        <!-- PÁGINA WEB -->
+        <div class="info-section">
+            <div class="info-header">Página Web</div>
+            <div class="info-content">
+                Para ingresar a la Página Web favor de dar clic en la liga.
+                O ingresa aquí:
+                <a href="https://www.cuautla.tecnm.mx" target="_blank">
+                    www.cuautla.tecnm.mx
+                </a>
+            </div>
+        </div>
+
+        <!-- MANUAL DE INSCRIPCIÓN -->
+        <div class="info-section">
+            <div class="info-header">Manual de Inscripción</div>
+            <div class="info-content">
+                Recuerda que en el Manual de Inscripción se encuentran los pasos
+                a seguir con lo que respecta a tu proceso de reinscripción.
+                <br/>
+                <strong>
+                    <a href="#">Manual de Reinscripción</a>
+                </strong>
+            </div>
+        </div>
+
+        <!-- SISTEMA DE GESTIÓN AMBIENTAL -->
+        <div class="info-section">
+            <div class="info-header">Sistema de Gestión Ambiental</div>
+            <div class="info-content">
+                Si deseas colaborar activamente en el cuidado del medio ambiente,
+                intégrate al club ambiental, haciendo tu registro en:
+                <br/>
+                <a href="mailto:calidad@cuautla.tecnm.mx">
+                    calidad@cuautla.tecnm.mx
+                </a>
+            </div>
+        </div>
+
+        <!-- MENSAJES -->
+        <div class="info-section">
+            <div class="info-header">Mensajes</div>
+            <div class="info-content">
+                Revise el menú Inscripciones → Horarios Reinscripción, para saber
+                si tiene adeudos. Acuda a realizarlos o no podrá realizar su
+                reinscripción a tiempo.
+            </div>
+        </div>
+
+        <!-- AVISO IMPORTANTE -->
+        <div class="info-warning">
+            <strong>Selección de materias:</strong>
+            03 de enero del 2026 a las hrs.
+            <br/>
+            <span class="warning-text">
+                Si no cubre su cuota de reinscripción se le eliminarán las materias
+                seleccionadas.
+            </span>
+        </div>
+
+    </p:panel>
+
+</div>
+
+            
+<div class="ui-g-12 ui-md-12 ui-lg-6">
+    <div class="dashboard-card avance-card-wrapper">
+
+        <div class="avance-card">
+
+            <i class="pi pi-chart-line dashboard-icono"></i>
+
+            <span class="dashboard-number">
+                65%
+            </span>
+
+            <p:progressBar value="65"
+                          
+                           styleClass="avance-progress"/>
+
+            <span class="dashboard-text motivacion-text">
+                ¡Vas por buen camino, sigue avanzando!
+            </span>
+
+        </div>
+
+    </div>
+</div>
 
 
-                    </h:panelGroup>
 
-                    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
-                    <ui:insert name="content" />
 
+            <p class="dashboard-subtitle">
+                Consulta y seguimiento de tu información académica
+            </p>
+        </div>
+
+        <div class="ui-g dashboard-grid">
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="dashboard-card">
+                    <i class="pi pi-user dashboard-icon"></i>
+                    <span class="dashboard-number">
+                     
+                    </span>
+                    <span class="dashboard-text">
+                        Materias inscritas
+                    </span>
                 </div>
+            </div>
 
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="dashboard-card">
+                    <i class="pi pi-check-circle dashboard-icon"></i>
+                    <span class="dashboard-number">
+                        
+                    </span>
+                    <span class="dashboard-text">
+                        Créditos acumulados
+                    </span>
+                </div>
+            </div>
 
-                <script>
-</script>
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="dashboard-card warning">
+                    <i class="pi pi-exclamation-triangle dashboard-icon"></i>
+                    <span class="dashboard-number">
+
+                    </span>
+                    <span class="dashboard-text">
+                        Adeudos pendientes
+                    </span>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <div class="dashboard-card">
+                    <i class="pi pi-calendar dashboard-icon"></i>
+                    <span class="dashboard-number">
+                     
+                    </span>
+                    <span class="dashboard-text">
+                        Periodo escolar activo
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </h:panelGroup>
+
+    <!-- CONTENIDO DINÁMICO -->
+    <ui:insert name="content" />
+</div>
+
+  </div>
 
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
@@ -218,7 +368,7 @@ if (window.PrimeFaces) {
 
 
 
-            </div>
+          
 
             <!-- ================= FOOTER ================= -->
             <div class="layout-footer">

@@ -726,3 +726,160 @@ body {
                 font-size: 1rem !important;
                 color: #fff !important;
             }
+            
+            
+            
+
+            
+            
+
+            
+            
+            
+            /* ===== ASIGNACION Y ACTUALIZACION  ===== */
+/* ===== PANEL AZUL PERSONALIZADO ===== */
+.panel-azul .ui-panel-titlebar {
+    background-color: #037DBE !important; /* Azul */
+    color: #FFFFFF !important;           /* Texto blanco */
+    padding: 6px 12px !important;         /* Altura pequeña */
+    min-height: auto !important;
+}
+
+/* Texto del título */
+.panel-azul .ui-panel-title {
+    font-size: 13px;                      /* Tamaño compacto */
+    font-weight: 600;
+    color: #FFFFFF !important;
+    line-height: 1.2;
+}
+
+/* Quita bordes extra si el theme los agrega */
+.panel-azul.ui-panel {
+    border-radius: 4px;
+}
+
+/* ===== PANEL PLANO, SIN BORDE NI SOMBRA ===== */
+.panel-azul,
+.panel-azul .ui-panel,
+.panel-azul .ui-panel-content,
+.panel-azul .ui-widget-content {
+    border: none !important;        /* Quita todos los bordes */
+    box-shadow: none !important;    /* Quita cualquier sombra */
+    background: #FFFFFF !important; /* Fondo blanco */
+    padding: 8px 10px !important;   /* Espacio interno */
+    border-radius: 8px !important;  /* Esquinas ligeramente redondeadas */
+}
+
+
+
+
+/* ===== CONTENEDOR CARD ===== */
+.card {
+    background: #FFFFFF !important; 
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+/* ===== TÍTULO PRINCIPAL ===== */
+.card h2 {
+    color: #1976D2 !important; 
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* ===== TOOLBAR BUSCADOR ===== */
+.ui-toolbar {
+    background: #E3F2FD !important;   /* Azul muy suave */
+    border: none !important;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.ui-toolbar .ui-inputfield {
+    border-radius: 8px !important; 
+}
+
+/* ===== DATATABLE GENERAL ===== */
+.ui-datatable {
+    border-radius: 12px;
+    overflow: hidden;
+    border: none !important;
+}
+
+/* ===== ENCABEZADO DE TABLA ===== */
+.ui-datatable thead th {
+    background: #1976D2 !important;   /* Azul encabezado */
+    color: #FFFFFF !important;        /* Texto blanco */
+    font-weight: 600;
+    font-size: 13px;
+    border: none !important;
+    padding: 10px;
+    text-align: center;
+}
+
+/* ===== FILAS ===== */
+.ui-datatable tbody tr {
+    background: #FFFFFF !important; 
+    transition: background-color 0.2s ease !important; 
+}
+
+.ui-datatable tbody tr:nth-child(even) {
+    background: #F8FAFC !important; 
+}
+
+.ui-datatable tbody tr:hover {
+    background: #E3F2FD !important; 
+}
+
+/* ===== CELDAS ===== */
+.ui-datatable tbody td {
+    border: none !important;
+    padding: 10px;
+    font-size: 13px;
+    color: #37474F;
+}
+
+/* ===== PAGINADOR ===== */
+.ui-paginator {
+    background: #FFFFFF !important;
+    border: none !important;
+    padding: 8px !important; 
+}
+
+.ui-paginator .ui-paginator-page {
+    border-radius: 6px !important; 
+}
+
+.ui-paginator .ui-state-active {
+    background: #1976D2 !important;
+    color: #FFFFFF !important;
+    border-radius: 6px;
+}
+
+
+/* ===== PAGINADOR VISIBLE Y LIMPIO ===== */
+.ui-datatable .ui-paginator {
+    display: block !important;
+    visibility: visible !important;
+    background: #FFFFFF !important;
+    border: none !important;
+    padding: 10px 0 !important;
+    margin-top: 10px;
+}
+
+/* Botones del paginador */
+.ui-datatable .ui-paginator-page,
+.ui-datatable .ui-paginator-next,
+.ui-datatable .ui-paginator-prev,
+.ui-datatable .ui-paginator-first,
+.ui-datatable .ui-paginator-last {
+    border-radius: 6px;
+}
+
+/* Página activa */
+.ui-datatable .ui-state-active {
+    background: #1976D2 !important;
+    color: #FFFFFF !important;
+}

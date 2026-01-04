@@ -213,80 +213,97 @@ body {
 /* =========================================================
    === SIDEBAR COLAPSADO (estilo base)
 ========================================================= */
+
 .layout-sidebar.collapsed {
-    width: 50px !important;
-    padding: 5px !important;
-    overflow: hidden;
-   
-    overflow: visible !important;
+    width: 46px !important;
+    padding: 1px 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
     position: relative;
     z-index: 2000;
 }
 
-
-/* Oculta texto del submenu */
-.layout-sidebar.collapsed .ui-panelmenu-header > a {
-    font-size: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    justify-content: center !important;
-    pointer-events: auto; /* permite clic */
-}
-
-/* Oculta contenido interno */
+.layout-sidebar.collapsed .ui-panelmenu,
 .layout-sidebar.collapsed .ui-panelmenu-content {
-    display: none !important;
-    height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
-
-/* Oculta items internos */
-.layout-sidebar.collapsed .ui-menuitem,
-.layout-sidebar.collapsed .ui-menuitem-link,
-.layout-sidebar.collapsed .ui-menuitem-icon,
-.layout-sidebar.collapsed .ui-menuitem-text {
-    display: none !important;
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a,
+.layout-sidebar.collapsed 
+.ui-menuitem-link {
+    font-size: 0 !important;
 }
-
-/* =========================================================
-   === MOSTRAR SOLO EL ICONO DEL SUBMENU (:before)
-========================================================= */
-
-/* Asegura posición del icono */
-.layout-sidebar.collapsed .ui-panelmenu-header > a::before {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a,
+.layout-sidebar.collapsed 
+.ui-menuitem-link {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 12px 0 !important;
+    width: 100%;
+}
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::before {
+    position: static !important;
+    transform: none !important;
     font-size: 1.3rem !important;
     margin: 0 !important;
+    line-height: 1 !important;
+}
+.layout-sidebar.collapsed 
+.ui-menuitem-icon,
+.layout-sidebar.collapsed 
+.ui-menuitem-link > i.pi {
+    display: inline-block !important;
+    font-size: 1.25rem !important;
+    margin: 0 !important;
+}
+.layout-sidebar.collapsed .ui-panelmenu-header {
+    margin-top: 4px;
 }
 
-/* Color del icono según clase */
-.layout-sidebar.collapsed .submenu-icon-car > .ui-panelmenu-header > a::before,
-.layout-sidebar.collapsed .submenu-icon-pencil > .ui-panelmenu-header > a::before,
-.layout-sidebar.collapsed .submenu-icon-bar > .ui-panelmenu-header > a::before {
+.layout-sidebar.collapsed .ui-menuitem {
+    margin: 2px 0;
+}
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::before {
     color: #ffffff !important;
 }
 
-/* =========================================================
-   === OCULTAR ICONOS DE PRIMEFACES QUE NO SE USAN
-========================================================= */
-
-
-
-/* Mostrar íconos de menuitem incluso cuando está colapsado */
-.layout-sidebar.collapsed .ui-panelmenu-content .pi {
-    display: inline-block !important;
+.layout-sidebar.collapsed 
+.ui-menuitem-icon {
+    color: #cfd8dc !important;
+}
+/* Oculta el icono de expandir/colapsar del submenu */
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a > .ui-panelmenu-icon {
+    display: none !important;
+}
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a span.ui-panelmenu-icon {
+    display: none !important;
 }
 
-/* NO ocultar los <i> personalizados del submenu */
-.layout-sidebar.collapsed .ui-panelmenu-header > a i {
-    display: inline-block !important;
-    pointer-events: none !important;
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a > span.ui-panelmenu-icon {
+    display: none !important;
 }
+.layout-sidebar.collapsed 
+.ui-menuitem-icon,
+.layout-sidebar.collapsed 
+.ui-menuitem-link > i.pi {
+    display: inline-block !important;
+}
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::before {
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+
+
 
 
 
@@ -327,6 +344,7 @@ body {
 
 
 
+
 /* ======================== ESTADO ACTIVO ======================== */
 .custom-menu .ui-menuitem-link.ui-state-active,
 .custom-menu .ui-menuitem-link.ui-state-highlight {
@@ -344,10 +362,11 @@ body {
 
 
 
+
 /* ===== CONTENEDOR PRINCIPAL ===== */
 .layout-main {
     flex: 1;
-    padding: 0 !important;
+    padding: 0px !important;
     overflow-y: auto;
     background-color: #f5f7fb;
     text-align: center;
@@ -358,63 +377,125 @@ body {
 .welcome-box {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 25px;
+    padding: 0px 5px;
     background: #ffffff;
     border-radius: 14px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     transition: all .4s ease;
 }
 
-/* ===== TIPOGRAFÍA PROFESIONAL ===== */
-.welcome-title {
+
+/* ===== HEADER DASHBOARD ===== */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-header .dashboard-title {
+    margin-bottom: 20px;
+}
+
+.dashboard-image {
+    padding: 20px;
+    max-height: 250px;
+    margin: 20px auto 30px auto;
+    display: block;
+       border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #037DBE;
+}
+
+.dashboard-title {
     font-family: "Inter", "Segoe UI", sans-serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
-    color: #037DBE;
-    letter-spacing: 0.3px;
-    margin-bottom: 8px;
+    color: #003366;
+    margin-bottom: 6px;
+           justify-content: center !important;
 }
 
-.welcome-subtitle {
-    font-family: "Inter", "Segoe UI", sans-serif;
-    font-size: 17px;
-    font-weight: 400;
-    color: #5e5e5e;
-    margin-bottom: 22px;
-}
-
-.welcome-label {
+.dashboard-subtitle {
     font-family: "Inter", "Segoe UI", sans-serif;
     font-size: 20px;
-    font-weight: 600;
+    color: #5e5e5e;
+    margin-bottom: 30px;
+        align-items: center !important;
+    justify-content: center !important;
+}
+
+.dashboard-grid {
+    margin-top: 20px;
+}
+
+/* ===== TARJETAS ===== */
+.dashboard-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 28px 18px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.10);
+}
+
+.dashboard-icon {
+    font-size: 60px !important;
+    color: #037DBE;
+    margin-bottom: 14px;
+}
+
+.dashboard-number {
+    display: block;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: 26px;
+    font-weight: 700;
     color: #003366;
 }
 
-.welcome-label-small {
+.dashboard-text {
     font-family: "Inter", "Segoe UI", sans-serif;
     font-size: 15px;
-    font-weight: 500;
-    color: #4a4a4a;
+    color: #6b6b6b;
 }
 
-
-/* ===== IMAGEN ===== */
-.welcome-image {
-    height: 330px;
-    object-fit: contain;
-    margin-bottom: 25px;
-    transition: transform 0.4s ease;
+/* Advertencia */
+.dashboard-card.warning .dashboard-icon {
+    color: #f0ad4e;
 }
 
-.welcome-image:hover {
-    transform: scale(1.03);
+/* ===== CASCARÓN VISUAL (SIN FUNCIONALIDAD) ===== */
+.dashboard-container.shell {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
+.dashboard-card.shell {
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
 
+.dashboard-card.shell:hover {
+    transform: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
 
-/* Ocultar sección */
-.hide-welcome {
-    display: none !important;
+.dashboard-icon.big {
+    font-size: 80px !important;
+}
+
+/* ===== LAYOUT ===== */
+.dashboard-layout {
+    align-items: flex-start;
 }
 
 /* ===== ANIMACIÓN ===== */
@@ -428,6 +509,133 @@ body {
         transform: translateY(0);
     }
 }
+
+
+/* ===== CONTENEDOR EXTERNO ===== */
+.avance-card-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* ===== TARJETA AVANCE ===== */
+.avance-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* CENTRA TODO */
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 560px;
+    box-sizing: border-box;
+}
+
+/* ICONO */
+.dashboard-icono {
+    font-size: 8rem !important;
+    margin-bottom: 12px;
+    color: #1E88E5 !important;
+}
+
+/* PORCENTAJE */
+.dashboard-number {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #0D47A1;
+    margin-bottom: 10px;
+}
+
+/* BARRA */
+
+.avance-progress {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    margin: 10px auto;
+}
+
+.avance-progress .ui-progressbar {
+    height: 10px;
+    border-radius: 10px;
+    background: #E3F2FD;
+}
+
+.avance-progress .ui-progressbar-value {
+    background: linear-gradient(90deg, #42A5F5, #1E88E5);
+    border-radius: 10px;
+}
+
+/* TEXTO */
+.motivacion-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1E88E5;
+    max-width: 520px;
+    line-height: 1.4;
+}
+
+
+
+
+/* ===== PANEL INFORMATIVO ESTUDIANTES ===== */
+
+.info-panel {
+    border-radius: 6px;
+    padding: 0;
+     width: 100%;
+}
+
+/* Secciones */
+.info-section {
+    margin-bottom: 12px;
+    border: 1px solid #DADADA;
+}
+
+/* Encabezados */
+.info-header {
+    background-color: #0D47A1;
+    color: #FFFFFF;
+    font-weight: 700;
+    padding: 6px 12px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+/* Contenido */
+.info-content {
+    background-color: #E0E0E0;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    color: #1F1F1F;
+    line-height: 1.4;
+     width: 100%;
+}
+
+.info-content a {
+    color: #1976D2;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.info-content a:hover {
+    text-decoration: underline;
+}
+
+/* Aviso importante */
+.info-warning {
+    background-color: #BDBDBD;
+    padding: 10px;
+    font-size: 0.85rem;
+    border: 1px solid #9E9E9E;
+     width: 100%;
+}
+
+.warning-text {
+    color: #D32F2F;
+    font-weight: 700;
+}
+
 
 
 /* ===== FOOTER ===== */

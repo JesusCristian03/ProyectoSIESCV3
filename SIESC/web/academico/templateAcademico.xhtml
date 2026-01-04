@@ -14,7 +14,13 @@
 
         <h:outputStylesheet  library="css" name="academico.css"/>
 
-
+        <h:outputScript library="primeicons" name="primeicons.css"/>
+          <!-- Ultima Theme y Layout -->
+    
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
+    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
+    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
 
         <script>
             function toggleSidebar() {
@@ -53,93 +59,202 @@
                         <p:panelMenu style="width:100%;" styleClass="custom-menu">
 
 
-                            <!-- 1 DOCENTE -->
-                            <p:submenu label="MATENIMIENTO" icon="pi pi-users" styleClass="submenu-icon-mantenimiento">
+                            <!-- MANTENIMIENTO -->
+<p:submenu label="MANTENIMIENTO" icon="pi pi-cog" styleClass="submenu-icon-mantenimiento">
 
-                                <p:submenu label="DOCENTES" icon="pi pi-users">
-                                    <p:submenu label="BASE" icon="pi pi-users">
-                                        <p:menuitem value="Asignacion a grupo" action="/academico/AsignacionActualizacion?faces-redirect=true"
-                                                    icon="pi pi-user-plus" actionListener="#{asignacionMGBean.inicializar}"/>
+    <p:submenu label="Docentes" icon="pi pi-users">
 
-                                        <p:menuitem value="Asignacion temporal " outcome=""
-                                                    icon="" />
-                                        <p:menuitem value="Asignacion temporal " outcome=""
-                                                    icon="" />
-                                    </p:submenu>
+        <p:submenu label="Base" icon="pi pi-id-card">
+            <p:menuitem value="Asignación a grupo"
+                        icon="pi pi-user-plus"
+                        action="/academico/AsignacionActualizacion?faces-redirect=true"
+                        actionListener="#{asignacionMGBean.inicializar}" />
 
-                                </p:submenu>
+            <p:menuitem value="Asignación temporal a otro departamento"
+                        icon="pi pi-sitemap" />
 
+            <p:menuitem value="Asignación de puesto"
+                        icon="pi pi-briefcase" />
 
-                                <p:submenu label="Grupos de Horarios" icon=" ">
-                                    <p:submenu label=" " icon=" ">
-                                        <p:menuitem value="hola " outcome="/academico/docenteBusqueda.xhtml"
-                                                    icon=" " actionListener="#{docenteBusquedaBean.inicializacion}"/>
-                                    </p:submenu>
-                                </p:submenu>
+            <p:menuitem value="Horarios administrativos y de apoyo"
+                        icon="pi pi-calendar" />
 
+            <p:menuitem value="Impresión de horarios"
+                        icon="pi pi-print" />
+        </p:submenu>
 
-                                <p:submenu label="Horarios examenes especiales/globales " icon=" ">
-                                    <p:submenu label=" " icon=" ">
-                                        <p:menuitem value=" " outcome=""
-                                                    icon=" " />
-                                    </p:submenu>
-                                </p:submenu>
+        <p:submenu label="Honorarios" icon="pi pi-user">
+            <p:menuitem value="Asignación a grupo"
+                        icon="pi pi-user-plus" />
+            <p:menuitem value="Impresión de horarios"
+                        icon="pi pi-print" />
+        </p:submenu>
 
+    </p:submenu>
 
-                                <p:submenu label="Residencias " icon=" ">
-                                    <p:submenu label=" " icon=" ">
-                                        <p:menuitem value=" " outcome=""
-                                                    icon=" " />
-                                    </p:submenu>
-                                </p:submenu>
+    <p:menuitem value="Grupos de Horarios"
+                icon="pi pi-clock" />
 
+    <p:menuitem value="Horarios exámenes especiales / globales"
+                icon="pi pi-calendar-plus" />
 
-                                <p:submenu label="Concentrado de Autoevaluacion " icon=" ">
-                                    <p:submenu label=" " icon=" ">
-                                        <p:menuitem value=" " outcome=""
-                                                    icon=" " />
-                                    </p:submenu>
-                                </p:submenu>
+    <!-- RESIDENCIAS -->
+    <p:submenu label="Residencias" icon="pi pi-home">
+        <p:menuitem value="Asignación de asesor"
+                    icon="pi pi-user-edit" />
+        <p:menuitem value="Asignación de revisores"
+                    icon="pi pi-users" />
 
+        <p:submenu label="Documentos" icon="pi pi-folder">
+            <p:menuitem value="Acta de asesor"
+                        icon="pi pi-file-pdf" />
+            <p:menuitem value="Acta de revisores"
+                        icon="pi pi-file-pdf" />
+        </p:submenu>
+    </p:submenu>
 
-                                <p:submenu label="Programa oficial " icon=" ">
-                                    <p:submenu label=" " icon=" ">
-                                        <p:menuitem value=" " outcome=""
-                                                    icon=" " />
-                                    </p:submenu>
-                                </p:submenu>
+    <p:menuitem value="Concentrado de Autoevaluación"
+                icon="pi pi-check-square" />
 
+    <p:submenu label="Programa oficial" icon="pi pi-book">
+        <p:menuitem value="Programas Oficiales (Unidades Temáticas)"
+                    icon="pi pi-bookmark" />
+        <p:menuitem value="Subtemas"
+                    icon="pi pi-list" />
+    </p:submenu>
 
-                                <p:submenu label="Avance Reticular " icon=" ">
-                                    <p:submenu label=" " icon=" ">
-                                        <p:menuitem value=" " outcome=""
-                                                    icon=" " />
-                                    </p:submenu>
-                                </p:submenu>
+    <p:menuitem value="Avance Reticular"
+                icon="pi pi-chart-line" />
+</p:submenu>
 
+<!-- EVALUACIÓN -->
+<p:submenu label="EVALUACIÓN"  styleClass="submenu-icon-bar">
+    <p:menuitem value="Realizar evaluación"
+                icon="pi pi-check-square" />
 
-                            </p:submenu>
+    <p:menuitem value="Alumnos que no han evaluado"
+                icon="pi pi-exclamation-circle" />
 
+    <p:submenu label="Evaluación" icon="pi pi-file-check">
+        <p:menuitem value="Por Departamento"
+                    icon="pi pi-building" />
+        <p:menuitem value="Por el alumno"
+                    icon="pi pi-user" />
+        <p:menuitem value="Por el Docente"
+                    icon="pi pi-user-edit" />
+    </p:submenu>
+</p:submenu>
 
-                            <p:submenu label="EVALUACION" styleClass="submenu-icon-impresion" >
-                                <p:menuitem value="hola " outcome="/academico/AsignacionGrupos.xhtml"
-                                            icon=" " />
-                            </p:submenu>
+<!-- CONSULTAS -->
+<p:submenu label="CONSULTAS" icon="pi pi-search" styleClass="submenu-icon-consulta">
 
+    <p:submenu label="Grupos" icon="pi pi-users">
+        <p:menuitem value="Por Carrera"
+                    icon="pi pi-sitemap" />
+        <p:menuitem value="Por Departamento"
+                    icon="pi pi-building" />
+    </p:submenu>
 
-                            <p:submenu label="CONSULTAS" icon=""   styleClass="submenu-icon-consulta" >
+    <p:submenu label="Aulas" icon="pi pi-home">
+        <p:menuitem value="Disponibilidad de aulas"
+                    icon="pi pi-check" />
+        <p:menuitem value="Ocupación de aula"
+                    icon="pi pi-times" />
+    </p:submenu>
 
-                            </p:submenu>
+    <p:submenu label="Alumnos" icon="pi pi-user">
+        <p:menuitem value="Alumnos General"
+                    icon="pi pi-list" />
+        <p:menuitem value="Alumnos Inscritos"
+                    icon="pi pi-user-plus" />
+    </p:submenu>
 
+    <p:submenu label="Profesores" icon="pi pi-id-card">
+        <p:menuitem value="Filtrar docentes"
+                    icon="pi pi-filter"
+                    outcome="/academico/docenteBusqueda.xhtml"
+                    actionListener="#{docenteBusquedaBean.inicializacion}" />
 
-                            <p:submenu label="DPPI" styleClass="submenu-icon-utilerias">
+        <p:menuitem value="Plazas asignadas"
+                    icon="pi pi-briefcase" />
 
-                            </p:submenu>
+        <p:menuitem value="Sin evaluar examen especial"
+                    icon="pi pi-exclamation-triangle" />
 
+        <p:menuitem value="Detalle de horario"
+                    icon="pi pi-calendar" />
 
-                            <p:submenu label="UTILERIAS" styleClass="submenu-icon-utilerias">
+        <p:menuitem value="Sin capturar gestión curso"
+                    icon="pi pi-pencil" />
 
-                            </p:submenu>
+        <p:menuitem value="Seguimiento de SGC"
+                    icon="pi pi-eye" />
+    </p:submenu>
+
+    <p:submenu label="Egresados" icon="pi pi-graduation-cap">
+        <p:menuitem value="Listado"
+                    icon="pi pi-list" />
+        <p:menuitem value="Concentrado"
+                    icon="pi pi-database" />
+        <p:menuitem value="De 3, 4 y 5 años de egreso"
+                    icon="pi pi-calendar" />
+        <p:menuitem value="De 8 a 12 años"
+                    icon="pi pi-calendar-times" />
+        <p:menuitem value="Titulados"
+                    icon="pi pi-verified" />
+        <p:menuitem value="Titulados por opción"
+                    icon="pi pi-check-square" />
+    </p:submenu>
+
+    <p:menuitem value="Estadísticas"
+                icon="pi pi-chart-bar" />
+
+    <p:menuitem value="Lista de Asistencia"
+                icon="pi pi-book" />
+
+    <p:submenu label="Materias" icon="pi pi-bookmark">
+        <p:menuitem value="Materias por Periodo"
+                    icon="pi pi-calendar" />
+    </p:submenu>
+
+    <p:submenu label="Residencias" icon="pi pi-home">
+        <p:menuitem value="Residencias por carreras"
+                    icon="pi pi-sitemap" />
+    </p:submenu>
+</p:submenu>
+
+<!-- DPPI -->
+<p:submenu label="DPPI" icon="pi pi-chart-pie" styleClass="submenu-icon-car">
+
+    <p:submenu label="Necesidades" icon="pi pi-exclamation-circle">
+        <p:menuitem value="Necesidades"
+                    icon="pi pi-list" />
+        <p:menuitem value="Población esperada por carrera"
+                    icon="pi pi-users" />
+        <p:menuitem value="Justificación de superávit"
+                    icon="pi pi-file" />
+    </p:submenu>
+
+    <p:submenu label="Estructura Educativa" icon="pi pi-sitemap">
+        <p:menuitem value="EE Concentrado Carreras"
+                    icon="pi pi-database" />
+        <p:menuitem value="EE por Carrera"
+                    icon="pi pi-book" />
+        <p:menuitem value="EE Personal Docente"
+                    icon="pi pi-users" />
+        <p:menuitem value="EE Personal No Docente"
+                    icon="pi pi-user-minus" />
+        <p:menuitem value="EE Personal de Honorarios"
+                    icon="pi pi-user-plus" />
+    </p:submenu>
+</p:submenu>
+
+<!-- UTILERÍAS -->
+<p:submenu label="UTILERÍAS" icon="pi pi-cog" styleClass="submenu-icon-utilerias">
+    <p:menuitem value="Cambio de contraseña"
+                icon="pi pi-key" />
+</p:submenu>
+
 
 
 
