@@ -137,7 +137,7 @@ body {
 
 /* ---- Contenido interno ---- */
 .custom-menu .ui-panelmenu-content {
-    background: #F8FCFE !important; /* más minimalista */
+    background: #F8FCFE !important; /**/
    
     border: none !important;
         margin: 0 !important;
@@ -149,7 +149,7 @@ body {
 .custom-menu .ui-menuitem-link {
     padding: 8px 14px !important;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 1rem; 
     color: #003366 !important;
     transition: background 0.2s ease, color 0.2s ease;
 }
@@ -170,7 +170,17 @@ body {
     display: inline-block !important;
 }
 
-
+/* ---- SUBMENÚ (LABEL) ---- */
+.custom-menu .ui-submenu > a .ui-menuitem-text {
+    font-weight: 600!important;        /* negrita elegante */
+    letter-spacing: 0.3px;
+}
+.custom-menu .ui-submenu .ui-menuitem-link .ui-menuitem-text {
+    font-weight: 500!important;
+}
+.custom-menu .ui-submenu.ui-menuitem-active > a .ui-menuitem-text {
+    font-weight: 700!important;
+}
 
 /* MUESTRA EL ICONO EN EL SUBMENU*/
 /*.submenu-icon-home .ui-panelmenu-header::before,    esto hace que el icono este al principio*/
