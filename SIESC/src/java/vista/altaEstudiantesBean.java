@@ -23,10 +23,7 @@ import servicio.EntidadFederativaServicioLocal;
 import servicio.EstudianteServicioLocal;
 import servicio.PeriodoEscolarServicioLocal;
 
-/**
- *
- * @author cris_
- */
+
 @Named(value = "altaEstudiantesBean")
 @SessionScoped
 public class altaEstudiantesBean implements Serializable {
@@ -90,12 +87,10 @@ public class altaEstudiantesBean implements Serializable {
         alumnoGeneral.setDomicilioCalle('S');
         alumnoGeneral.setLugarNacimiento('S');
 
-        //-------------------------
-        //Por si lo necesitamos para armar el domicilio
         ciudad = estudiante.getCiudadProcedencia();
         alumnoGeneral.setNombre(estudiante.getNombreAlumno());
         alumnoGeneral.setIngresoMensual(null);
-        //Asignamos la entidad Federativa. 
+        // entidad Federativa. 
         for (EntidadFederativa e : listaEntidadFederativa) {
             System.out.println(e);
         }

@@ -14,8 +14,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     <ui:composition template="templateEscolares.xhtml">
 
         <ui:define name="content">
-
-
             <h:form id="frmBusqueda">
                 <div class="card">
                     <h2 style="margin-bottom:20px;">Alumnos</h2>
@@ -33,14 +31,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         listener="#{alumnosBusquedaBean.cambioBusqueda}" 
                                         update="tablaAlumnos" 
                                         process="@this"/>
-
-
                             </p:inputText>
-
-
-                        </p:toolbarGroup>
+                       </p:toolbarGroup>
                     </p:toolbar>
-
                     <br/>
 
                     <!-- ===================== TABLA ===================== -->
@@ -53,32 +46,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                  rowKey="#{alu.id}"
                                  styleClass="p-datatable-gridlines">
 
-                        <!-- No de Control -->
                         <p:column headerText="N° de Control" style="width:140px;">
                             <h:outputText value="#{alu.id}" />
                         </p:column>
 
-                        <!-- Apellido Paterno -->
                         <p:column headerText="Apellido paterno" sortBy="#{alu.apellidoPaterno}">
                             <h:outputText value="#{alu.apellidoPaterno}" />
                         </p:column>
 
-                        <!-- Apellido Materno -->
                         <p:column headerText="Apellido materno">
                             <h:outputText value="#{alu.apellidoMaterno}" />
                         </p:column>
 
-                        <!-- Nombre -->
                         <p:column headerText="Nombre" sortBy="#{alu.nombre}">
                             <h:outputText value="#{alu.nombre}" />
                         </p:column>
 
-                        <!-- CURP -->
                         <p:column headerText="CURP" style="width:220px;">
                             <h:outputText value="#{alu.curp}" />
                         </p:column>
 
-                        <!-- Carrera -->
                         <p:column headerText="Carrera" style="width:180px;">
                             <h:outputText value="#{alu.carrera}" />
                         </p:column>

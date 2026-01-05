@@ -6,14 +6,6 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
-
-
-    <h:head>
-        <title>Departamento de Escolares - SIESC</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-
 <h:head>
     <title>Departamento de Escolares - SIESC</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -22,24 +14,12 @@
    
        <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
 
-
-    <script>
-        function toggleSidebar() {
-            document.querySelector('.layout-sidebar').classList.toggle('collapsed');
-        }
-    </script>
-</h:head>
-
-
-
-
-
-        <script>
+       <script>
             function toggleSidebar() {
                 document.querySelector('.layout-sidebar').classList.toggle('collapsed');
             }
         </script>
-    </h:head>
+</h:head>
 
 
     <h:body>
@@ -83,13 +63,11 @@
                                </p:submenu>
                                 <p:menuitem value="Eliminación de alumnos" outcome="/escolares/listaAspirantes.xhtml"
                                             icon="pi pi-user-minus" />
-                              
-                                
+  
                                 <p:submenu label="Adeudos" icon="pi pi-exclamation-circle">
                                <p:menuitem value="Registrar adeudos" icon="pi pi-plus-circle" />
-<p:menuitem value="Consultar / Eliminar adeudos" icon="pi pi-search-minus" />
-<p:menuitem value="Lista de adeudos" icon="pi pi-list" />
-
+                               <p:menuitem value="Consultar / Eliminar adeudos" icon="pi pi-search-minus" />
+                                <p:menuitem value="Lista de adeudos" icon="pi pi-list" />
                                 </p:submenu>
                                 
                                 <p:menuitem value="Registro de titulados" outcome="/escolares/listaAspirantes.xhtml"
@@ -106,8 +84,6 @@
 
                             <!-- 2 HISTORIAL -->
                             <p:menuitem value="Historial académico"  icon="pi pi-book"/>
-                            
-                           
 
                             <!-- 3 CALIFICACIONES Y ACTAS -->
                             <p:submenu label="Calificaciones y Actas" icon="pi pi-file">
@@ -124,47 +100,47 @@
                             </p:submenu>
 
                             <p:submenu label="Inscripciones" icon="pi pi-check-square">
-    <p:menuitem value="Enero-Jun / Ago-Dic" icon="pi pi-calendar" />
-    <p:menuitem value="Verano" icon="pi pi-sun" />
-    <p:menuitem value="Autorizar inscripción" icon="pi pi-check-circle" />
-    <p:menuitem value="Solicitud" icon="pi pi-file-edit" />
+                            <p:menuitem value="Enero-Jun / Ago-Dic" icon="pi pi-calendar" />
+                            <p:menuitem value="Verano" icon="pi pi-sun" />
+                            <p:menuitem value="Autorizar inscripción" icon="pi pi-check-circle" />
+                            <p:menuitem value="Solicitud" icon="pi pi-file-edit" />
+    
+                            <p:submenu label="Listas de Inscripción" icon="pi pi-list">
+                             <p:menuitem value="Establecer fechas de inscripción" icon="pi pi-clock" />
+                               <p:menuitem value="Generar listas de inscripción" icon="pi pi-file" />
+                             </p:submenu>
 
-    <p:submenu label="Listas de Inscripción" icon="pi pi-list">
-        <p:menuitem value="Establecer fechas de inscripción" icon="pi pi-clock" />
-        <p:menuitem value="Generar listas de inscripción" icon="pi pi-file" />
-    </p:submenu>
+                            <p:menuitem value="Actualización de pagos" icon="pi pi-credit-card" />
 
-    <p:menuitem value="Actualización de pagos" icon="pi pi-credit-card" />
+                              <p:submenu label="Cargas académicas" icon="pi pi-database">
+                                  <p:menuitem value="Anular cargas académicas" icon="pi pi-times-circle" />
+                                  <p:menuitem value="Restablecer cargas" icon="pi pi-refresh" />
+                                  <p:menuitem value="Calificación a cero" icon="pi pi-minus-circle" />
+                                  <p:menuitem value="Calificación a cero total" icon="pi pi-ban" />
+                                 <p:menuitem value="Calificación faltantes" icon="pi pi-exclamation-circle" />
+                               </p:submenu>
 
-    <p:submenu label="Cargas académicas" icon="pi pi-database">
-        <p:menuitem value="Anular cargas académicas" icon="pi pi-times-circle" />
-        <p:menuitem value="Restablecer cargas" icon="pi pi-refresh" />
-        <p:menuitem value="Calificación a cero" icon="pi pi-minus-circle" />
-        <p:menuitem value="Calificación a cero total" icon="pi pi-ban" />
-        <p:menuitem value="Calificación faltantes" icon="pi pi-exclamation-circle" />
-    </p:submenu>
-
-    <p:menuitem value="Autorizar evaluación" icon="pi pi-check" />
-</p:submenu>
+                            <p:menuitem value="Autorizar evaluación" icon="pi pi-check" />
+                            </p:submenu>
 
                               <p:submenu label="Carreras" icon="pi pi-briefcase">
     <p:menuitem value="Nueva carrera" icon="pi pi-plus-circle" />
     <p:menuitem value="Actualización" icon="pi pi-pencil" />
 </p:submenu>
                             
-                            <p:submenu label="Especialidades" icon="pi pi-star">
+ <p:submenu label="Especialidades" icon="pi pi-star">
     <p:menuitem value="Nueva especialidad" icon="pi pi-plus-circle" />
     <p:menuitem value="Actualización" icon="pi pi-pencil" />
 </p:submenu>
-                            <p:submenu label="Plan curricular" icon="pi pi-folder-open">
+<p:submenu label="Plan curricular" icon="pi pi-folder-open">
     <p:menuitem value="Retícula" icon="pi pi-sitemap" />
     <p:menuitem value="Actualización de datos" icon="pi pi-pencil" />
 </p:submenu>
-                            <p:submenu label="Exámenes especiales" icon="pi pi-file-excel">
+<p:submenu label="Exámenes especiales" icon="pi pi-file-excel">
     <p:menuitem value="Solicitud de exámenes especiales o globales" icon="pi pi-file-edit" />
     <p:menuitem value="Especiales reprobados" icon="pi pi-times-circle" />
 </p:submenu>
-                            <p:submenu label="Periodos Escolares" icon="pi pi-calendar">
+<p:submenu label="Periodos Escolares" icon="pi pi-calendar">
     <p:menuitem value="Nuevo" icon="pi pi-calendar-plus" />
     <p:menuitem value="Actualización" icon="pi pi-pencil" />
     <p:menuitem value="Filtro de acceso" icon="pi pi-filter" />

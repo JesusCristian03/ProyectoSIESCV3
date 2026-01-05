@@ -518,7 +518,7 @@ body {
     color: #f0ad4e;
 }
 
-/* ===== CASCARÓN VISUAL (SIN FUNCIONALIDAD) ===== */
+/* ===== CASCARÓN VISUAL  ===== */
 .dashboard-container.shell {
     background: #ffffff;
     border-radius: 14px;
@@ -769,9 +769,6 @@ body {
     padding: 8px 10px !important;   /* Espacio interno */
     border-radius: 8px !important;  /* Esquinas ligeramente redondeadas */
 }
-
-
-
 
 /* ===== CONTENEDOR CARD ===== */
 .card {

@@ -135,7 +135,6 @@ if (window.PrimeFaces) {
                                   <p:menuitem value="Datos Generales" action="datosGenerales" icon="pi pi-id-card" />
                                  <p:menuitem value="Pago Referenciado" action="pagoReferenciado" icon="pi pi-wallet" />
 
-
                             </p:submenu>
 
                             <!-- =================== INSCRIPCIONES =================== -->
@@ -172,18 +171,14 @@ if (window.PrimeFaces) {
                 
                 <!-- ================= CONTENIDO ================= -->
 <div class="layout-main">
-
     <!-- CAJA DE BIENVENIDA ESTUDIANTES -->
-    <h:panelGroup id="welcomeBoxEstudiantes" layout="block"
-                  rendered="#{view.viewId eq '/estudiante/index.xhtml'}"
-                  styleClass="welcome-box">
+    <h:panelGroup id="welcomeBoxEstudiantes" layout="block" rendered="#{view.viewId eq '/estudiante/index.xhtml'}" styleClass="welcome-box">
 
-        <div class="dashboard-header">
+        <div class="dashboard-header">  
             <h3 class="dashboard-title">
                 Bienvenid@ al Módulo de Estudiantes
             </h3>
-           
-            
+
             <div class="ui-g-12 ui-md-12 ui-lg-6">
 
     <p:panel styleClass="info-panel">

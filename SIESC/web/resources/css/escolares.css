@@ -371,15 +371,6 @@ body {
 .layout-sidebar.collapsed .ui-panelmenu-header-link:hover::after {
     opacity: 1;
 }
-
-
-
-
-
-
-
-
-
 /* ======================== ESTADO ACTIVO ======================== */
 .custom-menu .ui-menuitem-link.ui-state-active,
 .custom-menu .ui-menuitem-link.ui-state-highlight {
@@ -394,8 +385,6 @@ body {
     color: #ffffff !important;
 }
 
-
-
 /* ===== FOOTER ===== */
 .layout-footer {
     background-color: #003366;
@@ -406,7 +395,6 @@ body {
     font-size: 13px;
     flex-shrink: 0;
 }
-
 .pi::before {
     font-family: 'PrimeIcons' !important;
 }
@@ -528,7 +516,7 @@ body {
     color: #f0ad4e;
 }
 
-/* ===== CASCARÓN VISUAL (SIN FUNCIONALIDAD) ===== */
+/* ===== CASCARÓN VISUAL  ===== */
 .dashboard-container.shell {
     background: #ffffff;
     border-radius: 14px;
@@ -592,7 +580,7 @@ body {
 .panel-registro-alumno .ui-panel-titlebar {
   background-color: #037DBE !important;
     color: #ffffff !important;
-    height: 36px;                /* altura cómoda */
+    height: 36px;                /* altura  */
     padding: 0 12px;             /* solo padding horizontal */
     display: flex;
     align-items: center;         /* centra verticalmente */

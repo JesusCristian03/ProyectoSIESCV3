@@ -383,8 +383,6 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     transition: all .4s ease;
 }
-
-
 /* ===== HEADER DASHBOARD ===== */
 .dashboard-header {
     text-align: center;
@@ -656,8 +654,6 @@ body {
 /* ================================
    INSCRIPCIONES
    ================================ */
-
-
 /* ================================
    PANEL PRINCIPAL (custom-card)
    ================================ */
@@ -682,9 +678,7 @@ body {
 
 .custom-title {
     color: inherit !important;
-
 }
-
 /* ================================
    GRID INTERNO (custom-grid)
    ================================ */
@@ -694,7 +688,6 @@ body {
     padding: 10px !important;
     border-radius: 8px !important;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-
 }
 /* PanelGrid plano, sin borde ni sombra */
 .custom-panelgrid,

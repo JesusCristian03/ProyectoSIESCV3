@@ -37,9 +37,6 @@ public class docenteBusquedaBean implements Serializable {
         this.filtro = filtro;
     }
     
-    
-    
-    
     public docenteBusquedaBean() {
     }
 

@@ -9,14 +9,9 @@
     <h:head>
         <title>Departamento Academico</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
-        <!-- Ultima Theme -->
-
         <h:outputStylesheet  library="css" name="academico.css"/>
-
         <h:outputScript library="primeicons" name="primeicons.css"/>
           <!-- Ultima Theme y Layout -->
-    
     <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
     <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
@@ -65,83 +60,56 @@
     <p:submenu label="Docentes" icon="pi pi-users">
 
         <p:submenu label="Base" icon="pi pi-id-card">
-            <p:menuitem value="Asignación a grupo"
-                        icon="pi pi-user-plus"
+            <p:menuitem value="Asignación a grupo" icon="pi pi-user-plus"
                         action="/academico/AsignacionActualizacion?faces-redirect=true"
                         actionListener="#{asignacionMGBean.inicializar}" />
-
-            <p:menuitem value="Asignación temporal a otro departamento"
-                        icon="pi pi-sitemap" />
-
-            <p:menuitem value="Asignación de puesto"
-                        icon="pi pi-briefcase" />
-
-            <p:menuitem value="Horarios administrativos y de apoyo"
-                        icon="pi pi-calendar" />
-
-            <p:menuitem value="Impresión de horarios"
-                        icon="pi pi-print" />
+            <p:menuitem value="Asignación temporal a otro departamento" icon="pi pi-sitemap" />
+            <p:menuitem value="Asignación de puesto"   icon="pi pi-briefcase" />
+            <p:menuitem value="Horarios administrativos y de apoyo"   icon="pi pi-calendar" />
+            <p:menuitem value="Impresión de horarios"   icon="pi pi-print" />
         </p:submenu>
 
         <p:submenu label="Honorarios" icon="pi pi-user">
-            <p:menuitem value="Asignación a grupo"
-                        icon="pi pi-user-plus" />
-            <p:menuitem value="Impresión de horarios"
-                        icon="pi pi-print" />
+            <p:menuitem value="Asignación a grupo"  icon="pi pi-user-plus" />
+            <p:menuitem value="Impresión de horarios"  icon="pi pi-print" />
         </p:submenu>
 
     </p:submenu>
 
-    <p:menuitem value="Grupos de Horarios"
-                icon="pi pi-clock" />
-
-    <p:menuitem value="Horarios exámenes especiales / globales"
-                icon="pi pi-calendar-plus" />
+    <p:menuitem value="Grupos de Horarios"  icon="pi pi-clock" />
+    <p:menuitem value="Horarios exámenes especiales / globales"  icon="pi pi-calendar-plus" />
 
     <!-- RESIDENCIAS -->
     <p:submenu label="Residencias" icon="pi pi-home">
-        <p:menuitem value="Asignación de asesor"
-                    icon="pi pi-user-edit" />
-        <p:menuitem value="Asignación de revisores"
-                    icon="pi pi-users" />
+        <p:menuitem value="Asignación de asesor" icon="pi pi-user-edit" />
+        <p:menuitem value="Asignación de revisores" icon="pi pi-users" />
 
         <p:submenu label="Documentos" icon="pi pi-folder">
-            <p:menuitem value="Acta de asesor"
-                        icon="pi pi-file-pdf" />
-            <p:menuitem value="Acta de revisores"
-                        icon="pi pi-file-pdf" />
+            <p:menuitem value="Acta de asesor"  icon="pi pi-file-pdf" />
+            <p:menuitem value="Acta de revisores" icon="pi pi-file-pdf" />
         </p:submenu>
     </p:submenu>
 
-    <p:menuitem value="Concentrado de Autoevaluación"
-                icon="pi pi-check-square" />
+    <p:menuitem value="Concentrado de Autoevaluación" icon="pi pi-check-square" />
 
     <p:submenu label="Programa oficial" icon="pi pi-book">
-        <p:menuitem value="Programas Oficiales (Unidades Temáticas)"
-                    icon="pi pi-bookmark" />
-        <p:menuitem value="Subtemas"
-                    icon="pi pi-list" />
+        <p:menuitem value="Programas Oficiales (Unidades Temáticas)" icon="pi pi-bookmark" />
+        <p:menuitem value="Subtemas"  icon="pi pi-list" />
     </p:submenu>
 
-    <p:menuitem value="Avance Reticular"
-                icon="pi pi-chart-line" />
+    <p:menuitem value="Avance Reticular"  icon="pi pi-chart-line" />
 </p:submenu>
 
 <!-- EVALUACIÓN -->
 <p:submenu label="EVALUACIÓN"  styleClass="submenu-icon-bar">
-    <p:menuitem value="Realizar evaluación"
-                icon="pi pi-check-square" />
+    <p:menuitem value="Realizar evaluación"  icon="pi pi-check-square" />
 
-    <p:menuitem value="Alumnos que no han evaluado"
-                icon="pi pi-exclamation-circle" />
+    <p:menuitem value="Alumnos que no han evaluado"  icon="pi pi-exclamation-circle" />
 
     <p:submenu label="Evaluación" icon="pi pi-file-check">
-        <p:menuitem value="Por Departamento"
-                    icon="pi pi-building" />
-        <p:menuitem value="Por el alumno"
-                    icon="pi pi-user" />
-        <p:menuitem value="Por el Docente"
-                    icon="pi pi-user-edit" />
+        <p:menuitem value="Por Departamento"   icon="pi pi-building" />
+        <p:menuitem value="Por el alumno"  icon="pi pi-user" />
+        <p:menuitem value="Por el Docente"  icon="pi pi-user-edit" />
     </p:submenu>
 </p:submenu>
 
@@ -265,22 +233,15 @@
 <div class="layout-main">
 
     <!-- CAJA DE BIENVENIDA DEPARTAMENTO ACADÉMICO -->
-    <h:panelGroup id="welcomeBoxAcademico" layout="block"
-                  rendered="#{view.viewId eq '/academico/index.xhtml'}"
+    <h:panelGroup id="welcomeBoxAcademico" layout="block" rendered="#{view.viewId eq '/academico/index.xhtml'}"
                   styleClass="welcome-box">
 
         <div class="dashboard-header">
-            <h3 class="dashboard-title">
-                Bienvenid@s al Departamento Académico
-            </h3>
+            <h3 class="dashboard-title"> Bienvenid@s al Departamento Académico    </h3>
 
-            <h:graphicImage library="imagenes"
-                            name="sistema/logo_tec.jpg"
-                            styleClass="dashboard-image"/>
+            <h:graphicImage library="imagenes"  name="sistema/logo_tec.jpg"   styleClass="dashboard-image"/>
 
-            <p class="dashboard-subtitle">
-                Gestión y seguimiento de la actividad docente
-            </p>
+            <p class="dashboard-subtitle">   Gestión y seguimiento de la actividad docente   </p>
         </div>
 
         <div class="ui-g dashboard-grid">
@@ -288,36 +249,24 @@
             <div class="ui-g-12 ui-md-6 ui-lg-3">
                 <div class="dashboard-card">
                     <i class="pi pi-user dashboard-icon"></i>
-                    <span class="dashboard-number">
-                        #{academicoBean.totalDocentes}
-                    </span>
-                    <span class="dashboard-text">
-                        Docentes registrados
-                    </span>
+                    <span class="dashboard-number">  #{academicoBean.totalDocentes}  </span>
+                    <span class="dashboard-text">   Docentes registrados    </span>
                 </div>
             </div>
 
             <div class="ui-g-12 ui-md-6 ui-lg-3">
                 <div class="dashboard-card">
                     <i class="pi pi-book dashboard-icon"></i>
-                    <span class="dashboard-number">
-                        #{academicoBean.materiasAsignadas}
-                    </span>
-                    <span class="dashboard-text">
-                        Materias asignadas
-                    </span>
+                    <span class="dashboard-number">   #{academicoBean.materiasAsignadas}    </span>
+                    <span class="dashboard-text">   Materias asignadas   </span>
                 </div>
             </div>
 
             <div class="ui-g-12 ui-md-6 ui-lg-3">
                 <div class="dashboard-card warning">
                     <i class="pi pi-exclamation-circle dashboard-icon"></i>
-                    <span class="dashboard-number">
-                        #{academicoBean.cargasPendientes}
-                    </span>
-                    <span class="dashboard-text">
-                        Cargas pendientes
-                    </span>
+                    <span class="dashboard-number">  #{academicoBean.cargasPendientes}   </span>
+                    <span class="dashboard-text">  Cargas pendientes    </span>
                 </div>
             </div>
 
