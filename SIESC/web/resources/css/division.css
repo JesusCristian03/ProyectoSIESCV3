@@ -573,15 +573,12 @@ body {
 /* =========================================================
    === GRUPOSNE
 ========================================================= */
-
-
-
 /* Encabezado del panel */
 .panel-crear-grupo .ui-panel-titlebar {
     background-color: #037DBE !important;
     color: #ffffff !important;
 
-    height: 36px;                /* altura cómoda */
+    height: 36px;                /* altura  */
     padding: 0 12px;             /* solo padding horizontal */
 
     display: flex;
@@ -598,33 +595,12 @@ body {
     margin: 0;
 }
 
-
-
-
-
-
 /* Quitar borde del panelGrid */
 .panel-botones-sin-borde.ui-panelgrid,
 .panel-botones-sin-borde .ui-panelgrid-content,
 .panel-botones-sin-borde td {
     border: none !important;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Centrar contenido de los botones */
 /* Botones compactos y centrados */
 .panel-botones-sin-borde .ui-button {
@@ -1046,3 +1022,40 @@ body {
     background-image: none !important;
 }
 
+/* Encabezado azul con texto blanco */
+.panel-encabezado-azul .ui-panel-titlebar {
+    background-color: #037DBE !important; /* Azul */
+    color: #FFFFFF;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Texto del título */
+.panel-encabezado-azul .ui-panel-title {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+/* PanelGrid plano, sin borde ni sombra */
+.ui-fluid,
+.ui-fluid .ui-panelgrid-cell,
+.ui-fluid .label,
+.ui-fluid .value,
+.ui-fluid .ui-widget-content {
+    border: none !important;          /* Quita todos los bordes */
+    box-shadow: none !important;      /* Quita cualquier sombra */
+   
+    padding: 2px 5px !important;     /* Espacio interno */
+   
+}
+/* Eliminar todos los bordes del panelGrid */
+.ui-fluid,
+.ui-fluid .ui-panelgrid-cell,
+.ui-fluid .label,
+.ui-fluid .label-column,
+.ui-fluid.ui-widget-content {
+    border: none !important;
+    background: #FFFFFF!important; /* blanco de fondo */
+    padding: 2px 5px !important;
+    border-radius: 8px !important; /* opcional, esquinas suaves */
+    box-shadow: none !important;   /* elimina sombra si existiera */
+}
