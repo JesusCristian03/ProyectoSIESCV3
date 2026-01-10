@@ -162,7 +162,7 @@
                             </p:inputText>
                             <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioEstudiante}" styleClass="ui-inputfield" style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;">
                                 <p:ajax update="@this" process="@this" />
-                                <f:selectItem itemLabel="SELECCIONA ENTIDAD FEDERATIVA" itemValue="" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONA ENTIDAD FEDERATIVA" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems
                                     value="#{altaEstudiantesBean.listaEntidadFederativa}"
                                     var="ent"
@@ -368,7 +368,7 @@
 
                             <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioPadre}" style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;">
                                 <p:ajax />
-                                  <f:selectItem itemLabel="SELECCIONE UNA ENTIDAD FEDERATIVA" itemValue="-" noSelectionOption="true"/>
+                                  <f:selectItem itemLabel="SELECCIONE UNA ENTIDAD FEDERATIVA" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems
                                     value="#{altaEstudiantesBean.listaEntidadFederativa}"
                                     var="ent"
@@ -430,7 +430,7 @@
 
                             <p:selectOneMenu value="#{altaEstudiantesBean.numeroMunicipioMadre}" style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;">
                                 <p:ajax />
-                                <f:selectItem itemLabel="SELECCIONE UNA ENTIDAD FEDERATIVA" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONE UNA ENTIDAD FEDERATIVA" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems
                                     value="#{altaEstudiantesBean.listaEntidadFederativa}"
                                     var="ent"
