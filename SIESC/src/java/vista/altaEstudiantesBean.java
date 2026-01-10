@@ -68,84 +68,112 @@ public class altaEstudiantesBean implements Serializable {
 
     @PostConstruct
     public void init() {
+       inicializacion(); 
 
     }
 
     public void inicializacion() {
         listaEntidadFederativa = entidadFederativaServicio.traerListaEF();
         listaCarreras = carreraServicio.buscarTodos();
-        System.out.println("Ejecuto inicializacion ");
+         System.out.println(" LISTAS CARGADAS: " + listaEntidadFederativa.size() + " entidades federativas");
 
     }
 
-    public void guardar() {
-        EntidadFederativa entidadFederativa;
-        Date fechaActualizacion = new Date();
-        //Declaramos un caracter porque solo permite en las siguientes columnas
-        alumnoGeneral.setCiudad('S');
-        alumnoGeneral.setDomicilioColonia('S');
-        alumnoGeneral.setDomicilioCalle('S');
-        alumnoGeneral.setLugarNacimiento('S');
+    
+    
+    
+    
+public void guardar() {
 
-        ciudad = estudiante.getCiudadProcedencia();
-        alumnoGeneral.setNombre(estudiante.getNombreAlumno());
-        alumnoGeneral.setIngresoMensual(null);
-        // entidad Federativa. 
-        for (EntidadFederativa e : listaEntidadFederativa) {
-            System.out.println(e);
-        }
-        System.out.println("numeroMunicipioEstudiante:" + numeroMunicipioEstudiante);
-        entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioEstudiante);
+    System.out.println("=== INICIO GUARDAR ===");
+    System.out.println("No Control: " + numeroControl);
+    System.out.println("Entidad Estudiante ID: " + numeroMunicipioEstudiante);
+    System.out.println("Sexo: " + sexo);
+    System.out.println("Estado civil: " + estadoCivil);
+    System.out.println("Periodo ingreso IT: " + periodoIngresoIt);
+    System.out.println("=====================");
+    
+    
+    
+    System.out.println("AlumnoGeneral noControl: " + alumnoGeneral.getNoDeControl());
 
-        String domicilioCompleto = domicilioCalle + ","
-                + domicilioColonia + ","
-                + alumnoGeneral.getCodigoPostal() + ","
-                + alumnoGeneral.getMunicipio() + ","
-                + entidadFederativa.getNombreEntidad();
 
-        alumnoGeneral.setDomicilio(domicilioCompleto.toUpperCase());
-
-        estudiante.setEntidadProcedencia(entidadFederativa.getNombreEntidad());
-        estudiante.setSemestre(0);
-        //estudiante.setUltimoPeriodoInscrito(ultimoPeriodoInscrito);
-        estudiante.setPromedioPeriodoAnterior((double) 0);
-        estudiante.setPromedioAritmeticoAcumulado((double) 0);
-        estudiante.setCreditosAprobados(0);
-        estudiante.setCreditosCursados(0);
-        estudiante.setPromedioFinalAlcanzado((double) 0);
-        estudiante.setFechaActualizacion(fechaActualizacion);
-        PeriodoEscolar p = periodoEscolarServicio.buscarPorId(periodoIngresoIt);
-        estudiante.setPeriodoIngresoIt(p);
-
-        estudiante.setSexo(sexo.charAt(0));
-        estudiante.setEstadoCivil(estadoCivil.charAt(0));
-        //  estudiante.setl
-        alumnoGeneral.setEntidadFederativa(entidadFederativa);
-
-        estudiante.setCarrera(carreraServicio.buscarPorId(reticula).getCarrera());
-        estudiante.setNoDeControl(numeroControl);
-
-        System.out.println("Estudiante apellido " + estudiante.getApellidoPaterno());
-        System.out.println("Numero de Control" + numeroControl);
-
-        entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioMadre);
-        alumnoGeneral.setDomicilioEntidadFedMadre(entidadFederativa);
-
-        entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioPadre);
-        alumnoGeneral.setDomicilioEntidadFedPadre(entidadFederativa);
-
-        // private String domicilioCalle;
-        // private String domicilioColonia
-        //LE damos al estudiante
-        System.out.println(">>> No Control recibido: " + estudiante.getNoDeControl());
-         alumnoGeneral.setNoDeControl(estudiante);
-         alumnosGeneralesServicio.insertarAlumnoGeneral(alumnoGeneral);
-        estudianteServicio.insertarEstudiante(estudiante);
-       
-       
-        System.out.println("INSERTO ALUMNO GENERAL Y ESTUDIANTE");
+    // vlaidaciones 
+    if (sexo == null || sexo.isEmpty()) {
+        System.out.println("ERROR: sexo vacío");
+        return;
     }
 
+    if (estadoCivil == null || estadoCivil.isEmpty()) {
+        System.out.println("ERROR: estado civil vacío");
+        return;
+    }
+
+    // ENTIDAD FEDERATIVA DEL ESTUDIANTE
+    EntidadFederativa entidadFederativa =
+            entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioEstudiante);
+
+    if (entidadFederativa == null) {
+        System.out.println("ERROR: Entidad federativa no encontrada");
+        return;
+    }
+
+    // PERIODO ESCOLAR
+    PeriodoEscolar p = periodoEscolarServicio.buscarPorId(periodoIngresoIt);
+    if (p == null) {
+        System.out.println("ERROR: Periodo escolar no encontrado");
+        return;
+    }
+
+    Date fechaActualizacion = new Date();
+
+  // Estudiante
+    estudiante.setNoDeControl(numeroControl);
+    estudiante.setSexo(sexo.charAt(0));
+    estudiante.setEstadoCivil(estadoCivil.charAt(0));
+    estudiante.setPeriodoIngresoIt(p);
+    estudiante.setSemestre(0);
+    estudiante.setPromedioPeriodoAnterior(0.0);
+    estudiante.setPromedioAritmeticoAcumulado(0.0);
+    estudiante.setCreditosAprobados(0);
+    estudiante.setCreditosCursados(0);
+    estudiante.setPromedioFinalAlcanzado(0.0);
+    estudiante.setFechaActualizacion(fechaActualizacion);
+    estudiante.setEntidadProcedencia(entidadFederativa.getNombreEntidad());
+
+    estudiante.setCarrera(
+            carreraServicio.buscarPorId(reticula).getCarrera()
+    );
+
+  // Alumno general
+    alumnoGeneral.setNoDeControl(estudiante);
+    alumnoGeneral.setEntidadFederativa(entidadFederativa);
+
+    String domicilioCompleto = domicilioCalle + ", "
+            + domicilioColonia + ", "
+            + entidadFederativa.getNombreEntidad();
+
+    alumnoGeneral.setDomicilio(domicilioCompleto.toUpperCase());
+
+    // Familiares PADRE / MADRE
+    alumnoGeneral.setDomicilioEntidadFedMadre(
+            entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioMadre)
+    );
+
+    alumnoGeneral.setDomicilioEntidadFedPadre(
+            entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioPadre)
+    );
+    
+  // Guardar
+    estudianteServicio.insertarEstudiante(estudiante);
+    alumnosGeneralesServicio.insertarAlumnoGeneral(alumnoGeneral);
+
+    System.out.println("ESTUDIANTE Y ALUMNO GENERAL INSERTADOS");
+}
+
+
+    
+    
     public void guardarPrueba() {
 
         estudiante.setSexo(sexo.charAt(0));
