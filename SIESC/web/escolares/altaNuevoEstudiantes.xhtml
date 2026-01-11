@@ -315,17 +315,25 @@
                             </p:inputText>
 
 
-                            <h:outputText value="Foto" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Firma" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <p:fileUpload mode="advanced" fileLimit="1" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
-                            <p:fileUpload id="firma" 
-                                          value="#{altaEstudiantesBean.firma}" 
-                                          mode="advanced" 
-                                          fileLimit="1" 
-                                          auto="true" 
-                                          allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"
-                                          />
+<h:outputText value="Foto" style="font-weight:bold;" />
+<h:outputText value="Firma" style="font-weight:bold;" />
+<h:outputText value=" " style="font-weight:bold;" />
+
+<p:fileUpload
+    value="#{altaEstudiantesBean.fotoFile}"
+    mode="advanced"
+    auto="true"
+    fileLimit="1"
+    allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+
+
+<p:fileUpload
+    value="#{altaEstudiantesBean.firmaFile}"
+    mode="advanced"
+    auto="true"
+    fileLimit="1"
+    allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>
+
 
 
 

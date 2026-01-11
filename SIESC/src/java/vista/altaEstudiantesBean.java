@@ -17,6 +17,12 @@ import modelo.Carrera;
 import modelo.EntidadFederativa;
 import modelo.Estudiante;
 import modelo.PeriodoEscolar;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.IOException;
+import java.nio.file.Paths;
+import org.primefaces.model.file.UploadedFile;
 import servicio.AlumnosGeneralesServicioLocal;
 import servicio.CarreraServicioLocal;
 import servicio.EntidadFederativaServicioLocal;
@@ -65,6 +71,9 @@ public class altaEstudiantesBean implements Serializable {
     private Integer numeroMunicipioMadre = 0;
     private String anioIngreso;
     private Integer reticula = 0;
+    private UploadedFile fotoFile;
+private UploadedFile firmaFile;
+
 
     @PostConstruct
     public void init() {
@@ -97,7 +106,7 @@ public void guardar() {
     
     System.out.println("AlumnoGeneral noControl: " + alumnoGeneral.getNoDeControl());
 
-
+     
     // vlaidaciones 
     if (sexo == null || sexo.isEmpty()) {
         System.out.println("ERROR: sexo vacío");
@@ -117,8 +126,19 @@ public void guardar() {
         System.out.println("ERROR: Entidad federativa no encontrada");
         return;
     }
+    
+    if (fotoFile != null) {
+    String nombreFoto = guardarArchivo(fotoFile);
+    estudiante.setFoto(nombreFoto);
+}
 
-    // PERIODO ESCOLAR
+if (firmaFile != null) {
+    String nombreFirma = guardarArchivo(firmaFile);
+    estudiante.setFirma(nombreFirma);
+}
+
+
+    
     PeriodoEscolar p = periodoEscolarServicio.buscarPorId(periodoIngresoIt);
     if (p == null) {
         System.out.println("ERROR: Periodo escolar no encontrado");
@@ -141,6 +161,9 @@ public void guardar() {
     estudiante.setFechaActualizacion(fechaActualizacion);
     estudiante.setEntidadProcedencia(entidadFederativa.getNombreEntidad());
 
+
+
+    
     estudiante.setCarrera(
             carreraServicio.buscarPorId(reticula).getCarrera()
     );
@@ -148,6 +171,15 @@ public void guardar() {
   // Alumno general
     alumnoGeneral.setNoDeControl(estudiante);
     alumnoGeneral.setEntidadFederativa(entidadFederativa);
+    alumnoGeneral.setDomicilioCalle(domicilioCalle);
+    alumnoGeneral.setDomicilioColonia(domicilioColonia);
+    alumnoGeneral.setCiudad(ciudad);
+    alumnoGeneral.setNombre(estudiante.getNombreAlumno());
+    alumnoGeneral.setLugarNacimiento(lugarNacimiento);
+
+// Firma y archivos
+// estudiante.setFirma(firma);
+
 
     String domicilioCompleto = domicilioCalle + ", "
             + domicilioColonia + ", "
@@ -173,104 +205,7 @@ public void guardar() {
 
 
     
-    
-    public void guardarPrueba() {
 
-        estudiante.setSexo(sexo.charAt(0));
-        estudiante.setEstadoCivil(estadoCivil.charAt(0));
-        estudiante.setNoDeControl(numeroControl);
-        EntidadFederativa entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioEstudiante);
-        estudiante.setEntidadProcedencia(entidadFederativa.getNombreEntidad());
-
-        PeriodoEscolar p = periodoEscolarServicio.buscarPorId(periodoIngresoIt);
-        estudiante.setPeriodoIngresoIt(p);
-        estudiante.setCarrera(carreraServicio.buscarPorId(reticula).getCarrera());
-        entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioMadre);
-        alumnoGeneral.setDomicilioEntidadFedMadre(entidadFederativa);
-
-        
-
-        entidadFederativa = entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioPadre);
-        alumnoGeneral.setDomicilioEntidadFedPadre(entidadFederativa);
-
-        System.out.println("Periodo Ingreso Codigo");
-        System.out.println("===== DEBUG ESTUDIANTE =====");
-        System.out.println("Número de control: " + estudiante.getNoDeControl());
-
-        System.out.println("Apellido paterno: " + estudiante.getApellidoPaterno());
-        System.out.println("Apellido materno: " + estudiante.getApellidoMaterno());
-        System.out.println("Nombre: " + estudiante.getNombreAlumno());
-
-        System.out.println("Fecha de nacimiento: " + estudiante.getFechaNacimiento());
-
-        System.out.println("Sexo: " + estudiante.getSexo());
-        System.out.println("Estado civil: " + estudiante.getEstadoCivil());
-        System.out.println("CURP: " + estudiante.getCurpAlumno());
-        System.out.println("Correo electrónico: " + estudiante.getCorreoElectronico());
-
-        System.out.println("\n===== DEBUG: DOMICILIO =====");
-
-        System.out.println("Calle y número: " + domicilioCalle);
-        System.out.println("Colonia: " + domicilioColonia);
-        System.out.println("Código postal: " + alumnoGeneral.getCodigoPostal());
-        System.out.println("Ciudad procedencia: " + estudiante.getCiudadProcedencia());
-
-        System.out.println("Entidad federativa (ID): " + estudiante.getEntidadProcedencia());
-
-        System.out.println("Teléfono: " + alumnoGeneral.getTelefono());
-        System.out.println("Municipio: " + alumnoGeneral.getMunicipio());
-        System.out.println("Teléfono emergencia: " + alumnoGeneral.getTelefonoEmergencia());
-
-        System.out.println("\n===== DEBUG: DATOS ESCOLARES =====");
-        System.out.println("Retícula/Carrera: " + estudiante.getCarrera());
-        System.out.println("Especialidad: " + estudiante.getEspecialidad());
-
-        System.out.println("Periodo Ingreso IT: " + estudiante.getPeriodoIngresoIt());
-        
-        
-        
-     
-        System.out.println("Año Ingreso: " + anioIngreso);
-        System.out.println("Tipo de Ingreso: " + tipoIngreso);
-        
-        
-        
-        
-        
-        
-
-        System.out.println("Plan de Estudio: " + estudiante.getPlanDeEstudios());
-        System.out.println("Nivel Escolar: " + estudiante.getNivelEscolar());
-        System.out.println("Estatus Alumno: " + estudiante.getEstatusAlumno());
-
-        System.out.println("Tipo Servicio Médico: " + estudiante.getTipoServicioMedico());
-        System.out.println("Clave Servicio Médico: " + estudiante.getClaveServicioMedico());
-
-        System.out.println("Escuela Procedencia: " + estudiante.getEscuelaProcedencia());
-        System.out.println("Domicilio Escuela: " + estudiante.getDomicilioEscuela());
-
-        //System.out.println("Firma (base64 o binario): " + firma);
-        System.out.println("\n===== DEBUG: DATOS FAMILIARES PADRE=====");
-        System.out.println("Nombre del Padre: " + alumnoGeneral.getNombrePadre());
-        System.out.println("Domicilio Calle Padre: " + alumnoGeneral.getDomicilioCallePadre());
-        System.out.println("Colonia Padre: " + alumnoGeneral.getDomicilioColoniaPadre());
-        System.out.println("Estado Padre (id municipio): " + alumnoGeneral.getDomicilioEntidadFedPadre());
-        System.out.println("Teléfono Padre: " + alumnoGeneral.getDomicilioTelefonoPadre());
-        System.out.println("Ocupación Padre: " + alumnoGeneral.getOcupacionPadre());
-        System.out.println("Domicilio Ciudad Padre: " + alumnoGeneral.getDomicilioCiudadPadre());
-
-        System.out.println("\n===== DEBUG: DATOS FAMILIARES MADRE =====");
-        System.out.println("Nombre de la Madre: " + alumnoGeneral.getNombreMadre());
-        System.out.println("Domicilio Calle Madre: " + alumnoGeneral.getDomicilioCalleMadre());
-        System.out.println("Colonia Madre: " + alumnoGeneral.getDomicilioColoniaMadre());
-        System.out.println("Estado Madre (id municipio): " + alumnoGeneral.getDomicilioEntidadFedMadre());
-        System.out.println("Teléfono Madre: " + alumnoGeneral.getDomicilioTelefonoMadre());
-        System.out.println("Ocupación Madre: " + alumnoGeneral.getOcupacionMadre());
-        System.out.println("Domicilio Ciudad Madre: " + alumnoGeneral.getDomicilioCiudadMadre());
-
-        System.out.println("\n===== FIN DEBUG =====");
-
-    }
 
     public String getPeriodoIngresoIt() {
         return periodoIngresoIt;
@@ -412,9 +347,7 @@ public void guardar() {
         return domicilioMadre;
     }
 
-    /**
-     * Creates a new instance of altaEstudiantesBean
-     */
+  
     public void setDomicilioMadre(String domicilioMadre) {
         this.domicilioMadre = domicilioMadre;
     }
@@ -469,5 +402,60 @@ public void guardar() {
     public void setFirma(String firma) {
         this.firma = firma;
     }
+
+    
+    private String guardarArchivo(UploadedFile archivo) {
+
+    try {
+        // Carpeta física donde se guardarán los archivos
+        String ruta = "C:/scit/archivos/";
+
+        File carpeta = new File(ruta);
+        if (!carpeta.exists()) {
+            carpeta.mkdirs();
+        }
+
+        // Nombre único para evitar sobreescrituras
+       // String nombreArchivo = System.currentTimeMillis() + "_" + archivo.getFileName();
+ // nomas el nombre  del archivo
+        String nombreArchivo = Paths.get(archivo.getFileName()).getFileName().toString();
+
+        File destino = new File(ruta + nombreArchivo);
+
+        try (InputStream in = archivo.getInputStream();
+             FileOutputStream out = new FileOutputStream(destino)) {
+
+            byte[] buffer = new byte[1024];
+            int bytes;
+
+            while ((bytes = in.read(buffer)) != -1) {
+                out.write(buffer, 0, bytes);
+            }
+        }
+
+        return nombreArchivo;
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+    
+    public UploadedFile getFirmaFile() {
+    return firmaFile;
+}
+
+public void setFirmaFile(UploadedFile firmaFile) {
+    this.firmaFile = firmaFile;
+}
+
+public UploadedFile getFotoFile() {
+    return fotoFile;
+}
+
+public void setFotoFile(UploadedFile fotoFile) {
+    this.fotoFile = fotoFile;
+}
+
 
 }

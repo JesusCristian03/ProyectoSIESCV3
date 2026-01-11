@@ -18,10 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author cris_
- */
+
 @Entity
 @Table(name = "alumnos_generales", catalog = "scit", schema = "public")
 @XmlRootElement
@@ -84,13 +81,14 @@ public class AlumnosGenerales implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Column(name = "lugar_nacimiento")
-    private Character lugarNacimiento;
+    private String lugarNacimiento;
     @Column(name = "domicilio_calle")
-    private Character domicilioCalle;
+    private String domicilioCalle;
     @Column(name = "domicilio_colonia")
-    private Character domicilioColonia;
+    private String domicilioColonia;
     @Column(name = "ciudad")
-    private Character ciudad;
+    private String ciudad;
+
     @Column(name = "codigo_postal")
     private Integer codigoPostal;
     @Column(name = "telefono")
@@ -209,35 +207,35 @@ public class AlumnosGenerales implements Serializable {
         this.id = id;
     }
 
-    public Character getLugarNacimiento() {
+    public String getLugarNacimiento() {
         return lugarNacimiento;
     }
 
-    public void setLugarNacimiento(Character lugarNacimiento) {
+    public void setLugarNacimiento(String lugarNacimiento) {
         this.lugarNacimiento = lugarNacimiento;
     }
 
-    public Character getDomicilioCalle() {
+    public String getDomicilioCalle() {
         return domicilioCalle;
     }
 
-    public void setDomicilioCalle(Character domicilioCalle) {
+    public void setDomicilioCalle(String domicilioCalle) {
         this.domicilioCalle = domicilioCalle;
     }
 
-    public Character getDomicilioColonia() {
+    public String getDomicilioColonia() {
         return domicilioColonia;
     }
 
-    public void setDomicilioColonia(Character domicilioColonia) {
+    public void setDomicilioColonia(String domicilioColonia) {
         this.domicilioColonia = domicilioColonia;
     }
 
-    public Character getCiudad() {
+    public String getCiudad() {
         return ciudad;
     }
 
-    public void setCiudad(Character ciudad) {
+    public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
 
