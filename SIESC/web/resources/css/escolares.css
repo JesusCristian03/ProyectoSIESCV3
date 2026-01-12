@@ -605,3 +605,139 @@ body {
 .panel-registro-alumno .ui-panel-titlebar-icon:hover {
     color: #BBDEFB !important;
 }
+
+
+.panelgrid-compacto .ui-panelgrid-cell {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+.panelgrid-compacto .ui-outputlabel,
+.panelgrid-compacto span,
+.panelgrid-compacto label {
+    margin-bottom: 2px !important;
+    display: block;
+}
+.panelgrid-compacto .ui-inputfield,
+.panelgrid-compacto .ui-selectonemenu {
+    margin-top: 0 !important;
+}
+
+
+
+
+.input-compacto {
+    margin-top: 0 !important;
+    height: 36px !important;
+    line-height: 34px !important;
+}
+
+.form-field {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;         /* aquí controlas qué tan “pegados” están */
+}
+
+.form-field label,
+.form-field .ui-outputlabel,
+.form-field span {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: 600;
+    font-size: 13px;
+    color: #37474f;
+}
+
+.form-field .ui-inputfield {
+    margin-top: 0 !important;
+}
+
+
+/* botones  */
+.buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.btn-alta {
+    background: linear-gradient(135deg, #1e88e5, #1565c0) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0px 60px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 8px rgba(30, 136, 229, 0.35);
+    transition: all 0.25s ease;
+    min-height: 5px !important;
+    line-height: 1.2 !important;
+}
+
+
+
+.btn-alta .ui-button-text,
+.btn-alta .ui-icon {
+    color: #ffffff !important;
+}
+
+.btn-alta:hover {
+    background: linear-gradient(135deg, #1565c0, #0d47a1) !important;
+    box-shadow: 0 6px 14px rgba(13, 71, 161, 0.5);
+    transform: translateY(-1px);
+}
+
+.btn-regresar {
+    background: #f5f7fa !important;
+    border: 1px solid #cfd8dc !important;
+    border-radius: 8px !important;
+    padding: 0px 60px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #37474f !important;
+    transition: all 0.25s ease;
+}
+
+.btn-regresar .ui-button-text,
+.btn-regresar .ui-icon {
+    color: #37474f !important;
+}
+
+.btn-regresar:hover {
+    background: #e3f2fd !important;
+    border-color: #90caf9 !important;
+    color: #1565c0 !important;
+}
+
+/* Seccion de informacion   */
+.select-medio {
+    height: 36px !important;
+    border-radius: 6px !important;
+}
+
+/* Caja visible */
+.select-medio .ui-selectonemenu {
+    height: 36px !important;
+    border: 1px solid #cfd8dc !important;
+    border-radius: 6px !important;
+}
+
+/* Texto seleccionado */
+.select-medio .ui-selectonemenu-label {
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 14px;
+}
+
+/* Botón de la flecha */
+.select-medio .ui-selectonemenu-trigger {
+    height: 34px !important;
+    width: 34px !important;
+}
+
+/* Icono de flecha */
+.select-medio .ui-icon {
+    margin-top: 9px !important;
+}
+
