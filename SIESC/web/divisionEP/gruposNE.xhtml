@@ -323,11 +323,16 @@
                                          actionListener="#{horarioCrearBean.asignarMateriaSeleccionadaRCG}"
                                          update="confirmEliminarDialog growl grupo grupoEliminar"
                                          process="@this"
-                                         oncomplete="PF('confirmEliminarDialogWidget').show();" />
+                                         oncomplete="if (args.abrirDialogo) {
+                                         PF('confirmEliminarDialogWidget').show();
+                                         }" />
 
                         <p:remoteCommand name="asignarMateriaSeleccionadaM" 
                                          actionListener="#{horarioCrearBean.asignarMateriaSeleccionadaM}"                                         
-                                         oncomplete="PF('confirmModificarDialogWidget').show()"
+                                         oncomplete="
+                                         if (args.abrirDialogo) {
+                                         PF('confirmModificarDialogWidget').show();
+                                         }"
                                          update="confirmModificarDialog growl grupo"
                                          process="@this" />
 
@@ -336,6 +341,7 @@
                                          oncomplete=""
                                          update="grupo growl"
                                          process="@this" />
+                        
                         <p:remoteCommand name="asignarMateriaIntercambiarA" 
                                          actionListener="#{horarioCrearBean.cambiarMateriaSeleccionadaXA}"                                         
                                          oncomplete=""
@@ -624,6 +630,7 @@
                             { name: 'valorgrupo', value: valorgrupo }
                             ]);
                             }
+                            
                             if (modoGrupo){
                             asignarMateriaSeleccionadaRCG([
                             { name: 'nombre', value: nombre },

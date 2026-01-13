@@ -44,6 +44,11 @@ public class MateriasCarrerasServicio implements MateriasCarrerasServicioLocal {
     public MateriasCarreras buscarPorId(Integer x) {
         return materiasCarrerasFacade1.find(x);
     }
+    
+    @Override
+    public MateriasCarreras buscarMateriaPorNombre (String nombre, Integer reticula){
+    return materiasCarrerasFacade.buscarMateriaCarreraPorNombre(nombre, reticula);
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

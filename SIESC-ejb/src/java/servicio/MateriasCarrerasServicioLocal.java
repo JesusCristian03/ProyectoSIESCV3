@@ -31,4 +31,6 @@ public interface MateriasCarrerasServicioLocal {
     MateriasCarreras buscarMateriasCarreraPorMateria(String idmateria);
 
     public MateriasCarreras buscarPorId(Integer x);
+    
+    MateriasCarreras buscarMateriaPorNombre (String nombre, Integer reticula);
 }

@@ -92,5 +92,21 @@ public class MateriasCarrerasFacade extends AbstractFacade<MateriasCarreras> imp
             return null; // No encontró nada
         }
     }
+    
+    @Override
+    public MateriasCarreras buscarMateriaCarreraPorNombre(String nombre, Integer reticula) {
+        String sql = "SELECT m FROM MateriasCarreras m WHERE m.materia.nombreCompletoMateria = :nombre and m.reticula.reticula=:reticula";
+        Query query = em.createQuery(sql);
+        query.setParameter("nombre", nombre);
+        query.setParameter("reticula", reticula);
+
+        try {
+            System.out.println("Encontre");
+            return (MateriasCarreras) query.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println("No encontre nada");
+            return null; // No encontró nada
+        }
+    }
 
 }

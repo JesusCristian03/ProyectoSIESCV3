@@ -37,8 +37,10 @@ public interface MateriasCarrerasFacadeLocal {
 
     List<MateriasCarreras> buscarAsignaturaSemestre(Integer reticula, Integer semestre);
 
-    
-    
     MateriasCarreras buscarMateriaCarreraPorMateria(String idMateria);
+    
+    
+    MateriasCarreras buscarMateriaCarreraPorNombre(String nombre, Integer reticula);
+    
     
 }

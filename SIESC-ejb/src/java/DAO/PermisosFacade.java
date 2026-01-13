@@ -34,7 +34,8 @@ public class PermisosFacade extends AbstractFacade<Permisos> implements Permisos
     public List<Permisos> buscarCarreras(String usuario) {
         List<Permisos> lista = null;
         System.out.println("Iniciai");
-        String sqlPermisos = "SELECT p FROM Permisos p WHERE p.claveArea.claveArea=null and p.usuario.usuario=:usuario";
+        String sqlPermisos = "SELECT p FROM Permisos p WHERE p.usuario.usuario=:usuario";
+        //String sqlPermisos = "SELECT p FROM Permisos p WHERE p.claveArea.claveArea=null and p.usuario.usuario=:usuario";
         System.out.println("Consulta " + sqlPermisos);
         Query queryPersonal = em.createQuery(sqlPermisos);
  
