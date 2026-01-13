@@ -105,8 +105,8 @@ if (window.PrimeFaces) {
                                       
                                            <p:submenu label="Grupos" icon="pi pi-users">
                                             <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="/divisionEP/gruposNE?faces-redirect=true" icon="pi pi-plus-circle"/> 
-                                             <p:menuitem value="Aguste de capacidad"  icon="pi pi-sliders-h" />
-                                             <p:menuitem value="Paralelos"  icon="pi pi-sitemap" />
+                                             <p:menuitem value="Aguste de capacidad"  icon="pi pi-sliders-h" outcome="/divisionEP/prueba.xhtml" />
+                                             <p:menuitem value="Paralelos"  icon="pi pi-sitemap"  outcome="/divisionEP/prueba2.xhtml" />
                                              <p:menuitem value="Migrar Grupos"  icon="pi pi-refresh" />
                                            </p:submenu>
                                 

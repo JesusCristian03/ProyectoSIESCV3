@@ -21,7 +21,7 @@
                             var maximoSeleccion = #{horarioCrearBean.creditos};
                         </h:outputScript> 
                         <p:panel header="CREAR GRUPO: "  styleClass="panel-crear-grupo">
-                            <p:panelGrid columns="4" styleClass="ui-fluid form-horario" columnClasses="ui-g-12 ui-sm-6 ui-md-3">
+                            <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto"  columnClasses="ui-g-12 ui-md-3"  style="gap:20px;">
                                 <p:outputLabel for="carrera" value="CARRERA:"/>
                                 <p:outputLabel for="periodo" value="PERIODO:"/>
                                 <p:outputLabel for="semestre" value="SEMESTRE:"/>
@@ -29,10 +29,10 @@
                                 
                                 
                                 <p:selectOneMenu id="carrera" value="#{horarioCrearBean.carreraS}" 
-                                                 style="width:100%" 
+                                                
                                                  filter="true" 
                                                  filterMatchMode="contains" 
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">
+                                                 disabled="#{horarioCrearBean.desactivarCampos}" styleClass="select-medio" style="width:100%;" >
                                     <p:ajax listener="#{horarioCrearBean.cambioCarrera}" update="asignatura semestre grupo panelBotones panelBotonesModoGrupoAulas"/>
                                     <f:selectItem itemLabel="SELECCIONA CARRERA" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaPermisos}" var="listaPermiso" itemLabel="#{listaPermiso.reticula.nombreCarrera}" itemValue="#{listaPermiso.reticula.reticula}"/>
@@ -44,7 +44,7 @@
                                                  style="width:100%" 
                                                  filter="true" 
                                                  filterMatchMode="contains"
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">                                    
+                                                 disabled="#{horarioCrearBean.desactivarCampos}"  styleClass="select-medio" >                                    
                                     <p:ajax listener="#{horarioCrearBean.cambioPeriodo}" update="grupo panelBotones panelBotonesModoGrupoAulas"/>
                                     <f:selectItem itemLabel="SELECCIONA UN PERIODO" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaPeriodoEscolar}" var="listaPeriodo" itemLabel="#{listaPeriodo.identificacionCorta}" itemValue="#{listaPeriodo.periodo}"/>
@@ -53,10 +53,10 @@
 
                                 <p:selectOneMenu id="semestre" 
                                                  value="#{horarioCrearBean.semestreS}" 
-                                                 style="width:100%" 
+                                                
                                                  filter="true" 
                                                  filterMatchMode="contains"
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">                                    
+                                                 disabled="#{horarioCrearBean.desactivarCampos}" styleClass="select-medio" style="width:100%;">                                    
                                     <p:ajax listener="#{horarioCrearBean.cambioSemestre}" update="asignatura grupo panelBotones panelBotonesModoGrupoAulas" />
                                     <f:selectItem itemLabel="SELECCIONA UN SEMESTRE" itemValue="0" noSelectionOption="true"/>
                                     <f:selectItem itemLabel="SEMESTRE 1" itemValue="1"/>
@@ -74,10 +74,10 @@
                             
                                 <p:selectOneMenu id="asignatura" 
                                                  value="#{horarioCrearBean.asignaturaS}" 
-                                                 style="width:100%" 
+                                                
                                                  filter="true" 
                                                  filterMatchMode="contains"
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">
+                                                 disabled="#{horarioCrearBean.desactivarCampos}" styleClass="select-medio" style="width:100%;">
 
                                     <p:ajax listener="#{horarioCrearBean.actualizarCreditos}" 
                                             update="grupo panelBotones panelBotonesModoGrupoAulas"
@@ -95,11 +95,10 @@
                                 <p:outputLabel for="capgrupos" value="ESTUDIANTES"/>
                                 <p:outputLabel for="panelBotonesModoGrupoAulas" value=""/>
                                 <p:selectOneMenu id="aulas" 
-                                                 value="#{horarioCrearBean.aulas}" 
-                                                 style="width:100%" 
+                                                 value="#{horarioCrearBean.aulas}"
                                                  filter="true" 
                                                  filterMatchMode="contains" 
-                                                 disabled="#{horarioCrearBean.desactivarCampos}">
+                                                 disabled="#{horarioCrearBean.desactivarCampos}" styleClass="select-medio" style="width:100%;">
                                     <p:ajax listener="#{horarioCrearBean.cambioAula}" update="grupo panelBotones panelBotonesModoGrupoAulas" />
                                     <f:selectItem itemLabel="SELECCIONA AULA" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaAulas}" var="listaAulas" itemLabel="#{listaAulas.aula}" itemValue="#{listaAulas.aula}"/>
@@ -930,7 +929,7 @@
                                          severity="warn"
                                          closable="false"
                                          width="900"
-                                         >
+                                         styleClass="confirm-dialog-eliminar">
                             <!-- ✅ Muestra la materia que ha sido seleccionada de la tabla. -->
                             <h:panelGrid columns="1" cellpadding="5">
 
@@ -977,7 +976,8 @@
 
                             </h:panelGrid>
 
-                            <p:separator />
+                             <h:panelGroup layout="block"
+                      style="display:flex; justify-content:center; gap:2rem; margin-top:1rem;">
 
                             <p:commandButton value="Sí, eliminar"
                                              icon="pi pi-check"
@@ -993,8 +993,15 @@
                                              styleClass="ui-button-secondary"
                                              oncomplete="PF('confirmEliminarDialogWidget').hide();"                      
                                              update="grupo growl"
+                                             onclick="PF('mockEliminarDialog').hide();"/>
                                              />
+                            
+                            
+                             </h:panelGroup>
+
                         </p:confirmDialog>
+                        
+                        
                         <!-- ✅ VENTANA EMERGENTE DE MODIFICAR AULA -->
                         <p:dialog id="confirmModificarDialog"
                                   header="Modificar Aula"
@@ -1002,7 +1009,8 @@
                                   modal="true"
                                   closable="false"
                                   responsive="true"
-                                  style="max-width:450px;">
+                                  style="max-width:450px;"
+                                  styleClass="dialog-modificar-aula">
 
                             <!-- FORMULARIO ORDENADO -->
                             <h:panelGrid columns="1" style="width:100%;" cellspacing="8">

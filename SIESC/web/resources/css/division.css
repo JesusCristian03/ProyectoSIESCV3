@@ -428,7 +428,7 @@ body {
 .welcome-box {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 40px 25px;
+    padding: 5px 5px;
     background: #ffffff;
     border-radius: 14px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -573,6 +573,221 @@ body {
 /* =========================================================
    === GRUPOSNE
 ========================================================= */
+
+
+.panelgrid-compacto .ui-panelgrid-cell {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+.panelgrid-compacto .ui-outputlabel,
+.panelgrid-compacto span,
+.panelgrid-compacto label {
+    margin-bottom: 2px !important;
+    display: block;
+}
+.panelgrid-compacto .ui-inputfield,
+.panelgrid-compacto .ui-selectonemenu {
+    margin-top: 0 !important;
+}
+
+
+
+
+.input-compacto {
+    margin-top: 0 !important;
+    height: 36px !important;
+    line-height: 34px !important;
+}
+
+.form-field {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;         /*  */
+}
+
+.form-field label,
+.form-field .ui-outputlabel,
+.form-field span {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: 600;
+    font-size: 13px;
+    color: #37474f;
+}
+
+.form-field .ui-inputfield {
+    margin-top: 0 !important;
+}
+.panelgrid-compacto .ui-panelgrid-cell {
+    padding: 4px 6px !important;
+}
+
+/* Títulos (etiquetas) */
+.panelgrid-compacto span,
+.panelgrid-compacto label {
+    font-size: 11px;
+    color: #5f6368;
+    font-weight: 600;
+    display: block;
+}
+
+/* Valores */
+.panelgrid-compacto .ui-outputtext {
+    font-size: 12px;
+    color: #212121;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+.leyenda-box {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    color: #263238;
+    min-width: 160px;
+}
+
+
+
+
+/* Seccion de informacion   */
+.select-medio {
+    height: 36px !important;
+    border-radius: 6px !important;
+}
+
+/* Caja visible */
+.select-medio .ui-selectonemenu {
+    height: 36px !important;
+    border: 1px solid #cfd8dc !important;
+    border-radius: 6px !important;
+}
+
+/* Texto seleccionado */
+.select-medio .ui-selectonemenu-label {
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 14px;
+}
+
+/* Botón de la flecha */
+.select-medio .ui-selectonemenu-trigger {
+    height: 34px !important;
+    width: 34px !important;
+}
+
+/* Icono de flecha */
+.select-medio .ui-icon {
+    margin-top: 9px !important;
+}
+
+/* botones  */
+.buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.btn-alta {
+    background: linear-gradient(135deg, #1e88e5, #1565c0) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0px 60px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 8px rgba(30, 136, 229, 0.35);
+    transition: all 0.25s ease;
+    min-height: 5px !important;
+    line-height: 1.2 !important;
+}
+
+
+
+.btn-alta .ui-button-text,
+.btn-alta .ui-icon {
+    color: #ffffff !important;
+}
+
+.btn-alta:hover {
+    background: linear-gradient(135deg, #1565c0, #0d47a1) !important;
+    box-shadow: 0 6px 14px rgba(13, 71, 161, 0.5);
+    transform: translateY(-1px);
+}
+
+.btn-regresar {
+    background: #f5f7fa !important;
+    border: 1px solid #cfd8dc !important;
+    border-radius: 8px !important;
+    padding: 0px 60px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #37474f !important;
+    transition: all 0.25s ease;
+}
+
+.btn-regresar .ui-button-text,
+.btn-regresar .ui-icon {
+    color: #37474f !important;
+}
+
+.btn-regresar:hover {
+    background: #e3f2fd !important;
+    border-color: #90caf9 !important;
+    color: #1565c0 !important;
+}
+
+/* Seccion de informacion   */
+.select-medio {
+    height: 36px !important;
+    border-radius: 6px !important;
+}
+
+/* Caja visible */
+.select-medio .ui-selectonemenu {
+    height: 36px !important;
+    border: 1px solid #cfd8dc !important;
+    border-radius: 6px !important;
+}
+
+/* Texto seleccionado */
+.select-medio .ui-selectonemenu-label {
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 14px;
+}
+/* Kárdex compacto */
+.panelgrid-compacto .ui-panelgrid-cell {
+    padding: 4px 6px !important;
+}
+
+/* Títulos (etiquetas) */
+.panelgrid-compacto span,
+.panelgrid-compacto label {
+    font-size: 11px;
+    color: #5f6368;
+    font-weight: 600;
+    display: block;
+}
+
+/* Valores */
+.panelgrid-compacto .ui-outputtext {
+    font-size: 12px;
+    color: #212121;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+
+
+
 /* Encabezado del panel */
 .panel-crear-grupo .ui-panel-titlebar {
     background-color: #037DBE !important;
@@ -1058,4 +1273,235 @@ body {
     padding: 2px 5px !important;
     border-radius: 8px !important; /* opcional, esquinas suaves */
     box-shadow: none !important;   /* elimina sombra si existiera */
+}
+
+
+
+/*VENTANA EMERGENTE DE ELIMINAR */
+
+/* CONTENEDOR GENERAL DEL DIALOG */
+.confirm-dialog-eliminar .ui-dialog-content {
+    padding: 0 !important;
+    background: #f4f6f9;
+      align-items: center;        /* Centrado horizontal */
+    justify-content: center;    /* Centrado vertical */
+}
+
+/* HEADER */
+.confirm-dialog-eliminar .ui-dialog-titlebar {
+    background: linear-gradient(90deg, #b71c1c, #d32f2f);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+}
+
+/* ÍCONO */
+.confirm-dialog-eliminar .ui-dialog-titlebar .ui-dialog-title::before {
+    content: "⚠ ";
+    font-size: 1.2rem;
+}
+
+/* MENSAJE DE ALERTA */
+.confirm-dialog-eliminar .ui-confirm-dialog-message {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #b71c1c;
+    padding: 1rem 1rem 0.5rem;
+}
+
+/* TABLA */
+.confirm-dialog-eliminar .ui-datatable {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+     width: 100%;
+}
+
+/* ENCABEZADOS DE TABLA */
+.confirm-dialog-eliminar .ui-datatable thead th {
+    background: #037DBE !important;
+    color: white;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0.6rem;
+}
+
+/* CELDAS */
+.confirm-dialog-eliminar .ui-datatable tbody td {
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 0.4rem;
+}
+
+/* FILAS ALTERNADAS */
+.confirm-dialog-eliminar .ui-datatable tbody tr:nth-child(even) {
+    background: #eceff1;
+}
+
+/* ZONA DE BOTONES */
+.confirm-dialog-eliminar .ui-dialog-footer {
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: #fafafa;
+}
+
+
+
+/* BOTÓN ELIMINAR */
+.confirm-dialog-eliminar .ui-button-danger {
+    background: linear-gradient(135deg, #D64545, #B83232) !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.7rem 2.2rem;
+    box-shadow: 0 6px 16px rgba(214,69,69,0.35);
+    transition: all 0.25s ease;
+}
+
+.confirm-dialog-eliminar .ui-button-danger:hover {
+    background: linear-gradient(135deg, #E25A5A, #C43A3A) !important;
+    box-shadow: 0 8px 20px rgba(214,69,69,0.45);
+    transform: translateY(-1px);
+}
+
+/* Click */
+.confirm-dialog-eliminar .ui-button-danger:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 10px rgba(183,28,28,0.35);
+}
+
+/* BOTÓN CANCELAR */
+.confirm-dialog-eliminar .ui-button-secondary {
+    background: linear-gradient(135deg, #FAFBFC, #F4F6F8) !important;
+    color: #34495E !important;
+    border: 1px solid #D0D7DE !important;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.7rem 2.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.25s ease;
+}
+
+.confirm-dialog-eliminar .ui-button-secondary:hover {
+    background: linear-gradient(135deg, #F0F3F6, #E6EAEE) !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12) !important;
+    transform: translateY(-1px);
+}
+
+
+/* Click */
+.confirm-dialog-eliminar .ui-button-secondary:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+}
+
+
+
+
+/* modificar aula */
+/* CONTENEDOR */
+.dialog-modificar-aula .ui-dialog-content {
+    background: #f5f7fa;
+    padding: 1.5rem !important;
+}
+
+/* HEADER */
+.dialog-modificar-aula .ui-dialog-titlebar {
+    background: linear-gradient(90deg, #1565C0, #1E88E5);
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+}
+
+/* Icono de edición */
+.dialog-modificar-aula .ui-dialog-titlebar .ui-dialog-title::before {
+    content: "✎ ";
+    font-size: 1.1rem;
+}
+
+/* FILAS DEL FORMULARIO */
+.dialog-modificar-aula .ui-panelgrid {
+    border-radius: 8px;
+}
+
+/* Etiquetas */
+.dialog-modificar-aula .col-label {
+    text-align: right;
+    font-weight: 600;
+    color: #37474f;
+    padding-right: 1rem;
+    font-size: 0.85rem;
+}
+
+/* Valores */
+.dialog-modificar-aula .col-value {
+    color: #263238;
+    font-size: 0.85rem;
+}
+
+/* SELECT */
+.dialog-modificar-aula .ui-selectonemenu {
+    border-radius: 6px;
+    border: 1px solid #cfd8dc;
+    box-shadow: none;
+}
+
+/* Botones */
+.dialog-modificar-aula .ui-button {
+    border-radius: 6px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+/* Centrado perfecto de texto e icono en botones PrimeFaces */
+.ui-button,
+.ui-commandbutton,
+.ui-button-text-icon-left,
+.ui-button-text-only {
+
+    display: inline-flex !important;
+    align-items: center !important;   /* Centrado vertical */
+    justify-content: center !important; /* Centrado horizontal */
+}
+
+/* Texto */
+.ui-button .ui-button-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1 !important;
+    padding: 0 !important;
+}
+
+/* Ícono */
+.ui-button .ui-icon {
+    position: relative;
+    top: 0;
+}
+
+
+
+
+/* Confirmar */
+.dialog-modificar-aula .ui-button:not(.ui-button-secondary) {
+    background: linear-gradient(135deg, #1565C0, #1E88E5);
+    border: none;
+    color: white;
+}
+
+/* Cancelar */
+.dialog-modificar-aula .ui-button-secondary {
+    background: #eceff1;
+    color: #37474f;
+    border: 1px solid #cfd8dc;
+}
+
+/* Hover */
+.dialog-modificar-aula .ui-button:hover {
+    filter: brightness(1.05);
 }

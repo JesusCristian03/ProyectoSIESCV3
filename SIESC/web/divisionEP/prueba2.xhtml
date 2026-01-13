@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+              <ui:composition template="./templateDEP.xhtml">
+
+            <ui:define name="content">
+ 
+
+<h:form>
+
+    <p:commandButton value="Abrir ventana de eliminación"
+                     icon="pi pi-trash"
+                     onclick="PF('mockEliminarDialog').show(); return false;"
+                     style="margin:2rem;" />
+
+    <p:confirmDialog id="mockEliminarDialog"
+                     widgetVar="mockEliminarDialog"
+                     header="Confirmar eliminación"
+                     message="¿Está seguro de eliminar la materia seleccionada?"
+                     severity="warn"
+                     closable="false"
+                     width="900"
+                     styleClass="confirm-dialog-eliminar">
+
+        <h:panelGrid columns="1" cellpadding="5">
+
+            <p:dataTable id="tablaEliminarMock"
+                         var="item"
+                         showGridlines="true"
+                         size="small">
+
+                <p:column headerText="Materia">
+                    <h:outputText value="Programación Orientada a Objetos"/>
+                </p:column>
+
+                <p:column headerText="Lunes">
+                    <h:outputText value="07:00 - 09:00"/>
+                </p:column>
+
+                <p:column headerText="Martes">
+                    <h:outputText value="—"/>
+                </p:column>
+
+                <p:column headerText="Miércoles">
+                    <h:outputText value="07:00 - 09:00"/>
+                </p:column>
+
+                <p:column headerText="Jueves">
+                    <h:outputText value="—"/>
+                </p:column>
+
+                <p:column headerText="Viernes">
+                    <h:outputText value="07:00 - 09:00"/>
+                </p:column>
+
+                <p:column headerText="Sábado">
+                    <h:outputText value="—"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </h:panelGrid>
+
+    
+
+     <h:panelGroup layout="block"
+                      style="display:flex; justify-content:center; gap:2rem; margin-top:1rem;">
+
+
+            <p:commandButton value="Sí, eliminar"
+                             icon="pi pi-check"
+                             type="button"
+                             styleClass="ui-button-danger"/>
+
+            <p:commandButton value="Cancelar"
+                             icon="pi pi-times"
+                             type="button"
+                             styleClass="ui-button-secondary"
+                             onclick="PF('mockEliminarDialog').hide();"/>
+
+   
+        </h:panelGroup>
+
+    </p:confirmDialog>
+
+</h:form>
+
+
+
+
+                
+                
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>
