@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templateEscolares.xhtml">
+
+
+            <ui:define name="content">
+
+
+
+        <h:form id="formKardex">
+
+             <p:panel header="KÁRDEX"  styleClass="card custom-panel panel-registro-alumno" >
+
+                <!-- Datos generales  -->
+                
+                <p:panelGrid columns="6" styleClass="ui-fluid panelgrid-compacto" columnClasses="ui-g-12 ui-md-2">
+
+
+                    <h:outputText value="Número de control" style="font-weight:bold"/>
+                    <h:outputText value="Nombre" style="font-weight:bold"/>
+                    <h:outputText value="Carrera" style="font-weight:bold"/>
+                    <h:outputText value="Plan" style="font-weight:bold"/>
+                    <h:outputText value="Especialidad" style="font-weight:bold"/>
+                    <h:outputText value="Situación " style="font-weight:bold"/>
+                    
+                   
+                    <h:outputText value="#{kardexBean.noControl} 21680145" />
+                    <h:outputText value="#{kardexBean.nombre} Valeria" />                  
+                    <h:outputText value="#{kardexBean.carrera}SCI-Sistemas Computacionales" />
+                    <h:outputText value="#{kardexBean.plan}3- Ingenieria en sistemas computacionales" />
+                    <h:outputText value="#{kardexBean.especialidad} Desarrollo de aplicaciones Moviles para la Industria" />
+                    <h:outputText value="#{kardexBean.situacion} Vigente" />
+
+
+
+                     <h:outputText value="Periodo inicial" style="font-weight:bold"/>
+                     <h:outputText value="Periodo Final" style="font-weight:bold"/>
+                      <h:outputText value="Ciclo inicial" style="font-weight:bold"/>
+                     <h:outputText value="Ciclo actual" style="font-weight:bold"/>
+                     <h:outputText value="Ciclo acumulado" style="font-weight:bold"/>
+                     <h:outputText value="Promedio con reprobadas" style="font-weight:bold"/>
+                    
+                   
+
+                    <h:outputText value="#{kardexBean.pInicial} ENE-JUN/2025" />
+                    <h:outputText value="#{kardexBean.pfinal}--" />
+                    <h:outputText value="#{kardexBean.cInicial}--"/>
+                    <h:outputText value="#{kardexBean.cActual} 6" />
+                    <h:outputText value="#{kardexBean.cAcumulado}--" />
+                    <h:outputText value="#{kardexBean.pcReprobada} 80.5" />
+                    
+                     <h:outputText value="Promedio sin reprobadas" style="font-weight:bold"/>
+                     <h:outputText value="Créditos cursando" style="font-weight:bold"/>
+                     <h:outputText value="Materias cursadas" style="font-weight:bold"/>
+                     <h:outputText value="Materias aprobadas" style="font-weight:bold"/>
+                     <h:outputText value="Créditos acumulados" style="font-weight:bold"/>
+                     <h:outputText value="Avance" style="font-weight:bold"/>
+                     
+                     <h:outputText value="#{kardexBean.psReprobada}80.5" />
+                    <h:outputText value="#{kardexBean.cCursando} 28" />
+                    <h:outputText value="#{kardexBean.mCursadas}28/50" />
+                    <h:outputText value="#{kardexBean.mAprovadas} 20" />
+                    <h:outputText value="#{kardexBean.creditos} 200/250" />
+                    <h:outputText value="#{kardexBean.avance}80.5%"/>
+
+                </p:panelGrid>
+
+                <p:divider/>
+                     
+<h:panelGroup layout="block" style="margin:15px 0; text-align: center;">
+
+    <div class="kardex-leyenda">
+
+        <span class="leyenda-box aprobada">Materia aprobada</span>
+
+        <span class="leyenda-box reprobada">Materia reprobada</span>
+
+        <span class="leyenda-box cursando">Carga actual</span>
+
+        <span class="leyenda-box cursando-reprobada">Carga actual (reprobada)</span>
+
+        <span class="leyenda-box pendiente">Materia por cursar</span>
+
+    </div>
+      
+</h:panelGroup>
+
+<p:divider/>
+
+
+ <!-- Ya para la funcionalidad  eliminar todo el bloque <div class="ui-g"> y usar el bloque de abajo <p:dataGrid columns="6" layout="grid" styleClass="ui-fluid">--> 
+<div class="ui-g">
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-aprobada">
+            ACF0901<br/>
+            CÁLCULO DIFERENCIAL<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-aprobada">
+            ACF0902<br/>
+            CÁLCULO INTEGRAL<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-cursando">
+            ACF0904<br/>
+            CÁLCULO VECTORIAL<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-reprobada">
+            ACF0905<br/>
+            ECUACIONES DIFERENCIALES<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-pendiente">
+            SCC1010<br/>
+            GRAFICACIÓN<br/>
+            Créditos: 4
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-pendiente">
+            SCC1005<br/>
+            LENGUAJES Y AUTÓMATAS I<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-aprobada">
+            AED1285<br/>
+            FUND. DE PROGRAMACIÓN<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-aprobada">
+            AED1286<br/>
+            POO<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-cursando">
+            AED1026<br/>
+            ESTRUCTURA DE DATOS<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+        <div class="kardex-card bg-reprobada">
+            SCC1007<br/>
+            MÉTODOS NUMÉRICOS<br/>
+            Créditos: 5
+        </div>
+    </div>
+
+</div>
+ <div class="buttons-container">
+                   
+   
+                    <p:commandButton value="Imprimir" icon="pi pi-print" styleClass="ui-button-secondary"/>
+                </div>
+ 
+<p:dataGrid columns="6" layout="grid" styleClass="ui-fluid">
+
+    <p:panel styleClass="kardex-card bg-aprobada">
+        ACF0901<br/>
+        CÁLCULO DIFERENCIAL<br/>
+        Créditos: 5
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-aprobada">
+        ACF0902<br/>
+        CÁLCULO INTEGRAL<br/>
+        Créditos: 5
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-cursando">
+        ACF0904<br/>
+        CÁLCULO VECTORIAL<br/>
+        Créditos: 5
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-reprobada">
+        ACF0905<br/>
+        ECUACIONES DIFERENCIALES<br/>
+        Créditos: 5
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-pendiente">
+        SCC1010<br/>
+        GRAFICACIÓN<br/>
+        Créditos: 4
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-pendiente">
+        SCC1005<br/>
+        LENGUAJES Y AUTÓMATAS I<br/>
+        Créditos: 5
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-aprobada">
+        AED1285<br/>
+        FUND. DE PROGRAMACIÓN<br/>
+        Créditos: 5
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-aprobada">
+        AED1286<br/>
+        PROGRAMACIÓN ORIENTADA A OBJETOS<br/>
+        Créditos: 5
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-cursando">
+        AED1026<br/>
+        ESTRUCTURA DE DATOS<br/>
+        Créditos: 5
+    </p:panel>
+
+    <p:panel styleClass="kardex-card bg-reprobada">
+        SCC1007<br/>
+        MÉTODOS NUMÉRICOS<br/>
+        Créditos: 5
+    </p:panel>
+
+</p:dataGrid>
+            </p:panel>
+    
+                    
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

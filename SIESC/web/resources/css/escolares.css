@@ -741,3 +741,130 @@ body {
     margin-top: 9px !important;
 }
 
+
+
+/* -------------------------------------------------------------------------- */
+/*                        KARDEX                                              */
+/* -------------------------------------------------------------------------- */
+
+/* Kárdex compacto */
+.panelgrid-compacto .ui-panelgrid-cell {
+    padding: 4px 6px !important;
+}
+
+/* Títulos (etiquetas) */
+.panelgrid-compacto span,
+.panelgrid-compacto label {
+    font-size: 11px;
+    color: #5f6368;
+    font-weight: 600;
+    display: block;
+}
+
+/* Valores */
+.panelgrid-compacto .ui-outputtext {
+    font-size: 12px;
+    color: #212121;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+
+.leyenda-box {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    color: #263238;
+    min-width: 160px;
+}
+.kardex-leyenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.leyenda-box {
+    min-width: 160px;
+}
+
+
+/* Colores */
+.aprobada {
+    background: #c8e6c9;
+    border: 1px solid #2e7d32;
+}
+
+.reprobada {
+    background: #ffcdd2;
+    border: 1px solid #c62828;
+}
+
+.cursando {
+    background: #fff9c4;
+    border: 1px solid #f9a825;
+}
+
+.cursando-reprobada {
+    background: #ffe0b2;
+    border: 1px solid #ef6c00;
+}
+
+.pendiente {
+    background: #eeeeee;
+    border: 1px solid #9e9e9e;
+}
+
+
+
+.leyenda {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* Estados */
+.aprobada { background: #c8e6c9; border:1px solid #2e7d32; }
+.reprobada { background: #ffcdd2; border:1px solid #c62828; }
+.cursando { background: #fff9c4; border:1px solid #f9a825; }
+.cursando-reprobada { background: #ffe0b2; border:1px solid #ef6c00; }
+.pendiente { background: #eeeeee; border:1px solid #9e9e9e; }
+
+/* Tarjetas */
+.bg-aprobada { background:#e8f5e9; border:1px solid #66bb6a; }
+.bg-reprobada { background:#ffebee; border:1px solid #ef5350; }
+.bg-cursando { background:#fffde7; border:1px solid #fbc02d; }
+.bg-pendiente { background:#f5f5f5; border:1px solid #bdbdbd; }
+
+.kardex-card {
+    height: 110px;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                        CARGA ACADEMICA                                     */
+/* -------------------------------------------------------------------------- */
+.carga-menu .ui-button {
+    background: transparent !important;
+    border: none !important;
+    color: #1e88e5;
+    padding: 0;
+}
+
+.carga-menu .ui-button:hover {
+    background: #e3f2fd !important;
+}
+
+.menu-eliminar {
+    color: #d32f2f !important;
+}

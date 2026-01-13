@@ -13,6 +13,7 @@
    <h:outputStylesheet  library="css" name="escolares.css"/>
    
        <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
+      
 
        <script>
             function toggleSidebar() {
@@ -114,7 +115,7 @@
 
                               <p:submenu label="Cargas académicas" icon="pi pi-database">
                                   <p:menuitem value="Anular cargas académicas" icon="pi pi-times-circle" />
-                                  <p:menuitem value="Restablecer cargas" icon="pi pi-refresh" />
+                                  <p:menuitem value="Restablecer cargas" icon="pi pi-refresh"  outcome="/escolares/cargaAcademica.xhtml"/>
                                   <p:menuitem value="Calificación a cero" icon="pi pi-minus-circle" />
                                   <p:menuitem value="Calificación a cero total" icon="pi pi-ban" />
                                  <p:menuitem value="Calificación faltantes" icon="pi pi-exclamation-circle" />
@@ -198,7 +199,7 @@
         <p:menuitem value="Alumnos inscritos" icon="pi pi-user-check" />
         <p:menuitem value="Alumnos 7, 8 y 9 semestre" icon="pi pi-clock" />
         <p:menuitem value="Bajas temporales" icon="pi pi-user-minus" />
-        <p:menuitem value="Kardex Alumno" icon="pi pi-book" />
+        <p:menuitem value="Kardex Alumno" icon="pi pi-book"  outcome="/escolares/kardex.xhtml" />
         <p:menuitem value="Candidatos pronables" icon="pi pi-thumbs-up" />
         <p:menuitem value="Ingreso de Alumnos" icon="pi pi-sign-in" />
         <p:menuitem value="Reprobados 1er semestre" icon="pi pi-times-circle" />

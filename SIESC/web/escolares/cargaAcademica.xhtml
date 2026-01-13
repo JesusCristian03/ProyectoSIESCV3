@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templateEscolares.xhtml">
+
+
+            <ui:define name="content">
+
+        <h:form id="formCarga">
+
+              <p:panel header="CARGA ACADÉMICA"  styleClass="card custom-panel panel-registro-alumno" >
+
+                <h2></h2>
+
+                <!-- Datos del alumno -->
+                <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto">
+
+                    <h:outputText value="No. de control"/>
+                    <h:outputText value="Situación"/>
+                    <h:outputText value="Nombre"/>
+                    <h:outputText value="Periodo"/>
+                    
+                    <h:outputText value=" 21680145" style="font-weight:bold"/>
+                    <h:outputText value=" VIGENTE" style="font-weight:bold"/>
+                    <h:outputText value="VALERIA" style="font-weight:bold"/>
+                    <p:selectOneMenu value=" " styleClass="select-medio" style="font-weight:bold">
+                        
+                        <f:selectItem itemLabel="Selecciona un periodo" itemValue="-" noSelectionOption="true" />
+                                <f:selectItem itemLabel="ENE-JUN/2025" />
+                                <f:selectItem itemLabel="AGO-DIC/2025"  />
+                                <f:selectItem itemLabel="VERANO"  />
+                              
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Plan"/>
+                    <h:outputText value="Carrera"/>
+                    <h:outputText value="Especialidad"/>
+                    <h:outputText value=""/>
+                    
+                    <h:outputText value="3-INGENIERIA EN SISTEMAS COMPUTACIONALES" style="font-weight:bold"/>
+                    <h:outputText value="INGENIERIA EN SISTEMAS COMPUTACIONALES" style="font-weight:bold"/>
+                    <h:outputText value="DESARROLLO DE APLICACIONES MOVILES PARA LA INDUSTRIA" style="font-weight:bold"/>
+
+                </p:panelGrid>
+
+             
+
+                <!-- Botones -->
+                <div class="buttons-container">
+                    <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="btn-alta"/>
+                    <p:commandButton value="Invalidar todo" icon="pi pi-times" styleClass="ui-button-danger"/>
+                    <p:commandButton value="Imprimir" icon="pi pi-print" styleClass="ui-button-secondary"/>
+                </div>
+
+                <!-- Tabla -->
+                <p:dataTable value="#{cargaBean.materias}" var="m" style="margin-top:15px"  rows="5">
+
+                    <p:column headerText="Clave"></p:column>
+                    <p:column headerText="Asignatura"> </p:column>
+                    <p:column headerText="Grupo"> </p:column>
+
+                    <p:column headerText="Lunes">#{m.lunes}</p:column>
+                    <p:column headerText="Martes">#{m.martes}</p:column>
+                    <p:column headerText="Miércoles">#{m.miercoles}</p:column>
+                    <p:column headerText="Jueves">#{m.jueves}</p:column>
+                    <p:column headerText="Viernes">#{m.viernes}</p:column>
+                    <p:column headerText="" style="width:40px; text-align:center">
+
+                    <p:menuButton icon="pi pi-ellipsis-v" styleClass="carga-menu">
+
+                     <p:menuitem value="Modificar"
+                    icon="pi pi-pencil"
+                    actionListener="#{cargaBean.modificar(row)}"
+                    update="@form"/>
+
+                     <p:menuitem value="Eliminar"
+                    icon="pi pi-trash"
+                    styleClass="menu-eliminar"
+                    actionListener="#{cargaBean.eliminar(row)}"
+                    update="@form"/>
+
+                    <p:menuitem value="Detalle"
+                    icon="pi pi-search"
+                    actionListener="#{cargaBean.verDetalle(row)}"
+                    update="@form"/>
+
+                     </p:menuButton>
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+
+
+                    
+                    
+                    
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+
