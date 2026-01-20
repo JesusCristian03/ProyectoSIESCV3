@@ -129,31 +129,7 @@
                                     <p:ajax />
                                 </p:inputNumber>
 
-         
-                        <h:panelGroup id="panelBotonesModoGrupoAulas"
-                                      layout="block"
-                                      style="display:flex; justify-content: right; gap:10px; margin-bottom:0px; ">
 
-                            <!-- Ícono Modo Aula -->
-                            <p:commandButton icon="pi pi-building"
-                                             title="Modo Aula"
-                                             styleClass="btn-modo btn-modo-aula"
-                                             actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
-                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
-                                             oncomplete="desactivandoModoTodo(); activarModoAula();"
-                                             disabled="#{!horarioCrearBean.booleanBotonAula 
-                                                         or horarioCrearBean.desactivarCampos}"/>
-
-                            <!-- Ícono Modo Grupo -->
-                            <p:commandButton icon="pi pi-users"
-                                             title="Modo Grupo"
-                                             styleClass="btn-modo btn-modo-grupo"
-                                             actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
-                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
-                                             oncomplete="desactivandoModoTodo(); activarModoGrupo();"
-                                             disabled="#{!horarioCrearBean.booleanBotonGrupo
-                                                         or horarioCrearBean.desactivarCampos}"/>
-                        </h:panelGroup>
                                 
                                   <p:growl id="growl" showDetail="true" sticky="false" life="4000"/>
 
@@ -271,7 +247,31 @@
 
                             </p:panelGrid>
 
+                                    
+                        <h:panelGroup id="panelBotonesModoGrupoAulas"
+                                      layout="block"
+                                      style="display:flex; justify-content: right; gap:10px; margin-bottom:0px; ">
 
+                            <!-- Ícono Modo Aula -->
+                            <p:commandButton icon="pi pi-building"
+                                             title="Modo Aula"
+                                             styleClass="btn-modo btn-modo-aula"
+                                             actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
+                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
+                                             oncomplete="desactivandoModoTodo(); activarModoAula();"
+                                             disabled="#{!horarioCrearBean.booleanBotonAula 
+                                                         or horarioCrearBean.desactivarCampos}"/>
+
+                            <!-- Ícono Modo Grupo -->
+                            <p:commandButton icon="pi pi-users"
+                                             title="Modo Grupo"
+                                             styleClass="btn-modo btn-modo-grupo"
+                                             actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
+                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
+                                             oncomplete="desactivandoModoTodo(); activarModoGrupo();"
+                                             disabled="#{!horarioCrearBean.booleanBotonGrupo
+                                                         or horarioCrearBean.desactivarCampos}"/>
+                        </h:panelGroup>
 
                         </p:panel>
 
