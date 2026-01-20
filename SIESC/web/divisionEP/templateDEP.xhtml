@@ -14,12 +14,8 @@
         <title>Sistema Escolar ITC - División de Estudios Profesionales</title>
         <h:outputStylesheet  library="css" name="division.css"/>
         <h:outputScript library="primeicons" name="primeicons.css"/>
-          <!-- Ultima Theme y Layout -->
-    <h:outputStylesheet library="ultima" name="primefaces-ultima-blue/theme.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/layout-blue.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/animate.css"/>
-    <h:outputStylesheet library="ultima" name="ultima-layout/css/ripple.css"/>
-    <h:outputScript library="ultima" name="ultima-layout/js/layout.js"/>
+        
+ 
 
         <script>
             // Variable para saber si el sidebar está abierto o cerrado
@@ -206,54 +202,15 @@ if (window.PrimeFaces) {
                   rendered="#{view.viewId eq '/divisionEP/index.xhtml'}"
                   styleClass="welcome-box">
 <div class="dashboard-header">
-    <h3 class="dashboard-title"> Bienvenid@s al Departamento "División de Estudios Profesionales"</h3>
-
-    <h:graphicImage library="imagenes"
-                    name="sistema/logo_tec.jpg"
-                    styleClass="dashboard-image"/>
+    
+    <h:outputText value="Bienvenid@s al Departamento " styleClass="titulo-welcome"/>
+     <h3 class="dashboard-title"> "DIVISIÓN DE ESTUDIOS PROFESIONALES" </h3>
+    <h:graphicImage library="imagenes" name="sistema/logo_tec.jpg" styleClass="dashboard-image"/>
 
     <p class="dashboard-subtitle">
-        Gestión académica del periodo activo
+       Área de gestión académica
     </p>
 </div>
-
-        <div class="ui-g dashboard-grid">
-
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <div class="dashboard-card">
-                    <i class="pi pi-book dashboard-icon"></i>
-                    <span class="dashboard-number">#{divisionBean.totalMaterias}</span>
-                    <span class="dashboard-text">Materias registradas</span>
-                </div>
-            </div>
-
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <div class="dashboard-card">
-                    <i class="pi pi-users dashboard-icon"></i>
-                    <span class="dashboard-number">#{divisionBean.totalGrupos}</span>
-                    <span class="dashboard-text">Grupos creados</span>
-                </div>
-            </div>
-
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <div class="dashboard-card warning">
-                    <i class="pi pi-exclamation-circle dashboard-icon"></i>
-                    <span class="dashboard-number">#{divisionBean.materiasSinGrupo}</span>
-                    <span class="dashboard-text">Materias sin grupo</span>
-                </div>
-            </div>
-
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <div class="dashboard-card">
-                    <i class="pi pi-calendar dashboard-icon"></i>
-                    <span class="dashboard-number">#{divisionBean.periodoActivo}</span>
-                    <span class="dashboard-text">Periodo activo</span>
-                </div>
-            </div>
-
-        </div>
-
-
     </h:panelGroup>
 
 

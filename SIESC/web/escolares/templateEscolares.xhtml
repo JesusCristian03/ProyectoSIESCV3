@@ -125,14 +125,14 @@
                             </p:submenu>
 
                               <p:submenu label="Carreras" icon="pi pi-briefcase">
-    <p:menuitem value="Nueva carrera" icon="pi pi-plus-circle" />
-    <p:menuitem value="Actualización" icon="pi pi-pencil" />
-</p:submenu>
+                             <p:menuitem value="Nueva carrera" icon="pi pi-plus-circle" />
+                             <p:menuitem value="Actualización" icon="pi pi-pencil" />
+                              </p:submenu>
                             
- <p:submenu label="Especialidades" icon="pi pi-star">
-    <p:menuitem value="Nueva especialidad" icon="pi pi-plus-circle" />
-    <p:menuitem value="Actualización" icon="pi pi-pencil" />
-</p:submenu>
+                             <p:submenu label="Especialidades" icon="pi pi-star">
+                                <p:menuitem value="Nueva especialidad" icon="pi pi-plus-circle" />
+                                <p:menuitem value="Actualización" icon="pi pi-pencil" />
+                             </p:submenu>
 <p:submenu label="Plan curricular" icon="pi pi-folder-open">
     <p:menuitem value="Retícula" icon="pi pi-sitemap" />
     <p:menuitem value="Actualización de datos" icon="pi pi-pencil" />
@@ -309,66 +309,15 @@
             <h3 class="dashboard-title">
                 Bienvenid@s al Departamento de Servicios Escolares
             </h3>
+            
 
             <h:graphicImage library="imagenes"
                             name="sistema/logo_tec.jpg"
                             styleClass="dashboard-image"/>
 
             <p class="dashboard-subtitle">
-                Administración y control académico estudiantil
+                Area de Administración y control académico estudiantil
             </p>
-        </div>
-
-        <div class="ui-g dashboard-grid">
-
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <div class="dashboard-card">
-                    <i class="pi pi-users dashboard-icon"></i>
-                    <span class="dashboard-number">
-                        #{escolaresBean.totalEstudiantes}
-                    </span>
-                    <span class="dashboard-text">
-                        Estudiantes registrados
-                    </span>
-                </div>
-            </div>
-
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <div class="dashboard-card">
-                    <i class="pi pi-user-plus dashboard-icon"></i>
-                    <span class="dashboard-number">
-                        #{escolaresBean.nuevosIngresos}
-                    </span>
-                    <span class="dashboard-text">
-                        Nuevos ingresos
-                    </span>
-                </div>
-            </div>
-
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <div class="dashboard-card warning">
-                    <i class="pi pi-exclamation-triangle dashboard-icon"></i>
-                    <span class="dashboard-number">
-                        #{escolaresBean.tramitesPendientes}
-                    </span>
-                    <span class="dashboard-text">
-                        Trámites pendientes
-                    </span>
-                </div>
-            </div>
-
-            <div class="ui-g-12 ui-md-6 ui-lg-3">
-                <div class="dashboard-card">
-                    <i class="pi pi-calendar dashboard-icon"></i>
-                    <span class="dashboard-number">
-                        #{escolaresBean.periodoActivo}
-                    </span>
-                    <span class="dashboard-text">
-                        Periodo escolar activo
-                    </span>
-                </div>
-            </div>
-
         </div>
 
     </h:panelGroup>

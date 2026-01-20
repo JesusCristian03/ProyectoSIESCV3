@@ -17,20 +17,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             </f:metadata>
             <h:form id="formAsigGrupo">
 
-                <div class="card" style="padding:10px 20px; margin:auto; max-width:100%;">
+               
 
 
                     <p:growl id="growlAsignacion" showDetail="true" sticky="false" life="4000"/>
                     <!-- PANEL PRINCIPAL -->
                     <p:panel header="ASIGNACIÓN Y ACTUALIZACIÓN DE DOCENTES A GRUPOS" styleClass="panel-azul">
-                        <p:panelGrid columns="2" styleClass="ui-fluid" columnClasses="ui-g-12 ui-md-6">
+                         <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto"  columnClasses="ui-g-12 ui-md-3"  style="gap:20px;">
 
 
-                            <p:outputLabel value="DEPARTAMENTO:" style="font-weight:bold;"/>
-                            <p:outputLabel value="CARRERA:" style="font-weight:bold;"/>
+                            <p:outputLabel value="DEPARTAMENTO:" />
+                            <p:outputLabel value="CARRERA:" />
+                             <p:outputLabel value="PERIODO:" />
+                            <p:outputLabel value="SEMESTRE:" />
                             <p:selectOneMenu value="#{asignacionMGBean.departamentoSeleccionado}"
                                              filter="true" 
-                                             filterMatchMode="contains" >
+                                             filterMatchMode="contains"
+                                              styleClass="select-medio">
                                 <p:ajax listener="#{asignacionMGBean.cambioDepartamento}" update="formAsigGrupo tablaDatos growlAsignacion"/>
                                 <f:selectItem itemLabel="Seleccione un departamento" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems value="#{asignacionMGBean.listaDepartamentos}" var="dep"
@@ -40,7 +43,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
                             <p:selectOneMenu value="#{asignacionMGBean.carreraSeleccionada}"
                                              filter="true" 
-                                             filterMatchMode="contains" >
+                                             filterMatchMode="contains" 
+                                              styleClass="select-medio">
                                 <p:ajax listener="#{asignacionMGBean.cambioCarrera}" update="tablaDatos growlAsignacion"/>
                                 <f:selectItem itemLabel="Selecciones una carrera" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems 
@@ -51,12 +55,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             </p:selectOneMenu>
 
 
-                            <p:outputLabel value="PERIODO:" style="font-weight:bold;"/>
-                            <p:outputLabel value="SEMESTRE:" style="font-weight:bold;"/>
+                           
                             <p:selectOneMenu id="periodo" 
                                              value="#{asignacionMGBean.periodoSeleccionado}"
                                              filter="true" 
-                                             filterMatchMode="contains" >
+                                             filterMatchMode="contains" 
+                                              styleClass="select-medio">
                                 <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="growlAsignacion tablaDatos" />
                                 <f:selectItem itemLabel="Seleccione el Periodo" itemValue="" />
                                 <f:selectItems 
@@ -71,7 +75,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <p:selectOneMenu id="semestre" 
                                              value="#{asignacionMGBean.semestreSeleccionado}"
                                              filter="true" 
-                                             filterMatchMode="contains" >
+                                             filterMatchMode="contains"
+                                              styleClass="select-medio">
                                 <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="tablaDatos growlAsignacion" />
                                 <f:selectItem itemLabel="Selecciona un semestre" itemValue="" />
                                 <f:selectItems value="#{asignacionMGBean.semestres}" var="s"
@@ -91,9 +96,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
 
-                </div>
 
-                <div class="card" style="padding:10px 20px; margin:auto; max-width:100%;">
+          
 
 
                     <!-- Horario del maestro (se actualiza automáticamente al seleccionar uno) -->
@@ -103,7 +107,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         <div style="max-height:400px; overflow-y:auto;">
                             <p:dataTable value="#{asignacionMGBean.listaHorarioCrear}" 
                                          var="h"
-                                         styleClass="tabla-horarios"
+                                         styleClass="tabla-horario"
                                          style="width:100%;"
                                          id="tablaDatos"
                                          selectionMode="single"
@@ -163,12 +167,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
 
-                        </div>
+                       </div>  
                     </p:panel>
 
 
 
-                </div>
+               
                 <p:dialog id="dlgMaestros"  
                           widgetVar="dlgMaestros"
                           header="ASIGNAR MAESTRO"
@@ -218,7 +222,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <!-- Selección de maestro -->
                     <p:selectOneMenu value="#{asignacionMGBean.docenteRFC}" 
                                      filter="true" filterMatchMode="contains"
-                                     style="width:100%; margin-bottom:15px;">
+                                      styleClass="select-medio" >
                         <p:ajax listener="#{asignacionMGBean.verHorarioMaestro}" update=":formAsigGrupo:tablaDatos :formAsigGrupo:tablaHorariosMaestro"/>
                         <f:selectItem itemLabel="SELECCIONE UN MAESTRO" itemValue="" />
                         <f:selectItems value="#{asignacionMGBean.listaDocentes}"

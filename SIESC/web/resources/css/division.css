@@ -86,17 +86,17 @@ body {
 .layout-sidebar {
     width: 260px;
     background-color: #ffffff !important;
-    border-right: 1px solid #e5e5e5; /* más suave  */
+    border-right: 1px solid #e5e5e5; /*   */
     overflow-y: auto;
     padding: 5px; /* espacio entre el panel menu y el sidebar  */
 }
 /* Scrollbar  */
 .layout-sidebar::-webkit-scrollbar {
-    width: 6px; /*  delgado */
+    width: 4px; /*  delgado */
 }
 
 .layout-sidebar::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.25);
+     background-color: #E6F4FA !important;
     border-radius: 10px;
 }
 
@@ -104,6 +104,19 @@ body {
     background: transparent;
 }
 
+
+.layout-main::-webkit-scrollbar {
+       width: 4px; 
+}
+
+.layout-main::-webkit-scrollbar-thumb {
+     background-color: #2f5f8f !important;
+    border-radius: 10px;
+}
+
+.layout-main::-webkit-scrollbar-track {
+    background: transparent;
+}
 /* ======================== PANELMENU ======================== */
 .custom-menu.ui-panelmenu {
     border: none !important; /* sin bordes  */
@@ -137,7 +150,7 @@ body {
 
 /* ---- Contenido interno ---- */
 .custom-menu .ui-panelmenu-content {
-    background: #F8FCFE !important; /* más minimalista */
+    background: #F8FCFE !important; /* */
    
     border: none !important;
         margin: 0 !important;
@@ -236,10 +249,13 @@ body {
     color: #003366 !important;
 }
 
+/* =========================================================
+   === MENU COLAPSADO – SIDEBAR
+========================================================= */
 
-
-
-
+/* ---------------------------------------------------------
+   CONTENEDOR SIDEBAR COLAPSADO
+--------------------------------------------------------- */
 .layout-sidebar.collapsed {
     width: 46px !important;
     padding: 1px 0 !important;
@@ -249,17 +265,28 @@ body {
     z-index: 2000;
 }
 
+/* ---------------------------------------------------------
+   PANELMENU – ESTRUCTURA GENERAL
+--------------------------------------------------------- */
 .layout-sidebar.collapsed .ui-panelmenu,
 .layout-sidebar.collapsed .ui-panelmenu-content {
     display: flex !important;
     flex-direction: column !important;
 }
+
+/* ---------------------------------------------------------
+   OCULTAR TEXTO (HEADERS E ITEMS)
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
 .ui-panelmenu-header > a,
 .layout-sidebar.collapsed 
 .ui-menuitem-link {
     font-size: 0 !important;
 }
+
+/* ---------------------------------------------------------
+   CENTRADO DE CONTENIDO (HEADERS E ITEMS)
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
 .ui-panelmenu-header > a,
 .layout-sidebar.collapsed 
@@ -267,17 +294,72 @@ body {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: 12px 0 !important;
+    padding: 5px 0 !important;
     width: 100%;
 }
+
+/* ---------------------------------------------------------
+   HEADER PANELMENU – ALTURA COMPACTA
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a {
+    padding: 0 !important;
+
+    height: 3px !important;
+    min-height: 5px !important;
+    max-height: 5px !important;
+    line-height: 5px !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    background-image: none !important;
+}
+
+/* ---------------------------------------------------------
+   HEADER PANELMENU – CONTENEDOR LI
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu-header {
+    margin: 0 !important;
+    margin-top: 4px;
+    border: 0 !important;
+    background-image: none !important;
+    overflow: hidden !important;
+}
+
+/* ---------------------------------------------------------
+   LISTA UL / LI (EVITAR ESPACIOS FANTASMA)
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu > ul > li {
+    padding: 0 !important;
+}
+
+.layout-sidebar.collapsed 
+.ui-menuitem {
+    margin: 2px 0;
+}
+
+/* ---------------------------------------------------------
+   ICONO PERSONALIZADO DEL HEADER (::before)
+   (queda definido, pero luego se oculta al colapsar)
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
 .ui-panelmenu-header > a::before {
     position: static !important;
     transform: none !important;
-    font-size: 1.3rem !important;
     margin: 0 !important;
+
+    font-size: 0.75rem !important;
     line-height: 1 !important;
+    color: #ffffff !important;
 }
+
+/* ---------------------------------------------------------
+   ICONOS DE ITEMS DEL MENU
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
 .ui-menuitem-icon,
 .layout-sidebar.collapsed 
@@ -285,48 +367,88 @@ body {
     display: inline-block !important;
     font-size: 1.25rem !important;
     margin: 0 !important;
-}
-.layout-sidebar.collapsed .ui-panelmenu-header {
-    margin-top: 4px;
-}
-
-.layout-sidebar.collapsed .ui-menuitem {
-    margin: 2px 0;
-}
-.layout-sidebar.collapsed 
-.ui-panelmenu-header > a::before {
-    color: #ffffff !important;
-}
-
-.layout-sidebar.collapsed 
-.ui-menuitem-icon {
     color: #cfd8dc !important;
 }
-/* Oculta el icono de expandir/colapsar del submenu */
+
+/* ---------------------------------------------------------
+   OCULTAR TEXTO DEL HEADER (SPAN INTERNO)
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
-.ui-panelmenu-header > a > .ui-panelmenu-icon {
-    display: none !important;
-}
-.layout-sidebar.collapsed 
-.ui-panelmenu-header > a span.ui-panelmenu-icon {
+.ui-panelmenu-header-text {
     display: none !important;
 }
 
+/* =========================================================
+   ELIMINAR ICONOS DEL PANELMENU HEADER AL COLAPSAR
+========================================================= */
+
+/* Pseudo-elementos del header y del link */
 .layout-sidebar.collapsed 
-.ui-panelmenu-header > a > span.ui-panelmenu-icon {
+.ui-panelmenu-header::before,
+.layout-sidebar.collapsed 
+.ui-panelmenu-header::after,
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::before,
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::after {
+    content: none !important;
     display: none !important;
 }
+
+/* ---------------------------------------------------------
+   ELIMINAR TOGGLERS Y FLECHAS (ULTIMA / PRIMEFACES)
+--------------------------------------------------------- */
+
+/* Spans internos */
 .layout-sidebar.collapsed 
-.ui-menuitem-icon,
+.ui-panelmenu-header > a > .ui-panelmenu-icon,
 .layout-sidebar.collapsed 
-.ui-menuitem-link > i.pi {
-    display: inline-block !important;
+.ui-panelmenu-header > a > span.ui-panelmenu-icon,
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a > span.layout-menuitem-toggler,
+.layout-sidebar.collapsed 
+.layout-menuitem-toggler {
+    display: none !important;
 }
+
+/* Iconos PrimeIcons reales dentro del header */
 .layout-sidebar.collapsed 
-.ui-panelmenu-header > a::before {
-    display: inline-block !important;
-    visibility: visible !important;
+.ui-panelmenu-header > a > i.pi {
+    display: none !important;
 }
+
+/* ---------------------------------------------------------
+   ELIMINAR ICONOS DE SUBMENUS SOLO EN HEADER
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu-header .ui-panelmenu-icon {
+    display: none !important;
+}
+
+/* ---------------------------------------------------------
+   NEUTRALIZAR PSEUDO-ELEMENTOS DE ICONOS INTERNOS
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu-icon::before,
+.layout-sidebar.collapsed 
+.ui-panelmenu-icon::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* ---------------------------------------------------------
+   HEADER RAÍZ – CASOS ESPECIALES ULTIMA
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header::before,
+.layout-sidebar.collapsed 
+.ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header::after,
+.layout-sidebar.collapsed 
+.ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header.ui-state-active::after {
+    content: none !important;
+    display: none !important;
+}
+
 
 
 
@@ -417,7 +539,7 @@ body {
 /* ===== CONTENEDOR PRINCIPAL ===== */
 .layout-main {
     flex: 1;
-    padding: 0 !important;
+    padding: 0px !important;
     overflow-y: auto;
     background-color: #f5f7fb;
     text-align: center;
@@ -426,9 +548,9 @@ body {
 
 /* ===== TARJETA DE BIENVENIDA ===== */
 .welcome-box {
-    max-width: 1400px;
+    max-width: 1450px;
     margin: 0 auto;
-    padding: 5px 5px;
+    padding: 50px 5px;
     background: #ffffff;
     border-radius: 14px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -439,7 +561,7 @@ body {
 /* ===== HEADER DASHBOARD ===== */
 .dashboard-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .dashboard-header .dashboard-title {
@@ -451,7 +573,7 @@ body {
     max-height: 350px;
     margin: 20px auto 30px auto;
     display: block;
-       border-radius: 50%;
+    border-radius: 50%;
     object-fit: cover;
     border: 3px solid #037DBE;
 }
@@ -462,7 +584,17 @@ body {
     font-weight: 700;
     color: #003366;
     margin-bottom: 6px;
-           justify-content: center !important;
+    justify-content: center !important;
+    padding: 30px;
+}
+.titulo-welcome {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: #34495e;
+   
+    padding-left: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .dashboard-subtitle {
@@ -574,223 +706,9 @@ body {
    === GRUPOSNE
 ========================================================= */
 
-
-.panelgrid-compacto .ui-panelgrid-cell {
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-}
-.panelgrid-compacto .ui-outputlabel,
-.panelgrid-compacto span,
-.panelgrid-compacto label {
-    margin-bottom: 2px !important;
-    display: block;
-}
-.panelgrid-compacto .ui-inputfield,
-.panelgrid-compacto .ui-selectonemenu {
-    margin-top: 0 !important;
-}
-
-
-
-
-.input-compacto {
-    margin-top: 0 !important;
-    height: 36px !important;
-    line-height: 34px !important;
-}
-
-.form-field {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 4px !important;         /*  */
-}
-
-.form-field label,
-.form-field .ui-outputlabel,
-.form-field span {
-    margin: 0 !important;
-    padding: 0 !important;
-    font-weight: 600;
-    font-size: 13px;
-    color: #37474f;
-}
-
-.form-field .ui-inputfield {
-    margin-top: 0 !important;
-}
-.panelgrid-compacto .ui-panelgrid-cell {
-    padding: 4px 6px !important;
-}
-
-/* Títulos (etiquetas) */
-.panelgrid-compacto span,
-.panelgrid-compacto label {
-    font-size: 11px;
-    color: #5f6368;
-    font-weight: 600;
-    display: block;
-}
-
-/* Valores */
-.panelgrid-compacto .ui-outputtext {
-    font-size: 12px;
-    color: #212121;
-    font-weight: 600;
-    line-height: 1.2;
-}
-
-
-.leyenda-box {
-    display: block;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    text-align: center;
-    color: #263238;
-    min-width: 160px;
-}
-
-
-
-
-/* Seccion de informacion   */
-.select-medio {
-    height: 36px !important;
-    border-radius: 6px !important;
-}
-
-/* Caja visible */
-.select-medio .ui-selectonemenu {
-    height: 36px !important;
-    border: 1px solid #cfd8dc !important;
-    border-radius: 6px !important;
-}
-
-/* Texto seleccionado */
-.select-medio .ui-selectonemenu-label {
-    line-height: 34px !important;
-    padding: 0 10px !important;
-    font-size: 14px;
-}
-
-/* Botón de la flecha */
-.select-medio .ui-selectonemenu-trigger {
-    height: 34px !important;
-    width: 34px !important;
-}
-
-/* Icono de flecha */
-.select-medio .ui-icon {
-    margin-top: 9px !important;
-}
-
-/* botones  */
-.buttons-container {
-    display: flex;
-    justify-content: flex-end;
-    gap: 15px;
-    margin-top: 25px;
-    padding-top: 15px;
-    border-top: 1px solid #e0e0e0;
-}
-
-.btn-alta {
-    background: linear-gradient(135deg, #1e88e5, #1565c0) !important;
-    border: none !important;
-    border-radius: 8px !important;
-    padding: 0px 60px !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    box-shadow: 0 4px 8px rgba(30, 136, 229, 0.35);
-    transition: all 0.25s ease;
-    min-height: 5px !important;
-    line-height: 1.2 !important;
-}
-
-
-
-.btn-alta .ui-button-text,
-.btn-alta .ui-icon {
-    color: #ffffff !important;
-}
-
-.btn-alta:hover {
-    background: linear-gradient(135deg, #1565c0, #0d47a1) !important;
-    box-shadow: 0 6px 14px rgba(13, 71, 161, 0.5);
-    transform: translateY(-1px);
-}
-
-.btn-regresar {
-    background: #f5f7fa !important;
-    border: 1px solid #cfd8dc !important;
-    border-radius: 8px !important;
-    padding: 0px 60px !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    color: #37474f !important;
-    transition: all 0.25s ease;
-}
-
-.btn-regresar .ui-button-text,
-.btn-regresar .ui-icon {
-    color: #37474f !important;
-}
-
-.btn-regresar:hover {
-    background: #e3f2fd !important;
-    border-color: #90caf9 !important;
-    color: #1565c0 !important;
-}
-
-/* Seccion de informacion   */
-.select-medio {
-    height: 36px !important;
-    border-radius: 6px !important;
-}
-
-/* Caja visible */
-.select-medio .ui-selectonemenu {
-    height: 36px !important;
-    border: 1px solid #cfd8dc !important;
-    border-radius: 6px !important;
-}
-
-/* Texto seleccionado */
-.select-medio .ui-selectonemenu-label {
-    line-height: 34px !important;
-    padding: 0 10px !important;
-    font-size: 14px;
-}
-/* Kárdex compacto */
-.panelgrid-compacto .ui-panelgrid-cell {
-    padding: 4px 6px !important;
-}
-
-/* Títulos (etiquetas) */
-.panelgrid-compacto span,
-.panelgrid-compacto label {
-    font-size: 11px;
-    color: #5f6368;
-    font-weight: 600;
-    display: block;
-}
-
-/* Valores */
-.panelgrid-compacto .ui-outputtext {
-    font-size: 12px;
-    color: #212121;
-    font-weight: 600;
-    line-height: 1.2;
-}
-
-
-
-
-
 /* Encabezado del panel */
 .panel-crear-grupo .ui-panel-titlebar {
-    background-color: #037DBE !important;
+    background-color: #2f5f8f !important;
     color: #ffffff !important;
 
     height: 36px;                /* altura  */
@@ -810,183 +728,328 @@ body {
     margin: 0;
 }
 
+/* =====================================================
+   FORMULARIOS ESTILO COMPACTO
+===================================================== */
+
+/* Base común para inputs y selects */
+.panelgrid-compacto .ui-inputfield,
+.panelgrid-compacto .ui-selectonemenu {
+    height: 32px !important;
+    min-height: 32px !important;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+
+/* =====================================================
+   TEXTO DEL DATO 
+===================================================== */
+
+/* InputText e InputNumber */
+.panelgrid-compacto .ui-inputtext,
+.panelgrid-compacto .ui-inputnumber-input {
+     font-size: 1rem !important;
+   
+     font-weight: 700 !important; 
+    color: #263238 !important;
+}
+
+/* Texto seleccionado del SelectOneMenu */
+.panelgrid-compacto .ui-selectonemenu-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #263238;
+}
+
+
+/* Icono dropdown */
+.panelgrid-compacto .ui-selectonemenu-trigger {
+    width: 28px !important;
+}
+
+.panelgrid-compacto .ui-selectonemenu-trigger .ui-icon {
+    margin-top: 7px !important;
+}
+
+/* Panel desplegable */
+.ui-selectonemenu-panel .ui-selectonemenu-items li {
+    font-size: 13px;
+    padding: 6px 10px;
+}
+
+/* Filtro */
+.ui-selectonemenu-panel .ui-selectonemenu-filter {
+    font-size: 13px;
+    padding: 5px 8px;
+}
+/* =====================================================
+   LABELS 
+===================================================== */
+
+.panelgrid-compacto .ui-outputlabel {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #546e7a;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+
+.panelgrid-compacto .ui-inputfield:focus,
+.panelgrid-compacto .ui-selectonemenu.ui-state-focus {
+    border-color: #1565c0 !important;
+    box-shadow: 0 0 0 1px rgba(21, 101, 192, 0.3);
+}
+
+
+
+/* ===============================
+   BOTONES MODO (AULA / GRUPO)
+================================ */
+
+.btn-modo {
+    width: 40px;
+    height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+
+    font-size: 1rem;
+    background-image: none !important;
+
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    transition: background-color 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.15s ease;
+}
+
+/* Hover general */
+.btn-modo:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.20);
+}
+
+/* ===============================
+   MODO AULA
+================================ */
+
+.btn-modo-aula {
+    background-color: #5C6BC0 !important; /* Morado  */
+    color: #ffffff !important;
+   
+}
+
+.btn-modo-aula:hover {
+    background-color: #673AB7 !important;
+}
+
+/* ===============================
+   MODO GRUPO
+================================ */
+
+.btn-modo-grupo {
+    background-color: #1565C0  !important; /* Azul */
+    color: #ffffff !important;
+   
+}
+
+.btn-modo-grupo:hover {
+    background-color: #254AA5 !important;
+}
+/* ===============================
+   ICONOS BOTONES MODO
+================================ */
+
+.btn-modo .ui-button-icon-left {
+    position: static !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: .95rem;
+    line-height: 1;
+
+    pointer-events: none;
+}
+
+/* Eliminar espacio reservado para texto */
+.btn-modo .ui-button-text {
+    display: none !important;
+}
+
+/* Asegurar contenedor interno centrado */
+.btn-modo .ui-button-icon-only {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-modo .ui-button-icon-left {
+    color: #ffffff !important;
+}
+
+
+
+
+
+
+
+
+/* ===============================
+   PANELE DE BOTONES 
+================================ */
+
 /* Quitar borde del panelGrid */
 .panel-botones-sin-borde.ui-panelgrid,
 .panel-botones-sin-borde .ui-panelgrid-content,
 .panel-botones-sin-borde td {
     border: none !important;
 }
-/* Centrar contenido de los botones */
+
 /* Botones compactos y centrados */
 .panel-botones-sin-borde .ui-button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    height: 32px;              /* ↓ tamaño del botón */
-        padding: 0 6px;            /* ↓ reduce ancho */
-    min-width: auto !important;/* anula ancho mínimo del theme */
-    width: auto;               /* se ajusta al contenido */
-   
-    font-size: 0.75rem;        /* ↓ texto */
-    line-height: 1;            /* evita que crezca */
-    border-radius: 6px;        /* look moderno */
+    height: 32px;
+    padding: 0 10px;
+    min-width: unset !important;
+
+    font-size: 0.75rem;
+    line-height: 1;
+    border-radius: 6px;
+
+    transition: all 0.25s ease;
 }
 
-/* Separación correcta entre icono y texto */
-/* Icono del botón */
-.panel-botones-sin-borde .ui-button .ui-button-icon-left {
-    font-size: 0.8rem;
+
+/* Icono */
+.panel-botones-sin-borde 
+.ui-button .ui-button-icon-left {
+    font-size: 1rem;
     margin-right: 0.4rem;
+   
+}
+
+/* Texto */
+.panel-botones-sin-borde 
+.ui-button .ui-button-text {
+    padding: 0;
     line-height: 1;
 }
 
-/* Texto del botón */
-.panel-botones-sin-borde .ui-button .ui-button-text {
-    padding: 0;               /* quita padding interno */
-    line-height: 1;
+
+/* ===============================
+  BOTONES PROPIOS 
+================================ */
+
+/* Quitar overlays del theme */
+.panel-botones-sin-borde 
+.ui-button,
+.panel-botones-sin-borde 
+.ui-button:before,
+.panel-botones-sin-borde 
+.ui-button:after,
+.panel-botones-sin-borde 
+.ui-button.ui-state-hover,
+.panel-botones-sin-borde 
+.ui-button.ui-state-active {
+    background-image: none !important;
+    filter: none !important;
 }
 
-/* Base común para botones de acciones */
-.btn-guardar,
-.btn-eliminar,
-.btn-modificar,
-.btn-intercambiar {
+/* Eliminar capa blanca del theme */
+.panel-botones-sin-borde 
+.ui-button:before {
+    content: none !important;
+}
+
+/* ===============================
+   BOTONES INSTITUCIONALES
+================================ */
+
+.btn-inst {
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18) !important;
+    transition: background-color 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.15s ease;
+}
+
+/* Elevación sutil */
+.btn-inst:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.22);
+    transform: translateY(-1px);
+}
+
+/* ===============================
+   INSERTAR / GUARDAR
+================================ */
+
+.btn-inst-insertar {
+    background-color: #0D3B66 !important; /* Azul */
     color: #ffffff !important;
-    font-weight: 600;
-    border-width: 2px;
-    border-style: solid;
 }
 
-/* Guardar */
-.btn-guardar {
-    background-color: #1565c0;
-    border-color: #1565c0;
+.btn-inst-insertar:hover {
+    background-color: #155A8A !important;
 }
 
-/* Eliminar */
-.btn-eliminar {
-    background-color: #d32f2f;
-    border-color: #d32f2f;
+/* ===============================
+   ELIMINAR
+================================ */
+
+.btn-inst-eliminar {
+    background-color: #B71C1C !important; /* Rojo sobrio */
+    color: #ffffff !important;
 }
 
-/* Modificar */
-.btn-modificar {
-    background-color: #f57c00;
-    border-color: #f57c00;
+.btn-inst-eliminar:hover {
+    background-color: #D32F2F !important;
 }
 
-/* Intercambiar */
-.btn-intercambiar {
-    background-color: #2e7d32;
-    border-color: #2e7d32;
+/* ===============================
+   MODIFICAR / EDITAR
+================================ */
+
+.btn-inst-modificar {
+    background-color: #F9A825 !important; /* Ámbar institucional */
+    color: #263238 !important;
 }
 
-/* Hover */
-.btn-guardar:hover {
-    background-color: #0d47a1;
-    border-color: #0d47a1;
+.btn-inst-modificar:hover {
+    background-color: #FBC02D !important;
 }
 
-.btn-eliminar:hover {
-    background-color: #b71c1c;
-    border-color: #b71c1c;
+/* ===============================
+   INTERCAMBIAR / ACCIÓN ESPECIAL
+================================ */
+
+.btn-inst-intercambiar {
+    background-color: #2E7D32 !important; /* Verde académico */
+    color: #ffffff !important;
 }
 
-.btn-modificar:hover {
-    background-color: #ef6c00;
-    border-color: #ef6c00;
+.btn-inst-intercambiar:hover {
+    background-color: #388E3C !important;
 }
-
-.btn-intercambiar:hover {
-    background-color: #1b5e20;
-    border-color: #1b5e20;
-}
-
-/* Disabled */
-.ui-button.ui-state-disabled,
-.ui-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-
-
-
-
-
-
-/* ===== CONTENIDO PRINCIPAL ===== */
-
-
-
-
-
-
-
-            /* Quita padding de las celdas */
-            .ui-panelgrid .ui-panelgrid-cell {
-                padding: 5px !important;
-            }
-
-            /* Uniforma altura de todos los inputs */
-            .ui-inputfield,
-            .ui-selectonemenu,
-            .ui-selectonemenu-label {
-                height: 50px !important;
-                min-height: 50px !important;
-                box-sizing: border-box;
-
-            }
-            .ui-inputfield {
-                display: flex !important;
-                align-items: center !important;
-            }
-
-  
-
-
-            /* Tabla estilizada */
-            .tabla-autorizaciones {
-                border-radius: 10px;
-                overflow: hidden;
-                font-size: 14px;
-            }
-
-            /* Encabezados */
-            .tabla-autorizaciones .ui-datatable-header,
-            .tabla-autorizaciones th {
-                background: #003366 !important;
-                color: white !important;
-                font-weight: bold;
-                text-align: center;
-                padding: 10px !important;
-                
-            }
-
-            /* Celdas */
-            .tabla-autorizaciones td {
-                padding: 8px 12px !important;
-                border-bottom: 1px solid #e0e0e0 !important;
-                font-weight: bold !important;
-            }
-
-            /* Hover de las filas */
-            .tabla-autorizaciones tbody tr:hover {
-                background: #f1f7ff !important;
-                font-weight: bold !important;
-            }
-
-            /* Centrado de columnas */
-            .col-centrada {
-                text-align: center !important;
-            }
-
-            /* Botón de eliminar */
-            .boton-eliminar {
-                border-radius: 6px !important;
-                padding: 0px 0px !important;
-            }
 
 
 
@@ -1117,6 +1180,10 @@ body {
 
 
 
+
+
+
+
 /* ===========================
    SIMBOLOGÍA / LEYENDA
 =========================== */
@@ -1124,18 +1191,19 @@ body {
 .legend-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 0px;
+     
 }
 
 .legend-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1380px;
     margin: 0 auto;
     text-align: center;
 }
 
 .legend-header {
-    background-color: #8FA3B3 !important;
+    background-color:  #2f5f8f !important;
     color: #FFFFFF;
     padding: 1px 12px;
     font-size: 10px;
@@ -1176,12 +1244,12 @@ body {
    ========================= */
 
 .tabla-horario.ui-datatable thead th.ui-state-default {
-    background-color: #037DBE !important;
+    background-color: #2f5f8f !important;
     color: #ffffff !important;
     text-align: center;
 
-    padding: 0 !important;          /* elimina padding real */
-    height: 32px !important;        /* altura real */
+    padding: 0 !important;          /* elimina padding  */
+    height: 32px !important;        /* altura */
     vertical-align: middle;
 }
 
@@ -1191,7 +1259,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    height: 32px;                   /* MISMA altura */
+    height: 32px;                   /*  */
     padding: 0 6px !important;      /* padding mínimo horizontal */
     line-height: 1;
     font-size: 0.75rem;
@@ -1505,3 +1573,172 @@ body {
 .dialog-modificar-aula .ui-button:hover {
     filter: brightness(1.05);
 }
+
+
+
+
+
+
+
+ .celda-seleccionada {
+                                border: 2px solid #1976d2 !important;
+                                background-color: #e3f2fd !important;
+                                box-shadow: 0 0 5px #64b5f6;
+                                transition: all 0.2s ease;
+                            }
+
+                            .celda-insertada {
+                                background-color: #DAE3F3; /* azul claro */
+                                font-weight: bold;          /* opcional */
+                            }
+                            .resaltarEliminar {
+                                background-color: #FFFACD !important; /* amarillo pastel */
+                                cursor: pointer;
+                                transition: all 0.2s ease;
+                            }
+                            /* ✅ Clases visuales seguras */
+                            .celda-hover-intercambio {
+                                filter: brightness(90%) !important;
+                                cursor: pointer;
+                            }
+                            .celda-seleccionada-intercambio {
+                                background-color: #04BC86 !important; /* verde oscuro */
+                                color: white !important;
+                            }
+                            .celda-intercambio {
+                                background-color: #04BC86 !important; /* verde oscuro */
+                                color: white !important;
+                            }
+
+                            .celda-hover-modificar {
+                                filter: brightness(90%) !important;
+                                cursor: pointer; /* azul claro */
+                            }
+
+                            .celda-hover-eliminar {
+                                filter: brightness(90%) !important;
+                                cursor: pointer; /* rojo suave */
+                            }
+
+                            .celda-hover-agregar {
+                                filter: brightness(90%) !important;
+                                cursor: pointer; /* amarillo suave */
+                            }
+
+                            
+                            
+/* =========================================================
+   ESTILO GENERAL – AUTORIZACIÓN ACADÉMICA (COMPACTO)
+========================================================= */
+
+/* Panel principal */
+.panel-encabezado-azull {
+    background: #f8fafc !important;
+    border: 1px solid #dbe5ef !important;
+}
+
+.panel-encabezado-azull .ui-panel-titlebar {
+    background: linear-gradient(135deg, #1565c0, #1e88e5) !important;
+    color: #fff;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 6px 6px 0 0;
+}
+
+.panel-encabezado-azull .ui-panel-content {
+    padding: 1rem 1.2rem !important;
+}
+
+/* Labels */
+.form-label {
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    color: #37474f !important;
+    margin-bottom: 4px !important;
+    display: block !important;
+}
+
+/* Inputs compactos */
+.ui-inputfield,
+.ui-inputnumber-input,
+.ui-selectonemenu {
+    height: 34px;
+    font-size: 0.85rem !important;
+    border-radius: 6px !important;
+}
+
+/* SelectOneMenu */
+.ui-selectonemenu .ui-selectonemenu-label {
+    padding: 0.45rem 0.6rem !important;
+    font-size: 0.85rem !important;
+}
+
+.ui-selectonemenu-trigger {
+    width: 2.2rem !important;
+}
+
+/* PanelGrid compacto */
+.panelgrid-compacto {
+    row-gap: 0.8rem !important;
+    column-gap: 1rem !important;
+}
+
+/* Growl */
+.ui-growl {
+    font-size: 0.8rem !important;
+}
+
+/* Botón principal */
+.boton-principal {
+    height: 38px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    background: linear-gradient(135deg, #1976d2, #1e88e5) !important;
+    border: none !important;
+    border-radius: 6px !important;
+}
+
+
+
+            /* Tabla estilizada */
+            .tabla-autorizaciones {
+                border-radius: 10px;
+                overflow: hidden;
+                font-size: 14px;
+            }
+
+            /* Encabezados */
+            .tabla-autorizaciones .ui-datatable-header,
+            .tabla-autorizaciones th {
+                background: #003366 !important;
+                color: white !important;
+                font-weight: bold;
+                text-align: center;
+                padding: 10px !important;
+                
+            }
+
+            /* Celdas */
+            .tabla-autorizaciones td {
+                padding: 8px 12px !important;
+                border-bottom: 1px solid #e0e0e0 !important;
+                font-weight: bold !important;
+            }
+
+            /* Hover de las filas */
+            .tabla-autorizaciones tbody tr:hover {
+                background: #f1f7ff !important;
+                font-weight: bold !important;
+            }
+
+            /* Centrado de columnas */
+            .col-centrada {
+                text-align: center !important;
+            }
+
+            /* Botón de eliminar */
+            .boton-eliminar {
+                border-radius: 6px !important;
+                padding: 0px 0px !important;
+            }

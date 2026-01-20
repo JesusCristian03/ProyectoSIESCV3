@@ -25,14 +25,15 @@
                                 <p:outputLabel for="carrera" value="CARRERA:"/>
                                 <p:outputLabel for="periodo" value="PERIODO:"/>
                                 <p:outputLabel for="semestre" value="SEMESTRE:"/>
-                                <p:outputLabel for="asignatura" value="Asignatura: " />
+                                <p:outputLabel for="asignatura" value="ASIGNATURA: " />
                                 
                                 
-                                <p:selectOneMenu id="carrera" value="#{horarioCrearBean.carreraS}" 
-                                                
+                                <p:selectOneMenu id="carrera" value="#{horarioCrearBean.carreraS}"
+                                                 styleClass="select-medio"
                                                  filter="true" 
                                                  filterMatchMode="contains" 
-                                                 disabled="#{horarioCrearBean.desactivarCampos}" styleClass="select-medio" style="width:100%;" >
+                                                 disabled="#{horarioCrearBean.desactivarCampos}"  style="width:100%;" >
+                                    
                                     <p:ajax listener="#{horarioCrearBean.cambioCarrera}" update="asignatura semestre grupo panelBotones panelBotonesModoGrupoAulas"/>
                                     <f:selectItem itemLabel="SELECCIONA CARRERA" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaPermisos}" var="listaPermiso" itemLabel="#{listaPermiso.reticula.nombreCarrera}" itemValue="#{listaPermiso.reticula.reticula}"/>
@@ -136,17 +137,7 @@
                             <!-- Ícono Modo Aula -->
                             <p:commandButton icon="pi pi-building"
                                              title="Modo Aula"
-                                             style="
-                                             width:40px;
-                                             height:40px;
-                                             display:flex;
-                                             justify-content:center;
-                                             align-items:center;
-                                             background-color:#6100B2;
-                                             color:white;
-                                             border-radius:6px;
-                                             border:2px solid #6100B2;
-                                             "
+                                             styleClass="btn-modo btn-modo-aula"
                                              actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
                                              update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
                                              oncomplete="desactivandoModoTodo(); activarModoAula();"
@@ -156,17 +147,7 @@
                             <!-- Ícono Modo Grupo -->
                             <p:commandButton icon="pi pi-users"
                                              title="Modo Grupo"
-                                             style="
-                                             width:40px;
-                                             height:40px;
-                                             display:flex;
-                                             justify-content:center;
-                                             align-items:center;
-                                             background-color:#0231B3;
-                                             color:white;
-                                             border-radius:6px;
-                                             border:2px solid #0231B3;
-                                             "
+                                             styleClass="btn-modo btn-modo-grupo"
                                              actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
                                              update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
                                              oncomplete="desactivandoModoTodo(); activarModoGrupo();"
@@ -186,72 +167,8 @@
 
 
 
-                            <p:divider />
-                            <p:panelGrid id="panelBotones" columns="4" styleClass="ui-fluid panel-botones-sin-borde" columnClasses="ui-g-12 ui-md-3">
-                                <p:commandButton value="Insertar Materia"
-                                                 icon="pi pi-save"     
-                                                 iconPos="left"             
-                                                 onclick="window.onbeforeunload = null; guardarSeleccionadas()"
-                                                 action="#{horarioCrearBean.generarHorario()}" 
-                                                 style="background-color:blue; color:white; border: 2px solid blue;"
-                                                 id="btnguardar"                               
-                                                 update="panelBotones growl grupo"
-
-                                                 disabled="#{horarioCrearBean.eliminando 
-                                                             or horarioCrearBean.activarModificar 
-                                                             or horarioCrearBean.modoIntercambio 
-                                                             or !horarioCrearBean.booleanBotonInsertar}" /> 
-
-                                <p:commandButton 
-                                    value="Eliminar Materia" 
-                                    icon="pi pi-trash" 
-                                    styleClass="p-button-danger p-button-rounded" 
-                                    style="background-color:red; color:white; border: 2px solid red;"
-                                    title="Selecciona la materia a eliminar"
-                                    actionListener="#{horarioCrearBean.activarEliminar}"
-                                    oncomplete="activarModoEliminarJS();"
-                                    update="panelBotones growl grupo confirmEliminarDialog 
-                                    carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
-                                    process="@this"
-                                    disabled="#{!horarioCrearBean.booleanBotonEliminar 
-                                                or horarioCrearBean.activarModificar 
-                                                or horarioCrearBean.modoIntercambio}"
-                                    >
-                                </p:commandButton>
-
-                                <p:commandButton  
-                                    value="Modificar Aula"  
-                                    icon="pi pi-pencil"  
-                                    styleClass="p-button-rounded"  
-                                    style="background-color:orange; color:white; border: 2px solid orange;"  
-                                    title="Selecciona una materia para modificar su aula"
-                                    actionListener="#{horarioCrearBean.activarModoModificar}"  
-                                    oncomplete="activarModoModificarJS();"  
-                                    update="panelBotones growl grupo confirmModificarDialog 
-                                    carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
-                                    process="@this"
-                                    disabled="#{!horarioCrearBean.booleanBotonModificar 
-                                                or horarioCrearBean.eliminando 
-                                                or horarioCrearBean.modoIntercambio }"
-                                    />
-
-                                <p:commandButton value="Intercambiar Horas"
-                                                 icon="pi pi-refresh"
-                                                 actionListener="#{horarioCrearBean.activarModoIntercambio}"
-                                                 process="@this"
-                                                 update="panelBotones grupo
-                                                 carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
-                                                 style="background-color:green; color:white; border: 2px green;"
-                                                 oncomplete="activarModoIntercambiar();"  
-                                                 disabled="#{!horarioCrearBean.booleanBotonIntercambiar 
-                                                             or horarioCrearBean.eliminando 
-                                                             or horarioCrearBean.activarModificar}"
-                                                 />
-
-                            </p:panelGrid>
-
-
-
+                           
+                            
 <h:panelGroup layout="block" styleClass="legend-wrapper">
 
     <div class="legend-container">
@@ -293,6 +210,69 @@
     </div>
 
 </h:panelGroup>
+                             <p:divider />
+                            <p:panelGrid id="panelBotones" columns="4" styleClass="ui-fluid panel-botones-sin-borde" columnClasses="ui-g-12 ui-md-3">
+                                <p:commandButton value="Insertar Materia"
+                                                 icon="pi pi-save"     
+                                                 iconPos="left"             
+                                                 onclick="window.onbeforeunload = null; guardarSeleccionadas()"
+                                                 action="#{horarioCrearBean.generarHorario()}" 
+                                                 id="btnguardar"                               
+                                                 update="panelBotones growl grupo"
+                                                 styleClass="btn-inst btn-inst-insertar"
+                                                 disabled="#{horarioCrearBean.eliminando 
+                                                             or horarioCrearBean.activarModificar 
+                                                             or horarioCrearBean.modoIntercambio 
+                                                             or !horarioCrearBean.booleanBotonInsertar}" /> 
+
+                                <p:commandButton 
+                                    value="Eliminar Materia" 
+                                    icon="pi pi-trash" 
+                                    title="Selecciona la materia a eliminar"
+                                    actionListener="#{horarioCrearBean.activarEliminar}"
+                                    oncomplete="activarModoEliminarJS();"
+                                    update="panelBotones growl grupo confirmEliminarDialog 
+                                    carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
+                                    process="@this"
+                                    styleClass="btn-inst btn-inst-eliminar"
+                                    disabled="#{!horarioCrearBean.booleanBotonEliminar 
+                                                or horarioCrearBean.activarModificar 
+                                                or horarioCrearBean.modoIntercambio}"
+                                    >
+                                </p:commandButton>
+
+                                <p:commandButton  
+                                    value="Modificar Aula"  
+                                    icon="pi pi-pencil"  
+                                    title="Selecciona una materia para modificar su aula"
+                                    actionListener="#{horarioCrearBean.activarModoModificar}"  
+                                    oncomplete="activarModoModificarJS();"  
+                                    update="panelBotones growl grupo confirmModificarDialog 
+                                    carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
+                                    process="@this"
+                                    styleClass="btn-inst btn-inst-modificar"
+                                    disabled="#{!horarioCrearBean.booleanBotonModificar 
+                                                or horarioCrearBean.eliminando 
+                                                or horarioCrearBean.modoIntercambio }"
+                                    />
+
+                                <p:commandButton value="Intercambiar Horas"
+                                                 icon="pi pi-refresh"
+                                                 actionListener="#{horarioCrearBean.activarModoIntercambio}"
+                                                 process="@this"
+                                                 update="panelBotones grupo
+                                                 carrera periodo semestre asignatura aulas grupos capgrupos panelBotonesModoGrupoAulas"
+                                                 oncomplete="activarModoIntercambiar();"  
+                                                 styleClass="btn-inst btn-inst-intercambiar"
+                                                 disabled="#{!horarioCrearBean.booleanBotonIntercambiar 
+                                                             or horarioCrearBean.eliminando 
+                                                             or horarioCrearBean.activarModificar}"
+                                                 />
+
+                            </p:panelGrid>
+
+
+
                         </p:panel>
 
                         <h:inputHidden id="posicionesSeleccionadas" value="#{horarioCrearBean.posicionesSeleccionadas}" />
@@ -874,52 +854,9 @@
                             window.onbeforeunload = function(event) {
                             return "Si recargas la página, los datos del formulario se perderán.";
                             };
-                        </h:outputScript>>
+                        </h:outputScript>
                         <style>
-                            .celda-seleccionada {
-                                border: 2px solid #1976d2 !important;
-                                background-color: #e3f2fd !important;
-                                box-shadow: 0 0 5px #64b5f6;
-                                transition: all 0.2s ease;
-                            }
-
-                            .celda-insertada {
-                                background-color: #DAE3F3; /* azul claro */
-                                font-weight: bold;          /* opcional */
-                            }
-                            .resaltarEliminar {
-                                background-color: #FFFACD !important; /* amarillo pastel */
-                                cursor: pointer;
-                                transition: all 0.2s ease;
-                            }
-                            /* ✅ Clases visuales seguras */
-                            .celda-hover-intercambio {
-                                filter: brightness(90%) !important;
-                                cursor: pointer;
-                            }
-                            .celda-seleccionada-intercambio {
-                                background-color: #04BC86 !important; /* verde oscuro */
-                                color: white !important;
-                            }
-                            .celda-intercambio {
-                                background-color: #04BC86 !important; /* verde oscuro */
-                                color: white !important;
-                            }
-
-                            .celda-hover-modificar {
-                                filter: brightness(90%) !important;
-                                cursor: pointer; /* azul claro */
-                            }
-
-                            .celda-hover-eliminar {
-                                filter: brightness(90%) !important;
-                                cursor: pointer; /* rojo suave */
-                            }
-
-                            .celda-hover-agregar {
-                                filter: brightness(90%) !important;
-                                cursor: pointer; /* amarillo suave */
-                            }
+                           
                         </style>
                         <!-- VENTANA EMERGENTE PARA ELIMINAR UNA MATERIA -->
                         <p:confirmDialog id="confirmEliminarDialog"

@@ -439,7 +439,8 @@
                                                  style="font-size:12px; text-align:center;"
                                                  scrollable="true"
                                                  scrollHeight="500"
-                                                 rowStyleClass="#{inscripcionesBean.grupoSeleccionado eq item ? 'row-highlight' : ''}">
+                                                 rowStyleClass="#{inscripcionesBean.grupoSeleccionado eq item ? 'row-highlight' : ''}"
+                                                  styleClass="tabla-horario">
 
                                         <p:ajax event="rowSelect" 
                                                 listener="#{inscripcionesBean.onSeleccionarGrupo}" 
@@ -480,9 +481,10 @@
                                     <p:dataTable id="tablaHorarioSeleccionado"
                                                  value="#{inscripcionesBean.listaHorarioASeleccionadas}" 
                                                  var="item"
-                                                 style="font-size:12px; text-align:center; width:100%;"
+                                                 
                                                  scrollable="true" scrollHeight="400"
-                                                 emptyMessage="No hay horarios seleccionados">
+                                                 emptyMessage="No hay horarios seleccionados"
+                                                   styleClass="tabla-horario">
 
                                         <p:column headerText="Asignatura / Docente" style="width:18%; font-size:13px; text-align:center;">
 
@@ -555,7 +557,7 @@
                                     <p:toolbar id="toolbarBotones" style="margin-top:10px;">
 
 
-                                        <p:toolbarGroup>
+                                        <p:toolbarGroup styleClass="toolbar-botones">
 
 
                                             <p:commandButton value="Guardar Horario" 
@@ -563,7 +565,7 @@
                                                              action="#{inscripcionesBean.guardarHorario}" 
                                                              update="tablaHorarioSeleccionado 
                                                              :seleccion:tabVista:toolbarBotones :seleccion:tabVista:growlMensajes"
-                                                             style="height:40px; background:#1976D2; font-size:16px; padding:0 10px 0 30px; margin-left:10px;"
+                                                             styleClass="btn-guardar"
                                                              disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas
                                                                          or inscripcionesBean.modoInsertar}" />
 
@@ -577,15 +579,15 @@
                                                              :seleccion:tabVista:growlMensajes 
                                                              :seleccion:tabVista:panelCreditos 
                                                              :formEstudiante:panelEstudiante" 
-                                                             style="height:40px; background:#1976D2; font-size:16px; padding:0 10px 0 30px; margin-left:10px;"
+                                                             styleClass="btn-eliminar"
                                                              disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas or inscripcionesBean.modoEliminar}" />
 
                                             <p:commandButton value="Imprimir Horario"
                                                              icon="pi pi-print"
                                                              actionListener="#{inscripcionesBean.generarPDF}"
                                                              ajax="false"
-                                                             style="height:40px; background:#1976D2; font-size:16px; padding:0 10px 0 30px; margin-left:10px;"
                                                              update=":seleccion:tabVista:growlMensajes :seleccion:tabVista:toolbarBotones"
+                                                             styleClass="btn-imprimir"
                                                              disabled="#{!inscripcionesBean.modoImprimir}"/>
                                         </p:toolbarGroup>
                                     </p:toolbar>
@@ -620,7 +622,8 @@
                                                  var="item"
                                                  style="font-size:12px; text-align:center;"
                                                  scrollable="true"
-                                                 scrollHeight="500">
+                                                 scrollHeight="500"
+                                                   styleClass="tabla-horario">
 
                                         <p:column headerText="Grupo" style="width:4%; text-align:center;">
                                             <h:outputText value="#{item.grupo}" />

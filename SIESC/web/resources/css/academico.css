@@ -86,23 +86,38 @@ body {
 .layout-sidebar {
     width: 260px;
     background-color: #ffffff !important;
-    border-right: 1px solid #e5e5e5; /* más suave  */
+    border-right: 1px solid #e5e5e5; /*   */
     overflow-y: auto;
     padding: 5px; /* espacio entre el panel menu y el sidebar  */
 }
 /* Scrollbar  */
 .layout-sidebar::-webkit-scrollbar {
-    width: 6px; /*  delgado */
+    width: 4px; /*  delgado */
 }
 
 .layout-sidebar::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,0.25);
+     background-color: #E6F4FA !important;
     border-radius: 10px;
 }
 
 .layout-sidebar::-webkit-scrollbar-track {
     background: transparent;
 }
+
+
+.layout-main::-webkit-scrollbar {
+       width: 4px; 
+}
+
+.layout-main::-webkit-scrollbar-thumb {
+     background-color: #2f5f8f !important;
+    border-radius: 10px;
+}
+
+.layout-main::-webkit-scrollbar-track {
+    background: transparent;
+}
+
 
 /* ======================== PANELMENU ======================== */
 .custom-menu.ui-panelmenu {
@@ -240,6 +255,14 @@ body {
 
 
 
+
+/* =========================================================
+   === MENU COLAPSADO – SIDEBAR
+========================================================= */
+
+/* ---------------------------------------------------------
+   CONTENEDOR SIDEBAR COLAPSADO
+--------------------------------------------------------- */
 .layout-sidebar.collapsed {
     width: 46px !important;
     padding: 1px 0 !important;
@@ -249,17 +272,28 @@ body {
     z-index: 2000;
 }
 
+/* ---------------------------------------------------------
+   PANELMENU – ESTRUCTURA GENERAL
+--------------------------------------------------------- */
 .layout-sidebar.collapsed .ui-panelmenu,
 .layout-sidebar.collapsed .ui-panelmenu-content {
     display: flex !important;
     flex-direction: column !important;
 }
+
+/* ---------------------------------------------------------
+   OCULTAR TEXTO (HEADERS E ITEMS)
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
 .ui-panelmenu-header > a,
 .layout-sidebar.collapsed 
 .ui-menuitem-link {
     font-size: 0 !important;
 }
+
+/* ---------------------------------------------------------
+   CENTRADO DE CONTENIDO (HEADERS E ITEMS)
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
 .ui-panelmenu-header > a,
 .layout-sidebar.collapsed 
@@ -267,17 +301,72 @@ body {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: 12px 0 !important;
+    padding: 5px 0 !important;
     width: 100%;
 }
+
+/* ---------------------------------------------------------
+   HEADER PANELMENU – ALTURA COMPACTA
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a {
+    padding: 0 !important;
+
+    height: 3px !important;
+    min-height: 5px !important;
+    max-height: 5px !important;
+    line-height: 5px !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    background-image: none !important;
+}
+
+/* ---------------------------------------------------------
+   HEADER PANELMENU – CONTENEDOR LI
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu-header {
+    margin: 0 !important;
+    margin-top: 4px;
+    border: 0 !important;
+    background-image: none !important;
+    overflow: hidden !important;
+}
+
+/* ---------------------------------------------------------
+   LISTA UL / LI (EVITAR ESPACIOS FANTASMA)
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu > ul > li {
+    padding: 0 !important;
+}
+
+.layout-sidebar.collapsed 
+.ui-menuitem {
+    margin: 2px 0;
+}
+
+/* ---------------------------------------------------------
+   ICONO PERSONALIZADO DEL HEADER (::before)
+   (queda definido, pero luego se oculta al colapsar)
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
 .ui-panelmenu-header > a::before {
     position: static !important;
     transform: none !important;
-    font-size: 1.3rem !important;
     margin: 0 !important;
+
+    font-size: 0.75rem !important;
     line-height: 1 !important;
+    color: #ffffff !important;
 }
+
+/* ---------------------------------------------------------
+   ICONOS DE ITEMS DEL MENU
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
 .ui-menuitem-icon,
 .layout-sidebar.collapsed 
@@ -285,47 +374,86 @@ body {
     display: inline-block !important;
     font-size: 1.25rem !important;
     margin: 0 !important;
-}
-.layout-sidebar.collapsed .ui-panelmenu-header {
-    margin-top: 4px;
-}
-
-.layout-sidebar.collapsed .ui-menuitem {
-    margin: 2px 0;
-}
-.layout-sidebar.collapsed 
-.ui-panelmenu-header > a::before {
-    color: #ffffff !important;
-}
-
-.layout-sidebar.collapsed 
-.ui-menuitem-icon {
     color: #cfd8dc !important;
 }
-/* Oculta el icono de expandir/colapsar del submenu */
+
+/* ---------------------------------------------------------
+   OCULTAR TEXTO DEL HEADER (SPAN INTERNO)
+--------------------------------------------------------- */
 .layout-sidebar.collapsed 
-.ui-panelmenu-header > a > .ui-panelmenu-icon {
-    display: none !important;
-}
-.layout-sidebar.collapsed 
-.ui-panelmenu-header > a span.ui-panelmenu-icon {
+.ui-panelmenu-header-text {
     display: none !important;
 }
 
+/* =========================================================
+   ELIMINAR ICONOS DEL PANELMENU HEADER AL COLAPSAR
+========================================================= */
+
+/* Pseudo-elementos del header y del link */
 .layout-sidebar.collapsed 
-.ui-panelmenu-header > a > span.ui-panelmenu-icon {
+.ui-panelmenu-header::before,
+.layout-sidebar.collapsed 
+.ui-panelmenu-header::after,
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::before,
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a::after {
+    content: none !important;
     display: none !important;
 }
+
+/* ---------------------------------------------------------
+   ELIMINAR TOGGLERS Y FLECHAS (ULTIMA / PRIMEFACES)
+--------------------------------------------------------- */
+
+/* Spans internos */
 .layout-sidebar.collapsed 
-.ui-menuitem-icon,
+.ui-panelmenu-header > a > .ui-panelmenu-icon,
 .layout-sidebar.collapsed 
-.ui-menuitem-link > i.pi {
-    display: inline-block !important;
+.ui-panelmenu-header > a > span.ui-panelmenu-icon,
+.layout-sidebar.collapsed 
+.ui-panelmenu-header > a > span.layout-menuitem-toggler,
+.layout-sidebar.collapsed 
+.layout-menuitem-toggler {
+    display: none !important;
 }
+
+/* Iconos PrimeIcons reales dentro del header */
 .layout-sidebar.collapsed 
-.ui-panelmenu-header > a::before {
-    display: inline-block !important;
-    visibility: visible !important;
+.ui-panelmenu-header > a > i.pi {
+    display: none !important;
+}
+
+/* ---------------------------------------------------------
+   ELIMINAR ICONOS DE SUBMENUS SOLO EN HEADER
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu-header .ui-panelmenu-icon {
+    display: none !important;
+}
+
+/* ---------------------------------------------------------
+   NEUTRALIZAR PSEUDO-ELEMENTOS DE ICONOS INTERNOS
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu-icon::before,
+.layout-sidebar.collapsed 
+.ui-panelmenu-icon::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* ---------------------------------------------------------
+   HEADER RAÍZ – CASOS ESPECIALES ULTIMA
+--------------------------------------------------------- */
+.layout-sidebar.collapsed 
+.ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header::before,
+.layout-sidebar.collapsed 
+.ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header::after,
+.layout-sidebar.collapsed 
+.ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header.ui-state-active::after {
+    content: none !important;
+    display: none !important;
 }
 
 
@@ -413,11 +541,10 @@ body {
 
 
 
-
 /* ===== CONTENEDOR PRINCIPAL ===== */
 .layout-main {
     flex: 1;
-    padding: 0 !important;
+    padding: 0px  !important;
     overflow-y: auto;
     background-color: #f5f7fb;
     text-align: center;
@@ -426,9 +553,9 @@ body {
 
 /* ===== TARJETA DE BIENVENIDA ===== */
 .welcome-box {
-    max-width: 1400px;
+    max-width: 1450px;
     margin: 0 auto;
-     padding: 5px 5px;
+     padding: 60px 5px;
     background: #ffffff;
     border-radius: 14px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -462,7 +589,17 @@ body {
     font-weight: 700;
     color: #003366;
     margin-bottom: 6px;
-           justify-content: center !important;
+    justify-content: center !important;
+    padding: 30px;
+}
+.titulo-welcome {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: #34495e;
+   
+    padding-left: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .dashboard-subtitle {
@@ -577,71 +714,137 @@ body {
 
 
 
+    
+            /* ===== ASIGNACION Y ACTUALIZACION  ===== */
+/* ===== PANEL AZUL PERSONALIZADO ===== */
+.panel-azul .ui-panel-titlebar {
+    background-color: #2f5f8f !important;/* Azul #037DBE !important; */
+    color: #FFFFFF !important;           /* Texto blanco */
+    padding: 6px 5px !important;         /* Altura pequeña */
+    min-height: auto !important;
+}
+
+/* Texto del título */
+.panel-azul .ui-panel-title {
+    font-size: 13px;                      /* Tamaño compacto */
+    font-weight: 600;
+    color: #FFFFFF !important;
+    line-height: 1.2;
+}
+
+/* Quita bordes extra si el theme los agrega */
+.panel-azul.ui-panel {
+    border-radius: 4px;
+}
+
+/* ===== PANEL PLANO, SIN BORDE NI SOMBRA ===== */
+.panel-azul,
+.panel-azul .ui-panel,
+.panel-azul .ui-panel-content,
+.panel-azul .ui-widget-content {
+    border: none !important;        /* Quita todos los bordes */
+    box-shadow: none !important;    /* Quita cualquier sombra */
+    background: #FFFFFF !important; /* Fondo blanco */
+    padding: 8px 10px !important;   /* Espacio interno */
+    border-radius: 8px !important;  /* Esquinas ligeramente redondeadas */
+}
+
+/* ===== CONTENEDOR CARD ===== */
+.card {
+    background: #FFFFFF !important; 
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+/* ===== TÍTULO PRINCIPAL ===== */
+.card h2 {
+    color: #1976D2 !important; 
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* ===== TOOLBAR BUSCADOR ===== */
+.ui-toolbar {
+    background: #E3F2FD !important;   /* Azul muy suave */
+    border: none !important;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.ui-toolbar .ui-inputfield {
+    border-radius: 8px !important; 
+}
 
 
-            .ui-panelgrid-cell {
-                padding-top: 5px !important;
-                padding-bottom: 5px !important;
-            }
+/* =========================
+   ENCABEZADO DATATABLE
+   ========================= */
 
+.tabla-horario.ui-datatable thead th.ui-state-default {
+    background-color: #2f5f8f !important;
+    color: #ffffff !important;
+    text-align: center;
 
-            /* ===================================================================== */
-            /* ========================   ESTILOS DE TABLA   ======================= */
-            /* ===================================================================== */
+    padding: 0 !important;          /* elimina padding  */
+    height: 32px !important;        /* altura */
+    vertical-align: middle;
+}
 
-            /* Aplica SOLO a la tabla con class="tabla-horarios" */
-            .tabla-horarios * {
-                font-size: 12px !important;
-                text-align: center !important;
-                color: #000 !important; /* Negro */
-            }
+/* Contenedor interno del texto */
+.tabla-horario.ui-datatable thead th .ui-column-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            /* Header y footer */
-            .tabla-horarios .ui-datatable-header,
-            .tabla-horarios .ui-datatable-footer {
-                background: #0d47a1;
-                color: #fff !important;
-                font-weight: bold;
-            }
+    height: 32px;                   /*  */
+    padding: 0 6px !important;      /* padding mínimo horizontal */
+    line-height: 1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffffff !important;
+}
 
-            /* Asignatura: materia */
-            .tabla-horarios .asignatura-box .materia {
-                font-weight: bold;
-                font-size: 13px;
-                color: #000 !important;
-            }
-
-            /* Asignatura: maestro */
-            .tabla-horarios .asignatura-box .maestro {
-                font-size: 11px;
-                color: #000 !important;
-            }
-
-            /* 3 puntitos */
-            .boton-tres-puntos {
-                background: none !important;
-                border: none !important;
-                box-shadow: none !important;
-                color: #000 !important;
-                font-size: 18px !important;
-                padding: 0 !important;
-                width: auto !important;
-                height: auto !important;
-            }
-            .tabla-horarios .linea-divisora .linea {
-                width: 70%;
-                height: 1px;
-                background-color: #ccc; /* línea gris suave */
-                margin: 3px auto;
-            }
+/* Quita gradientes y sombras del theme */
+.tabla-horario.ui-datatable thead th {
+    background-image: none !important;
+}
 
 
 
-            /* Evita que PrimeFaces pinte la fila seleccionada de amarillo */
-            .ui-datatable .ui-state-highlight {
-                background-color: transparent !important;
-                color: inherit !important;
-            }
+/* Elimina gradiente del theme */
+.tabla-horario.ui-datatable thead th {
+    background-image: none !important;
+}
+
+
+/* Fila completa del encabezado */
+.tabla-horario .ui-datatable-thead > tr > th {
+    background-color: #1565c0 !important;   /* azul */
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    border-color: #0d47a1;
+}
+
+/* Texto del encabezado */
+.tabla-horario .ui-column-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+/* Hover en encabezado (opcional) */
+.tabla-horario .ui-datatable-thead > tr > th:hover {
+    background-color: #0d47a1;
+}
+
+/* Quitar gradientes del theme */
+.tabla-horario .ui-state-default {
+    background-image: none !important;
+}
+
+
 
             /* ===================================================================== */
             /* ========================   BORDE TABLA INTERIOR   ======================= */
@@ -727,94 +930,163 @@ body {
                 color: #fff !important;
             }
             
-            
-            
 
             
-            
-
-            
-            
-            
-            /* ===== ASIGNACION Y ACTUALIZACION  ===== */
-/* ===== PANEL AZUL PERSONALIZADO ===== */
-.panel-azul .ui-panel-titlebar {
-    background-color: #037DBE !important; /* Azul */
-    color: #FFFFFF !important;           /* Texto blanco */
-    padding: 6px 12px !important;         /* Altura pequeña */
-    min-height: auto !important;
-}
-
-/* Texto del título */
-.panel-azul .ui-panel-title {
-    font-size: 13px;                      /* Tamaño compacto */
-    font-weight: 600;
-    color: #FFFFFF !important;
-    line-height: 1.2;
-}
-
-/* Quita bordes extra si el theme los agrega */
-.panel-azul.ui-panel {
-    border-radius: 4px;
-}
-
-/* ===== PANEL PLANO, SIN BORDE NI SOMBRA ===== */
-.panel-azul,
-.panel-azul .ui-panel,
-.panel-azul .ui-panel-content,
-.panel-azul .ui-widget-content {
-    border: none !important;        /* Quita todos los bordes */
-    box-shadow: none !important;    /* Quita cualquier sombra */
-    background: #FFFFFF !important; /* Fondo blanco */
-    padding: 8px 10px !important;   /* Espacio interno */
-    border-radius: 8px !important;  /* Esquinas ligeramente redondeadas */
-}
-
-/* ===== CONTENEDOR CARD ===== */
-.card {
-    background: #FFFFFF !important; 
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-}
-
-/* ===== TÍTULO PRINCIPAL ===== */
-.card h2 {
-    color: #1976D2 !important; 
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 16px;
-}
-
-/* ===== TOOLBAR BUSCADOR ===== */
-.ui-toolbar {
-    background: #E3F2FD !important;   /* Azul muy suave */
-    border: none !important;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.ui-toolbar .ui-inputfield {
-    border-radius: 8px !important; 
-}
-
-/* ===== DATATABLE GENERAL ===== */
-.ui-datatable {
-    border-radius: 12px;
-    overflow: hidden;
-    border: none !important;
-}
-
-/* ===== ENCABEZADO DE TABLA ===== */
-.ui-datatable thead th {
-    background: #1976D2 !important;   /* Azul encabezado */
-    color: #FFFFFF !important;        /* Texto blanco */
-    font-weight: 600;
+ /* =====================================================
+   FORMULARIOS ESTILO COMPACTO
+===================================================== */
+ 
+/* Base común para inputs y selects */
+.panelgrid-compacto .ui-inputfield,
+.panelgrid-compacto .ui-selectonemenu {
+    height: 32px !important;
+    min-height: 32px !important;
     font-size: 13px;
-    border: none !important;
-    padding: 10px;
-    text-align: center;
+    border-radius: 6px;
 }
+
+
+/* =====================================================
+   TEXTO DEL DATO 
+===================================================== */
+
+/* InputText e InputNumber */
+.panelgrid-compacto .ui-inputtext,
+.panelgrid-compacto .ui-inputnumber-input {
+     font-size: 1rem !important;
+   
+     font-weight: 700 !important; 
+    color: #263238 !important;
+}
+
+/* Texto seleccionado del SelectOneMenu */
+.panelgrid-compacto .ui-selectonemenu-label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #263238;
+}
+
+
+/* Icono dropdown */
+.panelgrid-compacto .ui-selectonemenu-trigger {
+    width: 28px !important;
+}
+
+.panelgrid-compacto .ui-selectonemenu-trigger .ui-icon {
+    margin-top: 7px !important;
+}
+
+/* Panel desplegable */
+.ui-selectonemenu-panel .ui-selectonemenu-items li {
+    font-size: 13px;
+    padding: 6px 10px;
+}
+
+/* Filtro */
+.ui-selectonemenu-panel .ui-selectonemenu-filter {
+    font-size: 13px;
+    padding: 5px 8px;
+}
+/* =====================================================
+   LABELS 
+===================================================== */
+
+
+.panelgrid-compacto .ui-outputlabel {
+    font-size: 11.2px;
+    font-weight: 500;
+    color: #546e7a;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+
+    margin-bottom: 0 !important;
+    line-height: 1.1;
+}
+
+
+.panelgrid-compacto .ui-inputfield:focus,
+.panelgrid-compacto .ui-selectonemenu.ui-state-focus {
+    border-color: #1565c0 !important;
+    box-shadow: 0 0 0 1px rgba(21, 101, 192, 0.3);
+}
+
+
+
+/* Seccion de informacion   */
+.select-medio {
+    height: 36px !important;
+    border-radius: 6px !important;
+}
+
+/* Caja visible */
+.select-medio .ui-selectonemenu {
+    height: 36px !important;
+    border: 1px solid #cfd8dc !important;
+    border-radius: 6px !important;
+}
+
+/* Texto seleccionado (CENTRADO) */
+.select-medio .ui-selectonemenu-label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    height: 100% !important;
+    width: 100% !important;
+
+    padding: 0 34px 0 10px !important; /* respeta el espacio de la flecha */
+    font-size: 14px;
+    text-align: center !important;
+}
+
+
+/* Botón de la flecha */
+.select-medio .ui-selectonemenu-trigger {
+    height: 34px !important;
+    width: 34px !important;
+}
+
+/* Icono de flecha */
+.select-medio .ui-icon {
+    margin-top: 9px !important;
+}
+
+
+/* Labels */
+.form-label {
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    color: #37474f !important;
+    margin-bottom: 4px !important;
+    display: block !important;
+}
+
+/* Inputs compactos */
+.ui-inputfield,
+.ui-inputnumber-input,
+.ui-selectonemenu {
+    height: 34px;
+    font-size: 0.85rem !important;
+    border-radius: 6px !important;
+}
+
+/* SelectOneMenu */
+.ui-selectonemenu .ui-selectonemenu-label {
+    padding: 0.45rem 0.6rem !important;
+    font-size: 0.85rem !important;
+}
+
+.ui-selectonemenu-trigger {
+    width: 2.2rem !important;
+}
+
+/* PanelGrid compacto */
+.panelgrid-compacto {
+    row-gap: 0.8rem !important;
+    column-gap: 1rem !important;
+}          
+
+
 
 /* ===== FILAS ===== */
 .ui-datatable tbody tr {
