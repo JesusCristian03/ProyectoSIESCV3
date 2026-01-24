@@ -1089,7 +1089,7 @@ public class InscripcionesBean implements Serializable {
                 }
             }
 
-            mostrarPanel("Selecciona materias disponibles [ Materias " + materiasDisponibles + "]", "mensaje-info");
+            mostrarPanel("MATERIAS DISPONIBLES[ MATERIAS" + materiasDisponibles + "]", "mensaje-info");
 
         }
     }

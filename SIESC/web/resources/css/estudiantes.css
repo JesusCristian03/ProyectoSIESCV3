@@ -52,7 +52,7 @@ body {
     width: 180px !important; /* tamaño */
     height: 40px !important;
     font-size: 15px !important;
-   
+
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -81,7 +81,7 @@ body {
 .layout-main-container {
     flex: 1;
     display: flex;
-    overflow: hidden;   
+    overflow: hidden;
 }
 /* ======================== SIDEBAR ======================== */
 .layout-sidebar {
@@ -97,7 +97,7 @@ body {
 }
 
 .layout-sidebar::-webkit-scrollbar-thumb {
-     background-color: #E6F4FA !important;
+    background-color: #E6F4FA !important;
     border-radius: 10px;
 }
 
@@ -107,11 +107,11 @@ body {
 
 
 .layout-main::-webkit-scrollbar {
-       width: 4px; 
+    width: 4px;
 }
 
 .layout-main::-webkit-scrollbar-thumb {
-     background-color: #2f5f8f !important;
+    background-color: #2f5f8f !important;
     border-radius: 10px;
 }
 
@@ -123,12 +123,12 @@ body {
 .custom-menu.ui-panelmenu {
     border: none !important; /* sin bordes  */
     background: #ffffff !important;
-      width: 100% !important; /* ← OCUPAR TODO EL ANCHO */
+    width: 100% !important; /* ← OCUPAR TODO EL ANCHO */
     margin: 0 !important;   /* ← SIN ESPACIOS EXTERNOS */
     padding: 0 !important;  /* ← SIN ESPACIOS INTERNOS */
     border-radius: 0 !important; /* ← OPCIONAL, pero lo deja uniforme con el sidebar */
     box-shadow: none !important; /* ← elimina borde visual extra */
-   
+
 }
 
 /* ---- Encabezados ---- */
@@ -147,16 +147,16 @@ body {
 }
 
 .custom-menu .ui-panelmenu-header:hover {
-    background: #00A4C2 !important; 
+    background: #00A4C2 !important;
     cursor: pointer;
 }
 
 /* ---- Contenido interno ---- */
 .custom-menu .ui-panelmenu-content {
     background: #F8FCFE !important; /* más minimalista */
-   
+
     border: none !important;
-        margin: 0 !important;
+    margin: 0 !important;
     padding-top: 4px !important;
     padding-bottom: 4px !important;
 }
@@ -250,9 +250,9 @@ body {
 /* ---------------------------------------------------------
    OCULTAR TEXTO (HEADERS E ITEMS)
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-menuitem-link {
     font-size: 0 !important;
 }
@@ -260,9 +260,9 @@ body {
 /* ---------------------------------------------------------
    CENTRADO DE CONTENIDO (HEADERS E ITEMS)
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-menuitem-link {
     display: flex !important;
     justify-content: center !important;
@@ -274,7 +274,7 @@ body {
 /* ---------------------------------------------------------
    HEADER PANELMENU – ALTURA COMPACTA
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a {
     padding: 0 !important;
 
@@ -293,7 +293,7 @@ body {
 /* ---------------------------------------------------------
    HEADER PANELMENU – CONTENEDOR LI
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header {
     margin: 0 !important;
     margin-top: 4px;
@@ -305,12 +305,12 @@ body {
 /* ---------------------------------------------------------
    LISTA UL / LI (EVITAR ESPACIOS FANTASMA)
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu > ul > li {
     padding: 0 !important;
 }
 
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-menuitem {
     margin: 2px 0;
 }
@@ -319,7 +319,7 @@ body {
    ICONO PERSONALIZADO DEL HEADER (::before)
    (queda definido, pero luego se oculta al colapsar)
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a::before {
     position: static !important;
     transform: none !important;
@@ -333,9 +333,9 @@ body {
 /* ---------------------------------------------------------
    ICONOS DE ITEMS DEL MENU
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-menuitem-icon,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-menuitem-link > i.pi {
     display: inline-block !important;
     font-size: 1.25rem !important;
@@ -346,7 +346,7 @@ body {
 /* ---------------------------------------------------------
    OCULTAR TEXTO DEL HEADER (SPAN INTERNO)
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header-text {
     display: none !important;
 }
@@ -356,13 +356,13 @@ body {
 ========================================================= */
 
 /* Pseudo-elementos del header y del link */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header::before,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header::after,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a::before,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a::after {
     content: none !important;
     display: none !important;
@@ -373,19 +373,19 @@ body {
 --------------------------------------------------------- */
 
 /* Spans internos */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a > .ui-panelmenu-icon,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a > span.ui-panelmenu-icon,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a > span.layout-menuitem-toggler,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .layout-menuitem-toggler {
     display: none !important;
 }
 
 /* Iconos PrimeIcons reales dentro del header */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header > a > i.pi {
     display: none !important;
 }
@@ -393,7 +393,7 @@ body {
 /* ---------------------------------------------------------
    ELIMINAR ICONOS DE SUBMENUS SOLO EN HEADER
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-header .ui-panelmenu-icon {
     display: none !important;
 }
@@ -401,9 +401,9 @@ body {
 /* ---------------------------------------------------------
    NEUTRALIZAR PSEUDO-ELEMENTOS DE ICONOS INTERNOS
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-icon::before,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu-icon::after {
     content: none !important;
     display: none !important;
@@ -412,11 +412,11 @@ body {
 /* ---------------------------------------------------------
    HEADER RAÍZ – CASOS ESPECIALES ULTIMA
 --------------------------------------------------------- */
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header::before,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header::after,
-.layout-sidebar.collapsed 
+.layout-sidebar.collapsed
 .ui-panelmenu > .ui-panelmenu-panel > .ui-panelmenu-header.ui-state-active::after {
     content: none !important;
     display: none !important;
@@ -497,7 +497,7 @@ body {
 .welcome-box {
     max-width: 1450px;
     margin: 0 auto;
-     padding: 20px 5px;
+    padding: 20px 5px;
     background: #ffffff;
     border-radius: 14px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
@@ -520,7 +520,7 @@ body {
     max-height: 250px;
     margin: 20px auto 30px auto;
     display: block;
-       border-radius: 50%;
+    border-radius: 50%;
     object-fit: cover;
     border: 3px solid #037DBE;
 }
@@ -539,7 +539,7 @@ body {
     font-weight: 500;
     letter-spacing: 0.03em;
     color: #34495e;
-   
+
     padding-left: 0.75rem;
     margin-bottom: 1.5rem;
 }
@@ -701,8 +701,8 @@ body {
 /* ===== PANEL INFORMATIVO ESTUDIANTES ===== */
 
 .info-panel {
-    width: 75%;              
-    margin: 0 auto;        
+    width: 75%;
+    margin: 0 auto;
     padding: 0;
 
     border: none !important;
@@ -737,7 +737,7 @@ body {
     font-size: 0.85rem;
     color: #1F1F1F;
     line-height: 1.4;
-     width: 100%;
+    width: 100%;
 }
 
 .info-content a {
@@ -756,7 +756,7 @@ body {
     padding: 10px;
     font-size: 0.85rem;
     border: 1px solid #9E9E9E;
-     width: 100%;
+    width: 100%;
 }
 
 .warning-text {
@@ -803,8 +803,56 @@ body {
     text-align: center !important;
     padding: .7rem !important;
     border-radius: 14px 14px 0 0 !important;
-     height:30px !important;
+    height:30px !important;
 }
+.custom-card > .ui-panel-content {
+    padding: 2px !important;
+
+}
+
+/* Header del panel */
+.custom-card > .ui-panel-titlebar {
+    background: none;
+    border: none;
+
+    padding: 4px 8px;          /* ❌ sin padding lateral */
+    display: flex;
+    justify-content: flex-start; /* ⬅️ izquierda */
+    align-items: center;
+}
+.custom-title {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    margin: 0;
+    padding: 0;
+}
+
+.custom-card > .ui-panel-titlebar .ui-panel-title {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+
+.reticula-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.escala-reticula {
+    --scale-factor: 0.85;
+    display: inline-block;
+    transform: scale(var(--scale-factor));
+    transform-origin: top center;
+}
+
+.escala-reticula .ui-datatable {
+    margin-bottom: 0 !important;
+}
+
 
 .custom-title {
     color: inherit !important;
@@ -828,7 +876,7 @@ body {
     border: none !important;          /* Quita todos los bordes */
     box-shadow: none !important;      /* Quita cualquier sombra */
     background: #E3F2FD !important;   /* Fondo azul muy suave */
-    padding: 8px 10px !important;     /* Espacio interno */
+    padding: 0px 10px !important;     /* Espacio interno */
     border-radius: 8px !important;    /* Esquinas ligeramente redondeadas */
 }
 /* Eliminar todos los bordes del panelGrid */
@@ -839,9 +887,14 @@ body {
 .flat-panelgrid .ui-widget-content {
     border: none !important;
     background: #FFFFFF!important; /* blanco de fondo */
-    padding: 8px 10px !important;
+    padding: 0px 10px !important;
     border-radius: 8px !important; /* opcional, esquinas suaves */
     box-shadow: none !important;   /* elimina sombra si existiera */
+}
+.ui-widget-content{
+ 
+ 
+    
 }
 
 .flat-panelgrid .label {
@@ -1025,6 +1078,8 @@ body {
     border: 2px solid #28a745 !important;
     padding: 10px !important;
     border-radius: 6px !important;
+    font-weight: bold;
+    font-size: 11.5px;
 }
 
 .mensaje-naranja .ui-panel-content {
@@ -1033,6 +1088,8 @@ body {
     border: 2px solid #ff9800 !important;
     padding: 10px !important;
     border-radius: 6px !important;
+    font-weight: bold;
+    font-size: 11.5px;
 }
 
 .mensaje-amarillo .ui-panel-content {
@@ -1041,6 +1098,8 @@ body {
     border: 2px solid #ffeb3b !important;
     padding: 10px !important;
     border-radius: 6px !important;
+    font-weight: bold;
+    font-size: 11.5px;
 }
 
 .mensaje-error  .ui-panel-content{
@@ -1049,6 +1108,8 @@ body {
     border: 2px solid #dc3545 !important;
     padding: 10px !important;
     border-radius: 6px !important;
+    font-weight: bold;
+    font-size: 11.5px;
 }
 
 .mensaje-info .ui-panel-content {
@@ -1057,6 +1118,8 @@ body {
     border: 2px solid #007bff !important;
     border-radius: 6px !important;
     padding: 10px;
+    font-weight: bold;
+    font-size: 11.5px;
 }
 
 /* Estados de disponibilidad */
@@ -1151,7 +1214,7 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 15px;
-    width: 100%; 
+    width: 100%;
 }
 
 /* Contenedor principal */
@@ -1184,8 +1247,8 @@ body {
 
 /* Celdas */
 .legend-cell {
-    flex: 1; 
-   
+    flex: 1;
+
     min-width: 0;           /* ⬅️ permite que se hagan pequeñas sin romper */
     padding: 5px;
     margin: 0px;
@@ -1268,7 +1331,7 @@ body {
 }
 
 /* Para que el select e input ocupen todo el ancho */
-.ui-inputfield, 
+.ui-inputfield,
 .ui-selectonemenu {
     width: 100% !important;
 }
@@ -1282,94 +1345,106 @@ body {
 
 
 
-            /* Quita padding de las celdas */
-            .ui-panelgrid .ui-panelgrid-cell {
-                padding: 5px !important;
-            }
+/* Quita padding de las celdas */
+.ui-panelgrid .ui-panelgrid-cell {
+    padding: 5px !important;
+}
 
-            /* Uniforma altura de todos los inputs */
-            .ui-inputfield,
-            .ui-selectonemenu,
-            .ui-selectonemenu-label {
-                height: 50px !important;
-                min-height: 50px !important;
-                box-sizing: border-box;
-            }
-
-
-            /* Tabla estilizada */
-            .tabla-autorizaciones {
-                border-radius: 10px;
-                overflow: hidden;
-                font-size: 14px;
-            }
-
-            /* Encabezados */
-            .tabla-autorizaciones .ui-datatable-header,
-            .tabla-autorizaciones th {
-                background: #1976D2 !important;
-                color: white !important;
-                font-weight: bold;
-                text-align: center;
-                padding: 10px !important;
-            }
-
-            /* Celdas */
-            .tabla-autorizaciones td {
-                padding: 8px 12px !important;
-                border-bottom: 1px solid #e0e0e0 !important;
-            }
-
-            /* Hover de las filas */
-            .tabla-autorizaciones tbody tr:hover {
-                background: #f1f7ff !important;
-            }
-
-            /* Centrado de columnas */
-            .col-centrada {
-                text-align: center !important;
-            }
-
-            /* Botón de eliminar */
-            .boton-eliminar {
-                border-radius: 6px !important;
-                padding: 6px 10px !important;
-            }
+/* Uniforma altura de todos los inputs */
+.ui-inputfield,
+.ui-selectonemenu,
+.ui-selectonemenu-label {
+    height: 50px !important;
+    min-height: 50px !important;
+    box-sizing: border-box;
+}
 
 
+/* Tabla estilizada */
+.tabla-autorizaciones {
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+/* Encabezados */
+.tabla-autorizaciones .ui-datatable-header,
+.tabla-autorizaciones th {
+    background: #1976D2 !important;
+    color: white !important;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px !important;
+}
+
+/* Celdas */
+.tabla-autorizaciones td {
+    padding: 8px 12px !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+
+/* Hover de las filas */
+.tabla-autorizaciones tbody tr:hover {
+    background: #f1f7ff !important;
+}
+
+/* Centrado de columnas */
+.col-centrada {
+    text-align: center !important;
+}
+
+/* Botón de eliminar */
+.boton-eliminar {
+    border-radius: 6px !important;
+    padding: 6px 10px !important;
+}
 
 
 
 
-            /* ENCABEZADOS */
-            .header-cell {
-                font-weight: bold;
-                background: #003366;
-                color:#FFFFFF;
-                text-transform: capitalize;
-                padding: 6px;
-                text-align: center;
-                width: 100%;
-            }
 
-            /* DATOS */
-            .data-cell {
-                padding: 6px;
-                text-align: center;
-                width:100%;
-                background: #f2f2f2;
-                color: #333;
-                height:100%;
-                display: flex;
-                align-items: center;     /* vertical */
-                justify-content: center; /* horizontal */
 
-            }
+/* ENCABEZADOS */
+.header-cell {
+    font-weight: bold;
 
-            /* espaciado general */
-            .flat-panelgrid .ui-panelgrid-cell {
-                padding: 6px;
-            }
+
+    padding: 1px;
+    text-align: center;
+    width: 100%;
+
+
+
+    font-weight: 500;
+    color: #546e7a;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+.ui-outputlabel-label{
+
+    font-size: 11.5px;
+
+}
+/* DATOS */
+.data-cell {
+    padding: 1px;
+    text-align: center;
+    width:100%;
+
+    color: #333;
+    height:100%;
+    display: flex;
+    align-items: center;     /* vertical */
+    justify-content: center; /* horizontal */
+    font-weight: bold;
+}
+
+/* espaciado general */
+.flat-panelgrid .ui-panelgrid-cell {
+    padding: 1px !important;
+
+}
 
 
 
@@ -1441,10 +1516,10 @@ body {
 
 
 
-            /* =====================================================
-   TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
+/* =====================================================
+TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
 ===================================================== */
-            
+
 
 #toolbarBotones {
     display: flex !important;
@@ -1465,7 +1540,7 @@ body {
     justify-content: center !important;   /* centra los botones */
     align-items: center !important;
     gap: 260px !important;                           /* separación uniforme */
- 
+
 }
 
 .toolbar-botones .ui-button {
@@ -1481,8 +1556,8 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
 
     transition: background 0.2s ease,
-                box-shadow 0.2s ease,
-                transform 0.1s ease !important;
+        box-shadow 0.2s ease,
+        transform 0.1s ease !important;
 }
 
 

@@ -1039,7 +1039,7 @@ public class HorarioCrearBean implements Serializable {
         aulaMateriaSeleccionada = params.get("aula");
         System.out.println("MateriaSeleccionada:" + nombreMateriaSeleccionada);
 
-        MateriasCarreras materiaC;
+        /*MateriasCarreras materiaC;
         Boolean x = false;
         materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
 
@@ -1066,7 +1066,7 @@ public class HorarioCrearBean implements Serializable {
 
             PrimeFaces.current().ajax().addCallbackParam("abrirDialogo", false);
             return;
-        }
+        }*/
 
         modoEliminarSeleccionadoG();//Pintar las seleccionadas para eliminar
         obtenerHorasDeMateriaEliminarG();//Contabilizar cuantas materias estan realmente en la base de datos por grupo
@@ -1108,7 +1108,7 @@ public class HorarioCrearBean implements Serializable {
 
         System.out.println("MateriaSeleccionada:" + nombreMateriaSeleccionada);
 
-        MateriasCarreras materiaC;
+       /* MateriasCarreras materiaC;
         Boolean x = false;
         materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
 
@@ -1134,7 +1134,7 @@ public class HorarioCrearBean implements Serializable {
 
             PrimeFaces.current().ajax().addCallbackParam("abrirDialogo", false);
             return;
-        }
+        }*/
 
         modoEliminarSeleccionadoA();//Pintar las seleccionadas para eliminar
 
@@ -1233,7 +1233,7 @@ public class HorarioCrearBean implements Serializable {
         System.out.println("MFila: " + filaMateriaSeleccionada);
         System.out.println("MColumna: " + columnaMateriaSeleccionada);
 
-        MateriasCarreras materiaC;
+       /* MateriasCarreras materiaC;
         Boolean x = false;
         materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
 
@@ -1258,7 +1258,7 @@ public class HorarioCrearBean implements Serializable {
 
             PrimeFaces.current().ajax().addCallbackParam("abrirDialogo", false);
             return;
-        }
+        }*/
 
         asignarValorDirectoEnCelda("#FC5110");
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA", nombreMateriaSeleccionada + "  " + aulaMateriaSeleccionada);
@@ -1366,7 +1366,7 @@ public class HorarioCrearBean implements Serializable {
         nombreMateriaSeleccionada = nombre;
         aulaMateriaSeleccionada = aula;
 
-        MateriasCarreras materiaC;
+      /*  MateriasCarreras materiaC;
         Boolean x = false;
         materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
 
@@ -1388,7 +1388,7 @@ public class HorarioCrearBean implements Serializable {
                     "MATERIA NO PERMITIDA",
                     "No se permite borrar, area no disponible");
             return;
-        }
+        }*/
 
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA", "MATERIA: " + nombre + " AULA: " + aula);
         // Si es la misma materia que ya estaba seleccionada → deselecciona
@@ -1414,7 +1414,7 @@ public class HorarioCrearBean implements Serializable {
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA", "MATERIA: " + nombreMateriaSeleccionada + " AULA: " + aulaMateriaSeleccionada);
         // Cambia color de la nueva seleccionada
 
-        MateriasCarreras materiaC;
+      /*  MateriasCarreras materiaC;
         Boolean x = false;
         materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
 
@@ -1436,7 +1436,7 @@ public class HorarioCrearBean implements Serializable {
                     "MATERIA NO PERMITIDA",
                     "No se permite borrar, area no disponible");
             return;
-        }
+        }*/
         modificarSeleccion();
 
     }
