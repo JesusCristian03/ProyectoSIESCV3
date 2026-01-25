@@ -129,11 +129,34 @@
                                     <p:ajax />
                                 </p:inputNumber>
 
+                                  <h:panelGroup id="panelBotonesModoGrupoAulas"
+                                      layout="block"
+                                      style="display:flex; justify-content: right; gap:10px; margin-bottom:0px; ">
 
+                            <!-- Ícono Modo Aula -->
+                            <p:commandButton icon="pi pi-building"
+                                             title="Modo Aula"
+                                             styleClass="btn-modo btn-modo-aula"
+                                             actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
+                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
+                                             oncomplete="desactivandoModoTodo(); activarModoAula();"
+                                             disabled="#{!horarioCrearBean.booleanBotonAula 
+                                                         or horarioCrearBean.desactivarCampos}"/>
+
+                            <!-- Ícono Modo Grupo -->
+                            <p:commandButton icon="pi pi-users"
+                                             title="Modo Grupo"
+                                             styleClass="btn-modo btn-modo-grupo"
+                                             actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
+                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
+                                             oncomplete="desactivandoModoTodo(); activarModoGrupo();"
+                                             disabled="#{!horarioCrearBean.booleanBotonGrupo
+                                                         or horarioCrearBean.desactivarCampos}"/>
+                        </h:panelGroup>
                                 
                                   <p:growl id="growl" showDetail="true" sticky="false" life="4000"/>
 
-                          
+                                  
                             
                             
                             
@@ -144,48 +167,8 @@
 
 
                            
-                            
-<h:panelGroup layout="block" styleClass="legend-wrapper">
 
-    <div class="legend-container">
-        <div class="legend-header">SIMBOLOGÍA DE ESTADOS</div>
 
-        <div class="legend-row">
-            <div class="legend-cell celda-seleccionada">
-                Celda seleccionada
-            </div>
-
-            <div class="legend-cell celda-insertada">
-                Celda insertada / agregada
-            </div>
-
-            <div class="legend-cell resaltarEliminar">
-                Elemento marcado para eliminar
-            </div>
-
-            <div class="legend-cell celda-intercambio">
-                Intercambio confirmado
-            </div>
-
-            <div class="legend-cell celda-hover-intercambio">
-                Intercambio (hover)
-            </div>
-
-            <div class="legend-cell celda-hover-modificar">
-                Modificar (hover)
-            </div>
-
-            <div class="legend-cell celda-hover-eliminar">
-                Eliminar (hover)
-            </div>
-
-            <div class="legend-cell celda-hover-agregar">
-                Agregar (hover)
-            </div>
-        </div>
-    </div>
-
-</h:panelGroup>
                              <p:divider />
                             <p:panelGrid id="panelBotones" columns="4" styleClass="ui-fluid panel-botones-sin-borde" columnClasses="ui-g-12 ui-md-3">
                                 <p:commandButton value="Insertar Materia"
@@ -247,33 +230,10 @@
 
                             </p:panelGrid>
 
-                                    
-                        <h:panelGroup id="panelBotonesModoGrupoAulas"
-                                      layout="block"
-                                      style="display:flex; justify-content: right; gap:10px; margin-bottom:0px; ">
+                                    <p:divider /> 
+                      
 
-                            <!-- Ícono Modo Aula -->
-                            <p:commandButton icon="pi pi-building"
-                                             title="Modo Aula"
-                                             styleClass="btn-modo btn-modo-aula"
-                                             actionListener="#{horarioCrearBean.actualizarTablaPorAula}"
-                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
-                                             oncomplete="desactivandoModoTodo(); activarModoAula();"
-                                             disabled="#{!horarioCrearBean.booleanBotonAula 
-                                                         or horarioCrearBean.desactivarCampos}"/>
-
-                            <!-- Ícono Modo Grupo -->
-                            <p:commandButton icon="pi pi-users"
-                                             title="Modo Grupo"
-                                             styleClass="btn-modo btn-modo-grupo"
-                                             actionListener="#{horarioCrearBean.actualizarTablaPorGrupo}"
-                                             update="grupo growl panelBotonesModoGrupoAulas panelBotonesModoGrupoAulas panelBotones"
-                                             oncomplete="desactivandoModoTodo(); activarModoGrupo();"
-                                             disabled="#{!horarioCrearBean.booleanBotonGrupo
-                                                         or horarioCrearBean.desactivarCampos}"/>
-                        </h:panelGroup>
-
-                        </p:panel>
+                      
 
                         <h:inputHidden id="posicionesSeleccionadas" value="#{horarioCrearBean.posicionesSeleccionadas}" />
                         <!-- Input hidden para almacenar nombre de la materia seleccionada -->
@@ -344,7 +304,7 @@
  
                         
 
-                        <p:dataTable value="#{horarioCrearBean.listaHorarioCrear}" id="grupo" var="item" styleClass="tabla-horario" editable="true" editMode="cell" widgetVar="tablaWidget" size="small" showGridlines="true" >
+                        <p:dataTable value="#{horarioCrearBean.listaHorarioCrear}" id="grupo" var="item" styleClass="tabla-horario" editable="true" editMode="cell" widgetVar="tablaWidget" size="small" showGridlines="true" style="width:100%; margin: 0 auto;">
                             <p:ajax event="cellEdit" listener="#{horarioCrearBean.onCellEdit}" update="grupo"/>                           
 
 
@@ -482,6 +442,59 @@
                             </p:column>
                         </p:dataTable>
 
+                        
+                        
+                        
+                        
+                        
+                        <h:panelGroup layout="block" styleClass="legend-wrapper">
+
+    <div class="legend-container">
+
+        <!-- ================= ESTADOS ================= 
+        <div class="legend-header">SIMBOLOGÍA DE ESTADOS</div>
+
+        <div class="legend-row">
+            <div class="legend-cell celda-seleccionada">Celda seleccionada</div>
+            <div class="legend-cell celda-insertada">Celda insertada / agregada</div>
+            <div class="legend-cell resaltarEliminar">Elemento marcado para eliminar</div>
+            <div class="legend-cell celda-intercambio">Intercambio confirmado</div>
+            <div class="legend-cell celda-hover-intercambio">Intercambio (hover)</div>
+            <div class="legend-cell celda-hover-modificar">Modificar (hover)</div>
+            <div class="legend-cell celda-hover-eliminar">Eliminar (hover)</div>
+            <div class="legend-cell celda-hover-agregar">Agregar (hover)</div>
+        </div>   -->
+
+        <!-- ================= DEPARTAMENTOS ================= -->
+        <div class="legend-header" style="margin-top:12px;">
+            SIMBOLOGÍA DE DEPARTAMENTOS
+        </div>
+
+        <div class="legend-row">
+            <div class="legend-cell depto-cb">Ciencias Básicas</div>
+            <div class="legend-cell depto-ct">Departamento</div>
+            <div class="legend-cell depto-ii">Ingeniería Industrial</div>
+            <div class="legend-cell depto-mm">Metal Mecánica</div>
+            <div class="legend-cell depto-ee">Ing. Eléctrica y Electrónica</div>
+            <div class="legend-cell depto-sc">Sistemas y Computación</div>
+            <div class="legend-cell depto-cea">C. Económico Administrativas</div>
+            
+             <div class="legend-cell celda-seleccionada">Celda seleccionada</div>
+            <div class="legend-cell celda-insertada">Celda insertada / agregada</div>
+            <div class="legend-cell resaltarEliminar">Elemento marcado para eliminar</div>
+            <div class="legend-cell celda-intercambio">Intercambio confirmado</div>
+            <div class="legend-cell celda-hover-intercambio">Intercambio </div>
+            <div class="legend-cell celda-hover-modificar">Modificar </div>
+            <div class="legend-cell celda-hover-eliminar">Eliminar</div>
+            <div class="legend-cell celda-hover-agregar">Agregar</div>
+        </div>
+
+    </div>
+
+</h:panelGroup>
+                          </p:panel>
+                        
+                        
 
                         <script type="text/javascript">
 
