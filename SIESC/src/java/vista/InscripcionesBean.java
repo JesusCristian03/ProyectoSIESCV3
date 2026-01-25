@@ -813,12 +813,12 @@ public class InscripcionesBean implements Serializable {
     public void validaciones() {
         if (autorizacionesDisponibles[4] != null) {
             if (autorizacionesDisponibles[4].equals("12")) {
-                mostrarPanel("Semestre rebasado autorizado", "mensaje-info");
+                mostrarPanel("SEMESTRE REBASADO AUTORIZADO", "mensaje-info");
 
             }
         } else {
             if (vr.getSemeste() > 12) {
-                mostrarPanel("No te puedes inscribir en semestre inválido", "mensaje-error");
+                mostrarPanel("NO TE PUEDES INSCRIBIR EN SEMESTRE INVÁLIDO", "mensaje-error");
                 bloquearAzules();
                 return;
 
@@ -835,7 +835,7 @@ public class InscripcionesBean implements Serializable {
         }
         if (autorizacionesDisponibles[5] != null) {
             if (autorizacionesDisponibles[5].equals("OE")) {
-                mostrarPanel("Puedes seleccionar materias no prioritarias", "mensaje-info");
+                mostrarPanel("SELECCIONAR MATERIAS NO PRIORORITARIAS", "mensaje-info");
                 System.out.println("Se hizo mostrarPanel(\"Salto puedes seleccionar materias no prioritarias\", \"mensaje-naranja\");");
             }
         } else {
@@ -855,7 +855,7 @@ public class InscripcionesBean implements Serializable {
         if (Mrojas != 0) {
             grupoBloqueado = true;
             //addMessage(FacesMessage.SEVERITY_ERROR, "CARRERA REPROBADA", "NO PUEDES SELECCIONAR NINGUNA MATERIA");
-            mostrarPanel("No puedes seleccionar  [ Materia(s) reprobada(s) ]", "mensaje-error");
+            mostrarPanel("NO SELECCIONAR [ MATERIAS(S) REPROBADAS(S) ]", "mensaje-error");
             return true;
         }
         return false;
@@ -890,7 +890,7 @@ public class InscripcionesBean implements Serializable {
                 mostrarPanel("Selecciona materias prioritarias [ Materias en repetición Max. 2]" + " Tienes:" + listaNaranjas.size(), "mensaje-naranja");
                 return true;
             }*/
-            mostrarPanel("Selecciona materias prioritarias [ Materias en repetición Max. 2]" + " Tienes:" + listaNaranjas.size(), "mensaje-naranja");
+            mostrarPanel("SELECCIONAR MATERIAS PRIORITARIAS [ MATERIAS EN REPETICION MAX. 2]" + " TIENES:" + listaNaranjas.size(), "mensaje-naranja");
             return true;
         }
         return false;
@@ -903,7 +903,7 @@ public class InscripcionesBean implements Serializable {
             /* if (listaNaranjas.size() == 1) {
                 mostrarPanel("Selecciona materias prioritarias [Materias en repetición Min. 1]->[ Materias en ordinario" + listaAmarillas.size() + "]", "mensaje-amarillas");
             }*/
-            mostrarPanel("Selecciona materias prioritarias [ Materias en ordinario " + listaAmarillas.size() + "]", "mensaje-amarillo");
+            mostrarPanel("SELECCIONA MATERIAS PRIORITARIAS [ MATERIAS EN ORDINARIO " + listaAmarillas.size() + "]", "mensaje-amarillo");
             for (int i = 0; i < listaAmarillas.size(); i++) {
                 Reticula r = listaM.get(listaAmarillas.get(i)[0]);
                 try {
@@ -1089,7 +1089,7 @@ public class InscripcionesBean implements Serializable {
                 }
             }
 
-            mostrarPanel("MATERIAS DISPONIBLES[ MATERIAS" + materiasDisponibles + "]", "mensaje-info");
+            mostrarPanel("MATERIAS DISPONIBLES[ MATERIAS: " + materiasDisponibles + "]", "mensaje-info");
 
         }
     }

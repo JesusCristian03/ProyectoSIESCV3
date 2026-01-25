@@ -815,9 +815,9 @@ body {
     background: none;
     border: none;
 
-    padding: 4px 8px;          /* ❌ sin padding lateral */
+    padding: 4px 0;          /* sin espacio lateral */
     display: flex;
-    justify-content: flex-start; /* ⬅️ izquierda */
+    justify-content: center; /* ⬅️ CENTRADO */
     align-items: center;
 }
 .custom-title {
@@ -840,6 +840,7 @@ body {
     justify-content: center;
     align-items: flex-start;
     width: 100%;
+    overflow: hidden;   /* 🔥 corta el espacio fantasma */
 }
 
 .escala-reticula {
@@ -933,7 +934,7 @@ body {
    COLORES DE LA TABLA
    ============================================================ */
 .tabla-header {
-    background-color: #1976D2 !important;
+    background-color: #2F5F8F !important;
     color: #ffffff !important;
     text-align: center;
     font-weight: bold;
@@ -1003,7 +1004,7 @@ body {
 
 /* Header del panel */
 .ui-panel .ui-panel-titlebar {
-    background: #003366 !important;
+    background: #2F5F8F !important;
     color: #fff !important;
     font-weight: bold;
     font-size: 15px;
@@ -1011,7 +1012,7 @@ body {
     border-radius: 6px 6px 0 0 !important;
     height: 30px !important;         /*  */
     line-height: 30px !important;     /* MISMO valor para centrar verticalmente */
-    padding: 0 !important;
+    padding: 0px 0px 0px 0px !important;
 }
 
 /* Eliminar márgenes internos del título */
@@ -1020,6 +1021,40 @@ body {
     padding: 0 !important;
 }
 
+
+/* Texto de las pestañas */
+.ui-tabs-nav li a {
+    font-size: 12px;       /* 🔽 tamaño */
+    font-weight: 400;      /* normal (no gorda) */
+    padding: 6px 10px;     /* 🔽 menos alto */
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.ui-tabs-nav li.ui-tabs-selected a {
+    font-weight: 500;   /* o 400 si lo quieres igual */
+}
+/* Badge dentro de tabs */
+.ui-tabs-nav .ui-badge {
+    font-size: 9px !important;
+    min-width: 15px !important;
+    height: 15px !important;
+
+    display: inline-flex !important; /* 🔥 mejor que inline-block */
+    align-items: center;              /* 🔥 centra vertical */
+    justify-content: center;          /* 🔥 centra horizontal */
+
+    line-height: 1 !important;
+    padding: 0 !important;
+
+    border-radius: 50%; /* si lo quieres círculo perfecto */
+}
+
+.ui-tabs-nav li a .pi {
+    font-size: 11px;
+}
 
 /* Solo afecta a paneles que tengan styleClass="panel-azul" */
 .panel-azul .ui-panel-titlebar {
@@ -1183,7 +1218,7 @@ body {
 .legend-title {
     font-size: 1.1rem !important;
     font-weight: 600 !important;
-    color: #1976D2 !important;
+    color: #2F5F8F !important;
     text-align: center !important;
     margin-bottom: 0.5rem !important;
 }
