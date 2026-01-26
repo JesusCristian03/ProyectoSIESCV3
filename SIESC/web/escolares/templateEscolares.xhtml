@@ -7,8 +7,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>Departamento de Escolares - SIESC</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link rel="icon" href="#{resource['assets/itc.png']}" type="image/x-icon"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Sistema Escolar ITC - Departamento de Escolares </title>
+  
 
    <h:outputStylesheet  library="css" name="escolares.css"/>
    
@@ -35,7 +37,7 @@
 
                 <h:graphicImage library="assets" name="TECNM-blanco.png" style="height:45px; margin-left:13px;" />
 
-                <div class="title">DEPARTAMENTO DE ESCOLARES</div>
+                <div class="title">SISTEMA INTEGRAL DE INFORMACIÓN DEL INSTITUTO TECNOLÓGICO DE CUAUTLA <br/> DEPARTAMENTO ESCOLAR</div>
 
                 <h:form styleClass="logout-btn">
                     <p:commandButton value="Cerrar sesión" icon="pi pi-sign-out"
@@ -56,7 +58,7 @@
                             <p:submenu label="Alumnos" icon="pi pi-users">
                                 <p:menuitem value="Alta de Alumnos" outcome="/escolares/altaNuevoEstudiantes.xhtml"
                                             actionListener="#{altaEstudiantesBean.inicializacion}"
-                                            icon="pi pi-user-minus" />
+                                            icon="pi pi-user-plus" />
                                
                                <p:submenu label="Modificaciones de datos del Alumno" icon="pi pi-user-edit">
                                 <p:menuitem value=" " icon=" " />

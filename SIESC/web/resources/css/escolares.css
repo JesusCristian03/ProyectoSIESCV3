@@ -38,10 +38,10 @@ body {
 }
 
 .layout-topbar .title {
-    flex: 1;
-    text-align: center;
-    font-size: 1.25rem;
-    font-weight: 600;
+    flex: 1 !important;
+    text-align: center !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
 }
 
 /* ====== BOTÓN CERRAR SESION ====== */
@@ -382,7 +382,8 @@ body {
  font-family: "primeicons"; 
  font-size: .9rem; 
  line-height: 1; 
- color: #005fa3 !important; /* azul */ }
+  color: #ffffff !important;
+ /*color: #005fa3 !important;  azul */ }
 
 
 
@@ -661,7 +662,9 @@ body {
 
 /* ===== PANEL REGISTRO NUEVO ALUMNO ===== */
 .panel-registro-alumno .ui-panel-titlebar {
-  background-color: #037DBE !important;
+  /*background-color: #037DBE !important; 
+   background: #1976D2 !important;*/
+     background-color: #2f5f8f !important;
     color: #ffffff !important;
     height: 36px;                /* altura  */
     padding: 0 12px;             /* solo padding horizontal */
@@ -675,7 +678,7 @@ body {
 /* Texto del encabezado */
 .panel-registro-alumno .ui-panel-title {
     color: #FFFFFF !important;
-    font-size: 1rem;
+    font-size: .9rem;
     font-weight: 600;
     letter-spacing: 0.5px;
 }
