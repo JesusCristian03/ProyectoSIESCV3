@@ -130,7 +130,8 @@ body {
 
 /* ---- Encabezados ---- */
 .custom-menu .ui-panelmenu-header {
-    background: #037DBE !important;
+   /* background: #037DBE !important;*/
+    background: #1F4E79 !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     font-size: 0.97rem;

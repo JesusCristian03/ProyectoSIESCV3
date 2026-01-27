@@ -130,7 +130,8 @@ body {
 
 /* ---- Encabezados ---- */
 .custom-menu .ui-panelmenu-header {
-    background: #037DBE !important;
+   /* background: #037DBE !important;*/
+    background: #1F4E79 !important;
     color: #ffffff !important;
     font-weight: 600 !important;
     font-size: 0.97rem;
@@ -800,6 +801,9 @@ body {
 .select-medio {
     height: 36px !important;
     border-radius: 6px !important;
+     font-weight:bold  !important;
+         align-items: center !important;     /* vertical */
+    justify-content: center !important; /* horizontal */
 }
 
 /* Caja visible */
@@ -807,13 +811,21 @@ body {
     height: 36px !important;
     border: 1px solid #cfd8dc !important;
     border-radius: 6px !important;
+     font-weight:bold  !important;
+           align-items: center !important;     /* vertical */
+    justify-content: center !important; /* horizontal */
+       text-align: center !important;
 }
 
 /* Texto seleccionado */
 .select-medio .ui-selectonemenu-label {
     line-height: 34px !important;
     padding: 0 10px !important;
-    font-size: 14px;
+    font-size: 11px;
+     font-weight:bold  !important;
+             align-items: center !important;     /* vertical */
+    justify-content: center !important; /* horizontal */
+       text-align: center !important;
 }
 
 /* Botón de la flecha */
@@ -825,6 +837,101 @@ body {
 /* Icono de flecha */
 .select-medio .ui-icon {
     margin-top: 9px !important;
+}
+
+/* InputText mismo tamaño que selectOneMenu */
+.input-medio.ui-inputtext {
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    height: 34px !important;        /* CLAVE para igualar */
+    font-size: 11px !important;
+    font-weight: bold !important;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* INPUT DEL DATEPICKER */
+.date-medio input {
+    height: 34px !important;
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+/* BOTÓN DEL CALENDARIO */
+.date-medio button {
+    height: 34px !important;
+    width: 34px !important;
+}
+
+/* ÍCONO CENTRADO */
+.date-medio button .ui-icon {
+    line-height: 34px !important;
+}
+
+
+
+
+
+/* ENCABEZADOS */
+.header-cell {
+    font-weight: bold;
+
+
+    padding: 1px;
+    text-align: center;
+    width: 100%;
+
+
+
+    font-weight: 500;
+    color: #546e7a;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+.ui-outputlabel-label{
+
+    font-size: 11.5px;
+
+}
+/* DATOS */
+.data-cell {
+    padding: 1px;
+    text-align: center;
+    width:100%;
+
+    color: #333;
+    height:100%;
+    display: flex;
+    align-items: center;     /* vertical */
+    justify-content: center; /* horizontal */
+    font-weight: bold;
+}
+
+/* espaciado general */
+.flat-panelgrid .ui-panelgrid-cell {
+    padding: 1px !important;
+
+}
+
+/* Botón */
+.upload-blanco .ui-fileupload-choose {
+    background-color: #2196F3 !important;
+    border-color: #2196F3 !important;
+}
+
+/* TEXTO "Choose" */
+.upload-blanco .ui-fileupload-choose .ui-button-text {
+    color: #ffffff !important;
+}
+
+/* ÍCONO */
+.upload-blanco .ui-fileupload-choose .ui-icon {
+    color: #ffffff !important;
 }
 
 

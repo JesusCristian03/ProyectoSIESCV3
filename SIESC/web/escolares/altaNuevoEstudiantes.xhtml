@@ -25,51 +25,53 @@
                        
                        <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto"  columnClasses="ui-g-12 ui-md-3"  style="gap:20px;">
 
-                             <h:outputText value="No. Control" style="font-weight:bold; margin-bottom:10px; display:block;" />
-                            <h:outputText value="Nombre" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Apellido Paterno" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Apellido Materno" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                             <h:outputText value="No. Control" styleClass="header-cell" />
+                            <h:outputText value="Nombre" styleClass="header-cell" />
+                            <h:outputText value="Apellido Paterno" styleClass="header-cell" />
+                            <h:outputText value="Apellido Materno" styleClass="header-cell" />
                             
                             <p:inputText value="#{altaEstudiantesBean.numeroControl}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio"
+                                         style=" font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.estudiante.nombreAlumno}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();"
                                          >
                                 <p:ajax />
                             </p:inputText>
 
                             <p:inputText value="#{altaEstudiantesBean.estudiante.apellidoPaterno}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
 
                             <p:inputText value="#{altaEstudiantesBean.estudiante.apellidoMaterno}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                         styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
 
                             
                             
-                            <h:outputText value="Fecha de Nacimiento" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Sexo" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Estado Civil" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="CURP" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Fecha de Nacimiento" styleClass="header-cell" />
+                            <h:outputText value="Sexo" styleClass="header-cell"/>
+                            <h:outputText value="Estado Civil" styleClass="header-cell" />
+                            <h:outputText value="CURP" styleClass="header-cell" />
 
 
-                            <p:datePicker value="#{altaEstudiantesBean.estudiante.fechaNacimiento}"   styleClass="select-medio" style="width:100%;">
+                            <p:datePicker value="#{altaEstudiantesBean.estudiante.fechaNacimiento}"    
+                                          styleClass="date-medio"
+                                          style="width:100%; font-weight:bold;">
                                 <p:ajax />
                             </p:datePicker>
-                            <p:selectOneMenu value="#{altaEstudiantesBean.sexo}" styleClass="select-medio" style="width:100%;">
+                            <p:selectOneMenu value="#{altaEstudiantesBean.sexo}" styleClass="select-medio" style="width:100%; font-weight:bold;">
 
                                 <f:selectItem itemLabel="SELECCIONA UN SEXO" itemValue="-" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="MASCULINO" itemValue="M" />
@@ -77,7 +79,7 @@
                                 <p:ajax />
                             </p:selectOneMenu>
 
-                            <p:selectOneMenu value="#{altaEstudiantesBean.estadoCivil}" styleClass="select-medio" style="width:100%;">
+                            <p:selectOneMenu value="#{altaEstudiantesBean.estadoCivil}" styleClass="select-medio" style="width:100%; font-weight:bold;">
                                 <f:selectItem itemLabel="SELECCIONA ESTADO CIVIL" itemValue="-" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="SOLTERO(A)" itemValue="S" />
                                 <f:selectItem itemLabel="CASADO(A)" itemValue="C" />
@@ -86,26 +88,26 @@
 
 
                             <p:inputText value="#{altaEstudiantesBean.estudiante.curpAlumno}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                   styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
 
 
-                              <h:outputText value="Correo Electrónico" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Tipo de Sangre" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                              <h:outputText value="Correo Electrónico" styleClass="header-cell" />
+                            <h:outputText value="Tipo de Sangre" styleClass="header-cell"/>
+                            <h:outputText value="" styleClass="header-cell" />
+                            <h:outputText value="" styleClass="header-cell" />
                             
                             
                             <p:inputText value="#{altaEstudiantesBean.estudiante.correoElectronico}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                          styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
-                            <p:selectOneMenu id="tipoSangre" value="#{altaEstudiantesBean.alumnoGeneral.tipoSangre}" styleClass="select-medio" style="width:100%;">
+                            <p:selectOneMenu id="tipoSangre" value="#{altaEstudiantesBean.alumnoGeneral.tipoSangre}" styleClass="select-medio" style="width:100%; font-weight:bold;">
                                 <f:selectItem itemLabel="SELECCIONE TIPO DE SANGRE" itemValue="" noSelectionOption="true"/>                              
                                 <f:selectItem itemLabel="A+" itemValue="A+" />
                                 <f:selectItem itemLabel="A-" itemValue="A-" />
@@ -124,49 +126,49 @@
                         
                         <!-- ================= DOMICILIO ================= -->
                         <h3 class="section-title" style="font-size:1.5em; color:#1976D2; margin-bottom:20px; display:flex; align-items:center;">
-                            Domicilio <i class="pi pi-home" style="margin-left:30px; color:#1976D2; font-size:2rem;"></i>
+                            Domicilio <i class="pi pi-home" style="margin-left:30px; color:#1976D2; font-size:2rem; "></i>
                         </h3>
 
                          <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto"  columnClasses="ui-g-12 ui-md-3"  style="gap:20px;">
-                            <h:outputText value="Calle y Número" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Colonia" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Código Postal" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                             <h:outputText value="Ciudad" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Calle y Número" styleClass="header-cell" />
+                            <h:outputText value="Colonia" styleClass="header-cell" />
+                            <h:outputText value="Código Postal" styleClass="header-cell" />
+                             <h:outputText value="Ciudad" styleClass="header-cell" />
                             
                             <p:inputText value="#{altaEstudiantesBean.domicilioCalle}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.domicilioColonia}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                          styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.codigoPostal}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.estudiante.ciudadProcedencia}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio" 
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
 
 
-                            <h:outputText value="Municipio" style="font-weight:bold; margin-bottom:5px; display:block;" />  
-                            <h:outputText value="Entidad Federativa" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Teléfono" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Teléfono emergencia" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Municipio" styleClass="header-cell" />  
+                            <h:outputText value="Entidad Federativa" styleClass="header-cell" />
+                            <h:outputText value="Teléfono" styleClass="header-cell" />
+                            <h:outputText value="Teléfono emergencia" styleClass="header-cell" />
                             
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.municipio}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                          styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
@@ -180,16 +182,16 @@
                                     itemLabel="#{ent.nombreEntidad}" />
                             </p:selectOneMenu>
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.telefono}" 
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                          styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                         
                             <p:inputMask value="#{altaEstudiantesBean.alumnoGeneral.telefonoEmergencia}" 
                                          mask="(999) 999-9999"
-                                         styleClass="ui-inputfield" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;">
+                                          styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;">
                                 <p:ajax />
                             </p:inputMask>
 
@@ -203,10 +205,10 @@
                         <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto"  columnClasses="ui-g-12 ui-md-3"  style="gap:20px;">
 
 
-                            <h:outputText value="Carrera y Retícula" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Especialidad" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Periodo Ingreso IT" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                             <h:outputText value="Año" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Carrera y Retícula" styleClass="header-cell" />
+                            <h:outputText value="Especialidad" styleClass="header-cell" />
+                            <h:outputText value="Periodo Ingreso IT" styleClass="header-cell" />
+                             <h:outputText value="Año" styleClass="header-cell" />
                             
                             <p:selectOneMenu value="#{altaEstudiantesBean.reticula}" styleClass="select-medio" style="width:100%;">
                                 <p:ajax />
@@ -233,31 +235,32 @@
                                 <f:selectItem itemLabel="AGO-DIC/2025" itemValue="20253"/>
                             </p:selectOneMenu>
                              <p:inputMask value="#{altaEstudiantesBean.anioIngreso}" 
-                                         mask="9999" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;">
+                                         mask="9999"
+                                          styleClass="input-medio"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;" >
                                 <p:ajax />
                             </p:inputMask>
 
                            
-                            <h:outputText value="Tipo de Ingreso al Plantel" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Plan de estudio" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Nivel Escolar" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Estatus del Alumno" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Tipo de Ingreso al Plantel" styleClass="header-cell"/>
+                            <h:outputText value="Plan de estudio" styleClass="header-cell"/>
+                            <h:outputText value="Nivel Escolar" styleClass="header-cell"/>
+                            <h:outputText value="Estatus del Alumno" styleClass="header-cell" />
 
-                            <p:selectOneMenu value="#{altaEstudiantesBean.tipoIngreso}" styleClass="select-medio" style="width:100%;">
+                            <p:selectOneMenu value="#{altaEstudiantesBean.tipoIngreso}" styleClass="select-medio" style="width:100%; font-weight:bold;">
                                 <p:ajax />
                                 <f:selectItem itemLabel="SELECCIONA TIPO DE INGRESO" itemValue="-" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="EXAMEN SELECCION" itemValue="Examen"/>
                                 <f:selectItem itemLabel="REINGRESO" itemValue="Reingreso"/>
                             </p:selectOneMenu>
-                            <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.planDeEstudios}" styleClass="select-medio" style="width:100%;">
+                            <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.planDeEstudios}" styleClass="select-medio" style="width:100%; font-weight:bold;">
                                 <p:ajax />
                                 <f:selectItem itemLabel="SELECCIONA UNA COMPETENCIA" itemValue="-" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="3- COMPETENCIAS" itemValue="3"/>
                                 <f:selectItem itemLabel="4- COMPETENICAS" itemValue="4"/>
                             </p:selectOneMenu>
                             
-                            <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.nivelEscolar}"  styleClass="select-medio" style="width:100%;">
+                            <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.nivelEscolar}"  styleClass="select-medio" style="width:100%; font-weight:bold;">
 
                                 <p:ajax />
 
@@ -284,10 +287,10 @@
                             </p:selectOneMenu>
 
                             
-                            <h:outputText value="Tipo de servicio médico" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Clave servicio médico" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Escuela de procedencia" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Domicilio de la escuela" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Tipo de servicio médico" styleClass="header-cell"/>
+                            <h:outputText value="Clave servicio médico" styleClass="header-cell" />
+                            <h:outputText value="Escuela de procedencia" styleClass="header-cell"/>
+                            <h:outputText value="Domicilio de la escuela" styleClass="header-cell"/>
                             
                             <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.tipoServicioMedico}" styleClass="select-medio" style="width:100%;">
                                 <p:ajax />
@@ -299,29 +302,33 @@
                             </p:selectOneMenu>
 
                             <p:inputText value="#{altaEstudiantesBean.estudiante.claveServicioMedico}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
+                                           styleClass="input-medio" 
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.estudiante.escuelaProcedencia}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
+                                           styleClass="input-medio"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.estudiante.domicilioEscuela}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
+                                           styleClass="input-medio"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
 
 
-                           <h:outputText value="Foto" style="font-weight:bold;" />
-                           <h:outputText value="Firma" style="font-weight:bold;" />
+                           <h:outputText value="Foto" styleClass="header-cell"  style="font-weight:bold;" />
+                           <h:outputText value="Firma" styleClass="header-cell"  style="font-weight:bold;" />
                            <h:outputText value=" " style="font-weight:bold;" />
                            <h:outputText value=" " style="font-weight:bold;" />
 
                            <p:fileUpload
                                       value="#{altaEstudiantesBean.fotoFile}"
+                                       styleClass="upload-blanco"
                                       mode="advanced"
                                       auto="true"
                                       fileLimit="1"
@@ -330,6 +337,7 @@
 
                            <p:fileUpload
                                 value="#{altaEstudiantesBean.firmaFile}"
+                                 styleClass="upload-blanco"
                                 mode="advanced"
                                 auto="true"
                                 fileLimit="1"
@@ -351,23 +359,26 @@
 
                        <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto"  columnClasses="ui-g-12 ui-md-3"  style="gap:20px;">
 
-                            <h:outputText value="Nombre del Padre" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Domicilio (calle y número)" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Colonia" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Entidad Federativa" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Nombre del Padre" styleClass="header-cell" />
+                            <h:outputText value="Domicilio (calle y número)" styleClass="header-cell"/>
+                            <h:outputText value="Colonia" styleClass="header-cell" />
+                            <h:outputText value="Entidad Federativa" styleClass="header-cell" />
 
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombrePadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
+                                           styleClass="input-medio"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCallePadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
+                                           styleClass="input-medio"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColoniaPadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio"
+                                           style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
@@ -381,24 +392,27 @@
                                     itemLabel="#{ent.nombreEntidad}" />
                             </p:selectOneMenu>
                          
-                            <h:outputText value="Teléfono" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Ocupación del Padre" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Domicilio / Ciudad (Padre)" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Teléfono" styleClass="header-cell" />
+                            <h:outputText value="Ocupación del Padre" styleClass="header-cell" />
+                            <h:outputText value="Domicilio / Ciudad (Padre)" styleClass="header-cell" />
+                            <h:outputText value="" styleClass="header-cell" />
                            
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoPadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio" 
+                                          style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.ocupacionPadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio" 
+                                           style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
 
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCiudadPadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio"
+                                          style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
@@ -411,23 +425,26 @@
 
                         <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto"  columnClasses="ui-g-12 ui-md-3"  style="gap:20px;">
 
-                            <h:outputText value="Nombre de la Madre" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Domicilio (calle y número)" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Colonia" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Entidad federativa" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Nombre de la Madre" styleClass="header-cell" />
+                            <h:outputText value="Domicilio (calle y número)" styleClass="header-cell" />
+                            <h:outputText value="Colonia" styleClass="header-cell" />
+                            <h:outputText value="Entidad federativa" styleClass="header-cell" />
 
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.nombreMadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                            styleClass="input-medio"
+                                           style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioCalleMadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio" 
+                                           style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioColoniaMadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                            styleClass="input-medio"
+                                           style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
@@ -442,27 +459,30 @@
                                     itemLabel="#{ent.nombreEntidad}" />
                             </p:selectOneMenu>
                    
-                            <h:outputText value="Teléfono" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Ocupación de la Madre" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="Domicilio / Ciudad (madre)" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                            <h:outputText value="" style="font-weight:bold; margin-bottom:5px; display:block;" />
+                            <h:outputText value="Teléfono" styleClass="header-cell" />
+                            <h:outputText value="Ocupación de la Madre" styleClass="header-cell" />
+                            <h:outputText value="Domicilio / Ciudad (madre)" styleClass="header-cell" />
+                            <h:outputText value="" styleClass="header-cell" />
                            
                            
                             <p:inputText value="#{altaEstudiantesBean.alumnoGeneral.domicilioTelefonoMadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                          styleClass="input-medio"
+                                          style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
                             <p:inputText id="ocupacionMadre" 
                                          value="#{altaEstudiantesBean.alumnoGeneral.ocupacionMadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                           styleClass="input-medio"
+                                           style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
 
                             <p:inputText id="domicilioCiudadMadre" 
                                          value="#{altaEstudiantesBean.alumnoGeneral.domicilioCiudadMadre}" 
-                                         style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
+                                          styleClass="input-medio"
+                                           style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%; font-weight:bold;"
                                          oninput="this.value = this.value.toUpperCase();">
                                 <p:ajax />
                             </p:inputText>
