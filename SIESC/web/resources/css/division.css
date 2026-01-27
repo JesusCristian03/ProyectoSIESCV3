@@ -1664,14 +1664,24 @@ body {
     font-size: 0.8rem !important;
 }
 
-/* Botón principal */
+/* Botón principal compacto */
 .boton-principal {
     height: 38px !important;
     font-size: 0.85rem !important;
     font-weight: 600 !important;
+
+    width: 220px !important; 
+    min-width: unset !important;
+
+    padding: 0 14px !important;
+
     background: linear-gradient(135deg, #1976d2, #1e88e5) !important;
     border: none !important;
     border-radius: 6px !important;
+}
+.boton-derecha {
+    display: flex;
+    justify-content: flex-end;
 }
 
 
@@ -1717,3 +1727,123 @@ body {
                 border-radius: 6px !important;
                 padding: 0px 0px !important;
             }
+            
+ .panelgrid-compacto .ui-panelgrid-cell {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+}
+.panelgrid-compacto .ui-outputlabel,
+.panelgrid-compacto span,
+.panelgrid-compacto label {
+    margin-bottom: 2px !important;
+    display: block;
+}
+.panelgrid-compacto .ui-inputfield,
+.panelgrid-compacto .ui-selectonemenu {
+    margin-top: 0 !important;
+}           
+/* Seccion de informacion   */
+.select-medio {
+    height: 36px !important;
+    border-radius: 6px !important;
+     font-weight:bold  !important;
+         align-items: center !important;     /* vertical */
+    justify-content: center !important; /* horizontal */
+}
+
+/* Caja visible */
+.select-medio .ui-selectonemenu {
+    height: 36px !important;
+    border: 1px solid #cfd8dc !important;
+    border-radius: 6px !important;
+     font-weight:bold  !important;
+           align-items: center !important;     /* vertical */
+    justify-content: center !important; /* horizontal */
+       text-align: center !important;
+}
+
+/* Texto seleccionado */
+.select-medio .ui-selectonemenu-label {
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 11px;
+     font-weight:bold  !important;
+             align-items: center !important;     /* vertical */
+    justify-content: center !important; /* horizontal */
+       text-align: center !important;
+}
+
+/* Botón de la flecha */
+.select-medio .ui-selectonemenu-trigger {
+    height: 34px !important;
+    width: 34px !important;
+}
+
+/* Icono de flecha */
+.select-medio .ui-icon {
+    margin-top: 9px !important;
+}
+
+/* InputText mismo tamaño que selectOneMenu */
+.input-medio.ui-inputtext {
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    height: 34px !important;        /* CLAVE para igualar */
+    font-size: 12px !important;
+    font-weight: bold !important;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* INPUT DEL DATEPICKER */
+.date-medio input {
+    height: 34px !important;
+    line-height: 34px !important;
+    padding: 0 10px !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+/* BOTÓN DEL CALENDARIO */
+.date-medio button {
+    height: 34px !important;
+    width: 34px !important;
+}
+
+/* ÍCONO CENTRADO */
+.date-medio button .ui-icon {
+    line-height: 34px !important;
+}            
+
+/* ENCABEZADOS */
+.header-cell,
+.header-cell .ui-outputlabel-label {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    padding: 1px !important;
+    text-align: center !important;
+    width: 100% !important;
+    color: #546e7a !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+    margin-bottom: 2px !important;
+}
+/* DATOS */
+.data-cell {
+    padding: 1px !important;
+    text-align: center !important;
+    width:100% !important;
+    color: #333 !important;
+    height:100% !important;
+    display: flex !important;
+    align-items: center !important;     /* vertical */
+    justify-content: center !important; /* horizontal */
+    font-weight: bold !important;
+}
+
+/* espaciado general */
+.flat-panelgrid .ui-panelgrid-cell {
+    padding: 1px !important;
+}

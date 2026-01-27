@@ -14,14 +14,18 @@
                 <f:view>
 
 
-                    <h:form id="formAutorizacion" style="width:100%; margin:auto; margin-top:5px;">
+                    <h:form id="formAutorizacion" style="width:100%; margin:auto; margin-top:0px;">
                         <p:panel header="AUTORIZACIÓN ACADÉMICA"  styleClass="panel-crear-grupo">
-                            <p:panelGrid columns="2" styleClass="ui-fluid panelgrid-compacto" columnClasses="ui-g-12 ui-md-6" style="gap:20px;">
+                            <!-- <p:panelGrid columns="2" styleClass="ui-fluid panelgrid-compacto" columnClasses="ui-g-12 ui-md-6" style="gap:20px;">-->
+                                <p:panelGrid columns="6"  styleClass="ui-fluid panelgrid-compacto"    columnClasses="ui-g-12 ui-md-2" style="gap:20px;">
 
 
-                                <h:outputLabel value="Número de control:" styleClass="form-label"/>                 
-
-                                <h:outputLabel value="Se autoriza a:" styleClass="form-label"/> 
+                                <h:outputLabel value="Número de control:" styleClass="header-cell"/>                 
+                                <h:outputLabel value="Se autoriza a:" styleClass="header-cell"/>
+                                <h:outputLabel value="Periodo:" styleClass="header-cell"/>                      
+                                <h:outputLabel value="Tipo de autorización:" styleClass="header-cell"/>
+                                 <h:outputLabel value="Asignatura:"   styleClass="header-cell"  />
+                                  <h:outputLabel value="Motivo de autorizacion:" styleClass="header-cell"/>      
 
                                 <p:inputNumber id="numControl"
                                                value="#{autorizacionBean.numeroControl}"
@@ -32,7 +36,7 @@
                                                thousandSeparator=""
                                                decimalSeparator=""
                                                decimalPlaces="0"
-                                               inputStyleClass="ui-inputfield"
+                                               inputStyleClass="input-medio"
                                                >
                                     <p:ajax event="valueChange"
                                             listener="#{autorizacionBean.cambioEstudiante}" 
@@ -42,15 +46,10 @@
                                 <p:inputText id="nombreId"
                                              value="#{autorizacionBean.nombreAlumno}"
                                              readonly="true" 
-                                             styleClass="ui-inputfield"/>
-
-                                <h:outputLabel value="Periodo:" styleClass="form-label"/>                      
-                                <h:outputLabel value="Tipo de autorización:" styleClass="form-label"/>
-
-
+                                              styleClass="input-medio"/>
 
                                 <p:selectOneMenu value="#{autorizacionBean.periodoSeleccionado}"
-                                                 styleClass="ui-inputfield" >
+                                                  styleClass="select-medio" >
                                      <p:ajax
                                             listener="#{autorizacionBean.cambioPeriodo}" 
                                             process="@this"
@@ -61,7 +60,7 @@
 
 
                                 <p:selectOneMenu value="#{autorizacionBean.tipoAutorizacion}"
-                                                 styleClass="ui-inputfield" 
+                                                 styleClass="select-medio"
                                                  >
                                     <p:ajax 
                                         listener="#{autorizacionBean.cambioAutorizacion}" 
@@ -75,22 +74,15 @@
                                     <f:selectItem itemLabel="OMITIR CURSOS DE REPETICIÓN/ESPECIALES" itemValue="OE" />
                                 </p:selectOneMenu>
 
-                                <h:outputLabel
-                                    value="Asignatura:" 
-                                    style="font-weight:bold; margin-bottom:5px; display:block;"
-                                    rendered="#{autorizacionBean.deAcuerdo}" />
-
-                                <h:outputLabel                                   
-                                    value="" 
-                                    style="font-weight:bold; margin-bottom:5px; display:block;"
-                                    rendered="#{autorizacionBean.deAcuerdo}" />
 
                                 <p:selectOneMenu id="asignatura"
                                                  value="#{autorizacionBean.asignaturaEscogida}"
                                                  style="width:100%"
+                                                 styleClass="select-medio"
                                                  filter="true"
                                                  filterMatchMode="contains"
                                                  rendered="#{autorizacionBean.deAcuerdo}">
+                                    
                                     <p:ajax 
                                         listener="#{autorizacionBean.cambioAsignatura}" 
                                         update="botonAutorizar mensajes"/>
@@ -101,38 +93,37 @@
                                                    itemLabel="#{listaAsignatura.materia.materia} / #{listaAsignatura.materia.nombreCompletoMateria}"
                                                    itemValue="#{listaAsignatura.materia.materia}" />
                                 </p:selectOneMenu>
+                                
+                                  
+                                 
+                            
 
+                                
+                                <p:inputText value="#{autorizacionBean.motivoAutorizacion}"
+                                             styleClass="input-medio"/>
+
+                                
+                                
                             </p:panelGrid>
 
-
-
-
-                               <p:growl id="mensajes" showDetail="true" sticky="false" life="4000"/>
-
-                            <p:panelGrid  columns="2"
-                                              styleClass="ui-fluid" 
-                                              columnClasses="ui-g-12 ui-md-6" 
-                                              style="gap:20px; width:100%;">
-
-
-                                <h:outputLabel value="Motivo de autorizacion:" style="font-weight:bold; margin-bottom:5px; display:block;"/> 
-                                 <h:outputText value="" style="font-weight:bold; margin-bottom:5px; display:block;" />
-                                <p:inputText value="#{autorizacionBean.motivoAutorizacion}"
-                                             style="border-radius:6px; border:1px solid #ccc; padding:5px; width:100%;"
-                                             />
-
-
-                               
-                                   
-                                    <p:commandButton id="botonAutorizar"
+                                    <p:panelGrid  columns="1"    style="gap:20px; width:100%;">
+                                    
+                                        <h:panelGroup layout="block" styleClass="boton-derecha">
+                                           <p:commandButton id="botonAutorizar"
                                         value="Agregar Autorización"
                                                      icon="pi pi-plus"
                                                      action="#{autorizacionBean.insertar}"
                                                      update="tablaAutorizados :formAutorizacion:mensajes"
                                                       styleClass="boton-principal"
                                                      disabled="#{!autorizacionBean.activarBotonAutorizacion}"/>
+                                        </h:panelGroup>
+                                
+                                     </p:panelGrid>
 
-                                </p:panelGrid>
+
+                               <p:growl id="mensajes" showDetail="true" sticky="false" life="4000"/>
+
+                         
 
                                 <p:separator style="margin-top:15px; margin-bottom:15px;" />
                                 <!-- Tabla de autorizaciones registradas -->

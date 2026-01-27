@@ -879,31 +879,23 @@ body {
 /* ENCABEZADOS */
 .header-cell {
     font-weight: bold;
-
-
-    padding: 1px;
+   padding: 1px;
     text-align: center;
     width: 100%;
-
-
-
-    font-weight: 500;
+  font-weight: 500;
     color: #546e7a;
     letter-spacing: 0.3px;
     text-transform: uppercase;
     margin-bottom: 2px;
 }
 .ui-outputlabel-label{
-
     font-size: 11.5px;
-
 }
 /* DATOS */
 .data-cell {
     padding: 1px;
     text-align: center;
     width:100%;
-
     color: #333;
     height:100%;
     display: flex;
@@ -915,7 +907,6 @@ body {
 /* espaciado general */
 .flat-panelgrid .ui-panelgrid-cell {
     padding: 1px !important;
-
 }
 
 /* Botón */
