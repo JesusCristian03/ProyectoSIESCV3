@@ -8,15 +8,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
-import javax.ejb.LocalBean;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-
-/**
- *
- * @author valeria
- */
+import modelo.MateriaCarga;
 
 @Named
 @ViewScoped
@@ -60,8 +54,4 @@ public class CargaBean implements Serializable {
     public void verDetalle(MateriaCarga m) {
         System.out.println("Detalle " + m.getAsignatura());
     }
-    
-
-
 }
-
