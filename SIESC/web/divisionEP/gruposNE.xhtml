@@ -111,7 +111,7 @@
                                              title="Namegroup"
                                              required="true"
                                              requiredMessage="CAMPO NOMBRE GRUPO ES OBLIGATORIO."
-                                             style="width:275px"
+                                             style="select-medio"
                                              disabled="#{horarioCrearBean.desactivarCampos}">
                                     <!-- Este bloque hace que al escribir o cambiar, se llame al método -->
                                     <p:ajax event="input" listener="#{horarioCrearBean.cambioGrupo}" update="grupo panelBotones panelBotonesModoGrupoAulas" process="@this"/>
@@ -124,7 +124,7 @@
                                                requiredMessage="El campo es obligatorio"
                                                minValue="0"
                                                maxValue="100"      
-                                               inputStyle="width:275px"
+                                               style="select-medio"
                                                disabled="#{horarioCrearBean.desactivarCampos}">
                                     <p:ajax />
                                 </p:inputNumber>
@@ -449,46 +449,46 @@
                         
                         <h:panelGroup layout="block" styleClass="legend-wrapper">
 
-    <div class="legend-container">
+                            <div class="legend-container">
 
-        <!-- ================= ESTADOS ================= 
-        <div class="legend-header">SIMBOLOGÍA DE ESTADOS</div>
+                                <!-- ================= ESTADOS ================= 
+                                <div class="legend-header">SIMBOLOGÍA DE ESTADOS</div>
 
-        <div class="legend-row">
-            <div class="legend-cell celda-seleccionada">Celda seleccionada</div>
-            <div class="legend-cell celda-insertada">Celda insertada / agregada</div>
-            <div class="legend-cell resaltarEliminar">Elemento marcado para eliminar</div>
-            <div class="legend-cell celda-intercambio">Intercambio confirmado</div>
-            <div class="legend-cell celda-hover-intercambio">Intercambio (hover)</div>
-            <div class="legend-cell celda-hover-modificar">Modificar (hover)</div>
-            <div class="legend-cell celda-hover-eliminar">Eliminar (hover)</div>
-            <div class="legend-cell celda-hover-agregar">Agregar (hover)</div>
-        </div>   -->
+                                <div class="legend-row">
+                                    <div class="legend-cell celda-seleccionada">Celda seleccionada</div>
+                                    <div class="legend-cell celda-insertada">Celda insertada / agregada</div>
+                                    <div class="legend-cell resaltarEliminar">Elemento marcado para eliminar</div>
+                                    <div class="legend-cell celda-intercambio">Intercambio confirmado</div>
+                                    <div class="legend-cell celda-hover-intercambio">Intercambio (hover)</div>
+                                    <div class="legend-cell celda-hover-modificar">Modificar (hover)</div>
+                                    <div class="legend-cell celda-hover-eliminar">Eliminar (hover)</div>
+                                    <div class="legend-cell celda-hover-agregar">Agregar (hover)</div>
+                                </div>   -->
 
-        <!-- ================= DEPARTAMENTOS ================= -->
-        <div class="legend-header" style="margin-top:12px;">
-            SIMBOLOGÍA DE DEPARTAMENTOS
-        </div>
+                                <!-- ================= DEPARTAMENTOS ================= -->
+                                <div class="legend-header" style="margin-top:12px;">
+                                    SIMBOLOGÍA DE DEPARTAMENTOS
+                                </div>
 
-        <div class="legend-row">
-            <div class="legend-cell depto-cb">Ciencias Básicas</div>
-            <div class="legend-cell depto-ct">Departamento</div>
-            <div class="legend-cell depto-ii">Ingeniería Industrial</div>
-            <div class="legend-cell depto-mm">Metal Mecánica</div>
-            <div class="legend-cell depto-ee">Ing. Eléctrica y Electrónica</div>
-            <div class="legend-cell depto-sc">Sistemas y Computación</div>
-            <div class="legend-cell depto-cea">C. Económico Administrativas</div>
-            
-             <div class="legend-cell celda-seleccionada">Celda seleccionada</div>
-            <div class="legend-cell celda-insertada">Celda  agregada</div>
-            <div class="legend-cell resaltarEliminar">Elemento marcado para eliminar</div>
-            <div class="legend-cell celda-intercambio">Intercambio confirmado</div>
-          
-        </div>
+                                <div class="legend-row">
+                                    <div class="legend-cell depto-cb">Ciencias Básicas</div>
+                                    <div class="legend-cell depto-ct">Departamento</div>
+                                    <div class="legend-cell depto-ii">Ingeniería Industrial</div>
+                                    <div class="legend-cell depto-mm">Metal Mecánica</div>
+                                    <div class="legend-cell depto-ee">Ing. Eléctrica y Electrónica</div>
+                                    <div class="legend-cell depto-sc">Sistemas y Computación</div>
+                                    <div class="legend-cell depto-cea">C. Económico Administrativas</div>
 
-    </div>
+                                     <div class="legend-cell celda-seleccionada">Celda seleccionada</div>
+                                    <div class="legend-cell celda-insertada">Celda  agregada</div>
+                                    <div class="legend-cell resaltarEliminar">Elemento marcado para eliminar</div>
+                                    <div class="legend-cell celda-intercambio">Intercambio confirmado</div>
 
-</h:panelGroup>
+                                </div>
+
+                            </div>
+
+                        </h:panelGroup>
                           </p:panel>
                         
                         

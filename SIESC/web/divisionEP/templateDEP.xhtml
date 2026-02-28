@@ -5,18 +5,18 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 
-       <h:head>
-         <link rel="icon" href="#{resource['assets/itc.png']}" type="image/x-icon"/>
+    <h:head>
+        <link rel="icon" href="#{resource['assets/itc.png']}" type="image/x-icon"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Sistema Escolar ITC - División de Estudios Profesionales</title>
-        
+
         <h:outputStylesheet  library="css" name="division.css"/>
-        <h:outputScript library="primeicons" name="primeicons.css"/>
-        
- 
+        <h:outputStylesheet library="primeicons" name="primeicons.css"/>
+
+
 
         <script>
             // Variable para saber si el sidebar está abierto o cerrado
@@ -35,28 +35,27 @@
                     sidebarOpen = true;
                 }
             }
-            
-            
-            
 
-function aplicarTooltipsSidebar() {
-    document.querySelectorAll(".ui-panelmenu-header").forEach(function(header) {
-        const enlace = header.querySelector(".ui-panelmenu-header-link");
-        if (enlace) {
-            // Si el submenu tiene data-tooltip,
-            let texto = header.dataset.tooltip || enlace.innerText.trim();
 
-            enlace.dataset.tooltip = texto;
-        }
-    });
-}
 
-document.addEventListener("DOMContentLoaded", aplicarTooltipsSidebar);
 
-// Reaplicar tooltips cada vez que PrimeFaces renderice algo
-if (window.PrimeFaces) {
-    PrimeFaces.onContentReady(aplicarTooltipsSidebar);
-}
+            function aplicarTooltipsSidebar() {
+                document.querySelectorAll(".ui-panelmenu-header").forEach(function (header) {
+                    const enlace = header.querySelector(".ui-panelmenu-header-link");
+                    if (enlace) {
+                        // Si el submenu tiene data-tooltip,
+                        let texto = header.dataset.tooltip || enlace.innerText.trim();
+
+                        enlace.dataset.tooltip = texto;
+                    }
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", aplicarTooltipsSidebar);
+
+            $(document).on('pfAjaxComplete', function () {
+                aplicarTooltipsSidebar();
+            });
 
 
         </script>
@@ -66,7 +65,7 @@ if (window.PrimeFaces) {
 
     <h:body>
 
-       
+
 
         <div class="layout-wrapper">
 
@@ -94,133 +93,133 @@ if (window.PrimeFaces) {
                 <!-- ================= SIDEBAR ================= -->
                 <div class="layout-sidebar">
 
-                                    <h:form>
-                      <p:panelMenu style="width:100%;" styleClass="custom-menu">  
-                     
-                                                      <!-- =================== MANTENIMIENTO =================== -->
+                    <h:form>
+                        <p:panelMenu style="width:100%;" styleClass="custom-menu">  
+
+                            <!-- =================== MANTENIMIENTO =================== -->
                             <p:submenu label="Mantenimiento" styleClass="submenu-icon-mantenimiento"    pt:data-tooltip="Información Escolar" >
-                                      
-                                           <p:submenu label="Grupos" icon="pi pi-users">
-                                            <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="/divisionEP/gruposNE?faces-redirect=true" icon="pi pi-plus-circle"/> 
-                                             <p:menuitem value="Aguste de capacidad"  icon="pi pi-sliders-h" outcome="/divisionEP/prueba.xhtml" />
-                                             <p:menuitem value="Paralelos"  icon="pi pi-sitemap"  outcome="/divisionEP/prueba2.xhtml" />
-                                             <p:menuitem value="Migrar Grupos"  icon="pi pi-refresh" />
-                                           </p:submenu>
-                                
-                                            <p:submenu label="Aulas" icon="pi pi-briefcase">
-                                                  <p:menuitem value="Nueva"  icon="pi pi-plus" />
-                                                  <p:menuitem value="Modificaciones"  icon="pi pi-pencil" />
-                                            </p:submenu>
-                                
-                                          <p:submenu label="Inscripciones" icon="pi pi-calendar">
-                                            <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones" actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-calendar-plus"/> 
-                                             <p:menuitem value="Verano"  icon="pi pi-sun" />
-                                            <p:menuitem value="Autorización Académica"  action="/divisionEP/autorizacionAcademica?faces-redirect=true"    actionListener="#{autorizacionBean.inicializacion}"   icon="pi pi-verified"/>
-                                            <p:submenu label="Problemas de Reinscripción" icon="pi pi-exclamation-triangle">
-                                                  <p:menuitem value="Programación de fechas de atención"  icon="pi pi-clock" />
-                                                  <p:menuitem value="Seguimiento a problemas"  icon="pi pi-search" />
-                                                  <p:menuitem value="Folios de atención"  icon="pi pi-file" />
-                                           </p:submenu>
-                                             <p:menuitem value="Configuracion Semestres Permitidos"  icon="pi pi-cog" />
-                                           </p:submenu>
-                                
-                                            <p:menuitem value="NIP's de Alumnos"  icon="pi pi-key" />
-                                            
-                                             <p:submenu label="Residencias" icon="pi pi-home">
-                                                  <p:menuitem value="Registro de Alumnos"  icon="pi pi-user-plus" />
-                                                  <p:menuitem value="autorizar Residencias"  icon="pi pi-verified" />
-                                                  <p:menuitem value="Estatus"  icon="pi pi-info-circle" />
-                                           </p:submenu>
-                                            
-                                            <p:menuitem value="solicitud comité académico"  icon="pi pi-users" />
-                                         
-                                             <p:submenu label="Materias" icon="pi pi-book">
-                                                 <p:menuitem value="Verano"  icon="pi pi-sun" />
-                                           </p:submenu>
-                                            
-                           </p:submenu>
-                                                                  <!-- =================== CONSULTAS =================== -->
+
+                                <p:submenu label="Grupos" icon="pi pi-users">
+                                    <p:menuitem value="Nuevo" actionListener="#{horarioCrearBean.nuevoHorario}" action="/divisionEP/gruposNE?faces-redirect=true" icon="pi pi-plus-circle"/> 
+                                    <p:menuitem value="Aguste de capacidad"  icon="pi pi-sliders-h" outcome="/divisionEP/prueba.xhtml" />
+                                    <p:menuitem value="Paralelos"  icon="pi pi-sitemap"  outcome="/divisionEP/prueba2.xhtml" />
+                                    <p:menuitem value="Migrar Grupos"  icon="pi pi-refresh" />
+                                </p:submenu>
+
+                                <p:submenu label="Aulas" icon="pi pi-briefcase">
+                                    <p:menuitem value="Nueva"  icon="pi pi-plus" />
+                                    <p:menuitem value="Modificaciones"  icon="pi pi-pencil" />
+                                </p:submenu>
+
+                                <p:submenu label="Inscripciones" icon="pi pi-calendar">
+                                    <p:menuitem value="Ene-Jun/Ago-Dic" action="inscripciones" actionListener="#{inscripcionesBean.iniciarInscripcion}" icon="pi pi-calendar-plus"/> 
+                                    <p:menuitem value="Verano"  icon="pi pi-sun" />
+                                    <p:menuitem value="Autorización Académica"  action="/divisionEP/autorizacionAcademica?faces-redirect=true"    actionListener="#{autorizacionBean.inicializacion}"   icon="pi pi-verified"/>
+                                    <p:submenu label="Problemas de Reinscripción" icon="pi pi-exclamation-triangle">
+                                        <p:menuitem value="Programación de fechas de atención"  icon="pi pi-clock" />
+                                        <p:menuitem value="Seguimiento a problemas"  icon="pi pi-search" />
+                                        <p:menuitem value="Folios de atención"  icon="pi pi-file" />
+                                    </p:submenu>
+                                    <p:menuitem value="Configuracion Semestres Permitidos"  icon="pi pi-cog" />
+                                </p:submenu>
+
+                                <p:menuitem value="NIP's de Alumnos"  icon="pi pi-key" />
+
+                                <p:submenu label="Residencias" icon="pi pi-home">
+                                    <p:menuitem value="Registro de Alumnos"  icon="pi pi-user-plus" />
+                                    <p:menuitem value="autorizar Residencias"  icon="pi pi-verified" />
+                                    <p:menuitem value="Estatus"  icon="pi pi-info-circle" />
+                                </p:submenu>
+
+                                <p:menuitem value="solicitud comité académico"  icon="pi pi-users" />
+
+                                <p:submenu label="Materias" icon="pi pi-book">
+                                    <p:menuitem value="Verano"  icon="pi pi-sun" />
+                                </p:submenu>
+
+                            </p:submenu>
+                            <!-- =================== CONSULTAS =================== -->
                             <p:submenu label="Consultas" styleClass="submenu-icon-consulta"    pt:data-tooltip="Información Escolar" >
-                                            <p:submenu label="Grupos" icon="pi pi-users">
-                                            <p:menuitem value="Por Carrera Monitoreo"  icon="pi pi-chart-line"/> 
-                                             <p:menuitem value="Por Carrera"  icon="pi pi-sitemap" />
-                                             <p:menuitem value="Por Departamento"  icon="pi pi-building" />
-                                             <p:menuitem value="Menores de 10 Inscritos"  icon="pi pi-exclamation-triangle" />
-                                           </p:submenu>
-                                            <p:submenu label="Aulas" icon="pi pi-building">
-                                                  <p:menuitem value="Disponibilidad de Aulas"  icon="pi pi-check-circle" />
-                                                  <p:menuitem value="Ocupación de Aulas"  icon="pi pi-clock" />
-                                            </p:submenu>
-                                            <p:menuitem value="Lista de Asistencia"  icon="pi pi-list" />
-                                            <p:submenu label="Alumnos" icon="pi pi-users">
-                                                  <p:menuitem value="Alumnos General"  icon="pi pi-users" />
-                                                  <p:menuitem value="Alumnos Inscriptos"  icon="pi pi-check" />
-                                                  <p:menuitem value="Calificaciones Parciales"  icon="pi pi-chart-bar" />
-                                                  <p:menuitem value="Examenes Especiales"  icon="pi pi-file-edit" />
-                                                  <p:menuitem value="Problables a Egresar"  icon="pi pi-briefcase" />
-                                                  <p:menuitem value="Materias Pendientes"  icon="pi pi-exclamation-circle" />
-                                           </p:submenu>
-                                            <p:submenu label="Materias" icon="pi pi-book">
-                                                  <p:menuitem value="Análisis de Materias"  icon="pi pi-chart-pie" />
-                                                  <p:menuitem value="Materias en Retícula"  icon="pi pi-table" />
-                                                
-                                           </p:submenu>
-                                           <p:menuitem value="Estadísticas"  icon="pi pi-chart-bar" />
-                                           <p:menuitem value="Cargas Académicas"  icon="pi pi-briefcase" />
-                                             <p:submenu label="Residencias" icon="pi pi-home">
-                                                  <p:menuitem value="Residencia por Carrera"  icon="pi pi-chart-bar" />
-                                           </p:submenu>                           
+                                <p:submenu label="Grupos" icon="pi pi-users">
+                                    <p:menuitem value="Por Carrera Monitoreo"  icon="pi pi-chart-line"/> 
+                                    <p:menuitem value="Por Carrera"  icon="pi pi-sitemap" />
+                                    <p:menuitem value="Por Departamento"  icon="pi pi-building" />
+                                    <p:menuitem value="Menores de 10 Inscritos"  icon="pi pi-exclamation-triangle" />
+                                </p:submenu>
+                                <p:submenu label="Aulas" icon="pi pi-building">
+                                    <p:menuitem value="Disponibilidad de Aulas"  icon="pi pi-check-circle" />
+                                    <p:menuitem value="Ocupación de Aulas"  icon="pi pi-clock" />
+                                </p:submenu>
+                                <p:menuitem value="Lista de Asistencia"  icon="pi pi-list" />
+                                <p:submenu label="Alumnos" icon="pi pi-users">
+                                    <p:menuitem value="Alumnos General"  icon="pi pi-users" />
+                                    <p:menuitem value="Alumnos Inscriptos"  icon="pi pi-check" />
+                                    <p:menuitem value="Calificaciones Parciales"  icon="pi pi-chart-bar" />
+                                    <p:menuitem value="Examenes Especiales"  icon="pi pi-file-edit" />
+                                    <p:menuitem value="Problables a Egresar"  icon="pi pi-briefcase" />
+                                    <p:menuitem value="Materias Pendientes"  icon="pi pi-exclamation-circle" />
+                                </p:submenu>
+                                <p:submenu label="Materias" icon="pi pi-book">
+                                    <p:menuitem value="Análisis de Materias"  icon="pi pi-chart-pie" />
+                                    <p:menuitem value="Materias en Retícula"  icon="pi pi-table" />
+
+                                </p:submenu>
+                                <p:menuitem value="Estadísticas"  icon="pi pi-chart-bar" />
+                                <p:menuitem value="Cargas Académicas"  icon="pi pi-briefcase" />
+                                <p:submenu label="Residencias" icon="pi pi-home">
+                                    <p:menuitem value="Residencia por Carrera"  icon="pi pi-chart-bar" />
+                                </p:submenu>                           
                             </p:submenu>
-                                                                  
-                                                                  
-                                                                  
-                                                                  <!-- =================== IMPRESION =================== -->
+
+
+
+                            <!-- =================== IMPRESION =================== -->
                             <p:submenu label="Impresion" styleClass="submenu-icon-impresion"   icon="pi pi-print" pt:data-tooltip="Información Escolar" >
-                            
-                            <p:menuitem value="Horarios por Carrera"  icon="pi pi-calendar" />
-                            <p:menuitem value="Grupos Base"  icon="pi pi-sitemap" />
-                            <p:menuitem value="Créditos inferiores al mínimo"  icon="pi pi-exclamation-triangle" />
-                            <p:menuitem value="Créditos y Materiales Totales"  icon="pi pi-file" />
-                            <p:menuitem value="Promedio de Pgresados"  icon="pi pi-chart-line" />
+
+                                <p:menuitem value="Horarios por Carrera"  icon="pi pi-calendar" />
+                                <p:menuitem value="Grupos Base"  icon="pi pi-sitemap" />
+                                <p:menuitem value="Créditos inferiores al mínimo"  icon="pi pi-exclamation-triangle" />
+                                <p:menuitem value="Créditos y Materiales Totales"  icon="pi pi-file" />
+                                <p:menuitem value="Promedio de Pgresados"  icon="pi pi-chart-line" />
                             </p:submenu>
-                                                                   <!-- =================== UTILERIAS =================== -->
+                            <!-- =================== UTILERIAS =================== -->
                             <p:submenu label="Utilerias" styleClass="submenu-icon-utilerias"  icon="pi pi-wrench"  pt:data-tooltip="Información Escolar" >
-                            
-                            <p:menuitem value="Cambio de Contraseña"  icon="pi pi-lock" />
-                            
+
+                                <p:menuitem value="Cambio de Contraseña"  icon="pi pi-lock" />
+
                             </p:submenu>
                         </p:panelMenu>
-                </h:form>
+                    </h:form>
 
                 </div>
 
 
-<!-- ================= CONTENIDO ================= -->
-<div class="layout-main">
+                <!-- ================= CONTENIDO ================= -->
+                <div class="layout-main">
 
-    <!-- CAJA DE BIENVENIDA ESTUDIANTE -->
-    <h:panelGroup id="welcomeBox" layout="block"
-                  rendered="#{view.viewId eq '/divisionEP/index.xhtml'}"
-                  styleClass="welcome-box">
-<div class="dashboard-header">
-    
-    <h:outputText value="Bienvenid@s al Departamento " styleClass="titulo-welcome"/>
-     <h3 class="dashboard-title"> "DIVISIÓN DE ESTUDIOS PROFESIONALES" </h3>
-    <h:graphicImage library="imagenes" name="sistema/logo_tec.jpg" styleClass="dashboard-image"/>
+                    <!-- CAJA DE BIENVENIDA ESTUDIANTE -->
+                    <h:panelGroup id="welcomeBox" layout="block"
+                                  rendered="#{view.viewId eq '/divisionEP/index.xhtml'}"
+                                  styleClass="welcome-box">
+                        <div class="dashboard-header">
 
-    <p class="dashboard-subtitle">
-       Área de gestión académica
-    </p>
-</div>
-    </h:panelGroup>
+                            <h:outputText value="Bienvenid@s al Departamento " styleClass="titulo-welcome"/>
+                            <h3 class="dashboard-title"> "DIVISIÓN DE ESTUDIOS PROFESIONALES" </h3>
+                            <h:graphicImage library="imagenes" name="sistema/logo_tec.jpg" styleClass="dashboard-image"/>
 
-
+                            <p class="dashboard-subtitle">
+                                Área de gestión académica
+                            </p>
+                        </div>
+                    </h:panelGroup>
 
 
 
-    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
-    <ui:insert name="content" />
-</div>
+
+
+                    <!-- CONTENIDO DINÁMICO DEL MENÚ -->
+                    <ui:insert name="content" />
+                </div>
 
 
 
@@ -241,11 +240,9 @@ if (window.PrimeFaces) {
                                 .forEach(item => item.addEventListener("click", hideWelcomeBox));
 
                         // 2. OCULTAR DESPUÉS de cualquier actualización AJAX
-                        if (window.PrimeFaces) {
-                            PrimeFaces.onAjaxCompletion(function () {
-                                hideWelcomeBox();
-                            });
-                        }
+                        $(document).on('pfAjaxComplete', function () {
+                            hideWelcomeBox();
+                        });
                     });
                 </script>
 
