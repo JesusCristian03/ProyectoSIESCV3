@@ -1039,35 +1039,6 @@ public class HorarioCrearBean implements Serializable {
         aulaMateriaSeleccionada = params.get("aula");
         System.out.println("MateriaSeleccionada:" + nombreMateriaSeleccionada);
 
-        /*MateriasCarreras materiaC;
-        Boolean x = false;
-        materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
-
-        for (int i = 0; i < listaPermisos.size(); i++) {
-            Permisos p = listaPermisos.get(i);
-
-            System.out.println("MateriaC.size" + materiaC);
-
-            if (Objects.equals(p.getClaveArea().getClaveArea(), materiaC.getMateria().getClaveArea().getClaveArea())) {
-                x = true;
-                break;
-            }
-        }
-
-        // ❌ NO permitido → NO abrir ventana
-        if (x) {
-            // ✅ Todo permitido
-            PrimeFaces.current().ajax().addCallbackParam("abrirDialogo", true);
-        } else {
-            // ❌ Alguna restricción falló
-            addMessage(FacesMessage.SEVERITY_INFO,
-                    "MATERIA NO PERMITIDA",
-                    "No se permite borrar, area no disponible");
-
-            PrimeFaces.current().ajax().addCallbackParam("abrirDialogo", false);
-            return;
-        }*/
-
         modoEliminarSeleccionadoG();//Pintar las seleccionadas para eliminar
         obtenerHorasDeMateriaEliminarG();//Contabilizar cuantas materias estan realmente en la base de datos por grupo
         HorarioCrear h = new HorarioCrear();
@@ -1108,7 +1079,7 @@ public class HorarioCrearBean implements Serializable {
 
         System.out.println("MateriaSeleccionada:" + nombreMateriaSeleccionada);
 
-       /* MateriasCarreras materiaC;
+        /* MateriasCarreras materiaC;
         Boolean x = false;
         materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
 
@@ -1135,7 +1106,6 @@ public class HorarioCrearBean implements Serializable {
             PrimeFaces.current().ajax().addCallbackParam("abrirDialogo", false);
             return;
         }*/
-
         modoEliminarSeleccionadoA();//Pintar las seleccionadas para eliminar
 
         HorarioCrear h = new HorarioCrear();
@@ -1232,33 +1202,6 @@ public class HorarioCrearBean implements Serializable {
         System.out.println("MAula: " + aulaMateriaSeleccionada);
         System.out.println("MFila: " + filaMateriaSeleccionada);
         System.out.println("MColumna: " + columnaMateriaSeleccionada);
-
-       /* MateriasCarreras materiaC;
-        Boolean x = false;
-        materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
-
-        for (int i = 0; i < listaPermisos.size(); i++) {
-            Permisos p = listaPermisos.get(i);
-
-            if (Objects.equals(p.getClaveArea().getClaveArea(), materiaC.getMateria().getClaveArea().getClaveArea())) {
-                x = true;
-                break;
-            }
-        }
-
-        // ❌ NO permitido → NO abrir ventana
-        if (x) {
-            // ✅ Todo permitido
-            PrimeFaces.current().ajax().addCallbackParam("abrirDialogo", true);
-        } else {
-            // ❌ Alguna restricción falló
-            addMessage(FacesMessage.SEVERITY_INFO,
-                    "MATERIA NO PERMITIDA",
-                    "No se permite modificar, area no disponible");
-
-            PrimeFaces.current().ajax().addCallbackParam("abrirDialogo", false);
-            return;
-        }*/
 
         asignarValorDirectoEnCelda("#FC5110");
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA", nombreMateriaSeleccionada + "  " + aulaMateriaSeleccionada);
@@ -1359,14 +1302,13 @@ public class HorarioCrearBean implements Serializable {
 
         System.out.println("Materia seleccionada: " + nombre + " | Aula: " + aula);
 
-
         // Nueva selección
         filaMateriaSeleccionada = fila;
         columnaMateriaSeleccionada = columna;
         nombreMateriaSeleccionada = nombre;
         aulaMateriaSeleccionada = aula;
 
-      /*  MateriasCarreras materiaC;
+        /*  MateriasCarreras materiaC;
         Boolean x = false;
         materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
 
@@ -1389,7 +1331,6 @@ public class HorarioCrearBean implements Serializable {
                     "No se permite borrar, area no disponible");
             return;
         }*/
-
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA", "MATERIA: " + nombre + " AULA: " + aula);
         // Si es la misma materia que ya estaba seleccionada → deselecciona
         // Cambia color de la nueva seleccionada
@@ -1414,7 +1355,7 @@ public class HorarioCrearBean implements Serializable {
         addMessage(FacesMessage.SEVERITY_INFO, "MATERIA SELECCIONADA", "MATERIA: " + nombreMateriaSeleccionada + " AULA: " + aulaMateriaSeleccionada);
         // Cambia color de la nueva seleccionada
 
-      /*  MateriasCarreras materiaC;
+        /*  MateriasCarreras materiaC;
         Boolean x = false;
         materiaC = materiasCarrerasServicio.buscarMateriaPorNombre(nombreMateriaSeleccionada, Integer.parseInt(carreraS));
 
@@ -1536,14 +1477,16 @@ public class HorarioCrearBean implements Serializable {
         listacoordenadas.add("" + filaDestino + "," + columnaDestino + "");//une 1,1 en ["1,1"]
         aulaBuscada = aulasServicio.buscarPorId(aulaMateriaSeleccionada);
 
-        if (comprobacionEmpalmesPorGrupos()) {
+        if (booleanBuscarAula != true) {
+            if (comprobacionEmpalmesPorGrupos()) {
+                return;
+            }
 
-            return;
-        }
+        } else if (booleanBuscarGrupo != true) {
+            if (comprobacionEmpalmesPorAulaIntercambio()) {
+                return;
+            }
 
-        if (comprobacionEmpalmesPorAulaIntercambio()) {
-
-            return;
         }
 
         encontrarMateriaDeCelda();
