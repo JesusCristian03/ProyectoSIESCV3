@@ -81,7 +81,7 @@
                                                  styleClass="select-medio"
                                                  filter="true"
                                                  filterMatchMode="contains"
-                                                 rendered="#{autorizacionBean.deAcuerdo}">
+                                                 disabled="#{!autorizacionBean.deAcuerdo}">
                                     
                                     <p:ajax 
                                         listener="#{autorizacionBean.cambioAsignatura}" 

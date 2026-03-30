@@ -207,6 +207,7 @@ public class autorizacionBean implements Serializable {
             deAcuerdo = true;
             activarBotonAutorizacion = false;
         } else {
+            System.out.println("False");
             validacionCampos();
             deAcuerdo = false;
         }
