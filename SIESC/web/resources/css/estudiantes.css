@@ -1081,19 +1081,10 @@ body {
     background: #e3f1ff !important;
 }
 
-/* Botones azul intenso */
-#toolbarBotones .ui-button {
-    background: #006bb3 !important;
-    border: none !important;
-    color: white !important;
-    font-weight: bold;
-    border-radius: 6px !important;
-}
 
-#toolbarBotones .ui-button.ui-state-disabled {
-    background: #9fc5e8 !important;
-    opacity: 0.6;
-}
+
+
+
 
 /* Mensajes */
 .mensaje-exito  .ui-panel-content {
@@ -1540,6 +1531,8 @@ body {
 
 
 
+
+
 /* =====================================================
 TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
 ===================================================== */
@@ -1548,23 +1541,33 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
 #toolbarBotones {
     display: flex !important;
     justify-content: center !important;
-    align-items: center !important;
+    width: 100%;
 }
 
-/* Evita que los grupos se vayan a los extremos */
+/* Quitar comportamiento default de PrimeFaces */
 #toolbarBotones .ui-toolbar-group-left,
 #toolbarBotones .ui-toolbar-group-right {
     float: none !important;
-    display: flex !important;
-    align-items: center !important;
+    width: 100%;
 }
 
 .toolbar-botones {
     display: flex !important;
-    justify-content: center !important;   /* centra los botones */
+    justify-content: space-evenly !important; /*  */
     align-items: center !important;
-    gap: 260px !important;                           /* separación uniforme */
-
+    width: 100%;
+    flex-wrap: wrap; /* */
+    gap: 15px; /*  espacio adaptable */
+}
+#toolbarBotones {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important; /* opcional */
+}
+#toolbarBotones.ui-toolbar {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
 }
 
 .toolbar-botones .ui-button {
@@ -1629,6 +1632,13 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
     box-shadow: 0 4px 8px rgba(84,110,122,0.35) !important;
 }
 
+
+
+
+
+
+
+
 /* =====================================================
    TOOLBAR – FONDO BLANCO
 ===================================================== */
@@ -1642,3 +1652,90 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
     box-shadow: none !important;
 }
 
+
+
+/* ===============================
+   DIALOGO MODERNO
+=================================*/
+/* ===============================
+   DIALOGO MODERNO
+=================================*/
+.dialog-grupos .ui-dialog {
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+.dialog-grupos .ui-dialog-titlebar {
+    background: #03396c !important;
+    color: white !important;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+}
+
+/* Quitar espacio interno feo */
+.dialog-grupos .ui-dialog-content {
+    padding: 20px 25px !important;
+}
+
+/* ===============================
+   TABLA LIMPIA
+=================================*/
+.tabla-grupos {
+    border-radius: 8px !important;
+    overflow: hidden !important;
+}
+
+/* HEADER PRINCIPAL */
+.tabla-grupos .ui-datatable-thead > tr > th {
+    background: #03396c !important;
+    color: white !important;
+    font-size: 0.85rem;
+    text-align: center;
+    border: none !important;
+}
+
+
+/* OCULTAR HEADER DUPLICADO REAL */
+.tabla-grupos .ui-datatable-scrollable-body table thead {
+    display: none !important;
+}
+
+/* FILAS */
+.tabla-grupos .ui-datatable-data > tr {
+    font-size: 0.8rem;
+}
+
+.tabla-grupos .ui-datatable-data > tr:hover {
+    background: #f5f9ff !important;
+}
+
+/* CELDAS */
+.tabla-grupos .ui-datatable-data > tr > td {
+    text-align: center;
+    padding: 8px;
+}
+
+/* ===============================
+   BOTON
+=================================*/
+.boton-seleccionar {
+    background: linear-gradient(135deg, #03396c, #005b96) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    width: 220px;
+    height: 42px;
+    font-weight: bold;
+}
+
+/* alineación derecha */
+.footer-dialog {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.ui-datatable-scrollable-body thead {
+    display: none;
+}

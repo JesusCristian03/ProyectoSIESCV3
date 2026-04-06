@@ -24,7 +24,7 @@
                         <f:event type="preRenderView" listener="#{inscripcionesBean.resetearSiEsRecarga}" />
                     </f:metadata>
 
-                    <h:form id="formEstudiante">
+                 <h:form id="formEstudiante">
                         <p:panel id="panelEstudiante" styleClass="custom-card" style="width:100%; margin: 0 auto; display:block;">
 
 
@@ -71,18 +71,33 @@
 
                             </p:panelGrid>
 
-
-
-
-
-
-
-
-
                         </p:panel>
                     </h:form>
 
 
+                    
+  
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
                     <h:form id="seleccion">
 
@@ -92,17 +107,14 @@
                         <p:tabView id="tabVista" cache="false">
 
                             <p:ajax event="tabChange" listener="#{inscripcionesBean.onTabChange}" update="@this :seleccion:tabVista:panelGrupos" />
+                            
                             <f:facet name="actions">
-
                             </f:facet>
+                            
+                            
+                            
                             <p:tab title="Asignatura" >
-                                <f:facet name="actions">
-
-                                </f:facet>
-
-
-
-
+                          
 
                                 <div class="legend-title">AVANCE DEL ALUMNO</div>
                                 <div class="reticula-wrapper">
@@ -401,6 +413,9 @@
                                                 </div>
                                             </p:column>
                                         </p:dataTable>
+                                      
+                                    
+                                    
                                         <h:panelGroup layout="block" styleClass="legend-wrapper">
 
                                             <div class="legend-container">
@@ -425,6 +440,7 @@
                                                   widgetVar="selecionMateria" 
                                                   responsive="true" 
                                                   width="75%"
+                                                  appendTo="@(body)"
                                                   position="center center">
 
                                             <h3 style="text-align:center;">Lista de Grupos</h3>
@@ -593,47 +609,48 @@
                                                 </p:toolbarGroup>
                                             </p:toolbar>
                                         </p:panel>
+
                                     </div>
-
-                                </div>
-
-
-
-
-
-
-
-
-
-
-
+                                   </div>         
                             </p:tab>
+    
+
+
+
+
+
+
+
+
+
+                            
                             <p:tab>
-
-
 
                                 <f:facet name="title">
                                     <span>Grupo</span> <p:badge value="3" severity="danger" class="ml-1"></p:badge>
                                 </f:facet>
 
-                                <p:dialog id="dlg1" 
-
-                                          showEffect="fade" 
-                                          modal="true" 
-                                          widgetVar="selecionMateriaGrupo" 
-                                          responsive="true" 
-                                          width="75%"
-                                          position="center center">
-
+                                <p:dialog id="dlg1"
+                                 widgetVar="selecionMateriaGrupo"
+                                 modal="true"
+                                 draggable="false"
+                                 resizable="false"
+                                 responsive="true"
+                                 width="70%"
+                                 styleClass="dialog-grupos"
+                                 appendTo="@(body)"
+                                 position="center">
+                                    
                                     <h3 style="text-align:center;">Lista de Grupos</h3>
 
                                     <p:dataTable id="resultadosTabla1"
-                                                 value="#{inscripcionesBean.listaHorarioAsignatura}"
-                                                 var="item"
-                                                 style="font-size:12px; text-align:center;"
-                                                 scrollable="true"
-                                                 scrollHeight="500"
-                                                 styleClass="tabla-horario">
+                                     value="#{inscripcionesBean.listaHorarioAsignatura}"
+                                        var="item"
+                                        scrollable="true"
+                                        scrollHeight="400"
+                                        styleClass="tabla-horario"
+                                        tableStyle="table-layout: fixed;"
+                                         rowHover="true">
 
                                         <p:column headerText="Grupo" style="width:4%; text-align:center;">
                                             <h:outputText value="#{item.grupo}" />
@@ -668,23 +685,22 @@
                                     </p:dataTable>
 
                                     <!-- Botón abajo a la derecha -->
-                                    <div style="display:flex; justify-content:flex-end; margin-top:20px;">
-
-                                        <p:commandButton value="Seleccionar Grupo"
-                                                         icon="pi pi-check"
-                                                         style="background:#03396c;
-                                                         border-color:#03396c;
-                                                         width:220px;
-                                                         height:42px;
-                                                         font-size:14px;
-                                                         font-weight:bold;"
-                                                         actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
-                                                         oncomplete="PF('selecionMateriaGrupo').hide();"
-                                                         update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
-                                    </div>
-
+                                    <div class="footer-dialog">
+                    <p:commandButton value="Seleccionar Grupo"
+                     icon="pi pi-check"
+                     styleClass="boton-seleccionar"
+                     actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
+                     oncomplete="PF('selecionMateriaGrupo').hide();"
+                     update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
+                                   </div>
                                 </p:dialog>
 
+                                
+                                
+                                
+                                
+                                
+                                
                                 <p:outputPanel id="panelGrupos" styleClass="#{inscripcionesBean.grupoBloqueado ? 'bloqueado' : ''}">
                                     <p:dataGrid value="#{inscripcionesBean.listaGC}" 
                                                 var="grupo"
