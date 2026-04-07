@@ -28,42 +28,78 @@
               modal="true"
               closable="false"
               responsive="true"
-              style="max-width:1050px;"
+             style="width:500px; max-width:90vw;"
               styleClass="dialog-modificar-aula">
 
-        <h:panelGrid columns="1" style="width:100%;" cellspacing="8">
+    <!-- FORMULARIO ORDENADO -->
+                            <h:panelGrid columns="1" style="width:100%;" cellspacing="8">
 
-            <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
-                <h:outputText value="Materia:" />
-                <h:outputText value="Matemáticas Discretas" />
-            </h:panelGrid>
+                                <!-- Grupo: Materia -->
+                                <h:panelGrid columns="2" style="width:100%; row-gap:12px; column-gap:10px;" columnClasses="col-label,col-value">
 
-            <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
-                <h:outputText value="Aula actual:" />
-                <h:outputText value="A-203" />
-            </h:panelGrid>
+                                    <h:outputText value="Materia:" style="font-weight:bold;" />
+                                    <h:outputText value="#{horarioCrearBean.nombreMateriaSeleccionada}" 
+                                                  style="color:#2c3e50;" />
 
-            <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
-                <h:outputText value="Nueva aula:" />
-                <p:selectOneMenu style="width:100%;">
-                    <f:selectItem itemLabel="Seleccione un aula" itemValue="" />
-                    <f:selectItem itemLabel="A-101" itemValue="A-101" />
-                    <f:selectItem itemLabel="A-202" itemValue="A-202" />
-                    <f:selectItem itemLabel="B-301" itemValue="B-301" />
-                </p:selectOneMenu>
-            </h:panelGrid>
+                                </h:panelGrid>
 
-        </h:panelGrid>
+                                <!-- Grupo: Aula actual -->
+                                 <h:panelGrid columns="2" style="width:100%; row-gap:12px; column-gap:10px;" columnClasses="col-label,col-value">
+
+                                    <h:outputText value="Aula actual:" style="font-weight:bold;" />
+                                    <h:outputText value="#{horarioCrearBean.aulaMateriaSeleccionada}" 
+                                                  style="color:#2c3e50;" />
+
+                                </h:panelGrid>
+
+                                <!-- Grupo: Nueva aula -->
+                                 <h:panelGrid columns="2" style="width:100%; row-gap:12px; column-gap:10px;" columnClasses="col-label,col-value">
+
+                                    <h:outputText value="Nueva aula:" style="font-weight:bold;" />
+
+                                    <p:selectOneMenu value="#{horarioCrearBean.nuevaAulaSeleccionada}"
+                                                     style="width:100%; font-weight:bold;"
+                                                     >
+
+                                        <p:ajax />
+
+                                        <f:selectItem itemLabel="Seleccione un aula" 
+                                                      itemValue="" 
+                                                      noSelectionOption="true" />
+
+                                        <f:selectItems value="#{horarioCrearBean.listaAulas}" 
+                                                       var="a" 
+                                                       itemLabel="#{a.aula}" 
+                                                       itemValue="#{a.aula}" />
+                                    </p:selectOneMenu>
+
+                                </h:panelGrid>
+
+                            </h:panelGrid>
 
         <p:separator/>
+  <h:panelGroup layout="block" 
+                                          style="display:flex; justify-content:flex-end; gap:1rem; width:100%; margin-top:1rem;">
 
-        <h:panelGroup layout="block"
-                      style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1rem;">
+                                <!-- Confirmar -->
+                                <p:commandButton value="Confirmar"
+                                                 icon="pi pi-check"
+                                                 process="@form"
+                                                 styleClass="btn-confirmar"
+                                                 actionListener="#{horarioCrearBean.confirmarModificarMateria}"
+                                                 update="grupo growl panelBotones"
+                                                 oncomplete="PF('confirmModificarDialogWidget').hide();" />
 
-            <p:commandButton value="Confirmar" type="button"/>
-            <p:commandButton value="Cancelar" type="button" styleClass="ui-button-secondary"/>
+                                <!-- Cancelar  -->
+                                <p:commandButton value="Cancelar"
+                                                 icon="pi pi-times"
+                                                 styleClass="btn-cancelar ui-button-secondary"
+                                                 actionListener="#{horarioCrearBean.limpiarVariablesDeEstadoModificar}"
+                                                 onclick="PF('confirmModificarDialogWidget').hide();"
+                                                 update="grupo" />
+                                                
 
-        </h:panelGroup>
+                            </h:panelGroup>
 
     </p:dialog>
 

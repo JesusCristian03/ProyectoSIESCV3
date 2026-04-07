@@ -857,19 +857,22 @@
                         <style>
 
                         </style>
+                        
+                        
+                        
+                        
                         <!-- VENTANA EMERGENTE PARA ELIMINAR UNA MATERIA -->
                         <p:confirmDialog id="confirmEliminarDialog"
                                          widgetVar="confirmEliminarDialogWidget"
                                          header="Confirmar eliminación"
-                                         message="¿Estás seguro de eliminar los datos seleccionados?"                                          
-                                         severity="warn"
+                                         message="¿Estás seguro de eliminar los datos seleccionados?"
                                          closable="false"
                                          width="900"
                                          styleClass="confirm-dialog-eliminar">
-                            <!-- ✅ Muestra la materia que ha sido seleccionada de la tabla. -->
+                            <!--  Muestra la materia que ha sido seleccionada de la tabla. -->
                             <h:panelGrid columns="1" cellpadding="5">
 
-                                <!-- 🔹 Tabla con los datos del horario a eliminar -->
+                                <!--  Tabla con los datos del horario a eliminar -->
                                 <p:dataTable value="#{horarioCrearBean.listaHorarioBorrar}"
                                              id="grupoEliminar"
                                              var="item"
@@ -930,48 +933,53 @@
                                                  oncomplete="PF('confirmEliminarDialogWidget').hide();"                      
                                                  update="grupo growl"
                                                  onclick="PF('confirmEliminarDialogWidget').hide();"/>
-                                />
-
-
+            
                             </h:panelGroup>
 
                         </p:confirmDialog>
 
+                        
+                        
+                        
+                        
 
-                        <!-- ✅ VENTANA EMERGENTE DE MODIFICAR AULA -->
+                        <!--  VENTANA EMERGENTE DE MODIFICAR AULA -->
                         <p:dialog id="confirmModificarDialog"
                                   header="Modificar Aula"
                                   widgetVar="confirmModificarDialogWidget"
                                   modal="true"
                                   closable="false"
                                   responsive="true"
-                                  style="max-width:450px;"
+                                  width="600"
                                   styleClass="dialog-modificar-aula">
 
                             <!-- FORMULARIO ORDENADO -->
                             <h:panelGrid columns="1" style="width:100%;" cellspacing="8">
 
                                 <!-- Grupo: Materia -->
-                                <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
-
-                                    <h:outputText value="Materia:" style="font-weight:bold;" />
-                                    <h:outputText value="#{horarioCrearBean.nombreMateriaSeleccionada}" 
+                                 <h:panelGrid columns="2" style="width:100%; max-width:400px; margin:auto;"  columnClasses="col-label,col-value">
+                                
+                                <h:outputText value="Materia:" style="font-weight:bold;" />
+                                <h:outputText value="#{horarioCrearBean.nombreMateriaSeleccionada}" 
                                                   style="color:#2c3e50;" />
-
-                                </h:panelGrid>
-
-                                <!-- Grupo: Aula actual -->
-                                <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
-
-                                    <h:outputText value="Aula actual:" style="font-weight:bold;" />
-                                    <h:outputText value="#{horarioCrearBean.aulaMateriaSeleccionada}" 
+                                
+                                
+                                <h:outputText value="Aula actual:" style="font-weight:bold;" />
+                                <h:outputText value="#{horarioCrearBean.aulaMateriaSeleccionada}" 
                                                   style="color:#2c3e50;" />
-
-                                </h:panelGrid>
-
+                                 
+                                
+                                <h:outputText value="" style="font-weight:bold;" />
+                                <h:outputText value="" style="font-weight:bold;" />
+                                
+                                <h:outputText value="" style="font-weight:bold;" />
+                                <h:outputText value="" style="font-weight:bold;" />
+                                 </h:panelGrid>
+                                
+                                
                                 <!-- Grupo: Nueva aula -->
-                                <h:panelGrid columns="2" style="width:100%;" columnClasses="col-label,col-value">
-
+                                <h:panelGrid columns="2" style="width:100%; max-width:400px; margin:auto;"  columnClasses="col-label,col-value">
+                                
                                     <h:outputText value="Nueva aula:" style="font-weight:bold;" />
 
                                     <p:selectOneMenu value="#{horarioCrearBean.nuevaAulaSeleccionada}"
@@ -997,32 +1005,34 @@
                             <p:separator />
 
                             <!-- BOTONES ALINEADOS A LA DERECHA -->
-                            <h:panelGroup layout="block" 
-                                          style="display:flex; justify-content:flex-end; gap:1rem; width:100%; margin-top:1rem;">
-
-                                <!-- Confirmar (azul profesional) -->
+                            <h:panelGroup layout="block"  style="display:flex; justify-content:center; gap:1.5rem; width:100%; margin-top:1.5rem;">
+                                <!-- Confirmar -->
                                 <p:commandButton value="Confirmar"
                                                  icon="pi pi-check"
                                                  process="@form"
-                                                 style="background:#1A73E8; border:none; color:white; font-weight:bold;
-                                                 padding:0.6rem 1.4rem; border-radius:6px;"
+                                                 styleClass="btn-confirmar"
                                                  actionListener="#{horarioCrearBean.confirmarModificarMateria}"
                                                  update="grupo growl panelBotones"
                                                  oncomplete="PF('confirmModificarDialogWidget').hide();" />
 
-                                <!-- Cancelar (gris elegante) -->
+                                <!-- Cancelar  -->
                                 <p:commandButton value="Cancelar"
                                                  icon="pi pi-times"
-                                                 style="background:#6c757d; border:none; color:white; font-weight:bold;
-                                                 padding:0.6rem 1.4rem; border-radius:6px;"
+                                                 styleClass="btn-cancelar ui-button-secondary"
                                                  actionListener="#{horarioCrearBean.limpiarVariablesDeEstadoModificar}"
                                                  onclick="PF('confirmModificarDialogWidget').hide();"
-                                                 update="grupo"
-                                                 />
+                                                 update="grupo" />
+                                                
 
                             </h:panelGroup>
 
                         </p:dialog>
+                        
+                        
+                        
+                        
+                        
+                        
 
 
                     </h:form>
