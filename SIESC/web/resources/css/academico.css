@@ -884,8 +884,28 @@ body {
                 color: #fff !important;
             }
             
-
             
+            
+            
+            
+.panelgrid-compacto .ui-panelgrid-cell {
+    padding: 2px 10px !important;   /* menos espacio interno */
+}
+
+.panelgrid-compacto .ui-inputtext,
+.panelgrid-compacto .ui-selectonemenu,
+.panelgrid-compacto .ui-datepicker {
+    margin: 0 !important;          /* elimina separación extra */
+}
+
+.panelgrid-compacto label {
+    margin-bottom: 2px;
+    font-size: 0.9rem;             /* opcional: texto más compacto */
+}
+   
+
+
+
  /* =====================================================
    FORMULARIOS ESTILO COMPACTO
 ===================================================== */
@@ -897,8 +917,8 @@ body {
     min-height: 32px !important;
     font-size: 13px;
     border-radius: 6px;
+    
 }
-
 
 /* =====================================================
    TEXTO DEL DATO 
@@ -979,19 +999,36 @@ body {
     border-radius: 6px !important;
 }
 
-/* Texto seleccionado (CENTRADO) */
+/* Base → centrado (placeholder) */
+/* Base → centrado SIEMPRE */
 .select-medio .ui-selectonemenu-label {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 
-    height: 100% !important;
-    width: 100% !important;
-
-    padding: 0 34px 0 10px !important; /* respeta el espacio de la flecha */
-    font-size: 14px;
-    text-align: center !important;
+    padding: 0 34px 0 10px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+/* Cuando el texto YA cambió (no es el placeholder) */
+.select-medio .ui-selectonemenu-label:not([title="Seleccione el Periodo"]) {
+    justify-content: flex-start !important;
+}
+
+/* Asegura comportamiento del texto */
+.select-medio .ui-selectonemenu-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 34px 0 10px !important;
+}
+/* Si el texto NO es el placeholder */
+.select-medio .ui-selectonemenu-label[title]:not([title="Seleccione el Periodo"]) {
+    justify-content: flex-start !important;
+}
+
+
 
 
 /* Botón de la flecha */
@@ -1039,6 +1076,11 @@ body {
     row-gap: 0.8rem !important;
     column-gap: 1rem !important;
 }          
+
+
+
+
+
 
 
 
@@ -1105,4 +1147,27 @@ body {
 .ui-datatable .ui-state-active {
     background: #1976D2 !important;
     color: #FFFFFF !important;
+}
+
+
+/* Contenedor general del growl */
+.ui-growl {
+    opacity: 1 !important; /* quita transparencia */
+}
+
+/* Cada mensaje */
+.ui-growl-item {
+    background: #4FC3F7 !important; 
+    color: white !important;
+    border: none !important;
+}
+
+/* Título del mensaje */
+.ui-growl-title {
+    color: white !important;
+}
+
+/* Texto del mensaje */
+.ui-growl-message {
+    color: white !important;
 }

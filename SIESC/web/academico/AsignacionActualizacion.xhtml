@@ -25,7 +25,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <p:panel header="ASIGNACIÓN Y ACTUALIZACIÓN DE DOCENTES A GRUPOS" styleClass="panel-azul">
                          <p:panelGrid columns="4" styleClass="ui-fluid panelgrid-compacto"  columnClasses="ui-g-12 ui-md-3"  style="gap:20px;">
 
-
                             <p:outputLabel value="DEPARTAMENTO:" />
                             <p:outputLabel value="CARRERA:" />
                              <p:outputLabel value="PERIODO:" />
@@ -35,7 +34,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              filterMatchMode="contains"
                                               styleClass="select-medio">
                                 <p:ajax listener="#{asignacionMGBean.cambioDepartamento}" update="formAsigGrupo tablaDatos growlAsignacion"/>
-                                <f:selectItem itemLabel="Seleccione un departamento" itemValue="" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="Seleccione un departamento" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems value="#{asignacionMGBean.listaDepartamentos}" var="dep"
                                                itemLabel="#{dep.descripcionArea} (#{dep.claveArea})" itemValue="#{dep.claveArea}" />
                             </p:selectOneMenu>
@@ -46,7 +45,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              filterMatchMode="contains" 
                                               styleClass="select-medio">
                                 <p:ajax listener="#{asignacionMGBean.cambioCarrera}" update="tablaDatos growlAsignacion"/>
-                                <f:selectItem itemLabel="Selecciones una carrera" itemValue="" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="Selecciones una carrera" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems 
                                     value="#{asignacionMGBean.listaPermisos}" 
                                     var="listaPermiso"
@@ -62,7 +61,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              filterMatchMode="contains" 
                                               styleClass="select-medio">
                                 <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="growlAsignacion tablaDatos" />
-                                <f:selectItem itemLabel="Seleccione el Periodo" itemValue="" />
+                                <f:selectItem itemLabel="Seleccione el Periodo" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems 
                                     value="#{asignacionMGBean.listaPeriodos}" 
                                     var="p" 
@@ -78,7 +77,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              filterMatchMode="contains"
                                               styleClass="select-medio">
                                 <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="tablaDatos growlAsignacion" />
-                                <f:selectItem itemLabel="Selecciona un semestre" itemValue="" />
+                               <f:selectItem itemLabel="Selecciona un semestre" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems value="#{asignacionMGBean.semestres}" var="s"
                                                itemLabel="#{s}" itemValue="#{s}" />
                             </p:selectOneMenu>
@@ -293,5 +292,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
     </ui:composition>
 
+    
+    
+    
 </html>
 
