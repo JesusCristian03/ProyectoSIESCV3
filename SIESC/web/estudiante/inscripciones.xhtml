@@ -433,17 +433,22 @@
                                             </div>
 
                                         </h:panelGroup>
+                                        
+                                        
+                                        
+                                        
+                                        
                                         <p:dialog id="dlg" 
-                                                  header="Selecciona Grupo" 
+                                                  header=" Lista de Grupos" 
                                                   showEffect="fade" 
                                                   modal="true" 
                                                   widgetVar="selecionMateria" 
                                                   responsive="true" 
-                                                  width="75%"
+                                                  width="70%"
                                                   appendTo="@(body)"
                                                   position="center center">
 
-                                            <h3 style="text-align:center;">Lista de Grupos</h3>
+                                            <h4 class="titulo-dialogo">Selecciona grupo</h4>
 
                                             <p:dataTable id="tablaHorarioSeleccionandoEmergente"
                                                          value="#{inscripcionesBean.listaHorarioAsignatura}"
@@ -492,6 +497,10 @@
                                         </p:dialog>
 
 
+                                        
+                                        
+                                        
+                                        
                                         <p:growl id="growlMensajes" showDetail="true" sticky="false" life="4000"/>
 
                                         <p:panel header="HORARIOS SELECCIONADOS" style="margin-top:20px;">
@@ -631,17 +640,28 @@
                                 </f:facet>
 
                                 <p:dialog id="dlg1"
-                                 widgetVar="selecionMateriaGrupo"
-                                 modal="true"
-                                 draggable="false"
-                                 resizable="false"
-                                 responsive="true"
-                                 width="70%"
-                                 styleClass="dialog-grupos"
-                                 appendTo="@(body)"
-                                 position="center">
+    widgetVar="selecionMateriaGrupo"
+    modal="true"
+    draggable="false"
+    resizable="false"
+    responsive="true"
+    width="70%"
+    styleClass="dialog-grupos"
+    appendTo="@(body)"
+    position="center"
+    showHeader="false">
                                     
                                     <h3 style="text-align:center;">Lista de Grupos</h3>
+                                    
+                                     <!-- Botón abajo a la derecha -->
+                                    <div class="footer-dialog">
+                    <p:commandButton value="Seleccionar Grupo"
+                     icon="pi pi-check"
+                     styleClass="boton-seleccionar"
+                     actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
+                     oncomplete="PF('selecionMateriaGrupo').hide();"
+                     update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
+                                   </div>
 
                                     <p:dataTable id="resultadosTabla1"
                                      value="#{inscripcionesBean.listaHorarioAsignatura}"
@@ -684,15 +704,7 @@
                                         </p:column>
                                     </p:dataTable>
 
-                                    <!-- Botón abajo a la derecha -->
-                                    <div class="footer-dialog">
-                    <p:commandButton value="Seleccionar Grupo"
-                     icon="pi pi-check"
-                     styleClass="boton-seleccionar"
-                     actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
-                     oncomplete="PF('selecionMateriaGrupo').hide();"
-                     update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
-                                   </div>
+                                   
                                 </p:dialog>
 
                                 

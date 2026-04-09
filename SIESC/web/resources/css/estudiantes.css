@@ -1679,6 +1679,55 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
     padding: 20px 25px !important;
 }
 
+
+/* Centrar completamente el header */
+.ui-dialog .ui-dialog-titlebar {
+    display: flex;
+    justify-content: center;   /* centra horizontal */
+    align-items: center;       /* centra vertical */
+    position: relative;
+     text-align: center;
+}
+
+/* Evita que el botón X mueva el título */
+
+.ui-dialog .ui-dialog-titlebar-close {
+    position: absolute;
+    right: 12px;
+    bottom: 0px !important;  
+    top: auto;
+    transform: none;
+}
+
+/* Asegura que el texto no tenga márgenes raros */
+.ui-dialog .ui-dialog-title {
+    margin: 0;
+}
+
+/* Quitar espacio inferior del header */
+.ui-dialog .ui-dialog-titlebar {
+    padding-bottom: 10px !important;
+}
+
+
+
+
+
+
+
+
+
+
+/* Quitar espacio superior del contenido */
+.ui-dialog .ui-dialog-content {
+    padding-top: 5px !important;
+}
+
+.titulo-dialogo {
+    margin: 0;              
+    padding: 5px 0 10px 0;  
+    text-align: left;       
+}
 /* ===============================
    TABLA LIMPIA
 =================================*/
