@@ -1798,7 +1798,9 @@ body {
 .panelgrid-compacto .ui-inputfield,
 .panelgrid-compacto .ui-selectonemenu {
     margin-top: 0 !important;
-}           
+} 
+
+
 /* Seccion de informacion   */
 .select-medio {
     height: 36px !important;
@@ -1845,7 +1847,7 @@ body {
 .input-medio.ui-inputtext {
     line-height: 34px !important;
     padding: 0 10px !important;
-    height: 34px !important;        /* CLAVE para igualar */
+    height: 34px !important;        
     font-size: 12px !important;
     font-weight: bold !important;
     text-align: center;
@@ -1872,7 +1874,9 @@ body {
 /* ÍCONO CENTRADO */
 .date-medio button .ui-icon {
     line-height: 34px !important;
-}            
+}  
+
+
 
 /* ENCABEZADOS */
 .header-cell,

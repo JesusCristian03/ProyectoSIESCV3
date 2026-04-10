@@ -132,7 +132,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <p:column headerText="ASIGNATURA" style="width:19%; line-height: 1.2;">
                                     <div class="asignatura-box linea-divisora">
                                         <span class="materia">#{h.asignatura}</span>
-                                        <div class="linea"></div>
+                                        <div class="linea-separadora"></div>
                                         <span class="maestro">#{h.docente}</span>
                                     </div>
                                 </p:column>
@@ -151,10 +151,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <p:column headerText="SABADO" style="width:10%;">#{h.sabado}</p:column>
 
 
-                                <p:column style="text-align:center; width:6%;">
+                               <p:column style="text-align:center; width:6%;">
+                                 <f:facet name="header">
+                                   <i class="pi pi-ellipsis-h"></i>
+                                 </f:facet>
                                     <p:commandButton 
                                         icon="pi pi-trash"
-                                        styleClass="btn-basura"
+                                        styleClass="btn-basura ui-button-icon-only"
                                         actionListener="#{asignacionMGBean.accionEliminar(h)}"
                                         process="@this"
                                         update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion"
@@ -172,24 +175,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
                
-                <p:dialog id="dlgMaestros"  
-                          widgetVar="dlgMaestros"
-                          header="ASIGNAR MAESTRO"
-                          modal="true"
-                          resizable="false"
-                          width="1250">
-
+               <p:dialog id="dlgMaestros"  
+          widgetVar="dlgMaestros"
+          header="ASIGNAR MAESTRO"
+          modal="true"
+          resizable="false"
+          width="1250"
+          height="70vh"
+          styleClass="dlg-scroll">
 
                     <!-- Horario del maestro (se actualiza automáticamente al seleccionar uno) -->
-                    <p:panel header="HORARIO SELECCIONADO" style="margin-top:15px;">
+                    <p:panel header="HORARIO SELECCIONADO" style="margin-top: 0px;" styleClass="panel-azul">
 
                         <!-- CONTENEDOR CON SCROLL VERTICAL -->
                         <div style="max-height:200px; overflow-y:auto;">
                             <!-- Horario seleccionado -->
                             <p:dataTable value="#{asignacionMGBean.listaHorarioSeleccionado}" 
                                          var="h" 
-                                         styleClass="tabla-horarios"
-                                         style="width:100%; margin-bottom:15px;"
+                                          styleClass="tabla-horario"
+                                         style="width:100%;"
                                          rowKey="#{h.id}">
 
                                 <p:column headerText="CLAVE" style="width:6%;">#{h.materia}</p:column>
@@ -210,14 +214,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <p:column headerText="JUEVES" style="width:8%;">#{h.jueves}</p:column>
                                 <p:column headerText="VIERNES" style="width:8%;">#{h.viernes}</p:column>
                                 <p:column headerText="SABADO" style="width:8%;">#{h.sabado}</p:column>
+                               
 
                             </p:dataTable>
 
 
                         </div>
-                    </p:panel>
+                    </p:panel     >
 
-
+                    <p:panel  styleClass="panel-azul">
                     <!-- Selección de maestro -->
                     <p:selectOneMenu value="#{asignacionMGBean.docenteRFC}" 
                                      filter="true" filterMatchMode="contains"
@@ -239,9 +244,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                          update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion"
                                          oncomplete="PF('dlgMaestros').hide();" />
                     </div>
-
+                    </p:panel>
                     <!-- Horario del maestro (se actualiza automáticamente al seleccionar uno) -->
-                    <p:panel header="HORARIO DEL MAESTRO SELECCIONADO" style="margin-top:15px;">
+                    <p:panel header="HORARIO DEL MAESTRO SELECCIONADO" style="margin-top: 5px;" styleClass="panel-azul">
 
                         <!-- CONTENEDOR CON SCROLL VERTICAL -->
                         <div style="max-height:200px; overflow-y:auto;">
@@ -249,7 +254,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <p:dataTable value="#{asignacionMGBean.listaHorarioCrearMaestros}"
                                          var="hm"
                                          id="tablaHorariosMaestro"
-                                         styleClass="tabla-horarios"
+                                         styleClass="tabla-horario"
                                          style="width:100%;"
                                          rowKey="#{hm.id}">
 
