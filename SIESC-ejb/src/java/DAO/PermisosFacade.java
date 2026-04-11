@@ -35,14 +35,18 @@ public class PermisosFacade extends AbstractFacade<Permisos> implements Permisos
         List<Permisos> lista = null;
         System.out.println("Iniciai");
         String sqlPermisos = "SELECT p FROM Permisos p WHERE p.claveArea.claveArea=null and p.usuario.usuario=:usuario";
+       
         //String sqlPermisos = "SELECT p FROM Permisos p WHERE p.claveArea.claveArea=null and p.usuario.usuario=:usuario";
         System.out.println("Consulta " + sqlPermisos);
         Query queryPersonal = em.createQuery(sqlPermisos);
- 
+
         queryPersonal.setParameter("usuario", usuario);
 
         lista = (List<Permisos>) (queryPersonal.getResultList());
-        
+
+        for (Permisos p : lista) {
+            System.out.println(p.getUsuario());
+        }
         return lista;
     }
 
@@ -53,12 +57,12 @@ public class PermisosFacade extends AbstractFacade<Permisos> implements Permisos
         String sqlPermisos = "SELECT p FROM Permisos p WHERE p.reticula.reticula=null p.usuario.usuario=:usuario";
         System.out.println("Consulta " + sqlPermisos);
         Query queryPersonal = em.createQuery(sqlPermisos);
- 
+
         queryPersonal.setParameter("usuario", usuario);
 
         lista = (List<Permisos>) (queryPersonal.getResultList());
-        
+
         return lista;
     }
-    
+
 }

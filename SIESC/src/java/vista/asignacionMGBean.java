@@ -148,6 +148,10 @@ public class asignacionMGBean implements Serializable {
         //departamentoSeleccionado = new Organigrama();
         listaCarreras = carreraServicio.traerListaCarrera();
         listaPermisos = permisoServicio.buscarCarreras(usuario.getUsuario());
+        System.out.println("");
+        if (true) {
+            
+        }
         listaPeriodos = periodoEscolarServicio.periodosEscolaresActivos();
         periodoSeleccionado = listaPeriodos.get(0).getPeriodo();
         semestres = new ArrayList<>();

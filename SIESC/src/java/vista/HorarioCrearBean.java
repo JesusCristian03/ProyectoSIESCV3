@@ -135,6 +135,8 @@ public class HorarioCrearBean implements Serializable {
             booleanCampoAula = false;
             booleanCampoPeriodo = false;
             booleanCampoGrupo = false;
+            
+            modoInsertar = false;
 
             seleccionadocarreramateria2 = false;
             eliminando = false;
@@ -248,6 +250,7 @@ public class HorarioCrearBean implements Serializable {
     private Boolean desactivarCampos = false;
     private Boolean activarModificar = false;
     private Boolean booleanBuscarAula = false, booleanBuscarGrupo = false; //Para buscar el horario por grupo o por aula. 
+    private Boolean modoInsertar = false;
 
     private Boolean booleanBotonInsertar = false, booleanBotonEliminar = false, booleanBotonModificar = false,
             booleanBotonIntercambiar = false, booleanBotonAula = false, booleanBotonGrupo = false;
@@ -256,6 +259,14 @@ public class HorarioCrearBean implements Serializable {
 
     Date horainicioMateria;
     Date horainiciofinMateria;
+
+    public Boolean getModoInsertar() {
+        return modoInsertar;
+    }
+
+    public void setModoInsertar(Boolean modoInsertar) {
+        this.modoInsertar = modoInsertar;
+    }
 
     public String getCarreraSeleccionada() {
         return carreraSeleccionada;
@@ -729,6 +740,7 @@ public class HorarioCrearBean implements Serializable {
         // 6. Usa el servicio permisoServicio para buscar carreras relacionadas al usuario
         listaPermisos = permisoServicio.buscarCarreras(usuario.getUsuario());
         listaPeriodoEscolar = periodoEscolarServicio.periodosEscolaresActivos();
+        
         // opcional: listaPeriodoEscolar ya inicializada
         if (!listaPeriodoEscolar.isEmpty()) {
             periodoS = listaPeriodoEscolar.get(0).getPeriodo();
@@ -1864,7 +1876,7 @@ public class HorarioCrearBean implements Serializable {
         if (booleanBotonGrupo && booleanBotonAula) {//Borra si el boton se inactiva
             inicializarHorario();
             System.out.println("---A1----");
-            booleanBotonIntercambiar = false;
+             activarodesactivarBotones(false);
             //Por si se queda en modo intercambio y presiona modoAula para salir
             modoIntercambio = false;
         } else {
@@ -1894,23 +1906,27 @@ public class HorarioCrearBean implements Serializable {
             if (booleanBuscarAula) {//Dependiendo si busco por grupo o por horario
                 listaHorariosGenerados = horarioServicio.buscarHorariosPorAulas(periodoescolar,
                         aula);
-
-                addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR AULA",
+                if (!modoInsertar) {
+                      addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR AULA",
                         " \nAULA: " + aulas
                         + " " + carrera.getNombreCarrera()
                         + " \nPERIODO: " + periodoescolar.getIdentificacionCorta()
                 );
+                }
+              
 
             } else if (booleanBuscarGrupo) {
                 listaHorariosGenerados = horarioServicio.buscarHorariosPorGrupos(carrera, semestre, periodoescolar,
                         valorgrupo);
-
-                addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR GRUPO",
+                if (!modoInsertar) {
+                      addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR GRUPO",
                         " \nGRUPO: " + valorgrupo
                         + " " + carrera.getNombreCarrera()
                         + " \nSEMESTRE: " + semestreS
                         + " \nPERIODO: " + periodoescolar.getIdentificacionCorta()
-                );
+                ); 
+                }
+             
             }
 
             if (listaHorariosGenerados.size() != 0) {
@@ -2181,7 +2197,7 @@ public class HorarioCrearBean implements Serializable {
 
                     }
 
-                    addMessage(FacesMessage.SEVERITY_INFO, "ÉXITO", "SE HAN AGREGADO TODAS LOS HORARIOS A LA BD");
+                    addMessage(FacesMessage.SEVERITY_INFO, "ÉXITO", "SE HA AGREGADO NUEVO HORARIO");
                     //ACOMODAR EN LA TABLA LA INFORMACION 
                     for (int i = 0; i < listaHorarios.size(); i++) {//Obtener el objeto donde tengo la informacion de las materias.
                         horario = listaHorarios.get(i);
@@ -2201,10 +2217,11 @@ public class HorarioCrearBean implements Serializable {
                         }
 
                     }
-
+                    modoInsertar=true; //Es para evitar el mensaje de informacion inicial cuando se muestra el grupo, durante la generacio de horarios.
                     actualizarTabla();//para evitar que se pierdan los datos al momento de eliminar
                     //Ya al momento de insertar si quiero insertar otra para que no me mande mensaje de error despues de eliminar
                     listaHorarios = null;
+                    modoInsertar=false;
                     //addMessage(FacesMessage.SEVERITY_INFO, "INFO", "LIMPIANDO LISTA 1" );
                 }
 

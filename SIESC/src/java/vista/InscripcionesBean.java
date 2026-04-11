@@ -52,6 +52,7 @@ import modelo.RequisitosMateria;
 import modelo.Reticula;
 import modelo.ReticulaDatos;
 import modelo.SeleccionMaterias;
+import org.primefaces.event.SelectEvent;
 import servicio.AutorizacionInscripcionServicioLocal;
 import servicio.AvisosReinscripcionServicioLocal;
 import servicio.GruposServicioLocal;
@@ -497,10 +498,10 @@ public class InscripcionesBean implements Serializable {
         listaM = materiasCarrerasServicio.buscarMaterias(estudiante);
         periodoActual = periodoEscolarServicio.buscarPorId(periodoEscolarServicio.periodoActual());
         ///-----------------------------------------------------------
-        PeriodoEscolar prueba = periodoEscolarServicio.buscarPorId("20251");//Componer porque no hay como tal 
+        //PeriodoEscolar prueba = periodoEscolarServicio.buscarPorId("20251");//Componer porque no hay como tal 
         //.............................................................
 
-        vr = avisosReinscripcionServicio.buscarAvisoReinscripcion(estudiante, prueba);//Para conseguir el limite de creditos
+        vr = avisosReinscripcionServicio.buscarAvisoReinscripcion(estudiante, estudiante.getUltimoPeriodoInscrito());//Para conseguir el limite de creditos
         FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 
         //Reinicializar valores
@@ -514,7 +515,7 @@ public class InscripcionesBean implements Serializable {
         listaAzules = new ArrayList<>();
 
         guardandoPosicionesDeCadaTipoDeColor();//Contar cuantas materias hay de cada color.
-        listaAE = autorizacionInscripcionServicio.buscarAutorizacionesAlumno("20252", estudiante.getNoDeControl());
+        listaAE = autorizacionInscripcionServicio.buscarAutorizacionesAlumno(estudiante.getUltimoPeriodoInscrito().getPeriodo(), estudiante.getNoDeControl());
         System.out.println("ListAE.size:" + listaAE.size());
         for (int i = 0; i < listaAE.size(); i++) {
             AutorizacionInscripcion ai = listaAE.get(i);
@@ -705,9 +706,9 @@ public class InscripcionesBean implements Serializable {
         System.out.println("=== VERIFICACIÓN DE INSCRIPCIÓN ===");
 
         // Obtiene periodo de prueba
-        PeriodoEscolar prueba = periodoEscolarServicio.buscarPorId("20251");
-        vr = avisosReinscripcionServicio.buscarAvisoReinscripcion(estudiante, prueba);
-        System.out.println("PruebaP" + prueba);
+        //PeriodoEscolar prueba = periodoEscolarServicio.buscarPorId();
+        vr = avisosReinscripcionServicio.buscarAvisoReinscripcion(estudiante, estudiante.getUltimoPeriodoInscrito());
+        System.out.println("PruebaP" + estudiante.getUltimoPeriodoInscrito());
         System.out.println("Estudiante" + estudiante);
         System.out.println("VR" + vr);
 
@@ -715,7 +716,7 @@ public class InscripcionesBean implements Serializable {
             addMessage(FacesMessage.SEVERITY_ERROR, "NO REINSCRIPCION", "NO PUEDES REINSCRIBIRTE");
             return;
         }
-        /*
+        
         Date fechaSeleccionDate = vr.getFechaHoraSeleccion();
 
         LocalDateTime fechaSeleccion = fechaSeleccionDate.toInstant()
@@ -789,7 +790,7 @@ public class InscripcionesBean implements Serializable {
 
             addMessage(FacesMessage.SEVERITY_ERROR, "REINSCRIPCIÓN NO DISPONIBLE POR SITUACION ESCOLAR", "NO TE PUEDES REINSCRIBIR");
             return;
-        }*/
+        }
 
         // Aquí ya puedes continuar con la lógica
         try {
@@ -1466,7 +1467,9 @@ public class InscripcionesBean implements Serializable {
         }
     }
 
-    public void onSeleccionarGrupo() {
+    public void onSeleccionarGrupo(SelectEvent<HorarioAsignatura> event) {
+         
+        grupoSeleccionado = event.getObject();
         Boolean mensajeAutorizado = null;
 
         System.out.println("===============SELECCIONADO==================");
