@@ -116,6 +116,7 @@ public class InscripcionesBean implements Serializable {
     private Boolean modoGrupo = false;
     private String grupo = "";
     private int creditosSeleccionados = 0;
+    private int estadoNumeroMaterias = 0;
     private String mensaje;
     private String colorMensaje; // clase CSS
     private Boolean modoImprimir = false, modoInsertar = false, modoEliminar = false;
@@ -203,6 +204,14 @@ public class InscripcionesBean implements Serializable {
     public void mostrarMensajeInfo() {
         mensaje = "Seleccione una opción";
         colorMensaje = "mensaje-info";
+    }
+
+    public int getEstadoNumeroMaterias() {
+        return estadoNumeroMaterias;
+    }
+
+    public void setEstadoNumeroMaterias(int estadoNumeroMaterias) {
+        this.estadoNumeroMaterias = estadoNumeroMaterias;
     }
 
     public void mostrarPanel(String mensaje, String color) {
@@ -716,7 +725,7 @@ public class InscripcionesBean implements Serializable {
             addMessage(FacesMessage.SEVERITY_ERROR, "NO REINSCRIPCION", "NO PUEDES REINSCRIBIRTE");
             return;
         }
-        
+
         Date fechaSeleccionDate = vr.getFechaHoraSeleccion();
 
         LocalDateTime fechaSeleccion = fechaSeleccionDate.toInstant()
@@ -733,7 +742,7 @@ public class InscripcionesBean implements Serializable {
         System.out.println("-----------------------------------------");
 
         // --- Validaciones ---
-         if (ahora.isBefore(fechaSeleccion)) {
+        if (ahora.isBefore(fechaSeleccion)) {
             System.out.println("[INFO] Aún no es tu hora, acceso bloqueado.");
             addMessage(FacesMessage.SEVERITY_WARN, "Aún no puedes inscribirte", "Tu horario empieza a las: " + fechaSeleccion);
             return;
@@ -748,7 +757,6 @@ public class InscripcionesBean implements Serializable {
         System.out.println("[OK] Estás dentro del tiempo permitido, redirigiendo...");
         System.out.println("-----------------------------------------");
 
-        
         // 1. Validación de nulls (si algo es null, salimos)
         if (vr.getAutorizaEscolar() == null
                 || vr.getAdeudaBiblioteca() == null
@@ -761,7 +769,7 @@ public class InscripcionesBean implements Serializable {
 
             addMessage(FacesMessage.SEVERITY_ERROR, "DATOS INCOMPLETOS", "CONTACTA A ESCOLAR");
             return; // ← salir inmediatamente
-        } 
+        }
 
         // 2. Imprimir valores
         System.out.println("AutorizaEscolar: " + vr.getAutorizaEscolar());
@@ -966,10 +974,11 @@ public class InscripcionesBean implements Serializable {
         }
 
     }
+    int materiasDisponibles = 0;
 
     public void validacionAzules() {
-        int materiasDisponibles = 0;
-        Boolean autorizo=false;
+
+        Boolean autorizo = false;
         if (Mazules != 0) {
             int semestreAlumno = estudiante.getSemestre();
             //  addMessage(FacesMessage.SEVERITY_INFO, "MATERIAS DISPONIBLES ", "SELECCIONA TUS MATERIAS");
@@ -1010,10 +1019,10 @@ public class InscripcionesBean implements Serializable {
                             }
                         } // Caso 3 (opcional): si coincide par-par o impar-impar, se activa
                         else {
-                            
+
                             System.out.println("else rd.getMateria()" + rd.getMateria());
-                            
-                                //VERIFICACION DE MATERIAS REQUISITADAS
+
+                            //VERIFICACION DE MATERIAS REQUISITADAS
                             //Busco la materia para ver si tiene un requisito. 
                             //No siempre debe tener un requisito.
                             RequisitosMateria rm = requisitosMateriaServicio.encontrarAntecedenteMateria(
@@ -1029,8 +1038,8 @@ public class InscripcionesBean implements Serializable {
                             }
 
                             if (rm != null) {
-                                
-                                autorizo =autorizarRequisitoMateria(rd);//En cuanto encontrara uno tenía que regresar. 
+
+                                autorizo = autorizarRequisitoMateria(rd);//En cuanto encontrara uno tenía que regresar. 
                                 List<HistoriaAlumno> ha = historiaAlumnoServicio.buscarPorEstudianteMateria(
                                         rm.getMateriaRelacion().getMateria(),
                                         estudiante.getNoDeControl());
@@ -1049,9 +1058,9 @@ public class InscripcionesBean implements Serializable {
                                         System.out.println("HiPeriodo" + hi.getPeriodo());
                                         System.out.println("HiMateria" + hi.getMateria().getMateria());
                                         System.out.println("HiCalificacion" + hi.getCalificacion());
-                                        if (hi.getCalificacion() == 0 && autorizo!=true) {
-                                           // System.out.println("Rd.getDisponible"+ rd.getDisponible());
-                                           // System.out.println("Rd.getColor"+ rd.getColor());
+                                        if (hi.getCalificacion() == 0 && autorizo != true) {
+                                            // System.out.println("Rd.getDisponible"+ rd.getDisponible());
+                                            // System.out.println("Rd.getColor"+ rd.getColor());
                                             rd.setDisponible(false);
                                             rd.setColor("nodisponible");
                                         } else {
@@ -1230,6 +1239,8 @@ public class InscripcionesBean implements Serializable {
         restaurarHorarioReticula();
         //cambiarEstadoMateriasSeleccionadasPorGrupo();
         addMessage(FacesMessage.SEVERITY_INFO, "GRUPO SELECCIONADO", "HAZ SELECCIONADO:" + grupo);
+        materiasDisponibles--;
+
     }
 
     public void restaurarHorarioReticula() {
@@ -1319,6 +1330,9 @@ public class InscripcionesBean implements Serializable {
 
                     if (rd != null) {
                         System.out.println("Semestre " + s + ": " + rd.getNombreMateria());
+                        System.out.println("rd.getMateria():" + rd.getMateria());
+                        System.out.println("item.getMateria():" + item.getMateria());
+
                         if (rd.getMateria().equals(item.getMateria())) {
                             rd.setDisponible(true);
                             rd.setColor("disponible");
@@ -1355,6 +1369,7 @@ public class InscripcionesBean implements Serializable {
             }
             System.out.println("-----------------------------------");
         }
+
     }
 
     public void eliminarHorario() {//Mañana 06-11-2025
@@ -1366,11 +1381,17 @@ public class InscripcionesBean implements Serializable {
         restaurarHorarioReticula();
         listaHorarioASeleccionadas = new ArrayList();
         modoImprimir = false;
-
+        Mazules = 0;
+        Mnaranjas = 0;
+        Mamarillas = 0;
+        Mrojas = 0;
         creditosSeleccionados = 0;//Para reinicializacion. 
         guardandoPosicionesDeCadaTipoDeColor();
         validaciones();
 
+        materiasDisponibles = Mazules;
+        estadoNumeroMaterias = 0;
+        mostrarPanel("MATERIAS DISPONIBLES[ MATERIAS: " + materiasDisponibles + "]", "mensaje-info");
     }
 
     public void onTabChange() { //Solo se activa Sleccion con grupos cuando todas las materias a escoger estan en azul en el semestre del alumno.
@@ -1468,7 +1489,7 @@ public class InscripcionesBean implements Serializable {
     }
 
     public void onSeleccionarGrupo(SelectEvent<HorarioAsignatura> event) {
-         
+
         grupoSeleccionado = event.getObject();
         Boolean mensajeAutorizado = null;
 
@@ -1501,8 +1522,8 @@ public class InscripcionesBean implements Serializable {
                                     + mc.getCreditosMateria()
                             );
                             addMessage(FacesMessage.SEVERITY_WARN, "SOBRE CARGA",
-                                    "Créditos autorizados: " + vr.getCreditosAutorizados()+
-                            " por "+x.getMateriaAfectada().getMateria());
+                                    "Créditos autorizados: " + vr.getCreditosAutorizados()
+                                    + " por " + x.getMateriaAfectada().getMateria());
                             break;
                         }
                     }
@@ -1640,6 +1661,10 @@ public class InscripcionesBean implements Serializable {
                         grupoSeleccionado.getAsignatura());
                 listaHorarioASeleccionadas.add(grupoSeleccionado);
 
+                materiasDisponibles--;
+                //Para no perder el valor de las materias seleccionadas
+                estadoNumeroMaterias++;
+                mostrarPanel("MATERIAS DISPONIBLES[ MATERIAS: " + materiasDisponibles + "]", "mensaje-info");
                 //Para validacion escoga por turnos
                 if (materiaDeTabla.getColor().equals("repeticion")) {
                     if (Mnaranjas > 0) {
