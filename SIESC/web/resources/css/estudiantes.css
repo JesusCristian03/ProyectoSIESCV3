@@ -829,7 +829,13 @@ body {
     justify-content: center;
     align-items: flex-start;
     width: 100%;
-    overflow: hidden;   /* 🔥 corta el espacio fantasma */
+   
+}
+
+
+
+.escala-reticula .ui-datatable {
+    margin-bottom: 0 !important;
 }
 
 .escala-reticula {
@@ -837,10 +843,7 @@ body {
     display: inline-block;
     transform: scale(var(--scale-factor));
     transform-origin: top center;
-}
-
-.escala-reticula .ui-datatable {
-    margin-bottom: 0 !important;
+    margin-bottom: -140px; /*  valor para quitar el espacio al finalllll */
 }
 
 
@@ -1235,7 +1238,7 @@ body {
 /* Contenedor principal */
 .legend-container {
     width: 100%;           /* ocupa el ancho disponible */
-    max-width: 1100px;     /* evita que se estire demasiado */
+    max-width: 1100px;     /* evita que se estire demaado */
     margin: 0 auto;
     text-align: center;
     box-sizing: border-box;
@@ -1468,27 +1471,24 @@ body {
    ========================= */
 
 .tabla-horario.ui-datatable thead th.ui-state-default {
-    background-color: #2f5f8f !important;
-    color: #ffffff !important;
+   background-color: #2f5f8f !important;
+    color: #ffffff !important;  
     text-align: center;
-
     padding: 0 !important;          /* elimina padding  */
     height: 32px !important;        /* altura */
     vertical-align: middle;
 }
 
-/* Contenedor interno del texto */
 .tabla-horario.ui-datatable thead th .ui-column-title {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    height: 32px;                   /*  */
-    padding: 0 6px !important;      /* padding mínimo horizontal */
+    height: 32px;
+    padding: 0 6px !important;
     line-height: 1;
     font-size: 0.75rem;
-    font-weight: 600;
-    color: #ffffff !important;
+    font-weight: 700;              /* negrita */
+    color: #ffffff  !important;    
 }
 
 /* Quita gradientes y sombras del theme */
@@ -1529,7 +1529,106 @@ body {
     background-image: none !important;
 }
 
+/* Hover en filas */
+.tabla-horario .ui-datatable-data > tr:hover {
+    background-color: #e3f2fd !important; /* azul  */
+    cursor: pointer;
+}
 
+/* Scroll vertical y horizontal */
+.tabla-horario .ui-datatable-scrollable-body::-webkit-scrollbar {
+    width: 6px;      /* vertical */
+    height: 6px;     /* horizontal */
+}
+
+.tabla-horario .ui-datatable-scrollable-body::-webkit-scrollbar-track {
+    background: #e3f2fd; /* fondo claro */
+    border-radius: 10px;
+}
+
+.tabla-horario .ui-datatable-scrollable-body::-webkit-scrollbar-thumb {
+    background: #e3f2fd ; /* azul */
+    border-radius: 10px;
+}
+
+.tabla-horario .ui-datatable-scrollable-body::-webkit-scrollbar-thumb:hover {
+    background: #0d47a1; /* azul  */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   ENCABEZADO DATATABLE nueva
+   ========================= */
+
+.tabla-nueva.ui-datatable thead th.ui-state-default {
+    /*  background-color: #2f5f8f !important;
+    color: #ffffff !important;  */
+    background-color: #ffffff  !important;
+    color: #6c757d !important;
+    text-align: center;
+    padding: 0 !important;          /* elimina padding  */
+    height: 32px !important;        /* altura */
+    vertical-align: middle;
+}
+
+.tabla-nueva.ui-datatable thead th .ui-column-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    padding: 0 6px !important;
+    line-height: 1;
+    font-size: 0.75rem;
+    font-weight: 700;              /* negrita */
+    color: #000000 !important;     /*  negro */
+}
+
+/* Quita gradientes y sombras del theme */
+.tabla-nueva.ui-datatable thead th {
+    background-image: none !important;
+}
+
+
+
+/* Elimina gradiente del theme */
+.tabla-nueva.ui-datatable thead th {
+    background-image: none !important;
+}
+
+
+/* Fila completa del encabezado */
+.tabla-nueva .ui-datatable-thead > tr > th {
+    background-color: #1565c0 !important;   /* azul */
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    border-color: #0d47a1;
+}
+
+/* Texto del encabezado */
+.tabla-nueva .ui-column-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+/* Hover en encabezado (opcional) */
+.tabla-nueva .ui-datatable-thead > tr > th:hover {
+    background-color: #0d47a1;
+}
+
+/* Quitar gradientes del theme */
+.tabla-nueva .ui-state-default {
+    background-image: none !important;
+}
 
 
 
@@ -1788,3 +1887,41 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
 .ui-datatable-scrollable-body thead {
     display: none;
 }
+
+ .materia {
+    font-weight: 700;   /* negrita  */
+    font-size: 0.95rem;
+    display: block;
+}
+
+
+.tabla-horario {
+    width: 100% !important;
+}
+
+
+/* Quitar espacio interno del panel */
+.ui-panel .ui-panel-content {
+    padding: 5px 0px !important;
+}
+
+/* Quitar margen superior de la tabla */
+.tabla-horario {
+    margin-top: 0px !important;
+}
+
+/* Reducir espacio interno de la tabla */
+.tabla-horario .ui-datatable-tablewrapper {
+    margin-top: 0px !important;
+}
+
+
+
+#seleccion .ui-panel {
+    margin-bottom: 10px;
+}
+
+#seleccion .ui-panel:last-child {
+    margin-bottom: 0 !important;
+}
+
