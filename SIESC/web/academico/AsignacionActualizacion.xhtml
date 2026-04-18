@@ -102,17 +102,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <!-- Horario del maestro (se actualiza automáticamente al seleccionar uno) -->
                     <p:panel header="GRUPOS DISPONIBLES" styleClass="panel-azul">
 
-                        <!-- CONTENEDOR CON SCROLL VERTICAL -->
-                        <div style="max-height:400px; overflow-y:auto;">
+                        
                             <p:dataTable value="#{asignacionMGBean.listaHorarioCrear}" 
                                          var="h"
+                                         style="font-size:12px; text-align:center;"
+                                         scrollable="true"
+                                          scrollHeight="500"
                                          styleClass="tabla-horario"
-                                         style="width:100%;"
                                          id="tablaDatos"
                                          selectionMode="single"
                                          selection="#{asignacionMGBean.horarioCrearSeleccionado}"
                                          rowKey="#{h.id}" >
-                                <p:ajax event="rowSelect"
+                                
+                                
+                                
+                                       <p:ajax event="rowSelect"
                                         listener="#{asignacionMGBean.filaSeleccionada}"
                                         process="@this"
                                         update=":formAsigGrupo:dlgMaestros 
@@ -168,8 +172,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
 
 
-
-                       </div>  
                     </p:panel>
 
 
@@ -222,41 +224,54 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         </div>
                     </p:panel     >
 
-                    <p:panel  styleClass="panel-azul">
-                    <!-- Selección de maestro -->
-                    <p:selectOneMenu value="#{asignacionMGBean.docenteRFC}" 
-                                     filter="true" filterMatchMode="contains"
-                                      styleClass="select-medio" >
-                        <p:ajax listener="#{asignacionMGBean.verHorarioMaestro}" update=":formAsigGrupo:tablaDatos :formAsigGrupo:tablaHorariosMaestro"/>
-                        <f:selectItem itemLabel="SELECCIONE UN MAESTRO" itemValue="" />
-                        <f:selectItems value="#{asignacionMGBean.listaDocentes}"
-                                       var="pr" 
-                                       itemLabel="#{pr.rfc} / #{pr.nombreEmpleado} #{pr.apellidoPaterno} #{pr.apellidoMaterno}" 
-                                       itemValue="#{pr.rfc}" />
-                    </p:selectOneMenu>
+                  <p:panel   styleClass="panel-azull" style="margin-top: 0px;">
 
+   <p:panelGrid columns="2"  style="margin-top: 0px;" columnClasses="ui-g-12 ui-md-9, ui-g-12 ui-md-3">
+                                
 
-                    <div style="display:flex; justify-content:flex-end; margin-top:10px;">
-                        <p:commandButton value="ASIGNAR"
-                                         icon="pi pi-check"
-                                         styleClass="btn-asignar"
-                                         actionListener="#{asignacionMGBean.guardarMaestro}"
-                                         update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion"
-                                         oncomplete="PF('dlgMaestros').hide();" />
-                    </div>
-                    </p:panel>
+        <p:selectOneMenu value="#{asignacionMGBean.docenteRFC}" 
+                         filter="true" 
+                         filterMatchMode="contains"
+                         styleClass="select-medio"
+                         style="width:100%">
+            
+            <p:ajax listener="#{asignacionMGBean.verHorarioMaestro}" 
+                    update=":formAsigGrupo:tablaDatos :formAsigGrupo:tablaHorariosMaestro"/>
+
+            <f:selectItem itemLabel="SELECCIONE UN MAESTRO" itemValue="" />
+
+            <f:selectItems value="#{asignacionMGBean.listaDocentes}"
+                           var="pr" 
+                           itemLabel="#{pr.rfc} / #{pr.nombreEmpleado} #{pr.apellidoPaterno} #{pr.apellidoMaterno}" 
+                           itemValue="#{pr.rfc}" />
+        </p:selectOneMenu>
+
+        <p:commandButton value="ASIGNAR"
+                         icon="pi pi-check"
+                         styleClass="btn-asignar"
+                         actionListener="#{asignacionMGBean.guardarMaestro}"
+                         update=":formAsigGrupo:tablaDatos :formAsigGrupo:growlAsignacion"
+                         oncomplete="PF('dlgMaestros').hide();" />
+
+    </p:panelGrid>
+
+</p:panel>
+                    
+                    
+                    
                     <!-- Horario del maestro (se actualiza automáticamente al seleccionar uno) -->
-                    <p:panel header="HORARIO DEL MAESTRO SELECCIONADO" style="margin-top: 5px;" styleClass="panel-azul">
+                    <p:panel header="HORARIO DEL MAESTRO SELECCIONADO" style="margin-top: 0px;" styleClass="panel-azul">
 
-                        <!-- CONTENEDOR CON SCROLL VERTICAL -->
-                        <div style="max-height:200px; overflow-y:auto;">
+                       
 
                             <p:dataTable value="#{asignacionMGBean.listaHorarioCrearMaestros}"
                                          var="hm"
                                          id="tablaHorariosMaestro"
-                                         styleClass="tabla-horario"
-                                         style="width:100%;"
-                                         rowKey="#{hm.id}">
+                                         rowKey="#{hm.id}"
+                                         style="font-size:12px; text-align:center;"
+                                         scrollable="true"
+                                         scrollHeight="200"
+                                         styleClass="tabla-horario">
 
                                 <p:column headerText="CLAVE" style="width:6%;">#{hm.materia}</p:column>
 
@@ -279,7 +294,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
                             </p:dataTable>
 
-                        </div>
+                        
                     </p:panel>
 
 
