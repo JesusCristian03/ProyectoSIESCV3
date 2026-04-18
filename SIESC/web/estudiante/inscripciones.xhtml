@@ -639,28 +639,21 @@
                                 </f:facet>
 
                                 <p:dialog id="dlg1"
-    widgetVar="selecionMateriaGrupo"
-    modal="true"
-    draggable="false"
-    resizable="false"
-    responsive="true"
-    width="70%"
-    styleClass="dialog-grupos"
-    appendTo="@(body)"
-    position="center"
-    showHeader="false">
+                                 widgetVar="selecionMateriaGrupo"
+                                 modal="true"
+                                 draggable="false"
+                                 resizable="false"
+                                  responsive="true"
+                                  width="70%"
+                                
+                                 appendTo="@(body)"
+                                  position="center"
+                                  showHeader="true"
+                                   closable="true"
+                                    header="Horario del grupo seleccionado">
                                     
-                                    <h3 style="text-align:center;">Lista de Grupos</h3>
                                     
-                                     <!-- Botón abajo a la derecha -->
-                                    <div class="footer-dialog">
-                    <p:commandButton value="Seleccionar Grupo"
-                     icon="pi pi-check"
-                     styleClass="boton-seleccionar"
-                     actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
-                     oncomplete="PF('selecionMateriaGrupo').hide();"
-                     update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
-                                   </div>
+                                     
 
                                     <p:dataTable id="resultadosTabla1"
                                      value="#{inscripcionesBean.listaHorarioAsignatura}"
@@ -702,7 +695,17 @@
                                             <h:outputText value="#{item.sabado}" />
                                         </p:column>
                                     </p:dataTable>
-
+                                     
+                                     
+                                     
+                                      <div class="footer-dialog">
+                    <p:commandButton value="Seleccionar Grupo"
+                     icon="pi pi-check"
+                     styleClass="boton-seleccionar"
+                     actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
+                     oncomplete="PF('selecionMateriaGrupo').hide();"
+                     update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
+                                   </div>
                                    
                                 </p:dialog>
 
