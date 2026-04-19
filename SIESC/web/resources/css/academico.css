@@ -764,8 +764,6 @@ body {
     background-image: none !important;
 }
 
-
-
 /* Elimina gradiente del theme */
 .tabla-horario.ui-datatable thead th {
     background-image: none !important;
@@ -800,6 +798,33 @@ body {
 .tabla-horario .ui-datatable-scrollable-body thead {
     display: none;
 }
+
+
+/* =========================
+   SCROLL PERSONALIZADO TABLA
+   ========================= */
+
+/* Chrome, Edge, Safari */
+.tabla-horario .ui-datatable-scrollable-body::-webkit-scrollbar {
+    width: 6px;   /*  grosor vertical */
+    height: 6px;  /*  grosor horizontal */
+}
+
+.tabla-horario .ui-datatable-scrollable-body::-webkit-scrollbar-track {
+    background: #e3ecff; /* fondo suave */
+    border-radius: 10px;
+}
+
+.tabla-horario .ui-datatable-scrollable-body::-webkit-scrollbar-thumb {
+    background: #2f5f8f !important; 
+    border-radius: 10px;
+}
+
+.tabla-horario .ui-datatable-scrollable-body::-webkit-scrollbar-thumb:hover {
+    background: #2f5f8f !important;
+}
+
+
 /* ===============================
    TABLA LIMPIA
 =================================*/
@@ -1338,26 +1363,54 @@ body {
 }
 
 
-/* Contenedor general del growl */
-.ui-growl {
-    opacity: 1 !important; /* quita transparencia */
+
+
+
+/* =========================
+   RESET (elimina estilos de Ultima)
+   ========================= */
+
+.ui-growl-item, .ui-growl-item div { background-image: none !important; box-shadow: none !important; }
+
+
+
+
+/* =========================
+   INFO (AZUL)
+   ========================= */
+body .ui-growl .ui-growl-item-container.ui-growl-info {
+    background: #BBDEFB !important;
+    border-left: 6px solid #1E88E5 !important;
+    color: #0D47A1 !important;
 }
 
-/* Cada mensaje */
-.ui-growl-item {
-    background: #4FC3F7 !important; 
-    color: white !important;
-    border: none !important;
+/* =========================
+   WARN (AMARILLO)
+   ========================= */
+body .ui-growl .ui-growl-item-container.ui-growl-warn {
+    background: #FFE082 !important;
+    border-left: 6px solid #FFB300 !important;
+    color: #000 !important;
 }
 
-/* Título del mensaje */
+/* =========================
+   ERROR (ROJO)
+   ========================= */
+body .ui-growl .ui-growl-item-container.ui-growl-error {
+    background: #FFCDD2 !important;
+    border-left: 6px solid #E53935 !important;
+    color: #B71C1C !important;
+}
+
+/* =========================
+   TEXTO
+   ========================= */
 .ui-growl-title {
-    color: white !important;
+    font-weight: bold;
 }
 
-/* Texto del mensaje */
 .ui-growl-message {
-    color: white !important;
+    font-size: 13px;
 }
 
 
