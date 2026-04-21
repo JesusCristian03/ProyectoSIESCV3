@@ -806,7 +806,7 @@ body {
 
     padding: 4px 0;          /* sin espacio lateral */
     display: flex;
-    justify-content: center; /* ⬅️ CENTRADO */
+    justify-content: center;
     align-items: center;
 }
 .custom-title {
@@ -831,9 +831,6 @@ body {
     width: 100%;
    
 }
-
-
-
 .escala-reticula .ui-datatable {
     margin-bottom: 0 !important;
 }
@@ -1016,9 +1013,9 @@ body {
 
 /* Texto de las pestañas */
 .ui-tabs-nav li a {
-    font-size: 12px;       /* 🔽 tamaño */
+    font-size: 12px;       /*  tamaño */
     font-weight: 400;      /* normal (no gorda) */
-    padding: 6px 10px;     /* 🔽 menos alto */
+    padding: 6px 10px;     /*  menos alto */
     display: flex;
     align-items: center;
     gap: 4px;
@@ -1026,7 +1023,7 @@ body {
 
 
 .ui-tabs-nav li.ui-tabs-selected a {
-    font-weight: 500;   /* o 400 si lo quieres igual */
+    font-weight: 500;   
 }
 /* Badge dentro de tabs */
 .ui-tabs-nav .ui-badge {
@@ -1041,14 +1038,14 @@ body {
     line-height: 1 !important;
     padding: 0 !important;
 
-    border-radius: 50%; /* si lo quieres círculo perfecto */
+    border-radius: 50%; 
 }
 
 .ui-tabs-nav li a .pi {
     font-size: 11px;
 }
 
-/* Solo afecta a paneles que tengan styleClass="panel-azul" */
+
 .panel-azul .ui-panel-titlebar {
     background: #003366 !important;
     color: #fff !important;
@@ -1195,8 +1192,6 @@ body {
     box-shadow: var(--card-shadow);
     white-space: nowrap;
 }
-
-
 
 .legend-title {
     font-size: 1.1rem !important;
@@ -1496,13 +1491,10 @@ body {
     background-image: none !important;
 }
 
-
-
 /* Elimina gradiente del theme */
 .tabla-horario.ui-datatable thead th {
     background-image: none !important;
 }
-
 
 /* Fila completa del encabezado */
 .tabla-horario .ui-datatable-thead > tr > th {
@@ -1778,8 +1770,7 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
     padding: 20px 25px !important;
 }
 
-
-/* Centrar completamente el header */
+/* Centrar  el header */
 .ui-dialog .ui-dialog-titlebar {
     display: flex;
     justify-content: center;   /* centra horizontal */
@@ -1789,7 +1780,6 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
 }
 
 /* Evita que el botón X mueva el título */
-
 .ui-dialog .ui-dialog-titlebar-close {
     position: absolute;
     right: 12px;
