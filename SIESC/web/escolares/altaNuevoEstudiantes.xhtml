@@ -12,8 +12,9 @@
 
 
             <ui:define name="content">
-
+<p:growl id="growl" widgetVar="msg" showDetail="true" life="3000"/>
                 <h:form>
+             
 
                    <p:panel header="REGISTRO DE NUEVO ALUMNO"  styleClass="card custom-panel panel-registro-alumno"
                    style="border-radius:2px; box-shadow: 0 0px 2px rgba(0,0,0,0.1); padding:0px; background-color:#fdfdfd;">
@@ -493,14 +494,21 @@
                         <div class="buttons-container">
                         <p:commandButton value="Dar de Alta"
                                              action="#{altaEstudiantesBean.guardar}"
-                                             update=""
-                                             process="@this"
+                                              update="growl"
+                                             process="@form"
                                              icon="pi pi-check"
-                                              styleClass="btn-alta"/>
+                                              styleClass="btn-alta"
+                                                oncomplete="if (!args.validationFailed) {
+                                              PF('msg').renderMessage({
+                                               severity: 'info',
+                                               summary: 'Éxito',
+                                               detail: 'Se ha guardado correctamente' });
+                                                }" />
                             <p:button value="Regresar"
                                       outcome="listaAspirantes"
                                       icon="pi pi-arrow-left"
-                                       styleClass="btn-regresar"/>
+                                       styleClass="btn-regresar"
+                                       />
 
                         </div>
                     </p:panel>

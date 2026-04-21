@@ -843,7 +843,7 @@ body {
 .input-medio.ui-inputtext {
     line-height: 34px !important;
     padding: 0 10px !important;
-    height: 34px !important;        /* CLAVE para igualar */
+    height: 34px !important;        
     font-size: 11px !important;
     font-weight: bold !important;
     text-align: center;
@@ -1051,4 +1051,121 @@ body {
 
 .menu-eliminar {
     color: #d32f2f !important;
+}
+
+
+.ui-growl-item-container.ui-growl-message-info {
+    background-color: #003366 !important;
+    color: white !important;
+    border-radius: 8px;
+}
+
+.ui-growl-title {
+    font-weight: bold;
+}
+
+
+
+/* =========================
+  BUSQUEDAALUMNOS
+   ========================= */
+/* =========================
+   ENCABEZADO DATATABLE
+   ========================= */
+
+.tabla-nueva.ui-datatable thead th.ui-state-default {
+   background-color: #2f5f8f !important;
+    color: #ffffff !important;  
+    text-align: center;
+    padding: 0 !important;          /* elimina padding  */
+    height: 32px !important;        /* altura */
+    vertical-align: middle;
+}
+
+.tabla-nueva.ui-datatable thead th .ui-column-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    padding: 0 6px !important;
+    line-height: 1;
+    font-size: 0.75rem;
+    font-weight: 700;              /* negrita */
+    color: #ffffff  !important;    
+}
+
+/* Quita gradientes y sombras del theme */
+.tabla-nueva.ui-datatable thead th {
+    background-image: none !important;
+}
+
+/* Encabezado de la tabla */
+.tabla-nueva .ui-sortable-column {
+    display: flex !important;
+    align-items: center;
+    justify-content: center; /* opcional, puedes cambiar a flex-start */
+    gap: 6px; /* espacio entre texto e icono */
+}
+
+/* Icono de ordenamiento */
+.tabla-nueva .ui-sortable-column-icon {
+    position: static !important;
+    margin-left: 5px;
+}
+
+/* Elimina gradiente del theme */
+.tabla-nueva.ui-datatable thead th {
+    background-image: none !important;
+}
+
+
+/* Fila completa del encabezado */
+.tabla-nueva .ui-datatable-thead > tr > th {
+    background-color: #1565c0 !important;   /* azul */
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    border-color: #0d47a1;
+}
+
+/* Texto del encabezado */
+.tabla-nueva .ui-column-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+/* Hover en encabezado (opcional) */
+.tabla-nueva .ui-datatable-thead > tr > th:hover {
+    background-color: #0d47a1;
+}
+
+/* Quitar gradientes del theme */
+.tabla-nueva .ui-state-default {
+    background-image: none !important;
+}
+
+/* Hover en filas */
+.tabla-nueva .ui-datatable-data > tr:hover {
+    background-color: #e3f2fd !important; /* azul  */
+    cursor: pointer;
+}
+
+/* Scroll vertical y horizontal */
+.tabla-nueva .ui-datatable-scrollable-body::-webkit-scrollbar {
+    width: 6px;      /* vertical */
+    height: 6px;     /* horizontal */
+}
+
+.tabla-nueva .ui-datatable-scrollable-body::-webkit-scrollbar-track {
+    background: #e3f2fd; /* fondo claro */
+    border-radius: 10px;
+}
+
+.tabla-nueva .ui-datatable-scrollable-body::-webkit-scrollbar-thumb {
+    background: #e3f2fd ; /* azul */
+    border-radius: 10px;
+}
+
+.tabla-nueva .ui-datatable-scrollable-body::-webkit-scrollbar-thumb:hover {
+    background: #0d47a1; /* azul  */
 }
