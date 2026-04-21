@@ -21,6 +21,11 @@
             function toggleSidebar() {
                 document.querySelector('.layout-sidebar').classList.toggle('collapsed');
             }
+                document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.ui-menuitem-link').forEach(function(el) {
+            el.removeAttribute("title");
+        });
+    });
         </script>
 </h:head>
 

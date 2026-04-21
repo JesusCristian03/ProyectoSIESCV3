@@ -1169,3 +1169,15 @@ body {
 .tabla-nueva .ui-datatable-scrollable-body::-webkit-scrollbar-thumb:hover {
     background: #0d47a1; /* azul  */
 }
+
+.ui-menuitem-link {
+    pointer-events: auto;
+}
+
+.ui-menuitem-link[title] {
+    pointer-events: auto;
+}
+
+.ui-menuitem-link::after {
+    content: none !important;
+}
