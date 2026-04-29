@@ -120,6 +120,7 @@ public class InscripcionesBean implements Serializable {
     private String mensaje;
     private String colorMensaje; // clase CSS
     private Boolean modoImprimir = false, modoInsertar = false, modoEliminar = false;
+    private Boolean booleanGuardado = false;
     private String[] autorizacionesDisponibles = new String[6];
     private int Mrojas = 0, Mamarillas = 0, Mnaranjas = 0, Mazules = 0;
     List<int[]> listaRojas = new ArrayList<>();
@@ -129,6 +130,14 @@ public class InscripcionesBean implements Serializable {
 
     public String[] getAutorizacionesDisponibles() {
         return autorizacionesDisponibles;
+    }
+
+    public Boolean getBooleanGuardado() {
+        return booleanGuardado;
+    }
+
+    public void setBooleanGuardado(Boolean booleanGuardado) {
+        this.booleanGuardado = booleanGuardado;
     }
 
     public void setAutorizacionesDisponibles(String[] autorizacionesDisponibles) {
@@ -486,6 +495,7 @@ public class InscripcionesBean implements Serializable {
             modoImprimir = false;
             modoInsertar = false;
             modoEliminar = false;
+            booleanGuardado = false;
 
             Mrojas = 0;
             Mamarillas = 0;
@@ -1304,11 +1314,14 @@ public class InscripcionesBean implements Serializable {
         }
 
         addMessage(FacesMessage.SEVERITY_INFO, "HORARIO GUARDADO", "SE HA GUARDADO EL HORARIO");
+        mostrarPanel("HORARIO GUARDADO", "mensaje-exito");
+        bloquearAzules();//Para bloquear las materias disponibles.
         creditosSeleccionados = 0; //Para contabilizar de nuevo
 
         modoImprimir = true;
         modoInsertar = true;
         modoEliminar = true;
+        booleanGuardado = true;
     }
 
     public void eliminarHorario(HorarioAsignatura item) {
@@ -1369,6 +1382,8 @@ public class InscripcionesBean implements Serializable {
             }
             System.out.println("-----------------------------------");
         }
+        materiasDisponibles++;
+        mostrarPanel("MATERIAS DISPONIBLES[ MATERIAS: " + materiasDisponibles + "]", "mensaje-info");
 
     }
 
@@ -1390,7 +1405,7 @@ public class InscripcionesBean implements Serializable {
         validaciones();
 
         materiasDisponibles = Mazules;
-        estadoNumeroMaterias = 0;
+        // estadoNumeroMaterias = 0;
         mostrarPanel("MATERIAS DISPONIBLES[ MATERIAS: " + materiasDisponibles + "]", "mensaje-info");
     }
 

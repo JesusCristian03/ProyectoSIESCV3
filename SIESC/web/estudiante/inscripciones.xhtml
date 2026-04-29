@@ -63,7 +63,15 @@
 
                                 <p:outputLabel>
                                     <p:panel id="mensajePanel"
-                                             style="width:100%; text-align:center;"
+                                             style="
+                                             width:100%; 
+                                             text-align:center; 
+                                             height: 100%;
+                                             display: flex;
+                                             align-items: center;
+                                             justify-content: center;
+                                             font-weight: bold;
+                                             "
                                              styleClass="#{inscripcionesBean.colorMensaje}">
                                         <h:outputText value="#{inscripcionesBean.mensaje}" />
                                     </p:panel>
@@ -569,7 +577,8 @@
                                                                      :seleccion:tabVista:growlMensajes"
                                                                      actionListener="#{inscripcionesBean.eliminarHorario(item)}"
                                                                      title="Eliminar"
-                                                                     process="@this"/>
+                                                                     process="@this" 
+                                                                     disabled="#{inscripcionesBean.booleanGuardado}"/>
                                                 </p:column>
 
                                             </p:dataTable>
@@ -589,7 +598,11 @@
                                                                      icon="pi pi-save" 
                                                                      action="#{inscripcionesBean.guardarHorario}" 
                                                                      update="tablaHorarioSeleccionado 
-                                                                     :seleccion:tabVista:toolbarBotones :seleccion:tabVista:growlMensajes"
+                                                                     :seleccion:tabVista:toolbarBotones 
+                                                                     :seleccion:tabVista:growlMensajes 
+                                                                     :seleccion:tabVista:tablaHorarioSeleccionado 
+                                                                     :formEstudiante:panelEstudiante 
+                                                                     :seleccion:tabVista:tablaReticula"
                                                                      styleClass="btn-guardar"
                                                                      disabled="#{empty inscripcionesBean.listaHorarioASeleccionadas
                                                                                  or inscripcionesBean.modoInsertar}" />
@@ -652,15 +665,7 @@
                                     
                                     <h3 style="text-align:center;">Lista de Grupos</h3>
                                     
-                                     <!-- Botón abajo a la derecha -->
-                                    <div class="footer-dialog">
-                    <p:commandButton value="Seleccionar Grupo"
-                     icon="pi pi-check"
-                     styleClass="boton-seleccionar"
-                     actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
-                     oncomplete="PF('selecionMateriaGrupo').hide();"
-                     update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
-                                   </div>
+                                   
 
                                     <p:dataTable id="resultadosTabla1"
                                      value="#{inscripcionesBean.listaHorarioAsignatura}"
@@ -703,7 +708,15 @@
                                         </p:column>
                                     </p:dataTable>
 
-                                   
+                                     <!-- Botón abajo a la derecha -->
+                                    <div class="footer-dialog">
+                    <p:commandButton value="Seleccionar Grupo"
+                     icon="pi pi-check"
+                     styleClass="boton-seleccionar"
+                     actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
+                     oncomplete="PF('selecionMateriaGrupo').hide();"
+                     update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
+                                   </div>
                                 </p:dialog>
 
                                 
