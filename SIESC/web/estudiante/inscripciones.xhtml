@@ -108,7 +108,7 @@
 
                     <h:form id="seleccion">
 
-
+                      
 
 
                         <p:tabView id="tabVista" cache="false">
@@ -514,17 +514,17 @@
                                             <p:dataTable id="tablaHorarioSeleccionado"
                                                          value="#{inscripcionesBean.listaHorarioASeleccionadas}" 
                                                          var="item"
-
                                                          scrollable="false" scrollHeight="400"
                                                          emptyMessage="No hay horarios seleccionados"
-                                                         styleClass="tabla-horario">
+                                                         style="width:100%;"
+                                                         styleClass="tabla-nueva">
 
                                                 <p:column headerText="Asignatura / Docente" style="width:18%; font-size:13px; text-align:center;">
 
                                                     <h:panelGroup layout="block" style="text-align:center; padding:4px 0;">
 
                                                         <!-- Asignatura -->
-                                                        <div style=";">
+                                                        <div  class="materia" style=";">
                                                             #{item.materia} #{item.asignatura}
                                                         </div>
 
@@ -652,18 +652,19 @@
                                 </f:facet>
 
                                 <p:dialog id="dlg1"
-    widgetVar="selecionMateriaGrupo"
-    modal="true"
-    draggable="false"
-    resizable="false"
-    responsive="true"
-    width="70%"
-    styleClass="dialog-grupos"
-    appendTo="@(body)"
-    position="center"
-    showHeader="false">
+                                 widgetVar="selecionMateriaGrupo"
+                                 modal="true"
+                                 draggable="false"
+                                 resizable="false"
+                                  responsive="true"
+                                  width="70%"
+                                
+                                 appendTo="@(body)"
+                                  position="center"
+                                  showHeader="true"
+                                   closable="true"
+                                    header="Horario del grupo seleccionado">
                                     
-                                    <h3 style="text-align:center;">Lista de Grupos</h3>
                                     
                                    
 

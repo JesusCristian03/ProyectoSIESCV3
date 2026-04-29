@@ -21,6 +21,11 @@
             function toggleSidebar() {
                 document.querySelector('.layout-sidebar').classList.toggle('collapsed');
             }
+                document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.ui-menuitem-link').forEach(function(el) {
+            el.removeAttribute("title");
+        });
+    });
         </script>
 </h:head>
 
@@ -198,7 +203,7 @@
     <!-- ALUMNOS -->
     <p:submenu label="Alumnos" icon="pi pi-users">
         <p:menuitem value="Alumnos generales" icon="pi pi-user" />
-        <p:menuitem value="Alumnos inscritos" icon="pi pi-user-check" />
+        <p:menuitem value="Alumnos inscritos" icon="pi pi-users" outcome="/escolares/alumnosBusqueda.xhtml"/>
         <p:menuitem value="Alumnos 7, 8 y 9 semestre" icon="pi pi-clock" />
         <p:menuitem value="Bajas temporales" icon="pi pi-user-minus" />
         <p:menuitem value="Kardex Alumno" icon="pi pi-book"  outcome="/escolares/kardex.xhtml" />
