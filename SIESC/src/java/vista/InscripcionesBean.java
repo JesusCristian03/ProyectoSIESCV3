@@ -1249,6 +1249,7 @@ public class InscripcionesBean implements Serializable {
         restaurarHorarioReticula();
         //cambiarEstadoMateriasSeleccionadasPorGrupo();
         addMessage(FacesMessage.SEVERITY_INFO, "GRUPO SELECCIONADO", "HAZ SELECCIONADO:" + grupo);
+        mostrarPanel("HORARIO SELECCIONADO", "mensaje-exito");
         materiasDisponibles--;
 
     }
@@ -1461,13 +1462,13 @@ public class InscripcionesBean implements Serializable {
                 }
 
                 // Finalmente, asignar bloqueado o no
-                grupoBloqueado = n != materiasRequeridas;
+               /* grupoBloqueado = n != materiasRequeridas;
                 if (!grupoBloqueado && modoGrupo) {
                     addMessage(FacesMessage.SEVERITY_INFO, "HORARIO POR GRUPO", "SELECCIONA UN GRUPO");
                 } else {
                     addMessage(FacesMessage.SEVERITY_WARN, "HORARIO POR GRUPO", "NO PUEDES SELECCIONAR NINGUN GRUPO");
 
-                }
+                }*/
 
                 return;
             } else {

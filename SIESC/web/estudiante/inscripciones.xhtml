@@ -633,18 +633,7 @@
 
                                     </div>
                                    </div>         
-                            </p:tab>
-    
-
-
-
-
-
-
-
-
-
-                            
+                            </p:tab>                           
                             <p:tab>
 
                                 <f:facet name="title">
@@ -675,7 +664,7 @@
                                         scrollHeight="400"
                                         styleClass="tabla-horario"
                                         tableStyle="table-layout: fixed;"
-                                         rowHover="true">
+                                         rowHover="false">
 
                                         <p:column headerText="Grupo" style="width:4%; text-align:center;">
                                             <h:outputText value="#{item.grupo}" />
@@ -716,7 +705,10 @@
                      styleClass="boton-seleccionar"
                      actionListener="#{inscripcionesBean.confirmarSeleccionGrupo}"
                      oncomplete="PF('selecionMateriaGrupo').hide();"
-                     update="panelGrupos :seleccion:tabVista:tablaReticula :seleccion:tabVista:tablaHorarioSeleccionado" />
+                     update="panelGrupos 
+                     :seleccion:tabVista:tablaReticula 
+                     :seleccion:tabVista:tablaHorarioSeleccionado 
+                     :formEstudiante:panelEstudiante " />
                                    </div>
                                 </p:dialog>
 
