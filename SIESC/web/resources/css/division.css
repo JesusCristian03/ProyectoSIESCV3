@@ -68,7 +68,7 @@ body {
 
 /* Hover */
 .cerrar-sesion-btn:hover {
-    background-color:#037DBE !important; /* el color que cambia */
+    background-color:#037DBE !important; 
 }
 
 
@@ -121,11 +121,11 @@ body {
 .custom-menu.ui-panelmenu {
     border: none !important; /* sin bordes  */
     background: #ffffff !important;
-      width: 100% !important; /* ← OCUPAR TODO EL ANCHO */
-    margin: 0 !important;   /* ← SIN ESPACIOS EXTERNOS */
-    padding: 0 !important;  /* ← SIN ESPACIOS INTERNOS */
-    border-radius: 0 !important; /* ← OPCIONAL, pero lo deja uniforme con el sidebar */
-    box-shadow: none !important; /* ← elimina borde visual extra */
+      width: 100% !important; /*  OCUPAR TODO EL ANCHO */
+    margin: 0 !important;   /* SIN ESPACIOS EXTERNOS */
+    padding: 0 !important;  /* SIN ESPACIOS INTERNOS */
+    border-radius: 0 !important; 
+    box-shadow: none !important; /*  elimina borde visual extra */
 }
 
 /* ---- Encabezados ---- */
@@ -675,7 +675,7 @@ body {
 }
 /* Texto del título */
 .panel-crear-grupo .ui-panel-title {
-    font-size: 0.75rem;          /* ~12px */
+    font-size: 0.75rem;          
     font-weight: 600;
     line-height: 1;              /* evita empuje vertical */
     padding: 0;                  /* no padding extra */
@@ -1013,7 +1013,7 @@ body {
    ========================= */
 
 .form-horario {
-    font-size: 0.78rem; /* ↓ texto general */
+    font-size: 0.78rem; /*  texto general */
 }
 
 
@@ -1308,7 +1308,7 @@ body {
     border: none !important;
     background: #FFFFFF!important; /* blanco de fondo */
     padding: 2px 5px !important;
-    border-radius: 8px !important; /* opcional, esquinas suaves */
+    border-radius: 8px !important; 
     box-shadow: none !important;   /* elimina sombra si existiera */
 }
 
@@ -1899,8 +1899,8 @@ body {
     color: #333 !important;
     height:100% !important;
     display: flex !important;
-    align-items: center !important;     /* vertical */
-    justify-content: center !important; /* horizontal */
+    align-items: center !important;    
+    justify-content: center !important;
     font-weight: bold !important;
 }
 

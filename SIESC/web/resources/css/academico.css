@@ -68,7 +68,7 @@ body {
 
 /* Hover */
 .cerrar-sesion-btn:hover {
-    background-color:#037DBE !important; /* el color que cambia */
+    background-color:#037DBE !important; 
 }
 
 
@@ -121,11 +121,11 @@ body {
 .custom-menu.ui-panelmenu {
     border: none !important; /* sin bordes  */
     background: #ffffff !important;
-      width: 100% !important; /* ← OCUPAR TODO EL ANCHO */
-    margin: 0 !important;   /* ← SIN ESPACIOS EXTERNOS */
-    padding: 0 !important;  /* ← SIN ESPACIOS INTERNOS */
-    border-radius: 0 !important; /* ← OPCIONAL, pero lo deja uniforme con el sidebar */
-    box-shadow: none !important; /* ← elimina borde visual extra */
+      width: 100% !important; /* OCUPAR TODO EL ANCHO */
+    margin: 0 !important;   /*  SIN ESPACIOS EXTERNOS */
+    padding: 0 !important;  /*  SIN ESPACIOS INTERNOS */
+    border-radius: 0 !important; 
+    box-shadow: none !important; /* elimina borde visual extra */
 }
 
 /* ---- Encabezados ---- */
@@ -914,7 +914,7 @@ body {
 }
 
 .tabla-nueva .ui-datatable-scrollable-body::-webkit-scrollbar-track {
-    background: #e3f2fd; /* fondo claro */
+    background: #e3f2fd; 
     border-radius: 10px;
 }
 

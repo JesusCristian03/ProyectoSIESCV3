@@ -1014,7 +1014,7 @@ body {
 /* Texto de las pestañas */
 .ui-tabs-nav li a {
     font-size: 12px;       /*  tamaño */
-    font-weight: 400;      /* normal (no gorda) */
+    font-weight: 400;    
     padding: 6px 10px;     /*  menos alto */
     display: flex;
     align-items: center;
@@ -1055,7 +1055,7 @@ body {
     border-radius: 6px 6px 0 0 !important;
 
     height: 40px !important;        /* tu altura */
-    line-height: 40px !important;   /* debe coincidir */
+    line-height: 40px !important;  
     padding: 0 !important;
 }
 /* Tabla bordes y fondo */
@@ -1178,7 +1178,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px; /* un poco más pequeño también */
+    gap: 10px;
     margin-top: 15px;
 }
 .ultima-legend-small {
@@ -1209,7 +1209,7 @@ body {
     font-weight: bold;
     color: white;
     border-radius: 10px; /* esquinas redondeadas */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* sombra suave */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); 
     text-align: center;
     padding: 5px;
     cursor: default;
@@ -1246,14 +1246,14 @@ body {
     padding: 2px 4px;
     font-size: 13px;
     font-weight: bold;
-    width: 100%;            /* EXACTAMENTE el ancho del row */
+    width: 100%;           
     box-sizing: border-box;
 }
 
 /* Fila de celdas */
 .legend-row {
     display: flex;
-    flex-wrap: nowrap;      /* ⬅️ NO permite bajar a otra fila */
+    flex-wrap: nowrap;      /* NO permite bajar a otra fila */
     width: 100%;
     box-sizing: border-box;
 }
@@ -1262,7 +1262,7 @@ body {
 .legend-cell {
     flex: 1;
 
-    min-width: 0;           /* ⬅️ permite que se hagan pequeñas sin romper */
+    min-width: 0;           
     padding: 5px;
     margin: 0px;
     height: 60px;
@@ -1648,12 +1648,12 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
     align-items: center !important;
     width: 100%;
     flex-wrap: wrap; /* */
-    gap: 15px; /*  espacio adaptable */
+    gap: 15px; 
 }
 #toolbarBotones {
     border: none !important;
     box-shadow: none !important;
-    background: transparent !important; /* opcional */
+    background: transparent !important;
 }
 #toolbarBotones.ui-toolbar {
     border: none !important;
@@ -1745,9 +1745,7 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
 
 
 
-/* ===============================
-   DIALOGO MODERNO
-=================================*/
+
 /* ===============================
    DIALOGO MODERNO
 =================================*/
@@ -1788,7 +1786,7 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
     transform: none;
 }
 
-/* Asegura que el texto no tenga márgenes raros */
+/* que el texto no tenga márgenes raros */
 .ui-dialog .ui-dialog-title {
     margin: 0;
 }
@@ -1915,3 +1913,23 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
     margin-bottom: 0 !important;
 }
 
+
+
+.mensaje-centrado{
+    width: 100%;
+    min-height: 50px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+/* quitar padding interno default de PrimeFaces */
+.mensaje-centrado .ui-panel-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}

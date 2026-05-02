@@ -68,7 +68,7 @@ body {
 
 /* Hover */
 .cerrar-sesion-btn:hover {
-    background-color:#037DBE !important; /* el color que cambia */
+    background-color:#037DBE !important; 
 }
 
 
@@ -92,7 +92,7 @@ body {
 }
 /* Scrollbar  */
 .layout-sidebar::-webkit-scrollbar {
-    width: 4px; /*  delgado */
+    width: 4px; 
 }
 
 .layout-sidebar::-webkit-scrollbar-thumb {
@@ -121,11 +121,11 @@ body {
 .custom-menu.ui-panelmenu {
     border: none !important; /* sin bordes  */
     background: #ffffff !important;
-      width: 100% !important; /* ← OCUPAR TODO EL ANCHO */
-    margin: 0 !important;   /* ← SIN ESPACIOS EXTERNOS */
-    padding: 0 !important;  /* ← SIN ESPACIOS INTERNOS */
-    border-radius: 0 !important; /* ← OPCIONAL, pero lo deja uniforme con el sidebar */
-    box-shadow: none !important; /* ← elimina borde visual extra */
+      width: 100% !important; /* OCUPAR TODO EL ANCHO */
+    margin: 0 !important;   /* SIN ESPACIOS EXTERNOS */
+    padding: 0 !important;  /* SIN ESPACIOS INTERNOS */
+    border-radius: 0 !important;
+    box-shadow: none !important; /*  elimina borde visual extra */
 }
 
 /* ---- Encabezados ---- */
@@ -812,8 +812,8 @@ body {
     border: 1px solid #cfd8dc !important;
     border-radius: 6px !important;
      font-weight:bold  !important;
-           align-items: center !important;     /* vertical */
-    justify-content: center !important; /* horizontal */
+           align-items: center !important;     
+    justify-content: center !important; 
        text-align: center !important;
 }
 
@@ -823,8 +823,8 @@ body {
     padding: 0 10px !important;
     font-size: 11px;
      font-weight:bold  !important;
-             align-items: center !important;     /* vertical */
-    justify-content: center !important; /* horizontal */
+             align-items: center !important;    
+    justify-content: center !important;
        text-align: center !important;
 }
 
@@ -899,8 +899,8 @@ body {
     color: #333;
     height:100%;
     display: flex;
-    align-items: center;     /* vertical */
-    justify-content: center; /* horizontal */
+    align-items: center;    
+    justify-content: center;
     font-weight: bold;
 }
 
@@ -1103,7 +1103,7 @@ body {
 .tabla-nueva .ui-sortable-column {
     display: flex !important;
     align-items: center;
-    justify-content: center; /* opcional, puedes cambiar a flex-start */
+    justify-content: center; 
     gap: 6px; /* espacio entre texto e icono */
 }
 
@@ -1152,12 +1152,12 @@ body {
 
 /* Scroll vertical y horizontal */
 .tabla-nueva .ui-datatable-scrollable-body::-webkit-scrollbar {
-    width: 6px;      /* vertical */
-    height: 6px;     /* horizontal */
+    width: 6px;      
+    height: 6px;    
 }
 
 .tabla-nueva .ui-datatable-scrollable-body::-webkit-scrollbar-track {
-    background: #e3f2fd; /* fondo claro */
+    background: #e3f2fd;
     border-radius: 10px;
 }
 

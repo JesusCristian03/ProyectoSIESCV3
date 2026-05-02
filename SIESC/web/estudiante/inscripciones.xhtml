@@ -19,7 +19,7 @@
             <ui:define name="content">
 
                 <f:view>
-                    <!-- AQUI VA EL METADATA -->
+                    
                     <f:metadata>
                         <f:event type="preRenderView" listener="#{inscripcionesBean.resetearSiEsRecarga}" />
                     </f:metadata>
@@ -61,21 +61,10 @@
                                 <p:outputLabel value="#{inscripcionesBean.estudiante.especialidad}" styleClass="data-cell"/>
                                 <p:outputLabel value="#{inscripcionesBean.estudiante.reticula.nombreCarrera}" styleClass="data-cell"/>
 
-                                <p:outputLabel>
-                                    <p:panel id="mensajePanel"
-                                             style="
-                                             width:100%; 
-                                             text-align:center; 
-                                             height: 100%;
-                                             display: flex;
-                                             align-items: center;
-                                             justify-content: center;
-                                             font-weight: bold;
-                                             "
-                                             styleClass="#{inscripcionesBean.colorMensaje}">
-                                        <h:outputText value="#{inscripcionesBean.mensaje}" />
-                                    </p:panel>
-                                </p:outputLabel>
+                                <p:panel id="mensajePanel"
+         styleClass="mensaje-centrado #{inscripcionesBean.colorMensaje}">
+    <h:outputText value="#{inscripcionesBean.mensaje}" />
+</p:panel>
 
                             </p:panelGrid>
 
