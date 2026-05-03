@@ -32,5 +32,6 @@ public interface EstudianteFacadeLocal {
     Estudiante loginEstudiante(Estudiante estudiante);
     
     List<Estudiante> traerEstudiantesPorApellidoPaterno(String apPaterno);
+     boolean existeNoControl(String noControl);
     
 }

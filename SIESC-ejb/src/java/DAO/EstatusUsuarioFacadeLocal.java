@@ -28,5 +28,6 @@ public interface EstatusUsuarioFacadeLocal {
     List<EstatusUsuario> findRange(int[] range);
 
     int count();
+   
     
 }

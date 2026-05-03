@@ -52,5 +52,17 @@ public class EstudianteFacade extends AbstractFacade<Estudiante> implements Estu
         List<Estudiante> lista = query.getResultList();
         return lista;
     }
+    
+    @Override
+    public boolean existeNoControl(String noControl) {
+    String sql = "SELECT e FROM Estudiante e WHERE e.noDeControl = :control";
+
+    Query query = em.createQuery(sql);
+    query.setParameter("control", noControl);
+
+    List<Estudiante> lista = query.getResultList();
+
+    return !lista.isEmpty();
+}
 
 }

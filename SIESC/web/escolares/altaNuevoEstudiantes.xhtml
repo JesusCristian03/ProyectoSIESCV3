@@ -12,7 +12,7 @@
 
 
             <ui:define name="content">
-<p:growl id="growl" widgetVar="msg" showDetail="true" life="3000"/>
+<p:growl id="growl" showDetail="true" life="4000" />
                 <h:form>
              
 
@@ -74,14 +74,14 @@
                             </p:datePicker>
                             <p:selectOneMenu value="#{altaEstudiantesBean.sexo}" styleClass="select-medio" style="width:100%; font-weight:bold;">
 
-                                <f:selectItem itemLabel="SELECCIONA UN SEXO" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONA UN SEXO" itemValue="" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="MASCULINO" itemValue="M" />
                                 <f:selectItem itemLabel="FEMENINO" itemValue="F" />
                                 <p:ajax />
                             </p:selectOneMenu>
 
                             <p:selectOneMenu value="#{altaEstudiantesBean.estadoCivil}" styleClass="select-medio" style="width:100%; font-weight:bold;">
-                                <f:selectItem itemLabel="SELECCIONA ESTADO CIVIL" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONA ESTADO CIVIL" itemValue="" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="SOLTERO(A)" itemValue="S" />
                                 <f:selectItem itemLabel="CASADO(A)" itemValue="C" />
                                 <p:ajax />
@@ -214,13 +214,13 @@
                             <p:selectOneMenu value="#{altaEstudiantesBean.reticula}" styleClass="select-medio" style="width:100%;">
                                 <p:ajax />
 
-                                <f:selectItem itemLabel="SELECCIONE CARRERA" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONE CARRERA"  itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems value="#{altaEstudiantesBean.listaCarreras}" var="car" itemLabel="#{car.nombreCarrera}" itemValue="#{car.reticula}"/>
                             </p:selectOneMenu>
                             <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.especialidad}"  styleClass="select-medio" style="width:100%;">
                                 <p:ajax />
 
-                                <f:selectItem itemLabel="SELECCIONE UNA ESPECIALIDAD" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONE UNA ESPECIALIDAD" itemValue="" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="SISTEMAS COMPUTACIONALES" itemValue="SIS" />
                                 <f:selectItem itemLabel="ELECTRÓNICA" itemValue="ELC" />
                                 <f:selectItem itemLabel="INDUSTRIAL" itemValue="IND" />
@@ -231,7 +231,7 @@
 
                             <p:selectOneMenu value="#{altaEstudiantesBean.periodoIngresoIt}" styleClass="select-medio" style="width:100%;">
                                 <p:ajax />
-                                <f:selectItem itemLabel="SELECCIONA UN PERIODO" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONA UN PERIODO" itemValue="" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="ENE-JUN/2025" itemValue="20251"/>
                                 <f:selectItem itemLabel="AGO-DIC/2025" itemValue="20253"/>
                             </p:selectOneMenu>
@@ -250,13 +250,13 @@
 
                             <p:selectOneMenu value="#{altaEstudiantesBean.tipoIngreso}" styleClass="select-medio" style="width:100%; font-weight:bold;">
                                 <p:ajax />
-                                <f:selectItem itemLabel="SELECCIONA TIPO DE INGRESO" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONA TIPO DE INGRESO" itemValue="" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="EXAMEN SELECCION" itemValue="Examen"/>
                                 <f:selectItem itemLabel="REINGRESO" itemValue="Reingreso"/>
                             </p:selectOneMenu>
                             <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.planDeEstudios}" styleClass="select-medio" style="width:100%; font-weight:bold;">
                                 <p:ajax />
-                                <f:selectItem itemLabel="SELECCIONA UNA COMPETENCIA" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONA UNA COMPETENCIA" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="3- COMPETENCIAS" itemValue="3"/>
                                 <f:selectItem itemLabel="4- COMPETENICAS" itemValue="4"/>
                             </p:selectOneMenu>
@@ -265,7 +265,7 @@
 
                                 <p:ajax />
 
-                                <f:selectItem itemLabel="SELECCIONE NIVEL ESCOLAR" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONE NIVEL ESCOLAR" itemValue="" noSelectionOption="true"/>
 
                                 <f:selectItem itemLabel="LICENCIATURA" itemValue="L"/>
                                 <f:selectItem itemLabel="TSU" itemValue="T"/>
@@ -277,7 +277,7 @@
 
                             <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.estatusAlumno}" styleClass="select-medio" style="width:100%;">
                                 <p:ajax />
-                                <f:selectItem itemLabel="SELECCIONE ESTATUS" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONE ESTATUS" itemValue="" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="ACTIVO" itemValue="ACT"/>
                                 <f:selectItem itemLabel="INACTIVO" itemValue="INA"/>
                                 <f:selectItem itemLabel="BAJA TEMPORAL" itemValue="BT"/>
@@ -295,7 +295,7 @@
                             
                             <p:selectOneMenu value="#{altaEstudiantesBean.estudiante.tipoServicioMedico}" styleClass="select-medio" style="width:100%;">
                                 <p:ajax />
-                                <f:selectItem itemLabel="SELECCIONE TIPO SERVICIO MÉDICO" itemValue="-" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="SELECCIONE TIPO SERVICIO MÉDICO" itemValue="" noSelectionOption="true"/>
                                 <f:selectItem itemLabel="IMSS" itemValue="IMSS" />
                                 <f:selectItem itemLabel="ISSSTE" itemValue="ISSSTE" />
                                 <f:selectItem itemLabel="Seguro Popular/INSABI" itemValue="INSABI" />
@@ -491,26 +491,19 @@
                            
                         </p:panelGrid>
                         
-                        <div class="buttons-container">
-                        <p:commandButton value="Dar de Alta"
-                                             action="#{altaEstudiantesBean.guardar}"
-                                              update="growl"
-                                             process="@form"
-                                             icon="pi pi-check"
-                                              styleClass="btn-alta"
-                                                oncomplete="if (!args.validationFailed) {
-                                              PF('msg').renderMessage({
-                                               severity: 'info',
-                                               summary: 'Éxito',
-                                               detail: 'Se ha guardado correctamente' });
-                                                }" />
-                            <p:button value="Regresar"
-                                      outcome="listaAspirantes"
-                                      icon="pi pi-arrow-left"
-                                       styleClass="btn-regresar"
-                                       />
+                     <div class="buttons-container">
+  <p:commandButton value="Dar de Alta"
+                 action="#{altaEstudiantesBean.guardar}"
+                 update="growl"
+                 process="@form"
+                 icon="pi pi-check"
+                 styleClass="btn-alta"/>
 
-                        </div>
+    <p:button value="Regresar"
+              outcome="listaAspirantes"
+              icon="pi pi-arrow-left"
+              styleClass="btn-regresar"/>
+</div>
                     </p:panel>
 
 

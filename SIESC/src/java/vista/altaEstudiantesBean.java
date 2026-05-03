@@ -4,6 +4,8 @@
  */
 package vista;
 
+import DAO.EstudianteFacade;
+import DAO.EstudianteFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -22,12 +24,15 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.file.UploadedFile;
 import servicio.AlumnosGeneralesServicioLocal;
 import servicio.CarreraServicioLocal;
 import servicio.EntidadFederativaServicioLocal;
 import servicio.EstudianteServicioLocal;
 import servicio.PeriodoEscolarServicioLocal;
+
 
 
 @Named(value = "altaEstudiantesBean")
@@ -44,6 +49,8 @@ public class altaEstudiantesBean implements Serializable {
     private CarreraServicioLocal carreraServicio;
     @EJB
     private EntidadFederativaServicioLocal entidadFederativaServicio;
+   @EJB
+   private EstudianteFacadeLocal estudianteFacade;
 
     List<Carrera> listaCarreras = new ArrayList<>();
     List<EntidadFederativa> listaEntidadFederativa = new ArrayList<>();
@@ -102,52 +109,157 @@ public void guardar() {
     System.out.println("Periodo ingreso IT: " + periodoIngresoIt);
     System.out.println("=====================");
     
-    
-    
-    System.out.println("AlumnoGeneral noControl: " + alumnoGeneral.getNoDeControl());
+    numeroControl = (numeroControl != null) ? numeroControl.trim() : null;
 
-     
-    // vlaidaciones 
+    // VALIDACIONES
+    if (numeroControl == null || numeroControl.trim().isEmpty()) {
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "NÚMERO DE CONTROL REQUERIDO",
+                "Debe capturar el número de control");
+        return;
+    }
+    
+    //  validar duplicado 
+if (estudianteFacade.existeNoControl(numeroControl)) {
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "ERROR",
+            "El número de control ya está registrado");
+    return;
+}
+
     if (sexo == null || sexo.isEmpty()) {
-        System.out.println("ERROR: sexo vacío");
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "SEXO REQUERIDO",
+                "Debe seleccionar el sexo");
         return;
     }
 
     if (estadoCivil == null || estadoCivil.isEmpty()) {
-        System.out.println("ERROR: estado civil vacío");
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "ESTADO CIVIL REQUERIDO",
+                "Debe seleccionar el estado civil");
+        return;
+    }
+    
+  if (reticula == null || reticula == 0) {
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "CARRERA REQUERIDA",
+            "Debe seleccionar una carrera");
+    return;
+}
+
+Carrera carrera = carreraServicio.buscarPorId(reticula);
+
+if (carrera == null) {
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "CARRERA INVÁLIDA",
+            "No se encontró la carrera seleccionada");
+    return;
+}
+
+    if (periodoIngresoIt == null || periodoIngresoIt.isEmpty()) {
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "PERIODO REQUERIDO",
+                "Debe seleccionar el periodo de ingreso");
         return;
     }
 
-    // ENTIDAD FEDERATIVA DEL ESTUDIANTE
+    if (numeroMunicipioEstudiante == null || numeroMunicipioEstudiante == 0) {
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "ENTIDAD FEDERATIVA REQUERIDA",
+                "Debe seleccionar una entidad federativa");
+        return;
+    }
+
+    if (domicilioCalle == null || domicilioCalle.trim().isEmpty()) {
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "CALLE REQUERIDA",
+                "Debe capturar la calle");
+        return;
+    }
+
+    if (domicilioColonia == null || domicilioColonia.trim().isEmpty()) {
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "COLONIA REQUERIDA",
+                "Debe capturar la colonia");
+        return;
+    }
+
+  if (estudiante.getCiudadProcedencia() == null
+        || estudiante.getCiudadProcedencia().trim().isEmpty()) {
+
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "CIUDAD REQUERIDA",
+            "Debe capturar la ciudad");
+    return;
+}
+
+    // BUSCAR ENTIDAD FEDERATIVA
     EntidadFederativa entidadFederativa =
             entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioEstudiante);
 
     if (entidadFederativa == null) {
-        System.out.println("ERROR: Entidad federativa no encontrada");
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "ENTIDAD NO ENCONTRADA",
+                "La entidad federativa seleccionada no existe");
         return;
     }
-    
+
+    // GUARDAR FOTO
     if (fotoFile != null) {
-    String nombreFoto = guardarArchivo(fotoFile);
-    estudiante.setFoto(nombreFoto);
-}
+        String nombreFoto = guardarArchivo(fotoFile);
+        estudiante.setFoto(nombreFoto);
+    }
 
-if (firmaFile != null) {
-    String nombreFirma = guardarArchivo(firmaFile);
-    estudiante.setFirma(nombreFirma);
-}
+    // GUARDAR FIRMA
+    if (firmaFile != null) {
+        String nombreFirma = guardarArchivo(firmaFile);
+        estudiante.setFirma(nombreFirma);
+    }
 
-
-    
+    // BUSCAR PERIODO
     PeriodoEscolar p = periodoEscolarServicio.buscarPorId(periodoIngresoIt);
+
     if (p == null) {
-        System.out.println("ERROR: Periodo escolar no encontrado");
+        addMessage(FacesMessage.SEVERITY_ERROR,
+                "PERIODO NO ENCONTRADO",
+                "El periodo escolar seleccionado no existe");
         return;
     }
+    
+   if (numeroMunicipioPadre == null || numeroMunicipioPadre == 0) {
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "ENTIDAD DEL PADRE REQUERIDA",
+            "Debe seleccionar una entidad federativa para el padre");
+    return;
+}
+
+if (numeroMunicipioMadre == null || numeroMunicipioMadre == 0) {
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "ENTIDAD DE LA MADRE REQUERIDA",
+            "Debe seleccionar una entidad federativa para la madre");
+    return;
+}
+
+   // validar plan
+// validar plan
+if (estudiante.getPlanDeEstudios() == null 
+        || estudiante.getPlanDeEstudios().toString().trim().isEmpty()) {
+
+    addMessage(FacesMessage.SEVERITY_WARN,
+            "ADVERTENCIA",
+            "Debe seleccionar un plan de estudios");
+    return;
+}
+
+
+
+
+
 
     Date fechaActualizacion = new Date();
 
-  // Estudiante
+    // ESTUDIANTE
     estudiante.setNoDeControl(numeroControl);
     estudiante.setSexo(sexo.charAt(0));
     estudiante.setEstadoCivil(estadoCivil.charAt(0));
@@ -161,24 +273,19 @@ if (firmaFile != null) {
     estudiante.setFechaActualizacion(fechaActualizacion);
     estudiante.setEntidadProcedencia(entidadFederativa.getNombreEntidad());
 
+    estudiante.setCarrera(carrera.getCarrera());
 
-
-    
-    estudiante.setCarrera(
-            carreraServicio.buscarPorId(reticula).getCarrera()
-    );
-
-  // Alumno general
+    // ALUMNO GENERAL
     alumnoGeneral.setNoDeControl(estudiante);
     alumnoGeneral.setEntidadFederativa(entidadFederativa);
     alumnoGeneral.setDomicilioCalle(domicilioCalle);
     alumnoGeneral.setDomicilioColonia(domicilioColonia);
-    alumnoGeneral.setCiudad(ciudad);
+   
+    alumnoGeneral.setCiudad(estudiante.getCiudadProcedencia());
     alumnoGeneral.setNombre(estudiante.getNombreAlumno());
     alumnoGeneral.setLugarNacimiento(lugarNacimiento);
-
-// Firma y archivos
-// estudiante.setFirma(firma);
+  
+    
 
 
     String domicilioCompleto = domicilioCalle + ", "
@@ -187,18 +294,22 @@ if (firmaFile != null) {
 
     alumnoGeneral.setDomicilio(domicilioCompleto.toUpperCase());
 
-    // Familiares PADRE / MADRE
-    alumnoGeneral.setDomicilioEntidadFedMadre(
-            entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioMadre)
-    );
+EntidadFederativa entidadPadre =
+        entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioPadre);
 
-    alumnoGeneral.setDomicilioEntidadFedPadre(
-            entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioPadre)
-    );
+EntidadFederativa entidadMadre =
+        entidadFederativaServicio.buscarEntidadFederativa(numeroMunicipioMadre);
     
-  // Guardar
+alumnoGeneral.setDomicilioEntidadFedPadre(entidadPadre);
+alumnoGeneral.setDomicilioEntidadFedMadre(entidadMadre);
+    // GUARDAR
     estudianteServicio.insertarEstudiante(estudiante);
     alumnosGeneralesServicio.insertarAlumnoGeneral(alumnoGeneral);
+
+    // MENSAJE DE EXITO
+    addMessage(FacesMessage.SEVERITY_INFO,
+            "REGISTRO EXITOSO",
+            "El alumno fue dado de alta correctamente");
 
     System.out.println("ESTUDIANTE Y ALUMNO GENERAL INSERTADOS");
 }
@@ -457,5 +568,11 @@ public void setFotoFile(UploadedFile fotoFile) {
     this.fotoFile = fotoFile;
 }
 
+public void addMessage(FacesMessage.Severity severity, String resumen, String detalle) {
+    FacesContext.getCurrentInstance().addMessage(
+            null,
+            new FacesMessage(severity, resumen, detalle)
+    );
+}
 
 }
