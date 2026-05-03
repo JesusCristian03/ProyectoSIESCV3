@@ -193,6 +193,39 @@ if (carrera == null) {
             "Debe capturar la ciudad");
     return;
 }
+  
+
+
+// VALIDAR CURP
+if (estudiante.getCurpAlumno() == null || estudiante.getCurpAlumno().trim().isEmpty()) {
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "CURP REQUERIDA",
+            "Debe capturar la CURP");
+    return;
+}
+
+String curpAlumno = estudiante.getCurpAlumno().trim().toUpperCase();
+
+// VALIDAR LONGITUD
+if (curpAlumno.length() != 18) {
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "CURP INVÁLIDA",
+            "La CURP debe tener exactamente 18 caracteres");
+    return;
+}
+
+// VALIDAR FORMATO
+String regexCurp = "^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[A-Z0-9]{2}$";
+
+if (!curpAlumno.matches(regexCurp)) {
+    addMessage(FacesMessage.SEVERITY_ERROR,
+            "CURP INVÁLIDA",
+            "El formato de la CURP no es válido");
+    return;
+}
+
+
+estudiante.setCurpAlumno(curpAlumno);
 
     // BUSCAR ENTIDAD FEDERATIVA
     EntidadFederativa entidadFederativa =
