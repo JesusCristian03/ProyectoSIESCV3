@@ -41,19 +41,20 @@
                                     <p:ajax event="valueChange"
                                             listener="#{autorizacionBean.cambioEstudiante}" 
                                             process="@this"
-                                            update="nombreId tablaAutorizados botonAutorizar mensajes"/>
+                                            update="nombreId tablaAutorizados botonAutorizar mensajes" oncomplete="activarAnimacionSelect()" />
                                 </p:inputNumber>
                                 <p:inputText id="nombreId"
                                              value="#{autorizacionBean.nombreAlumno}"
-                                             readonly="true" 
-                                              styleClass="input-medio"/>
+                                            readonly="true"
+                                            
+                                          styleClass="input-medio"/>
 
                                 <p:selectOneMenu value="#{autorizacionBean.periodoSeleccionado}"
                                                   styleClass="select-medio" >
                                      <p:ajax
                                             listener="#{autorizacionBean.cambioPeriodo}" 
                                             process="@this"
-                                            update="nombreId tablaAutorizados botonAutorizar"/>
+                                            update="nombreId tablaAutorizados botonAutorizar" />
                                     <f:selectItem itemLabel="SELECCIONA UN PERIODO" itemValue="-" noSelectionOption="true"/>
                                     <f:selectItems value="#{autorizacionBean.listaPeriodos}" var="listaPeriodo" itemLabel="#{listaPeriodo.identificacionCorta}" itemValue="#{listaPeriodo.periodo}"/>
                                 </p:selectOneMenu>
@@ -64,7 +65,7 @@
                                                  >
                                     <p:ajax 
                                         listener="#{autorizacionBean.cambioAutorizacion}" 
-                                        update="formAutorizacion mensajes"/>
+                                        update="formAutorizacion mensajes"  oncomplete="activarAnimacionSelect()" />
                                     <f:selectItem itemLabel="SELECCIONA UN TIPO AUTORIZACION" itemValue="-" noSelectionOption="true"/>
                                     <f:selectItem itemLabel="CARGA MÍNIMA" itemValue="CM" />
                                     <f:selectItem itemLabel="CRUCE DE MATERIAS" itemValue="CR" />
@@ -85,7 +86,7 @@
                                     
                                     <p:ajax 
                                         listener="#{autorizacionBean.cambioAsignatura}" 
-                                        update="botonAutorizar mensajes"/>
+                                        update="botonAutorizar mensajes"  oncomplete="activarAnimacionSelect()" />
                                     <f:selectItem itemLabel="SELECCIONA ASIGNATURA" itemValue="-" noSelectionOption="true" />
 
                                     <f:selectItems value="#{autorizacionBean.listaMateria}"
@@ -165,6 +166,74 @@
                         </p:panel>
 
                     </h:form>
+<script>
+/* <![CDATA[ */
+
+function activarAnimacionSelect() {
+
+    /* SELECTS */
+    $('.select-medio .ui-selectonemenu-label').each(function () {
+
+        let texto = $(this).text().trim();
+
+        $(this).find('.texto-marquee').remove();
+
+        if (
+            texto.includes('Seleccione') ||
+            texto.includes('Selecciona')
+        ) {
+            return;
+        }
+
+        if (texto.length > 20) {
+
+            $(this).html(
+                '<div class="texto-marquee">' +
+                    '<span>' + texto + '</span>' +
+                    '<span>' + texto + '</span>' +
+                '</div>'
+            );
+        }
+    });
+
+/* INPUTTEXT */
+$('.input-medio').each(function () {
+
+    let texto = $(this).val();
+
+    $(this).removeClass('animacion-input');
+
+    /* evitar duplicar */
+    if ($(this).data('duplicado')) {
+        return;
+    }
+
+    if (this.scrollWidth > this.clientWidth) {
+
+        /* duplicar texto */
+        let textoDuplicado = texto + '          ' + texto;
+
+        $(this).val(textoDuplicado);
+
+        $(this).data('duplicado', true);
+
+        $(this).addClass('animacion-input');
+
+    }
+
+});
+
+}
+
+/* cargar */
+$(window).on('load', function () {
+
+    activarAnimacionSelect();
+
+});
+
+/* ]]> */
+</script>
                 </f:view>
             </ui:define>
 

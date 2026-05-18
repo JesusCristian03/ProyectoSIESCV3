@@ -34,7 +34,7 @@
                                                  filterMatchMode="contains" 
                                                  disabled="#{horarioCrearBean.desactivarCampos}"  style="width:100%;" >
 
-                                    <p:ajax listener="#{horarioCrearBean.cambioCarrera}" update="asignatura semestre grupo panelBotones panelBotonesModoGrupoAulas"/>
+                                    <p:ajax listener="#{horarioCrearBean.cambioCarrera}" update="asignatura semestre grupo panelBotones panelBotonesModoGrupoAulas" oncomplete="activarAnimacionSelect()" />
                                     <f:selectItem itemLabel="SELECCIONA CARRERA" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaPermisos}" var="listaPermiso" itemLabel="#{listaPermiso.reticula.nombreCarrera}" itemValue="#{listaPermiso.reticula.reticula}"/>
                                 </p:selectOneMenu>
@@ -46,7 +46,7 @@
                                                  filter="true" 
                                                  filterMatchMode="contains"
                                                  disabled="#{horarioCrearBean.desactivarCampos}"  styleClass="select-medio" >                                    
-                                    <p:ajax listener="#{horarioCrearBean.cambioPeriodo}" update="grupo panelBotones panelBotonesModoGrupoAulas"/>
+                                    <p:ajax listener="#{horarioCrearBean.cambioPeriodo}" update="grupo panelBotones panelBotonesModoGrupoAulas" oncomplete="activarAnimacionSelect()" />
                                     <f:selectItem itemLabel="SELECCIONA UN PERIODO" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaPeriodoEscolar}" var="listaPeriodo" itemLabel="#{listaPeriodo.identificacionCorta}" itemValue="#{listaPeriodo.periodo}"/>
                                 </p:selectOneMenu>
@@ -58,7 +58,7 @@
                                                  filter="true" 
                                                  filterMatchMode="contains"
                                                  disabled="#{horarioCrearBean.desactivarCampos}" styleClass="select-medio" style="width:100%;">                                    
-                                    <p:ajax listener="#{horarioCrearBean.cambioSemestre}" update="asignatura grupo panelBotones panelBotonesModoGrupoAulas" />
+                                    <p:ajax listener="#{horarioCrearBean.cambioSemestre}" update="asignatura grupo panelBotones panelBotonesModoGrupoAulas"  oncomplete="activarAnimacionSelect()" />
                                     <f:selectItem itemLabel="SELECCIONA UN SEMESTRE" itemValue="0" noSelectionOption="true"/>
                                     <f:selectItem itemLabel="SEMESTRE 1" itemValue="1"/>
                                     <f:selectItem itemLabel="SEMESTRE 2" itemValue="2"/>
@@ -82,7 +82,7 @@
 
                                     <p:ajax listener="#{horarioCrearBean.actualizarCreditos}" 
                                             update="grupo panelBotones panelBotonesModoGrupoAulas"
-                                            oncomplete="maximoSeleccion = args.creditos; console.log('Nuevo maximoSeleccion:', maximoSeleccion);" />
+                                            oncomplete="maximoSeleccion = args.creditos; console.log('Nuevo maximoSeleccion:', maximoSeleccion);"   />
 
                                     <f:selectItem itemLabel="SELECCIONA ASIGNATURA" itemValue="" noSelectionOption="true" />
                                     <f:selectItems value="#{horarioCrearBean.listaMateria}" 
@@ -100,7 +100,7 @@
                                                  filter="true" 
                                                  filterMatchMode="contains" 
                                                  disabled="#{horarioCrearBean.desactivarCampos}" styleClass="select-medio" style="width:100%;">
-                                    <p:ajax listener="#{horarioCrearBean.cambioAula}" update="grupo panelBotones panelBotonesModoGrupoAulas" />
+                                    <p:ajax listener="#{horarioCrearBean.cambioAula}" update="grupo panelBotones panelBotonesModoGrupoAulas"  oncomplete="activarAnimacionSelect()" />
                                     <f:selectItem itemLabel="SELECCIONA AULA" itemValue="" noSelectionOption="true"/>
                                     <f:selectItems value="#{horarioCrearBean.listaAulas}" var="listaAulas" itemLabel="#{listaAulas.aula}" itemValue="#{listaAulas.aula}"/>
                                 </p:selectOneMenu>
@@ -111,10 +111,10 @@
                                              title="Namegroup"
                                              required="true"
                                              requiredMessage="CAMPO NOMBRE GRUPO ES OBLIGATORIO."
-                                             style="select-medio"
+                                            styleClass="select-medio"
                                              disabled="#{horarioCrearBean.desactivarCampos}">
                                     <!-- Este bloque hace que al escribir o cambiar, se llame al método -->
-                                    <p:ajax event="input" listener="#{horarioCrearBean.cambioGrupo}" update="grupo panelBotones panelBotonesModoGrupoAulas" process="@this"/>
+                                    <p:ajax event="input" listener="#{horarioCrearBean.cambioGrupo}" update="grupo panelBotones panelBotonesModoGrupoAulas" process="@this" />
 
                                 </p:inputText>
 
@@ -124,9 +124,9 @@
                                                requiredMessage="El campo es obligatorio"
                                                minValue="0"
                                                maxValue="100"      
-                                               style="select-medio"
+                                               styleClass="select-medio"
                                                disabled="#{horarioCrearBean.desactivarCampos}">
-                                    <p:ajax />
+                                    <p:ajax  />
                                 </p:inputNumber>
 
                                 <h:panelGroup id="panelBotonesModoGrupoAulas"
@@ -1037,6 +1037,49 @@
 
 
                     </h:form>
+                    <script>
+
+function activarAnimacionSelect() {
+
+    $('.select-medio .ui-selectonemenu-label').each(function () {
+
+        let texto = $(this).text().trim();
+
+        /* limpiar */
+        $(this).find('.texto-marquee').remove();
+
+        /* txto estatico */
+        if (
+            texto.includes('Seleccione') ||
+            texto.includes('Selecciona')
+        ) {
+            return;
+        }
+
+        /* SOLO textos largos */
+        if (texto.length > 35) {
+
+            $(this).html(
+                '<div class="texto-marquee">' +
+                    '<span>' + texto + '</span>' +
+                    '<span>' + texto + '</span>' +
+                '</div>'
+            );
+
+        }
+
+    });
+
+}
+
+/* cargar */
+$(window).on('load', function () {
+
+    activarAnimacionSelect();
+
+});
+
+</script>
                 </f:view>
 
 

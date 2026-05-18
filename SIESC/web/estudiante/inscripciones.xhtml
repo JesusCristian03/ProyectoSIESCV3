@@ -635,7 +635,7 @@
                                  draggable="false"
                                  resizable="false"
                                   responsive="true"
-                                  width="70%"
+                                  width="80%"
                                 
                                  appendTo="@(body)"
                                   position="center"
@@ -662,10 +662,10 @@
                                             <h:outputText value="#{item.materia}" />
                                         </p:column> 
                                         <p:column headerText="Asignatura" style="width:18%; text-align:center;">
-                                            <h:outputText value="#{item.asignatura}" />
+                                            <h:outputText value="#{item.asignatura}" styleClass="texto-asignatura" />
                                         </p:column> 
-                                        <p:column headerText="Docente" style="width:11%; text-align:center;">
-                                            <h:outputText value="#{item.docente}" />
+                                        <p:column headerText="Docente" style="width:20%; text-align:center;">
+                                            <h:outputText value="#{item.docente}"  />
                                         </p:column> 
                                         <p:column headerText="Lunes" style="width:10%; text-align:center;">
                                             <h:outputText value="#{item.lunes}" />
@@ -682,7 +682,7 @@
                                         <p:column headerText="Viernes" style="width:10%; text-align:center;">
                                             <h:outputText value="#{item.viernes}" />
                                         </p:column>
-                                        <p:column headerText="Sábado" style="width:9%; text-align:center;">
+                                        <p:column headerText="Sábado" style="width:7%; text-align:center;">
                                             <h:outputText value="#{item.sabado}" />
                                         </p:column>
                                     </p:dataTable>

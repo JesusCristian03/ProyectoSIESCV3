@@ -34,8 +34,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <p:selectOneMenu value="#{asignacionMGBean.departamentoSeleccionado}"
                                              filter="true" 
                                              filterMatchMode="contains"
-                                              styleClass="select-medio">
-                                <p:ajax listener="#{asignacionMGBean.cambioDepartamento}" update="formAsigGrupo tablaDatos growlAsignacion"/>
+                                             styleClass="select-medio ">
+                                <p:ajax listener="#{asignacionMGBean.cambioDepartamento}" update="formAsigGrupo tablaDatos growlAsignacion"  oncomplete="activarAnimacionSelect()" />
                                 <f:selectItem itemLabel="Seleccione un departamento" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems value="#{asignacionMGBean.listaDepartamentos}" var="dep"
                                                itemLabel="#{dep.descripcionArea} (#{dep.claveArea})" itemValue="#{dep.claveArea}" />
@@ -46,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              filter="true" 
                                              filterMatchMode="contains" 
                                               styleClass="select-medio">
-                                <p:ajax listener="#{asignacionMGBean.cambioCarrera}" update="tablaDatos growlAsignacion"/>
+                                <p:ajax listener="#{asignacionMGBean.cambioCarrera}" update="tablaDatos growlAsignacion"  oncomplete="activarAnimacionSelect()" />
                                 <f:selectItem itemLabel="Selecciones una carrera" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems 
                                     value="#{asignacionMGBean.listaPermisos}" 
@@ -61,8 +61,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              value="#{asignacionMGBean.periodoSeleccionado}"
                                              filter="true" 
                                              filterMatchMode="contains" 
-                                              styleClass="select-medio">
-                                <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="growlAsignacion tablaDatos" />
+                                              styleClass="select-medio ">
+                                <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="growlAsignacion tablaDatos" oncomplete="activarAnimacionSelect()" />
                                 <f:selectItem itemLabel="Seleccione el Periodo" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems 
                                     value="#{asignacionMGBean.listaPeriodos}" 
@@ -77,8 +77,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                              value="#{asignacionMGBean.semestreSeleccionado}"
                                              filter="true" 
                                              filterMatchMode="contains"
-                                              styleClass="select-medio">
-                                <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="tablaDatos growlAsignacion" />
+                                             styleClass="select-medio s">
+                                <p:ajax listener="#{asignacionMGBean.cambioSemestre}" update="tablaDatos growlAsignacion"  oncomplete="activarAnimacionSelect()" />
                                <f:selectItem itemLabel="Selecciona un semestre" itemValue="#{null}" noSelectionOption="true"/>
                                 <f:selectItems value="#{asignacionMGBean.semestres}" var="s"
                                                itemLabel="#{s}" itemValue="#{s}" />
@@ -238,7 +238,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                          style="width:100%">
             
             <p:ajax listener="#{asignacionMGBean.verHorarioMaestro}" 
-                    update=":formAsigGrupo:tablaDatos :formAsigGrupo:tablaHorariosMaestro"/>
+                    update=":formAsigGrupo:tablaDatos :formAsigGrupo:tablaHorariosMaestro"      />
 
             <f:selectItem itemLabel="SELECCIONE UN MAESTRO" itemValue="" />
 
@@ -308,7 +308,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 </h:outputScript>
 
             </h:form>
+<script>
 
+function activarAnimacionSelect() {
+
+    $('.select-medio .ui-selectonemenu-label').each(function () {
+
+        let texto = $(this).text().trim();
+
+        /* limpiar */
+        $(this).find('.texto-marquee').remove();
+
+        /* txto estatico */
+        if (
+            texto.includes('Seleccione') ||
+            texto.includes('Selecciona')
+        ) {
+            return;
+        }
+
+        /* SOLO textos largos */
+        if (texto.length > 35) {
+
+            $(this).html(
+                '<div class="texto-marquee">' +
+                    '<span>' + texto + '</span>' +
+                    '<span>' + texto + '</span>' +
+                '</div>'
+            );
+
+        }
+
+    });
+
+}
+
+/* cargar */
+$(window).on('load', function () {
+
+    activarAnimacionSelect();
+
+});
+
+</script>
 
         </ui:define>
 

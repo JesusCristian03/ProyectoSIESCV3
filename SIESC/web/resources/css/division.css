@@ -1816,32 +1816,128 @@ body {
     border: 1px solid #cfd8dc !important;
     border-radius: 6px !important;
      font-weight:bold  !important;
-           align-items: center !important;     /* vertical */
-    justify-content: center !important; /* horizontal */
+           align-items: center !important;    
+    justify-content: center !important; 
        text-align: center !important;
 }
 
-/* Texto seleccionado */
+
+
+/*
+   SELECT CON TEXTO ANIMADO
+   LABEL DEL SELECT
+  */
+
 .select-medio .ui-selectonemenu-label {
+
+    height: 34px !important;
     line-height: 34px !important;
-    padding: 0 10px !important;
-    font-size: 11px;
-     font-weight:bold  !important;
-             align-items: center !important;     /* vertical */
-    justify-content: center !important; /* horizontal */
-       text-align: center !important;
+
+    font-size: 12px !important;
+    font-weight: bold !important;
+
+    overflow: hidden !important;
+    white-space: nowrap !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    position: relative !important;
+
+    padding-left: 35px !important;
+    padding-right: 35px !important;
+
+    text-align: center !important;
+
+    box-sizing: border-box !important;
 }
 
-/* Botón de la flecha */
+/* CONTENEDOR ANIMADO */
+
+.select-medio .texto-marquee {
+
+    display: flex;
+    align-items: center;
+
+    width: max-content;
+
+    white-space: nowrap;
+
+    animation: moverMarquee 12s linear infinite;
+}
+
+/* TEXTO DUPLICADO */
+.select-medio .texto-marquee span {
+
+    padding-right: 110px !important;
+}
+
+/* PAUSA */
+.select-medio:hover .texto-marquee {
+    animation-play-state: paused;
+}
+
+/* ANIMACION  CONTINUA*/
+
+@keyframes moverMarquee {
+
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(calc(-50%) );
+    }
+}
+
+
+.input-medio.animacion-input {
+
+    overflow: hidden !important;
+    white-space: nowrap !important;
+
+    animation: moverInput 10s linear infinite;
+
+    text-indent: 0;
+}
+
+/* MOVIMIENTO CONTINUO */
+@keyframes moverInput {
+
+    from {
+        text-indent: 0;
+    }
+
+    to {
+        text-indent: -220px;
+    }
+
+}
+
+/* BOTON FLECHA*/
+
 .select-medio .ui-selectonemenu-trigger {
     height: 34px !important;
     width: 34px !important;
 }
 
-/* Icono de flecha */
+/* Icono */
 .select-medio .ui-icon {
     margin-top: 9px !important;
 }
+
+.select-medio input {
+    text-align: center !important;
+    height: 100% !important;
+}
+input.select-medio {
+    text-align: center !important;
+}
+
+
+
+
 
 /* InputText mismo tamaño que selectOneMenu */
 .input-medio.ui-inputtext {

@@ -865,9 +865,9 @@ body {
 .custom-panelgrid .ui-widget-content {
     border: none !important;          /* Quita todos los bordes */
     box-shadow: none !important;      /* Quita cualquier sombra */
-    background: #E3F2FD !important;   /* Fondo azul muy suave */
+    background: #E3F2FD !important;   
     padding: 0px 10px !important;     /* Espacio interno */
-    border-radius: 8px !important;    /* Esquinas ligeramente redondeadas */
+    border-radius: 8px !important;    /* Esquinas  redondeadas */
 }
 /* Eliminar todos los bordes del panelGrid */
 .flat-panelgrid,
@@ -878,7 +878,7 @@ body {
     border: none !important;
     background: #FFFFFF!important; /* blanco de fondo */
     padding: 0px 10px !important;
-    border-radius: 8px !important; /* opcional, esquinas suaves */
+    border-radius: 8px !important;
     box-shadow: none !important;   /* elimina sombra si existiera */
 }
 .ui-widget-content{
@@ -907,7 +907,7 @@ body {
 
 .aguilucho-image {
     height: 428px;
-    width: auto;      /* mantiene la proporción */
+    width: auto;    
     max-width: 100%;  /* evita que se salga del contenedor */
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -1547,9 +1547,51 @@ body {
     background: #0d47a1; /* azul  */
 }
 
+/* =========================
+   TEXTO DE LAS COLUMNAS
+   ========================= */
+
+.tabla-horario .ui-datatable-data > tr > td {
+    font-family: 'Segoe UI', 'Inter', 'Poppins', sans-serif !important;
+    font-size: 0.74rem !important;
+    font-weight: 500;
+    color: #6c757d !important;
+    
+    letter-spacing: 0.2px;
+    line-height: 1.4;
+
+    padding: 8px 6px !important;
+    
+    border-color: #e3eaf3 !important;
+
+    transition: all 0.2s ease;
+}
 
 
+.tabla-horario .ui-datatable-data > tr:hover > td {
+   
+    color: #2c3e50 !important;
+}
 
+/* centra verticalmente */
+.tabla-horario .ui-datatable-data > tr > td span {
+    display: inline-block;
+    vertical-align: middle;
+}
+.texto-docente {
+    font-weight: 500;
+    color: #000000;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
+    letter-spacing: 0.3px;
+}
+
+
+.texto-asignatura {
+    font-weight: 500;
+    color: #000000;
+    font-family: 'Segoe UI', 'Inter', sans-serif;
+    letter-spacing: 0.3px;
+}
 
 
 
@@ -1833,7 +1875,7 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
 }
 
 
-/* OCULTAR HEADER DUPLICADO REAL */
+/* OCULTAR HEADER DUPLICADO*/
 .tabla-grupos .ui-datatable-scrollable-body table thead {
     display: none !important;
 }
@@ -1857,11 +1899,11 @@ TOOLBAR – BOTONES DE ACCIÓN (HORARIO)
    BOTON
 =================================*/
 .boton-seleccionar {
-    background: linear-gradient(135deg, #03396c, #005b96) !important;
+    background-color: #2f5f8f !important;
     border: none !important;
     border-radius: 8px !important;
-    width: 220px;
-    height: 42px;
+    width: 210px;
+    height: 40px;
     font-weight: bold;
 }
 

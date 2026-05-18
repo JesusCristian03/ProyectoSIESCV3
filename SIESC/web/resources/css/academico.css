@@ -1298,40 +1298,84 @@ body {
        text-align: center !important;
 }
 
-/* Texto seleccionado */
+
+
+/*
+   SELECT CON TEXTO ANIMADO
+   LABEL DEL SELECT
+  */
+
 .select-medio .ui-selectonemenu-label {
+
+    height: 34px !important;
     line-height: 34px !important;
-   padding: 0 10px 6px 10px !important;
-    font-size: 11px;
-     font-weight:bold  !important;
-     align-items: center !important;    
-    justify-content: center !important; 
-     text-align: center !important;
-       
+
+    font-size: 12px !important;
+    font-weight: bold !important;
+
+    overflow: hidden !important;
     white-space: nowrap !important;
-    overflow-x: auto !important;   /* scroll horizontal */
-    overflow-y: hidden !important;
-}
-.select-medio .ui-selectonemenu-label::-webkit-scrollbar {
-    height: 3px; /*  grosor horizontal */
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    position: relative !important;
+
+    padding-left: 35px !important;
+    padding-right: 35px !important;
+
+    text-align: center !important;
+
+    box-sizing: border-box !important;
 }
 
-.select-medio .ui-selectonemenu-label::-webkit-scrollbar-thumb {
-    background: rgba(64, 169, 255, 0.6);
-    border-radius: 4px;
+/* CONTENEDOR ANIMADO */
+
+.select-medio .texto-marquee {
+
+    display: flex;
+    align-items: center;
+
+    width: max-content;
+
+    white-space: nowrap;
+
+    animation: moverMarquee 12s linear infinite;
 }
 
-.select-medio .ui-selectonemenu-label::-webkit-scrollbar-track {
-    background: transparent;
+/* TEXTO DUPLICADO */
+.select-medio .texto-marquee span {
+
+    padding-right: 110px !important;
 }
 
-/* Botón de la flecha */
+/* PAUSA */
+.select-medio:hover .texto-marquee {
+    animation-play-state: paused;
+}
+
+/* ANIMACION  CONTINUA*/
+
+@keyframes moverMarquee {
+
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(calc(-50%) );
+    }
+}
+
+/* BOTON FLECHA*/
+
 .select-medio .ui-selectonemenu-trigger {
     height: 34px !important;
     width: 34px !important;
 }
 
-/* Icono de flecha */
+/* Icono */
 .select-medio .ui-icon {
     margin-top: 9px !important;
 }
@@ -1339,8 +1383,8 @@ body {
 /* InputText mismo tamaño que selectOneMenu */
 .input-medio.ui-inputtext {
     line-height: 34px !important;
-   padding: 0 10px 6px 10px !important;
-    height: 34px !important;        
+    padding: 0 10px 6px 10px !important;
+    height: 34px !important;
     font-size: 12px !important;
     font-weight: bold !important;
     text-align: center;
